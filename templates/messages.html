@@ -1,0 +1,62 @@
+<style>
+    .right {
+        right: 0
+    }
+    
+    .close {
+        float: right;
+        margin-top: -15px;
+        margin-right: -10px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    
+    .success {
+        background-color: green;
+    }
+    
+    .info {
+        background-color: purple;
+    }
+    
+    .warning {
+        background-color: teal;
+    }
+    
+    .error {
+        background-color: red;
+    }
+</style>
+
+
+<!-- Messages -->
+<div id="messages" style="position: absolute; top: 0; right: 0; margin-right: 10px; z-index: 999;">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} id="msg{{ forloop.counter }}" class="card-panel {{ message.tags }} white-text center-align" {% endif %}>
+            <i class="material-icons small close">close</i>
+            <i style="font-size: 32px" class="material-icons">notifications</i>
+            <p>{{ message }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<!-- Messages -->
+
+
+<script>
+    //Messages
+    setTimeout(() => {
+        $('.messages').fadeOut(1000, () => {
+            $('#messages').remove('ul')
+        })
+    }, 5000)
+    $(".close").click(function() {
+        let li = this.parentNode.id
+        $("#" + li).fadeOut(1000, () => {
+            $('.messages').remove("#" + li)
+        })
+    })
+</script>

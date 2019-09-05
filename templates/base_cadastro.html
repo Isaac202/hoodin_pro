@@ -1,0 +1,55 @@
+ {% extends "base.html" %} {% block main %}
+<div class="row">
+    <div class="col s12 l10 offset-l1" style="padding: 3rem 0 5rem 0">
+        <!--Melhorar design-->
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %} {% block form %}
+            <div class="row">
+                <div class="errornote">
+                    <font color="red">
+                        {{form.non_field_errors}}
+                    </font>
+                </div>
+
+                {% for field in form %}
+                <div class="col s12 m6">
+                    {{field.label_tag}} <br> {{field}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{field.errors}}
+                        </font>
+                    </div>
+                </div>
+                {% endfor %} <br> {% for field in form_user %}
+                <div class="col s12">
+                    {{field.label_tag}} {{field}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{field.errors}}
+                        </font>
+                    </div>
+                </div>
+                {% endfor %}
+                <!--
+                    <p>Sua senha deve ter no mínimo 08 caracteres, composta por letras maiúsculas e minúsculas e números</p>
+                -->
+                <p class="errornote">
+                    <font color="red">
+                        {{form_user.non_field_errors}}
+                    </font>
+                </p>
+            </div>
+            <div class="row">
+                <input class="btn col s12 m6" type="submit" value="Enviar">
+            </div>
+            {% endblock form %}
+        </form>
+    </div>
+</div>
+{% endblock main %} {% block script %}
+<script>
+    $(function() {
+        $('select').material_select(); //inicializando a select compomente
+    })
+</script>
+{% block script_cad %}{% endblock script_cad %} {% endblock script %}

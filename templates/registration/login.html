@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% load static %} {% block main %}
+<div class="container" align="center">
+    <div class="row">
+        <div class="col s12 l8 offset-l3">
+            <form style="padding-top: 8rem; padding-bottom: 8rem" name="meu_form" method="POST">
+                {% csrf_token %}
+                <div class="input-field col s12 l10">
+                    <p class="nome">
+                        <i class="material-icons prefix">account_circle</i> {{form.username}} {{form.username.label_tag}} {{form.username.errors}}
+                    </p>
+                </div>
+                <div class="input-field col s12 l10">
+                    <p class="fone">
+                        <i class="material-icons prefix">lock</i> {{form.password}} {{form.password.label_tag}} {{form.password.errors}}
+                    </p>
+                </div>
+                <div class="input-field col s12 l10">
+                    {{form.non_field_errors}}
+                </div>
+                <div class="input-field col s12 l6" align="center">
+                    <a class="btn red darken-4 col s12 l9" href="{% url 'password_reset' %}">Esqueci a senha</a>
+                </div>
+                <div class="input-field col s12 l6" align="center">
+                    <input type="submit" class="green darken-4 btn col s12 l9" value="Entrar" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

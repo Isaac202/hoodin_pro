@@ -1,0 +1,41 @@
+{% load static %} {% load cloudinary %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <head>
+        <title>{% block titulo %}Vai de JET{% endblock %}</title>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css'%}" media="screen,projection" /> {% block header %}{% endblock header %} {% include 'components/menu/index.html' %}
+    </head>
+
+    <body>
+        {% block main %}{% endblock main %}
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+                $('.slider').slider(); // inicializando slidshow
+                $(".button-collapse").sideNav(); // menu dispositivos moveis
+                $('.modal').modal(); // modal
+            });
+        </script>
+
+        {% block script %}{% endblock script %}
+
+    </body>
+    {% include "modal_aguarde.html" %} {% include "components/footer.html" %}
+
+</html>

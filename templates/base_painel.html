@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %} {% load funcionarios_tag %}
+    <title>Control Panel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'painel/css/custom.css' %}" rel="stylesheet" type="text/css" />
+
+    <style>
+        .right {
+            right: 0
+        }
+        
+        .close {
+            float: right;
+            margin-top: -15px;
+            margin-right: -10px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        
+        .success {
+            background-color: green;
+        }
+        
+        .info {
+            background-color: purple;
+        }
+        
+        .warning {
+            background-color: teal;
+        }
+        
+        .error {
+            background-color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Messages -->
+    <div id="messages" style="position: absolute; top: 0; right: 0; margin-right: 10px; z-index: 999;">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} id="msg{{ forloop.counter }}" class="card-panel {{ message.tags }} white-text center-align" {% endif %}>
+                <i class="material-icons small close">close</i>
+                <i style="font-size: 32px" class="material-icons">notifications</i>
+                <p>{{ message }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <!-- Messages -->
+
+    <ul id="slide-out" class="side-nav fixed z-depth-4">
+        <li>
+            <div class="userView">
+                <div class="background">
+                    <img src="{% static 'painel/img/photo1.png' %}">
+                </div>
+                <a><img class="circle" src="{{user.funcionario.get_foto}}"></a>
+                <a><span class="white-text name">{{request.user.funcionario.nome}}</span></a>
+                <a><span class="white-text email">{{request.user}}</span></a>
+                <a href="{% url 'users:logout' %}"><span class="white-text">
+                    <!--<i class="material-icons pink-item">exit_to_app</i>-->
+                    Sair
+                </span></a>
+            </div>
+        </li>
+
+        <li><a class="active" href="{% url 'funcionarios:painel' %}"><i class="material-icons pink-item">dashboard</i>Inicio</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+
+        <!-- <li><a class="subheader">Opções</a></li>
+        <li><a href="{% url 'funcionarios:motorista_analise' %}"><i class="material-icons pink-item">warning</i>Motoristas em Análise</a></li>
+        <li><a href="{% url 'funcionarios:motorista_aprovados' %}"><i class="material-icons pink-item">check</i>Motoristas Aprovados</a></li>
+        <li><a href="{% url 'funcionarios:motorista_reprovados' %}"><i class="material-icons pink-item">close</i>Motoristas Reprovados</a></li>
+ -->
+
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header">Motoristas<i class="material-icons pink-item">person</i>
+                        <i class="material-icons pink-item right">arrow_drop_down</i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="{% url 'funcionarios:motorista_sem_analise' %}"><i class="material-icons pink-item">format_list_bulleted</i>Sem Análise</a></li>
+                            <li><a href="{% url 'funcionarios:motorista_analise' %}"><i class="material-icons pink-item">error</i>Em Análise</a></li>
+                            <li><a href="{% url 'funcionarios:motorista_reprovados' %}"><i class="material-icons pink-item">close</i>Reprovados</a></li>
+                            <li><a href="{% url 'funcionarios:motorista_aprovados' %}"><i class="material-icons pink-item">check</i>Aprovados</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header">Veiculos<i class="material-icons pink-item">directions_car</i>
+                        <i class="material-icons pink-item right">arrow_drop_down</i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="{% url 'funcionarios:veiculos_analise' %}"><i class="material-icons pink-item">error</i>Em Análise</a></li>
+                            <li><a href="{% url 'funcionarios:veiculos_reprovados' %}"><i class="material-icons pink-item">close</i>Reprovados</a></li>
+                            <li><a href="{% url 'funcionarios:veiculos_aprovados' %}"><i class="material-icons pink-item">check</i>Aprovados</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <main>
+        <section class="content">
+            <div class="page-announce valign-wrapper"><a href="#" data-activates="slide-out" class="button-collapse valign hide-on-large-only"><i class="material-icons">menu</i></a>
+                <h1 class="page-announce-text valign">Área adminstrativa</h1>
+            </div>
+            {% block main %} {% endblock main %}
+        </section>
+    </main>
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container" style="height: 4rem">
+                <h5 class="center-align">© 2019</h5>
+            </div>
+        </div>
+    </footer>
+
+    <!-- So this is basically a hack, until I come up with a better solution. autocomplete is overridden
+        in the materialize js file & I don't want that.
+        -->
+    <!-- Yo dawg, I heard you like hacks. So I hacked your hack. (moved the sidenav js up so it actually works) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <script>
+        // Hide sideNav
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 300
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            draggable: true // Choose whether you can drag to open on touch screens
+        });
+        $('select').material_select();
+        $('.collapsible').collapsible();
+        $('.modal').modal(); // modal
+
+        //Messages
+        setTimeout(() => {
+            $('.messages').fadeOut(1000, () => {
+                $('#messages').remove('ul')
+            })
+        }, 8000)
+        $(".close").click(function() {
+                let li = this.parentNode.id
+                $("#" + li).fadeOut(1000, () => {
+                    $('.messages').remove("#" + li)
+                })
+            })
+            /*
+            $(document).ready(function() {
+                $('.tooltipped').tooltip({
+                    delay: 50
+                });
+            });
+            */
+    </script>
+    {% block script %} {% endblock script %}
+    <!--
+    <div class="fixed-action-btn horizontal tooltipped" data-position="top" dattooltipped " data-position="top "
+        data-delay="50 " data-tooltip="Quick Links ">
+        <a class="btn-floating btn-large red ">
+            <i class="large material-icons ">mode_edit</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red tooltipped " data-position="top " data-delay="50 " data-tooltip="Handbook "
+                    href="# "><i class="material-icons ">insert_chart</i></a></li>
+            <li><a class="btn-floating yellow darken-1 tooltipped " data-position="top " data-delay="50 "
+                    data-tooltip="Staff Applications " href="# "><i class="material-icons ">format_quote</i></a></li>
+            <li><a class="btn-floating green tooltipped " data-position="top " data-delay="50 "
+                    data-tooltip="Name Guidelines " href="# "><i class="material-icons ">publish</i></a></li>" <li><a class="btn-floating blue tooltipped" data-position="top" data-delay="50" data-tooltip="Issue Tracker" href="#"><i class="material-icons">attach_file</i></a></li>
+        <li><a class="btn-floating orange tooltipped" data-position="top" data-delay="50" data-tooltip="Support" href="#"><i class="material-icons">person</i></a></li>
+        </ul>
+    </div>
+</div>-->
+    {% include "modal_aguarde.html" %}
+</body>
+
+</html>

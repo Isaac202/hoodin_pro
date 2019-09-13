@@ -35,7 +35,7 @@ LIB_APPS = [
 HOODID_APPS = [
     'arquivos',
     'bry',
-    'cerpro',
+    'serpro',
     'clientes',
     'configuracoes',
     'home',
@@ -92,8 +92,8 @@ DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
 '''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jetlegacy',
-        'USER': 'jetlegacy',
+        'NAME': 'basehoodid',
+        'USER': 'registroon',
         'PASSWORD': 'PzN9uGeAAjueByeKDM',
         'HOST': '35.247.196.185',
         'PORT': '',
@@ -136,7 +136,6 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 

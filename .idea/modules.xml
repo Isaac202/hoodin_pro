@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/hoodid.iml" filepath="$PROJECT_DIR$/.idea/hoodid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../viralize/.idea/viralize.iml" filepath="$PROJECT_DIR$/../../../viralize/.idea/viralize.iml" />
     </modules>
   </component>
 </project>

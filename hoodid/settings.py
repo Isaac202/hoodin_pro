@@ -11,7 +11,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 
 # Application definition
@@ -84,22 +84,26 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
-
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
+'''
 
 DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
                                cast=dburl), }
-'''DATABASES = {
+
+'''
+#TODO ALTERA BASE ANTES DE COMMITA PRO REPOSITÓRIO
+
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'basehoodid',
-        'USER': 'registroon',
-        'PASSWORD': 'PzN9uGeAAjueByeKDM',
-        'HOST': '35.247.196.185',
+        'NAME': 'hoodid',
+        'USER': 'postgres',
+        'PASSWORD': 'gmCz0OpsnkDpssyp',
+        'HOST': '35.198.45.37',
         'PORT': '',
     }
 }
-'''
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

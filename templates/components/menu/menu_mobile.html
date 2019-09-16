@@ -1,6 +1,6 @@
 <!--menu mobile-->
 <ul id="menu-mobile" class="side-nav">
-    <li><a href="{% url 'motoristas:novo' %}">Motorista</a></li>
+    <li><a href="#">Motorista</a></li>
     <li><a href="#">Passageiro</a></li>
     <li><a href="#">Empresa</a></li>
     <li><a href="#">Quem somos</a></li>
@@ -8,20 +8,20 @@
     {% if user.is_authenticated %}
     <li>
         {% if user.motorista %}
-        <a href="{% url 'motoristas:painel' %}">Painel
+        <a href="#">Painel
                 </a> {% elif user.cliente %}
-        <a href="{% url 'clientes:painel' %}">Painel
+        <a href="#">Painel
                 </a> {% elif user.funcionario %}
-        <a href="{% url 'funcionarios:painel' %}">Painel
+        <a href="#">Painel
                 </a> {% endif %}
     </li>
 
     <li>
-        <a href="{% url 'users:logout' %}">Sair</a>
+        <a href="#">Sair</a>
     </li>
     {% else %}
     <li>
-        <a href="{% url 'users:login' %}">Entrar</a>
+        <a href="#">Entrar</a>
     </li>
     {% endif %}
 </ul>

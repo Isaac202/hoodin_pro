@@ -85,6 +85,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
 
+#TODO ALTERA BASE ANTES DE COMMITA PRO REPOSITÓRIO
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -136,7 +138,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 STATICFILES_DIRS = [
-    'estaticos'
+    'static'
 ]
 
 MEDIA_URL = '/media/'

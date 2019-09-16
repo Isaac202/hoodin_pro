@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+  <!--Slide show-->
+  {% include "components/slider.html" %}
+
+{% endblock main %}
+
+
+{% block script %}
+    <script type="text/javascript">
+          $(document).ready(function(){
+          $('.slider').slider(); // inicializando slidshow
+          $('select').material_select();//inicializando a select compomente
+          $(".button-collapse").sideNav();  // menu dispositivos moveis
+          $('.modal').modal(); // modal
+        });
+    </script>
+{% endblock script %}

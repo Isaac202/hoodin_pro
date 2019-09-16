@@ -85,12 +85,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
-
-
-
-
-
-
+'''
+default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
+DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
+                               cast=dburl), }
+'''
 #TODO ALTERA BASE ANTES DE COMMITA PRO REPOSITÓRIO
 
 DATABASES = {
@@ -104,9 +103,6 @@ DATABASES = {
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {

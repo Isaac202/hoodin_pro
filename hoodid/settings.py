@@ -85,6 +85,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
 
+
+
+
+
+
 #TODO ALTERA BASE ANTES DE COMMITA PRO REPOSITÓRIO
 
 DATABASES = {

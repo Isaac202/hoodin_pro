@@ -1,10 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_cadastro.html' %}
+{% block navegar %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Cadastro de Extensões</a>
+        <i class="Large material-icons right">assignment</i>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {% if user.is_authenticated %}
+           <li>
+             <strong>Usuário</strong>
+              {{user.username}}
+             </li>
 
-</body>
-</html>
+             {% endif %}
+      </ul>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block main %}
+   <form  method="post" class="col s12">
+    {% csrf_token %}
+    <ul class="collection with-header">
+      <li class="collection-header"><h4>Extensões</h4></li>
+       {% for field in form %}
+           <li class="collection-item">
+
+           <div class="input-field col s5 offset-s1">
+                <p class="nome">
+                    {{field}}
+                    {{field.label_tag}}
+                </p>
+               <p class="errornote">
+                   <font color="red">
+                  {{field.errors}}
+                 </font>
+
+               </p>
+
+            </div>
+           </li>
+       {% endfor %}
+           </ul>
+
+   <button class="btn waves-effect waves-light" type="submit" name="action">Gravar
+          <i class="material-icons right">done</i>
+       </button>
+
+   </form>
+    <!--Import jQuery before materialize.js-->
+
+{% endblock %}
+
+{% block script %}
+{% endblock script %}
+
+

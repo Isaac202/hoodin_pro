@@ -7,3 +7,9 @@ User = get_user_model()
 class Extensoes(models.Model):
     codextensao=models.PositiveIntegerField()
     nome=models.CharField(max_length=5)
+
+    class Meta:
+        ordering = ['nome', ]
+
+    def __str__(self):
+        return self.nome

@@ -15,8 +15,8 @@ urlpatterns = [
     path('', include('home.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', sair, name='logout'),
-    path('extensoes/', ExtensoesCreate.as_view(), name='novo_extensoes'),
     path('lista_extensoes/', ExtensoesList.as_view(), name='lista_extensoes'),
+    path('novo_extensoes/', ExtensoesCreate.as_view(), name='novo_extensoes'),
     path('atualiza_extensoes/<int:pk>/', ExtensoesUpdate.as_view(), name='atualiza_extensoes'),
     path('delete_extensoes/<int:pk>/', ExtensoesDelete.as_view(), name='delete_extensoes'),
 

@@ -13,6 +13,13 @@ class ExtensoesCreate(LoginRequiredMixin, CreateView):
     model = Extensoes
     template_name = "extensoes/inc_extensoes.html"
     form_class = ExtensoesForm
+
+    success_url = reverse_lazy('lista_extensoes')
+
+    def form_valid(self, form):
+        form.instance.perfil = self.request.user
+        return super(ExtensoesCreate, self).form_valid(form)
+
     #success_url = reverse_lazy('lista_placer')
 
 

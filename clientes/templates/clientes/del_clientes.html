@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block navegar %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Tarefas</a>
+        <i class="Large material-icons right">assignment</i>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {% if user.is_authenticated %}
+           <li>
+             <strong>Usuário</strong>
+              {{user.username}}
+             </li>
+             {% endif %}
+      </ul>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block main %}
+    <form action="" method="post">
+    {% csrf_token %}
+    <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Excluir Cientes</span>
+          <p>Atenção você realmente deseja excluir esse registro?.
+          Uma vez apagada não tem como recuperar.{{ object }}</p>
+        </div>
+        <div class="card-action">
+         <button class="btn waves-effect waves-light waves-light red" type="submit" name="action">Excluir
+          <i class="material-icons right">delete_forever</i>
+       </button>
+        </div>
+      </div>
+    </div>
+  </div>
+    </form>
+{% endblock %}

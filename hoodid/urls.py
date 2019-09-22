@@ -9,6 +9,15 @@ from extensoes.views import ExtensoesList
 from extensoes.views import ExtensoesUpdate
 from extensoes.views import ExtensoesDelete
 
+from clientes.views import ClientesCreate
+from clientes.views import ClientesList
+from clientes.views import ClientesUpdate
+from clientes.views import ClientesDelete
+
+from servicos.views import ServicosCreate
+from servicos.views import ServicosList
+from servicos.views import ServicosUpdate
+from servicos.views import ServicosDelete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,6 +28,21 @@ urlpatterns = [
     path('novo_extensoes/', ExtensoesCreate.as_view(), name='novo_extensoes'),
     path('atualiza_extensoes/<int:pk>/', ExtensoesUpdate.as_view(), name='atualiza_extensoes'),
     path('delete_extensoes/<int:pk>/', ExtensoesDelete.as_view(), name='delete_extensoes'),
+
+    path('lista_clientes/', ClientesList.as_view(), name='lista_clientes'),
+    path('novo_clientes/', ClientesCreate.as_view(), name='novo_clientes'),
+    path('atualiza_clientes/<int:pk>/', ClientesUpdate.as_view(), name='atualiza_clientes'),
+    path('delete_clientes/<int:pk>/', ClientesDelete.as_view(), name='delete_clientes'),
+
+    path('lista_servicos/', ServicosList.as_view(), name='lista_servicos'),
+    path('novo_servicos/', ServicosCreate.as_view(), name='novo_servicos'),
+    path('atualiza_servicos/<int:pk>/', ServicosUpdate.as_view(), name='atualiza_servicos'),
+    path('delete_servicos/<int:pk>/', ServicosDelete.as_view(), name='delete_servicos'),
+
+    path('lista_indicacoes/', ServicosList.as_view(), name='lista_indicacoes'),
+    path('novo_indicacoes/', ServicosCreate.as_view(), name='novo_indicacoes'),
+    path('atualiza_indicacoes/<int:pk>/', ServicosUpdate.as_view(), name='atualiza_indicacoes'),
+    path('delete_indicacoes/<int:pk>/', ServicosDelete.as_view(), name='delete_indicacoes'),
 
 ]
 

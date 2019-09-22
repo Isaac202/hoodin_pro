@@ -12,7 +12,7 @@ from .forms import BuscaForm
 
 class IndicacoesCreate(LoginRequiredMixin, CreateView):
     model = Indicacoes
-    template_name = "anunciante/inc_indicacoes.html"
+    template_name = "indicacoes/inc_indicacoes.html"
     form_class = IndicacoesForm
     success_url = reverse_lazy('lista_indicacoes')
 
@@ -41,14 +41,14 @@ class IndicacoesList(LoginRequiredMixin, ListView):
         return context
 
 
-class InciacoesUpdate(LoginRequiredMixin, UpdateView):
+class IndicacoesUpdate(LoginRequiredMixin, UpdateView):
     model = Indicacoes
     template_name = "indicacoes/upd_indicacoes.html"
     form_class = IndicacoesForm
     success_url = reverse_lazy('lista_indicacoes')
 
 
-class AnuncianteDelete(LoginRequiredMixin, DeleteView):
+class IndicacoesDelete(LoginRequiredMixin, DeleteView):
     model = Indicacoes
-    template_name = "anunciante/confirma_delete.html"
-    success_url = reverse_lazy('lista_anunciante')
+    template_name = "indicacoes/del_indicacoes.html"
+    success_url = reverse_lazy('lista_indicacoes')

@@ -23,7 +23,7 @@ class ExtensoesCreate(LoginRequiredMixin, CreateView):
     #success_url = reverse_lazy('lista_placer')
 
 
-class ExtensoesList(LoginRequiredMixin, ListView):
+class ExtensoesList(ListView):
     template_name ="extensoes/listar_extensoes.html"
     model = Extensoes
     paginate_by = 10

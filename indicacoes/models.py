@@ -7,7 +7,7 @@ User = get_user_model()
 class Indicacoes(models.Model):
     codindicacao=models.PositiveIntegerField()
     nome=models.CharField(max_length=100)
-    percentual_promocional=models.DecimalField(max_digits=5,decimal_places=2)
+   # percentual_promocional=models.DecimalField(max_digits=5,decimal_places=2)
     
 
 

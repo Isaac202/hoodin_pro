@@ -19,11 +19,18 @@ from servicos.views import ServicosList
 from servicos.views import ServicosUpdate
 from servicos.views import ServicosDelete
 
+from indicacoes.views import IndicacoesCreate
+from indicacoes.views import IndicacoesList
+from indicacoes.views import IndicacoesUpdate
+from indicacoes.views import IndicacoesDelete
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', sair, name='logout'),
+
     path('lista_extensoes/', ExtensoesList.as_view(), name='lista_extensoes'),
     path('novo_extensoes/', ExtensoesCreate.as_view(), name='novo_extensoes'),
     path('atualiza_extensoes/<int:pk>/', ExtensoesUpdate.as_view(), name='atualiza_extensoes'),
@@ -39,10 +46,10 @@ urlpatterns = [
     path('atualiza_servicos/<int:pk>/', ServicosUpdate.as_view(), name='atualiza_servicos'),
     path('delete_servicos/<int:pk>/', ServicosDelete.as_view(), name='delete_servicos'),
 
-    path('lista_indicacoes/', ServicosList.as_view(), name='lista_indicacoes'),
-    path('novo_indicacoes/', ServicosCreate.as_view(), name='novo_indicacoes'),
-    path('atualiza_indicacoes/<int:pk>/', ServicosUpdate.as_view(), name='atualiza_indicacoes'),
-    path('delete_indicacoes/<int:pk>/', ServicosDelete.as_view(), name='delete_indicacoes'),
+    path('lista_indicacoes/', IndicacoesList.as_view(), name='lista_indicacoes'),
+    path('novo_indicacoes/', IndicacoesCreate.as_view(), name='novo_indicacoes'),
+    path('atualiza_indicacoes/<int:pk>/', IndicacoesUpdate.as_view(), name='atualiza_indicacoes'),
+    path('delete_indicacoes/<int:pk>/', IndicacoesDelete.as_view(), name='delete_indicacoes'),
 
 ]
 

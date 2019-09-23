@@ -8,8 +8,8 @@ from .models import Extensoes
 from .forms import ExtensoesForm
 #from .forms import BuscaPlacerForm
 
-
-class ExtensoesCreate(LoginRequiredMixin, CreateView):
+#LoginRequiredMixin,
+class ExtensoesCreate(CreateView):
     model = Extensoes
     template_name = "extensoes/inc_extensoes.html"
     form_class = ExtensoesForm

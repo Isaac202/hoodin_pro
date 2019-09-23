@@ -9,7 +9,7 @@ from .forms import ServicosForm
 #from .forms import BuscaPlacerForm
 
 
-class ServicosCreate(LoginRequiredMixin, CreateView):
+class ServicosCreate(CreateView):
     model = Servicos
     template_name = "servicos/inc_servicos.html"
     form_class = ServicosForm
@@ -30,14 +30,14 @@ class ServicosList(ListView):
     context_object_name = "servicos"
 
 
-class ServicosUpdate(LoginRequiredMixin, UpdateView):
+class ServicosUpdate(UpdateView):
     model = Servicos
     template_name = "servicos/upd_servicos.html"
     form_class = ServicosForm
     success_url = reverse_lazy('lista_servicos')
 
 
-class ServicosDelete(LoginRequiredMixin, DeleteView):
+class ServicosDelete(DeleteView):
     model = Servicos
     template_name = "servicos/del_servicos.html"
     success_url = reverse_lazy('lista_servicos')

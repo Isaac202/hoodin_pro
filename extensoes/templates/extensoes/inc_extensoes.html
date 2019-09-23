@@ -3,7 +3,7 @@
 <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Cadastro de Extensões</a>
-        <i class="Large material-icons right">assignment</i>
+      <i class="Large material-icons right">assignment</i>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
            <li>
@@ -11,44 +11,69 @@
               {{user.username}}
              </li>
 
-             {% endif %}
+          {% endif %}
       </ul>
     </div>
-  </nav>
+ </nav>
 {% endblock %}
 
 {% block main %}
-   <form  method="post" class="col s12">
-    {% csrf_token %}
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Extensões</h4></li>
-       {% for field in form %}
-           <li class="collection-item">
 
-           <div class="input-field col s5 offset-s1">
-                <p class="nome">
-                    {{field}}
-                    {{field.label_tag}}
-                </p>
-               <p class="errornote">
-                   <font color="red">
-                  {{field.errors}}
-                 </font>
+   <form  method="post" class="col 12">
+    <div class="row">
 
-               </p>
+       <ul class="collection with-header">
+          <li class="collection-header"><h4>Extensões</h4></li>
 
-            </div>
-           </li>
-       {% endfor %}
-           </ul>
+           <!--
+               {% for field in form %}
 
-   <button class="btn waves-effect waves-light" type="submit" name="action">Gravar
-          <i class="material-icons right">done</i>
-       </button>
+                   <div class="input-field col s6">
+                       <p class="nome">
+                            {{field}}
+                            {{field.label_tag}}
+                       </p>
+                       <p class="errornote">
+                           <font color="red">
+                          {{field.errors}}
+                         </font>
+
+                       </p>
+
+                    </div>
+               {% endfor %}
+    -->
+
+               <li class="collection-item">
+
+                   <div class="input-field col s4">
+
+                       {{form.codextensao}}
+                       {{form.codextensao.label_tag}}
+
+                   </div>
+
+                   <div class="input-field col s8">
+
+                       {{form.nome}}
+                       {{form.nome.label_tag}}
+
+                    </div>
+               </li>
+
+       </ul>
+
+       <div class="input-field col s6">
+           <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar
+              <i class="material-icons right">done</i>
+           </button>
+       </div>
+
+    </div>
 
    </form>
-    <!--Import jQuery before materialize.js-->
 
+    <!--Import jQuery before materialize.js-->
 {% endblock %}
 
 {% block script %}

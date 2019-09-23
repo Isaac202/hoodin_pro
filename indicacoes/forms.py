@@ -1,14 +1,13 @@
 from django import forms
-from .models import Indicacoes
+from .models import Indicacoes # pega os campos e cria um form
 
 class IndicacoesForm(forms.ModelForm):
 
     class Meta:
         model = Indicacoes
-        fields = ['codindicacao', 'nome', 'percentual']
-
-
-
-class BuscaForm(forms.Form):
-    busca = forms.CharField(label='Nome', max_length=80, required=False)
-
+        #colocar os campos que não quer que apareça
+        exclude = (
+            #'token', 'status', 'pontuacao', 'data_cadastro',
+            #'id_usuario', 'valor_atual_credito', 'role','email','senha','confirma_sms',
+            #'status_motorista', 'status_veiculos' #'foto_perfil'
+        )

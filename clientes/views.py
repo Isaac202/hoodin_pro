@@ -9,7 +9,7 @@ from .forms import ClientesForm
 #from .forms import BuscaPlacerForm
 
 
-class ClientesCreate(LoginRequiredMixin, CreateView):
+class ClientesCreate(CreateView):
     model = Clientes
     template_name = "clientes/inc_clientes.html"
     form_class = ClientesForm
@@ -30,7 +30,7 @@ class ClientesList(ListView):
     context_object_name = "clientes"
 
 
-class ClientesUpdate(LoginRequiredMixin, UpdateView):
+class ClientesUpdate(UpdateView):
     model = Clientes
     template_name = "clientes/upd_clientes.html"
     form_class = ClientesForm

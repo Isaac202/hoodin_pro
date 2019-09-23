@@ -1,5 +1,5 @@
 <!--menu desktop-->
- {% if user.is_authenticated and not request.user.is_superuser%}
+{% if user.is_authenticated and not request.user.is_superuser%}
      <div class="nav-wrapper">
       <a href="#" class="brand-logo center-align">
 
@@ -7,102 +7,107 @@
 <ul id="nav-mobile" class="right hide-on-med-and-down">
    <li>
          <a href="#">
-                        <i class="material-icons left">perm_media</i>
-                        Agencias
-                    </a>
-                </li>
-      <li>
+            <i class="material-icons left">perm_media</i>
+            agencias
+         </a>
+   </li>
+
+   <li>
           <a href="{% url 'resumo' %}">
                 <i class="material-icons left">assignment</i>
                  Home
            </a>
-                </li>
+   </li>
 
-      <li>
+   <li>
          <a href="#">
              <i class="material-icons left">people</i>
                 Anunciante
         </a>
     </li>
+
     <li>
         <a href="#">
             <i class="material-icons left">perm_media</i>
             Campanhas
         </a>
-    </li>
-        <li>
+   </li>
+
+   <li>
            <a href="#">
              <i class="material-icons left">exit_to_app</i>
              Sair
             </a>
-        </li>
+   </li>
 </ul>
 {% endif %}
- {% if user.is_authenticated and request.user.is_superuser %}
-     <div class="nav-wrapper">
+
+{% if user.is_authenticated and request.user.is_superuser %}
+   <div class="nav-wrapper">
       <a href="#" class="brand-logo ">
-       <i class="material-icons left">verified_user</i>
+      <i class="material-icons left">verified_user</i>
       </a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <li>
+   <ul id="nav-mobile" class="right hide-on-med-and-down">
+       <li>
                     <a href="#">
                         <i class="material-icons left">assignment</i>
                            Home
                     </a>
-                </li>
+       </li>
 
-                <li>
+       <li>
                     <a href="#">
                          <i class="material-icons left">web</i>
                             Meus Dados
                     </a>
-                </li>
+       </li>
 
-                 <li>
+       <li>
                     <a href="#">
                          <i class="material-icons left">people</i>
                             Quem Somos
                     </a>
-                </li>
+       </li>
 
-                <li>
+       <li>
                     <a href="#">
                          <i class="material-icons left">web</i>
                             Registrar
                     </a>
-                </li>
+       </li>
 
-
-                <li>
+       <li>
                     <a href="#">
                          <i class="material-icons left">web</i>
                             Preços
                     </a>
-                </li>
-                <li>
+       </li>
+
+       <li>
                     <a href="#">
                         <i class="material-icons left">perm_media</i>
                         Meus Registros
                     </a>
-                </li>
-            <li>
+       </li>
+
+       <li>
                     <a href="#">
                         <i class="material-icons left">burst_mode</i>
                         Fale Conosco
                     </a>
-                </li>
+       </li>
 
-                     <li>
+       <li>
                        <a href="{% url 'logout' %}">
                          <i class="material-icons left">exit_to_app</i>
                          Sair
                         </a>
                     </li>
-            </ul>
+       </ul>
 
 {% endif %}
 
- {% if not user.is_authenticated %}
+{% if not user.is_authenticated %}
     <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
            <a href="{% url 'login' %}">
@@ -110,24 +115,28 @@
              home
             </a>
         </li>
+
         <li>
            <a href="{% url 'login' %}">
              <i class="material-icons left">assignment</i>
              Quem somos
             </a>
         </li>
+
         <li>
            <a href="{% url 'login' %}">
              <i class="material-icons left">enhanced_encryption</i>
              Registrar
             </a>
         </li>
+
         <li>
            <a href="{% url 'login' %}">
              <i class="material-icons left">monetization_on</i>
              Preços
             </a>
         </li>
+
         <li>
            <a href="{% url 'login' %}">
              <i class="material-icons left">mic</i>
@@ -149,6 +158,7 @@
              Cadastre-se
             </a>
          </li>
+
          <li>
            <a href="{% url 'login' %}">
              <i class="material-icons left">account_box</i>
@@ -156,8 +166,6 @@
             </a>
          </li>
 
-
-
      </ul>
-    {% endif %}
+{% endif %}
 </div>

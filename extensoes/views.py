@@ -30,14 +30,14 @@ class ExtensoesList(ListView):
     context_object_name = "extensoes"
 
 
-class ExtensoesUpdate(LoginRequiredMixin, UpdateView):
+class ExtensoesUpdate(UpdateView):
     model = Extensoes
     template_name = "extensoes/upd_extensoes.html"
     form_class = ExtensoesForm
     success_url = reverse_lazy('lista_extensoes')
 
 
-class ExtensoesDelete(LoginRequiredMixin, DeleteView):
+class ExtensoesDelete(DeleteView):
     model = Extensoes
     template_name = "extensoes/del_extensoes.html"
     success_url = reverse_lazy('lista_extensoes')

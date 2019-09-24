@@ -84,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
 
-'''
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
 DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
                                cast=dburl), }
@@ -101,6 +100,7 @@ DATABASES = {
         'PORT': '',
     }
 }
+'''
 
 
 

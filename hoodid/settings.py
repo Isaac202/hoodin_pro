@@ -84,7 +84,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
 
-
+'''
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
 DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
                                cast=dburl), }
@@ -101,7 +101,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-'''
+
 
 
 
@@ -139,13 +139,7 @@ USE_TZ = False
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-STATICFILES_DIRS = [
-    'static'
-]
 
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = 'media'
 
 
 CELERY_RESULT_BACKEND = 'django-db'
@@ -236,10 +230,8 @@ STATICFILES_DIRS = ['estaticos']
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
 #STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = 'media'
+LOGIN_REDIRECT_URL = reverse_lazy('users:redirect')
+LOGOUT_REDIRECT_URL = reverse_lazy('users:login')

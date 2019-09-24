@@ -1,0 +1,14 @@
+{% extends 'base_cadastro.html' %}
+{% block main %}
+ <div class="row">
+   <form action="" method="post" enctype="multipart/form-data" class="col s12 m10 offset-m1">
+            {% csrf_token %}
+            <div class="row">
+               <h4>
+                    Usuários do Sitema Cadastro
+
+                </h4>
+            </div>
+   </form>
+ </div>
+{% endblock %}

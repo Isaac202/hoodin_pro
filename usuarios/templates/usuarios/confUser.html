@@ -1,0 +1,30 @@
+{% extends "usuarios/emailEnviado.html" %}
+
+{% block msg %}
+<h1>
+    Seu cadastro foi confirmado com sucesso, agora só falta cadastrar seu veiculo. :)
+</h1>
+<p class="redirect">Você sera redirecionado em ..</p>
+<h1 id="time"></h1>
+{% endblock msg %}
+
+{% block script %}
+<script>
+    var time = 5;
+    $(function () {
+        $('#time').html(time.toString());
+    })
+    setInterval(() => {
+        if (time > 0) {
+            time--;
+            $('#time').html(time.toString());
+        }
+
+    }, 1000)
+
+    setTimeout(() => {
+        $(location).attr('href', "{{url_redirect}}");
+    }, 6000)
+
+</script>
+{% endblock script %}

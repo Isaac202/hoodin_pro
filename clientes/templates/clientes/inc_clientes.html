@@ -18,34 +18,160 @@
 {% endblock %}
 
 {% block main %}
-   <form  method="post" class="col s12">
+   <form  method="post" class="col 12">
     {% csrf_token %}
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Clientes</h4></li>
-       {% for field in form %}
-           <li class="collection-item">
+    <div class="row">
 
-           <div class="input-field col s5 offset-s1">
-                <p class="nome">
-                    {{field}}
-                    {{field.label_tag}}
-                </p>
-               <p class="errornote">
-                   <font color="red">
-                  {{field.errors}}
-                 </font>
+        <ul class="collection with-header">
+          <li class="collection-header"><h4>Clientes</h4></li>
+            <!--
+           {% for field in form %}
+               <li class="collection-item">
 
-               </p>
+               <div class="input-field col s5 offset-s1">
+                    <p class="nome">
+                        {{field}}
+                        {{field.label_tag}}
+                    </p>
+                   <p class="errornote">
+                       <font color="red">
+                      {{field.errors}}
+                     </font>
 
-            </div>
-           </li>
-       {% endfor %}
-           </ul>
+                   </p>
 
-   <button class="btn waves-effect waves-light" type="submit" name="action">Gravar
-          <i class="material-icons right">done</i>
-       </button>
+                </div>
+               </li>
+           {% endfor %}
+           -->
 
+                   <li class="collection-item">
+
+                       <!--LINHA 1-->
+                       <div class="input-field col s5">
+
+                           {{form.nome}}
+                           {{form.nome.label_tag}}
+
+                        </div>
+
+                       <div class="input-field col s5">
+
+                           {{form.email}}
+                           {{form.email.label_tag}}
+
+                        </div>
+
+                       <div class="input-field col s2">
+
+                           {{form.valor_credito}}
+                           {{form.valor_credito.label_tag}}
+
+                       </div>
+
+                       <!--LINHA 2-->
+                       <div class="input-field col s4">
+
+                           {{form.data_nascimento}}
+                           {{form.data_nascimento.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s4">
+
+                           {{form.telefone}}
+                           {{form.telefone.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s4">
+
+                           {{form.celular}}
+                           {{form.celular.label_tag}}
+
+                       </div>
+
+                       <!--LINHA 3-->
+                       <div class="input-field col s4">
+
+                           {{form.cep}}
+                           {{form.cep.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s4">
+
+                           {{form.endereco}}
+                           {{form.endereco.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s4">
+
+                           {{form.numero}}
+                           {{form.numero.label_tag}}
+
+                       </div>
+
+                       <!--LINHA 4-->
+                       <div class="input-field col s4">
+
+                           {{form.complemento}}
+                           {{form.complemento.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.bairro}}
+                           {{form.bairro.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.cidade}}
+                           {{form.cidade.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s2">
+
+                           {{form.estado}}
+                           {{form.estado.label_tag}}
+
+                       </div>
+
+
+                       <!--LINHA 4-->
+                       <div class="input-field col s6">
+
+                           {{form.nome_mae}}
+                           {{form.nome_mae.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s6">
+
+                           {{form.nome_pai}}
+                           {{form.nome_pai.label_tag}}
+
+                       </div>
+
+
+
+                   </li>
+
+
+               </ul>
+
+       <div class="input-field col s6">
+        <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar
+              <i class="material-icons right">done</i>
+        </button>
+      </div>
+
+    </div>
    </form>
     <!--Import jQuery before materialize.js-->
 

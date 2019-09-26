@@ -235,3 +235,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 LOGIN_REDIRECT_URL = reverse_lazy('users:redirect')
 LOGOUT_REDIRECT_URL = reverse_lazy('users:login')
+
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'

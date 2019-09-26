@@ -129,16 +129,6 @@ def gera_code(sender, instance, **kwargs):
             instance.code_bisavo = pai.code_avo
 
 
-@receiver(post_save, sender=User)
-def indicacao(sender, instance, **kwargs):
-    # se nao for nulo
-    if not instance.code_pai is None:
-        a = IndicacaoCliente.objects.create(
-            filho=instance,
-            code_pai=instance.code_pai,
-            code_avo=instance.code_avo,
-            code_bisavo=instance.code_bisavo
-            )
 
 
 class UserConfirm(models.Model):

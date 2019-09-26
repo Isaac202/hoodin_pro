@@ -3,12 +3,10 @@ from django.urls import path
 from django.conf.urls import include
 from home.views import sair
 from django.contrib.auth import views as auth_views
-
 from extensoes.views import ExtensoesCreate
 from extensoes.views import ExtensoesList
 from extensoes.views import ExtensoesUpdate
 from extensoes.views import ExtensoesDelete
-
 from clientes.views import ClientesCreate
 from clientes.views import ClientesList
 from clientes.views import ClientesUpdate
@@ -50,6 +48,8 @@ urlpatterns = [
     path('novo_indicacoes/', IndicacoesCreate.as_view(), name='novo_indicacoes'),
     path('atualiza_indicacoes/<int:pk>/', IndicacoesUpdate.as_view(), name='atualiza_indicacoes'),
     path('delete_indicacoes/<int:pk>/', IndicacoesDelete.as_view(), name='delete_indicacoes'),
+    path('accounts/', include('usuarios.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 
 ]
 

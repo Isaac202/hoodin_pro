@@ -47,6 +47,7 @@ HOODID_APPS = [
     'usuarios',
     'tools',
     'extensoes',
+
 ]
 
 INSTALLED_APPS = (
@@ -83,7 +84,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
-
+'''
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
 DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
                                cast=dburl), }
@@ -100,7 +101,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-'''
+
 
 
 
@@ -235,3 +236,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 LOGIN_REDIRECT_URL = reverse_lazy('users:redirect')
 LOGOUT_REDIRECT_URL = reverse_lazy('users:login')
+
+

@@ -9,7 +9,7 @@ User = get_user_model()
 
 class Clientes(models.Model):
     #padrão é não nulo
-    codcliente = models.PositiveIntegerField()
+   # codcliente = models.PositiveIntegerField()
     nome = models.CharField(max_length=255)
     email = models.EmailField(max_length=255, unique=True)
     codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
@@ -46,7 +46,7 @@ class Clientes(models.Model):
     facebook = models.CharField(max_length=100, null=True, blank=True)
     twitter = models.CharField(max_length=100, null=True, blank=True)
     homepage = models.CharField(max_length=100, null=True, blank=True)
-    senha = models.CharField(max_length=8)
+    #senha = models.CharField(max_length=8)
 
     class Meta:
         ordering = ('nome',)

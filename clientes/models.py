@@ -4,8 +4,11 @@ from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from configuracoes.tasks import enviar_sms
+from django.conf import settings
+from indicacoes.models import Indicacoes
 
 User = get_user_model()
+
 
 class Clientes(models.Model):
     #padrão é não nulo
@@ -32,13 +35,13 @@ class Clientes(models.Model):
     nome_pai = models.CharField(max_length=100, null=True, blank=True)
     identidade = models.CharField(max_length=20, null=True, blank=True)
     identidade_orgaoemissor = models.CharField(max_length=10, null=True, blank=True)
-    sexo = models.CharField(max_length=1, null=True, blank=True)
+    sexo = models.CharField(max_length=1, default='', choices=settings.SEXO_CHOICES)
     cnpjcpf = models.CharField(max_length=18, null=True, blank=True)
     passaporte = models.CharField(max_length=50, null=True, blank=True)
     nacionalidade = models.CharField(max_length=20, null=True, blank=True)
     estadocivil = models.CharField(max_length=1, null=True, blank=True)
     biografia = models.CharField(max_length=5000, null=True, blank=True)
-    codindicacao = models.PositiveIntegerField(null=True)
+    codindicacao = models.OneToOneField(Indicacoes,  on_delete=models.PROTECT, related_name='indicacao',verbose_name='Indicacao')
     nif = models.CharField(max_length=100, null=True, blank=True)
     codindicacao_cliente = models.PositiveIntegerField(null=True)
     documento_identidade = models.CharField(max_length=50, null=True, blank=True)

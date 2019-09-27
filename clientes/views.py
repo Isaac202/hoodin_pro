@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Clientes
+from indicacoes.models import Indicacoes
 from .forms import ClientesForm
 #from .forms import BuscaPlacerForm
 
@@ -41,3 +42,17 @@ class ClientesDelete(LoginRequiredMixin, DeleteView):
     model = Clientes
     template_name = "clientes/del_clientes.html"
     success_url = reverse_lazy('lista_clientes')
+
+class SelecionaInidicacoes(ListView):
+    template_name = 'clientes/lista_indicacoes.html'
+    model = Clientes
+    context_object_name = "seleciona_indicacoes"
+
+contexto ={
+'seleciona_indicacao': ClientesForm()
+}
+
+#https://www.youtube.com/watch?v=wOZz3pgIsNI
+#https://www.pythonsetup.com/how-render-django-forms-manually/
+
+

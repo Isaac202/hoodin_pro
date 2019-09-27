@@ -70,21 +70,27 @@
                        </div>
 
                        <!--LINHA 2-->
-                       <div class="input-field col s4">
+                       <div class="input-field col s2">
 
-                           {{form.data_nascimento}}
-                           {{form.data_nascimento.label_tag}}
+                           {{form.sexo}}
+                           {{form.sexo.errors}}
+
+
 
                        </div>
 
-                       <div class="input-field col s4">
+                       <div class="input-field col s3">
+                           <input type="date"  id="data_nascimento" name="data_nascimento">
+                       </div>
+
+                       <div class="input-field col s3">
 
                            {{form.telefone}}
                            {{form.telefone.label_tag}}
 
                        </div>
 
-                       <div class="input-field col s4">
+                       <div class="input-field col s3">
 
                            {{form.celular}}
                            {{form.celular.label_tag}}
@@ -143,7 +149,7 @@
                        </div>
 
 
-                       <!--LINHA 4-->
+                       <!--LINHA 5-->
                        <div class="input-field col s6">
 
                            {{form.nome_mae}}
@@ -159,6 +165,101 @@
                        </div>
 
 
+                       <!--LINHA 6-->
+                       <div class="input-field col s2">
+
+                           {{form.tipo_pessoa}}
+                           {{form.tipo_pessoa.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s4">
+
+                           {{form.cnpjcpf}}
+                           {{form.cnpjcpf.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s2">
+
+                           {{form.documento_tipo}}
+                           {{form.documento_tipo.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s4">
+
+                           {{form.documento_identidade}}
+                           {{form.documento_identidade.label_tag}}
+
+                       </div>
+
+                       <!--LINHA 7-->
+                       <div class="input-field col s3">
+
+                           {{form.nif}}
+                           {{form.nif.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.nacionalidade}}
+                           {{form.nacionalidade.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.passaporte}}
+                           {{form.passaporte.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.estadocivil}}
+                           {{form.estadocivil.label_tag}}
+
+                       </div>
+
+                       <!--LINHA 8-->
+                       <div class="input-field col s3">
+
+                           {{form.homepage}}
+                           {{form.homepage.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.facebook}}
+                           {{form.facebook.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.twitter}}
+                           {{form.twitter.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.codindicacao}}
+                          {{form.codindicacao.label_tag}}
+
+                       </div>
+
+
+                       <!--LINHA 9-->
+                       <div class="input-field col s12">
+
+                           {{form.biografia}}
+                           {{form.biografia.label_tag}}
+
+                       </div>
 
                    </li>
 
@@ -178,6 +279,11 @@
 {% endblock %}
 
 {% block script %}
+  <script>
+    $(document).ready(function(){
+        $('select').material_select();
+        $('.datepicker').pickadate();
+        });
+  </script>
 {% endblock script %}
-
 

@@ -2,7 +2,6 @@ from django import forms
 from .models import Clientes # pega os campos e cria um form
 from indicacoes.models import Indicacoes
 
-
 class ClientesForm(forms.ModelForm):
 
     class Meta:

@@ -38,7 +38,7 @@ class ClientesUpdate(UpdateView):
     success_url = reverse_lazy('lista_clientes')
 
 
-class ClientesDelete(LoginRequiredMixin, DeleteView):
+class ClientesDelete(DeleteView):
     model = Clientes
     template_name = "clientes/del_clientes.html"
     success_url = reverse_lazy('lista_clientes')

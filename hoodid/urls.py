@@ -48,6 +48,7 @@ urlpatterns = [
     path('novo_indicacoes/', IndicacoesCreate.as_view(), name='novo_indicacoes'),
     path('atualiza_indicacoes/<int:pk>/', IndicacoesUpdate.as_view(), name='atualiza_indicacoes'),
     path('delete_indicacoes/<int:pk>/', IndicacoesDelete.as_view(), name='delete_indicacoes'),
+
     path('accounts/', include('usuarios.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 

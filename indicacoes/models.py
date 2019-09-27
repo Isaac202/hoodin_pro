@@ -5,7 +5,7 @@ from django.db import models
 
 User = get_user_model()
 class Indicacoes(models.Model):
-    codindicacao=models.AutoField(primary_key=True)
+    codindicacao=models.PositiveIntegerField()
     nome=models.CharField(max_length=100)
    # percentual_promocional=models.DecimalField(max_digits=5,decimal_places=2)
     

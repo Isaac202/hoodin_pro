@@ -15,10 +15,11 @@ class Clientes(models.Model):
    # codcliente = models.PositiveIntegerField()
     nome = models.CharField(max_length=255)
     email = models.EmailField(max_length=255, unique=True)
-    codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
-    valor_credito = models.DecimalField(max_digits=11,decimal_places=2)
+    '''
+    #codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
+    valor_credito = models.DecimalField(max_digits=11,decimal_places=2,default=0)
     data_cadastro = models.DateTimeField(auto_now=True)
-    data_nascimento = models.DateField()
+    data_nascimento = models.DateField(null=True)
     cep = models.CharField(max_length=9, null=True, blank=True)
     endereco = models.CharField(max_length=255, null=True, blank=True)
     complemento = models.CharField(max_length=255, null=True, blank=True)
@@ -35,13 +36,14 @@ class Clientes(models.Model):
     nome_pai = models.CharField(max_length=100, null=True, blank=True)
     identidade = models.CharField(max_length=20, null=True, blank=True)
     identidade_orgaoemissor = models.CharField(max_length=10, null=True, blank=True)
-    sexo = models.CharField(max_length=1, default='', choices=settings.SEXO_CHOICES)
+    sexo = models.CharField(max_length=1, default='', null=True, blank=True, choices=settings.SEXO_CHOICES)
     cnpjcpf = models.CharField(max_length=18, null=True, blank=True)
     passaporte = models.CharField(max_length=50, null=True, blank=True)
     nacionalidade = models.CharField(max_length=20, null=True, blank=True)
     estadocivil = models.CharField(max_length=1, null=True, blank=True)
     biografia = models.CharField(max_length=5000, null=True, blank=True)
-    codindicacao = models.OneToOneField(Indicacoes,  on_delete=models.PROTECT, related_name='indicacao',verbose_name='Indicacao')
+    #codindicacao = models.OneToOneField(Indicacoes,  on_delete=models.PROTECT, null=True, related_name='indicacao',verbose_name='Indicacao')
+    codindicacao = models.PositiveIntegerField(null=True)
     nif = models.CharField(max_length=100, null=True, blank=True)
     codindicacao_cliente = models.PositiveIntegerField(null=True)
     documento_identidade = models.CharField(max_length=50, null=True, blank=True)
@@ -50,14 +52,16 @@ class Clientes(models.Model):
     twitter = models.CharField(max_length=100, null=True, blank=True)
     homepage = models.CharField(max_length=100, null=True, blank=True)
     #senha = models.CharField(max_length=8)
+'''
 
+    '''
     class Meta:
         ordering = ('nome',)
 
     def __str__(self):
         return self.nome
-
-
+'''
+'''
 @receiver(pre_save, sender=Clientes)
 def criar_usuario(sender, instance, **kwargs):
 
@@ -73,4 +77,4 @@ def criar_usuario(sender, instance, **kwargs):
 @receiver(post_save, sender=Clientes)
 def indicacao(sender, instance, **kwargs):
     enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')
-
+'''

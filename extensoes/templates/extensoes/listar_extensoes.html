@@ -30,12 +30,12 @@
      <form method="GET" action="." class="col s12">
        {% csrf_token %}
        <div class="row">
-           <div class="input-field col s4">
-           <i class="material-icons prefix">event</i>
-               {{form.busca}}
+           <div class="input-field col s6">
+           <i class="material-icons prefix">edit</i>
+               {{form.nome_extensao}}
            <label for="icon_telephone">Busca Extensão</label>
          </div>
-           <div class="input-field col s4">
+           <div class="input-field col s2">
              <button class="waves-effect waves-light btn" type="submit">
                <i class="material-icons left">find_in_page</i>Localizar
               </button>
@@ -51,8 +51,32 @@
     <ul class="collection with-header">
      <li class="collection-header"><h5>Lista Extensões</h5>
      <a href="{% url 'novo_extensoes' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+
+       <table class="striped" width="100%">
+            <thead>
+              <tr>
+                  <th width="5%">código</th>
+                  <th width="40%">nome</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for an in extensoes %}
+              <tr>
+                <td width="5%">{{ an.codextensao }}</td>
+                <td width="40%">{{ an.nome }}</td>
+                <td width="2%"><a href="{% url 'delete_extensoes' an.codextensao %}" class="secondary-content"><i class="material-icons">delete_forever</i></a></td>
+                <td width="2%"><a href="{% url 'atualiza_extensoes' an.codextensao %}" class="secondary-content"><i class="material-icons">edit</i></a></td>
+              </tr>
+             {%endfor%}
+            </tbody>
+
+          </table>
+
+
+
      </li>
 
+     <!--
      {% for an in extensoes %}
           <li class="collection-item"><div> <strong>codigo:</strong>{{ an.codextensao }}  <strong>nome:</strong>{{ an.nome }}
           <a href="{% url 'delete_extensoes' an.codextensao %}" class="secondary-content"><i class="material-icons">delete_forever</i></a>
@@ -62,6 +86,7 @@
           <br>
 
      {%endfor%}
+     -->
 </ul>
 
     {% if is_paginated %}

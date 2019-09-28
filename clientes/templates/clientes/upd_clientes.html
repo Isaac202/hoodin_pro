@@ -19,29 +19,248 @@
 {% block main %}
    <form  method="post" class="col s12">
     {% csrf_token %}
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Clientes</h4></li>
-       {% for field in form %}
-          <div class="input-field col s5 offset-s1">
-                <p class="nome">
-                    {{field}}
-                    {{field.label_tag}}
-                </p>
-               <p class="errornote">
-                   <font color="red">
-                  {{field.errors}}
-                 </font>
 
-               </p>
+        <div class="row">
 
-            </div>
+            <ul class="collection with-header">
+              <li class="collection-header"><h4>Clientes</h4></li>
 
-           </li>
-       {% endfor %}
-       <button class="btn waves-effect waves-light" type="submit" name="action">Gravar
-          <i class="material-icons right">check_circle</i>
-       </button>
-     </ul>
+                       <li class="collection-item">
+
+                           <!--LINHA 1-->
+                           <div class="input-field col s5">
+
+                               {{form.nome}}
+                               {{form.nome.label_tag}}
+
+                            </div>
+
+                           <div class="input-field col s5">
+
+                               {{form.email}}
+                               {{form.email.label_tag}}
+
+                            </div>
+
+                           <div class="input-field col s2">
+
+                               {{form.valor_credito}}
+                               {{form.valor_credito.label_tag}}
+
+                           </div>
+
+                           <!--LINHA 2-->
+
+                           <div class="input-field col s3">
+
+                               {{form.telefone}}
+                               {{form.telefone.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s3">
+
+                               {{form.celular}}
+                               {{form.celular.label_tag}}
+
+                           </div>
+    <!--
+                           <div class="input-field col s3">
+
+                               {{form.data_nascimento}}
+                               {{form.data_nascimento.label_tag}}
+
+                           </div>
+    -->
+                           <div class="input-field col s2">
+                               <input type="date"  id="data_nascimento" name="data_nascimento">
+                           </div>
+
+
+                           <div class="input-field col s4">
+
+                               {{form.sexo}}
+                               {{form.sexo.errors}}
+
+                           </div>
+
+                           <!--LINHA 3-->
+                           <div class="input-field col s4">
+
+                               {{form.cep}}
+                               {{form.cep.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s4">
+
+                               {{form.endereco}}
+                               {{form.endereco.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s3">
+
+                               {{form.numero}}
+                               {{form.numero.label_tag}}
+
+                           </div>
+
+                           <!--LINHA 4-->
+                           <div class="input-field col s4">
+
+                               {{form.complemento}}
+                               {{form.complemento.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s3">
+
+                               {{form.bairro}}
+                               {{form.bairro.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s3">
+
+                               {{form.cidade}}
+                               {{form.cidade.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s2">
+
+                               {{form.estado}}
+                               {{form.estado.label_tag}}
+
+                           </div>
+
+
+                          <!--LINHA 5-->
+                           <div class="input-field col s6">
+
+                               {{form.nome_mae}}
+                               {{form.nome_mae.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s6">
+
+                               {{form.nome_pai}}
+                               {{form.nome_pai.label_tag}}
+
+                           </div>
+
+
+                           <!--LINHA 6-->
+                           <div class="input-field col s2">
+
+                               {{form.tipo_pessoa}}
+                               {{form.tipo_pessoa.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s4">
+
+                               {{form.cnpjcpf}}
+                               {{form.cnpjcpf.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s2">
+
+                               {{form.documento_tipo}}
+                               {{form.documento_tipo.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s4">
+
+                               {{form.documento_identidade}}
+                               {{form.documento_identidade.label_tag}}
+
+                           </div>
+
+                           <!--LINHA 7-->
+                           <div class="input-field col s3">
+
+                               {{form.nif}}
+                               {{form.nif.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s3">
+
+                               {{form.nacionalidade}}
+                               {{form.nacionalidade.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s3">
+
+                               {{form.passaporte}}
+                               {{form.passaporte.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s3">
+
+                               {{form.estadocivil}}
+                               {{form.estadocivil.label_tag}}
+
+                           </div>
+
+                           <!--LINHA 8-->
+                           <div class="input-field col s3">
+
+                               {{form.homepage}}
+                               {{form.homepage.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s3">
+
+                               {{form.facebook}}
+                               {{form.facebook.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s2">
+
+                               {{form.twitter}}
+                               {{form.twitter.label_tag}}
+
+                           </div>
+
+                           <div class="input-field col s4">
+
+                               {{form.codindicacao}}
+                              {{form.codindicacao.label_tag}}
+
+                           </div>
+
+
+                           <!--LINHA 9-->
+                           <div class="input-field col s12">
+
+                               {{form.biografia}}
+                               {{form.biografia.label_tag}}
+
+                           </div>
+
+                       </li>
+
+
+                   </ul>
+
+           <div class="input-field col s6">
+            <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar
+                  <i class="material-icons right">done</i>
+            </button>
+          </div>
+
+        </div>
+
      </form>
 {% endblock %}
 

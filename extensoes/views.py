@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Extensoes
 from .forms import ExtensoesForm, BuscarForm
-
 #from .forms import BuscaPlacerForm
 
 #LoginRequiredMixin,

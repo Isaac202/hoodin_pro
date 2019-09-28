@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Servicos
-from .forms import ServicosForm
+from .forms import ServicosForm, BuscarForm
 #from .forms import BuscaPlacerForm
 
 
@@ -28,6 +28,19 @@ class ServicosList(ListView):
     model = Servicos
     paginate_by = 10
     context_object_name = "servicos"
+
+    def get_queryset(self):
+        qs = Servicos.objects.all()
+        nome_servico = self.request.GET.get('nome_servico')
+        if nome_servico is not None:
+            qs = Servicos.objects.filter(nome__icontains=nome_servico)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(ServicosList, self).get_context_data(**kwargs)
+        form = BuscarForm()
+        context['form'] = form
+        return context
 
 
 class ServicosUpdate(UpdateView):

@@ -5,7 +5,7 @@ from django.db import models
 User = get_user_model()
 # Create your models here.
 class Extensoes(models.Model):
-    codextensao=models.PositiveIntegerField()
+    #codextensao=models.PositiveIntegerField()
     nome=models.CharField(max_length=5)
 
     class Meta:

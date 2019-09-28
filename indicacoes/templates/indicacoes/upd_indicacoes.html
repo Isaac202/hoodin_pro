@@ -19,29 +19,35 @@
 {% block main %}
    <form  method="post" class="col s12">
     {% csrf_token %}
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Indicações</h4></li>
-       {% for field in form %}
-          <div class="input-field col s5 offset-s1">
-                <p class="nome">
-                    {{field}}
-                    {{field.label_tag}}
-                </p>
-               <p class="errornote">
-                   <font color="red">
-                  {{field.errors}}
-                 </font>
 
-               </p>
+    <div class="row">
 
-            </div>
+        <ul class="collection with-header">
+          <li class="collection-header"><h4>Atualizar Indicação</h4></li>
 
-           </li>
-       {% endfor %}
-       <button class="btn waves-effect waves-light" type="submit" name="action">Gravar
-          <i class="material-icons right">check_circle</i>
-       </button>
-     </ul>
+                   <li class="collection-item">
+
+                       <!--LINHA 1-->
+                       <div class="input-field col s6">
+
+                           {{form.nome}}
+                           {{form.nome.label_tag}}
+
+                        </div>
+
+                   </li>
+
+
+               </ul>
+
+       <div class="input-field col s6">
+        <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar
+              <i class="material-icons right">done</i>
+        </button>
+       </div>
+
+    </div>
+
      </form>
 {% endblock %}
 

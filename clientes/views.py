@@ -5,11 +5,10 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Clientes
-from indicacoes.models import Indicacoes
-from .forms import ClientesForm
+from .forms import ClientesForm, BuscarForm
 #from .forms import BuscaPlacerForm
 
-
+#LoginRequiredMixin,
 class ClientesCreate(CreateView):
     model = Clientes
     template_name = "clientes/inc_clientes.html"
@@ -30,6 +29,19 @@ class ClientesList(ListView):
     paginate_by = 10
     context_object_name = "clientes"
 
+    def get_queryset(self):
+        qs = Clientes.objects.all()
+        nome_cliente = self.request.GET.get('nome_cliente')
+        if nome_cliente is not None:
+            qs = Clientes.objects.filter(nome__icontains=nome_cliente)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(ClientesList, self).get_context_data(**kwargs)
+        form = BuscarForm()
+        context['form'] = form
+        return context
+
 
 class ClientesUpdate(UpdateView):
     model = Clientes
@@ -43,13 +55,9 @@ class ClientesDelete(DeleteView):
     template_name = "clientes/del_clientes.html"
     success_url = reverse_lazy('lista_clientes')
 
-class SelecionaInidicacoes(ListView):
-    template_name = 'clientes/lista_indicacoes.html'
-    model = Clientes
-    context_object_name = "seleciona_indicacoes"
 
 contexto ={
-'seleciona_indicacao': ClientesForm()
+'seleciona_cliente': ClientesForm()
 }
 
 #https://www.youtube.com/watch?v=wOZz3pgIsNI

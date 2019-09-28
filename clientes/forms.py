@@ -16,5 +16,7 @@ class ClientesForm(forms.ModelForm):
         class ClientesForm(forms.ModelForm):
             # no choices eu fiz um list comprehension que apenas gera um list [a,b,c...z] que vai ser renderizado no select
             indicacoes = forms.ChoiceField(
-                choices=[('0', '--Selecione--')] + [(indicacao.codindicacao, indicacao.nome) for indicacao in
+                choices=[('0', '--Selecione--')] + [(indicacao.id, indicacao.nome) for indicacao in
                                                     Indicacoes.objects.all()])
+class BuscarForm(forms.Form):
+    nome_cliente = forms.CharField(label='nome', max_length=80, required=False)

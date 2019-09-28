@@ -18,33 +18,66 @@
 {% endblock %}
 
 {% block main %}
-   <form  method="post" class="col s12">
+   <form  method="post" class="col s10">
     {% csrf_token %}
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Serviços</h4></li>
-       {% for field in form %}
-           <li class="collection-item">
 
-           <div class="input-field col s5 offset-s1">
-                <p class="nome">
-                    {{field}}
-                    {{field.label_tag}}
-                </p>
-               <p class="errornote">
-                   <font color="red">
-                  {{field.errors}}
-                 </font>
+    <div class="row">
 
-               </p>
+        <ul class="collection with-header">
+          <li class="collection-header"><h4>Serviços</h4></li>
 
-            </div>
-           </li>
-       {% endfor %}
-           </ul>
+                   <li class="collection-item">
 
-   <button class="btn waves-effect waves-light" type="submit" name="action">Gravar
-          <i class="material-icons right">done</i>
-       </button>
+                       <!--LINHA 1-->
+                       <div class="input-field col s6">
+
+                           {{form.nome}}
+                           {{form.nome.label_tag}}
+
+                        </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.preco}}
+                           {{form.preco.label_tag}}
+
+                        </div>
+
+                       <!--LINHA 2-->
+                       <div class="input-field col s3">
+
+                           {{form.tamanho}}
+                           {{form.tamanho.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.medida}}
+                           {{form.medida.label_tag}}
+
+                       </div>
+
+                       <div class="input-field col s3">
+
+                           {{form.servico_digitalizacao}}
+                           {{form.servico_digitalizacao.label_tag}}
+
+                       </div>
+
+
+                   </li>
+
+
+               </ul>
+
+       <div class="input-field col s6">
+        <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar
+              <i class="material-icons right">done</i>
+        </button>
+      </div>
+
+    </div>
 
    </form>
     <!--Import jQuery before materialize.js-->

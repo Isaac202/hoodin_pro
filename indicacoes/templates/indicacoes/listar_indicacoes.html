@@ -31,8 +31,8 @@
        {% csrf_token %}
        <div class="row">
            <div class="input-field col s4">
-           <i class="material-icons prefix">event</i>
-               {{form.busca}}
+           <i class="material-icons prefix">edit</i>
+               {{form.nome_indicacao}}
            <label for="icon_telephone">Busca Indicação</label>
          </div>
            <div class="input-field col s4">
@@ -51,18 +51,33 @@
     <ul class="collection with-header">
      <li class="collection-header"><h5>Lista Indicações</h5>
      <a href="{% url 'novo_indicacoes' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+
+
+       <table class="striped" width="100%">
+            <thead>
+              <tr>
+                  <th width="5%">código</th>
+                  <th width="40%">nome</th>
+                  <th width="2%"> </th>
+                  <th width="2%"> </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for an in indicacoes %}
+              <tr>
+                <td width="5%">{{ an.id }}</td>
+                <td width="40%">{{ an.nome }}</td>
+                <td width="2%"><a href="{% url 'delete_indicacoes' an.id %}" class="secondary-content"><i class="material-icons">delete_forever</i></a></td>
+                <td width="2%"><a href="{% url 'atualiza_indicacoes' an.id %}" class="secondary-content"><i class="material-icons">edit</i></a></td>
+              </tr>
+             {%endfor%}
+            </tbody>
+
+          </table>
+
      </li>
 
-     {% for an in indicacoes %}
-          <li class="collection-item"><div> <strong>codigo:</strong>{{ an.codindicacao }}  <strong>nome:</strong>{{ an.nome }}
-          <a href="{% url 'delete_indicacoes' an.codindicacao %}" class="secondary-content"><i class="material-icons">delete_forever</i></a>
-          <a href="{% url 'atualiza_indicacoes' an.codindicacao %}" class="secondary-content"><i class="material-icons">edit</i></a>
-
-          </div></li>
-          <br>
-
-     {%endfor%}
-</ul>
+    </ul>
 
     {% if is_paginated %}
       <ul class="pagination">

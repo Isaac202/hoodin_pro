@@ -1,16 +1,11 @@
 <!--menu desktop-->
+<!--ESTÁ LOGADO E NÃO É SUPER USUÁRIO-->
 {% if user.is_authenticated and not request.user.is_superuser%}
      <div class="nav-wrapper">
       <a href="#" class="brand-logo center-align">
 
       </a>
 <ul id="nav-mobile" class="right hide-on-med-and-down">
-   <li>
-         <a href="#">
-            <i class="material-icons left">perm_media</i>
-            agencias
-         </a>
-   </li>
 
    <li>
           <a href="{% url 'resumo' %}">
@@ -20,104 +15,140 @@
    </li>
 
    <li>
-         <a href="#">
+         <a href="{% url 'upd_clientes' %}">
              <i class="material-icons left">people</i>
-                Anunciante
+                Meus Dados
         </a>
     </li>
 
     <li>
         <a href="#">
             <i class="material-icons left">perm_media</i>
-            Campanhas
+            Tabela Preços
         </a>
-   </li>
+    </li>
 
-   <li>
-           <a href="#">
-             <i class="material-icons left">exit_to_app</i>
-             Sair
-            </a>
-   </li>
+    <li>
+        <a href="#">
+            <i class="material-icons left">perm_media</i>
+            Registrar
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            <i class="material-icons left">perm_media</i>
+            Meus Registros
+        </a>
+    </li>
+
+    <li>
+        <a href="#">
+            <i class="material-icons left">perm_media</i>
+            Fale Conosco
+        </a>
+    </li>
+
+    <li>
+       <a href="#">
+         <i class="material-icons left">exit_to_app</i>
+         Sair
+        </a>
+    </li>
 </ul>
 {% endif %}
-
+<!--ESTÁ LOGADO E É SUPER USUÁRIO-->
 {% if user.is_authenticated and request.user.is_superuser %}
    <div class="nav-wrapper">
       <a href="#" class="brand-logo ">
       <i class="material-icons left">verified_user</i>
       </a>
+
    <ul id="nav-mobile" class="right hide-on-med-and-down">
        <li>
-                    <a href="#">
-                        <i class="material-icons left">assignment</i>
-                           Home
-                    </a>
+            <a href="#">
+                <i class="material-icons left">assignment</i>
+                   Home
+            </a>
        </li>
 
        <li>
-                    <a href="#">
-                         <i class="material-icons left">web</i>
-                            Meus Dados
-                    </a>
+            <a href="#">
+                 <i class="material-icons left">web</i>
+                    Usuários
+            </a>
        </li>
 
        <li>
-                    <a href="#">
-                         <i class="material-icons left">people</i>
-                            Quem Somos
-                    </a>
+            <a href="{% url 'lista_extensoes' %}">
+                 <i class="material-icons left">people</i>
+                    Extensões
+            </a>
        </li>
 
        <li>
-                    <a href="#">
-                         <i class="material-icons left">web</i>
-                            Registrar
-                    </a>
+            <a href="{% url 'lista_servicos' %}">
+                 <i class="material-icons left">web</i>
+                    Serviços
+            </a>
        </li>
 
        <li>
-                    <a href="#">
-                         <i class="material-icons left">web</i>
-                            Preços
-                    </a>
+            <a href="{% url 'lista_indicacoes' %}">
+                 <i class="material-icons left">web</i>
+                    Indicações
+            </a>
        </li>
 
        <li>
-                    <a href="#">
-                        <i class="material-icons left">perm_media</i>
-                        Meus Registros
-                    </a>
+            <a href="#">
+                <i class="material-icons left">perm_media</i>
+                   Tabela de Preços
+            </a>
        </li>
 
        <li>
-                    <a href="#">
-                        <i class="material-icons left">burst_mode</i>
-                        Fale Conosco
-                    </a>
+            <a href="#">
+                <i class="material-icons left">burst_mode</i>
+                QRCode
+            </a>
        </li>
 
        <li>
-                       <a href="{% url 'logout' %}">
-                         <i class="material-icons left">exit_to_app</i>
-                         Sair
-                        </a>
-                    </li>
+            <a href="#">
+                <i class="material-icons left">burst_mode</i>
+                Relatórios
+            </a>
+       </li>
+
+       <li>
+            <a href="#">
+                <i class="material-icons left">burst_mode</i>
+                Config
+            </a>
+       </li>
+
+       <li>
+           <a href="{% url 'logout' %}">
+             <i class="material-icons left">exit_to_app</i>
+             Sair
+            </a>
+        </li>
        </ul>
 
 {% endif %}
-
+<!--NÃO ESTÁ LOGADO-->
 {% if not user.is_authenticated %}
     <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
            <a href="{% url 'login' %}">
              <i class="material-icons left">home</i>
-             home
-            </a>
+             Home
+           </a>
         </li>
 
         <li>
-           <a href="{% url 'login' %}">
+           <a href="#">
              <i class="material-icons left">assignment</i>
              Quem somos
             </a>
@@ -131,29 +162,28 @@
         </li>
 
         <li>
-           <a href="{% url 'login' %}">
+           <a href="#">
              <i class="material-icons left">monetization_on</i>
              Preços
             </a>
         </li>
 
         <li>
-           <a href="{% url 'login' %}">
+           <a href="#">
              <i class="material-icons left">mic</i>
              Depoimentos
             </a>
-
         </li>
 
         <li>
-           <a href="{% url 'login' %}">
+           <a href="#">
              <i class="material-icons left">email</i>
              Fale conosco
             </a>
         </li>
 
         <li>
-           <a href="{% url 'login' %}">
+           <a href="{% url 'novo_clientes' %}">
              <i class="material-icons left">people</i>
              Cadastre-se
             </a>

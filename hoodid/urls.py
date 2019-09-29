@@ -22,6 +22,11 @@ from indicacoes.views import IndicacoesList
 from indicacoes.views import IndicacoesUpdate
 from indicacoes.views import IndicacoesDelete
 
+from precos.views import PrecosCreate
+from precos.views import PrecosList
+from precos.views import PrecosUpdate
+from precos.views import PrecosDelete
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -51,6 +56,11 @@ urlpatterns = [
 
     path('accounts/', include('usuarios.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+
+    path('lista_precos/', PrecosList.as_view(), name='lista_precos'),
+    path('novo_precos/', PrecosCreate.as_view(), name='novo_precos'),
+    path('atualiza_precos/<int:pk>/', PrecosUpdate.as_view(), name='atualiza_precos'),
+    path('delete_precos/<int:pk>/', PrecosDelete.as_view(), name='delete_precos'),
 
 ]
 

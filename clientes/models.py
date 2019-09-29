@@ -42,7 +42,7 @@ class Clientes(models.Model):
     facebook = models.CharField(max_length=100, null=True, blank=True)
     twitter = models.CharField(max_length=100, null=True, blank=True)
     homepage = models.CharField(max_length=100, null=True, blank=True)
-    codindicacao = models.OneToOneField(Indicacoes,  on_delete=models.PROTECT, null=True, related_name='indicacao',verbose_name='Indicacao')
+    codindicacao = models.OneToOneField(Indicacoes,  on_delete=models.PROTECT, null=True, related_name='indicacao', verbose_name='Indicacao')
 
     '''
     #codusuario = models.OneToOneField(User, on_delete=models.PROTECT)

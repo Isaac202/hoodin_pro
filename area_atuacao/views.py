@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Area_Atuacao
-from .forms import Area_Atuacao, BuscarForm
+from .forms import Area_AtuacaoForm, BuscarForm
 #from .forms import BuscaPlacerForm
 
 #LoginRequiredMixin,

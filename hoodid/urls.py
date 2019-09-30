@@ -7,6 +7,7 @@ from extensoes.views import ExtensoesCreate
 from extensoes.views import ExtensoesList
 from extensoes.views import ExtensoesUpdate
 from extensoes.views import ExtensoesDelete
+
 from clientes.views import ClientesCreate
 from clientes.views import ClientesList
 from clientes.views import ClientesUpdate
@@ -27,10 +28,10 @@ from precos.views import PrecosList
 from precos.views import PrecosUpdate
 from precos.views import PrecosDelete
 
-from Area_atuacao.views import  Area_AtuacaoCreate
-from Area_Atuacao.views import Area_AtuacaoList
-from Area_Atuacao.views import Area_AtuacaoUpdate
-from Area_Atuacao.views import Area_AtuacaoDelete
+from area_atuacao.views import Area_AtuacaoCreate
+from area_atuacao.views import Area_AtuacaoList
+from area_atuacao.views import Area_AtuacaoUpdate
+from area_atuacao.views import Area_AtuacaoDelete
 
 urlpatterns = [
     path('admin/', admin.site.urls),

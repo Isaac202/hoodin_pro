@@ -86,24 +86,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
 
-'''
-
-default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
-DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
+DEV = config('DEV', default=False, cast=bool)
+if DEV:
+    default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
+    DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
                                cast=dburl), }
-'''
-#TODO ALTERA BASE ANTES DE COMMITA PRO REPOSITÓRIO
-
-DATABASES = {
-    'default': {
+else:
+    DATABASES = {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'hoodid',
         'USER': 'postgres',
         'PASSWORD': 'gmCz0OpsnkDpssyp',
         'HOST': '35.198.45.37',
         'PORT': '',
+       }
     }
-}
 
 
 

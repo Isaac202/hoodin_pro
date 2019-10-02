@@ -32,6 +32,7 @@ from area_atuacao.views import Area_AtuacaoCreate
 from area_atuacao.views import Area_AtuacaoList
 from area_atuacao.views import Area_AtuacaoUpdate
 from area_atuacao.views import Area_AtuacaoDelete
+from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
 
 urlpatterns = [
     path('admin/', admin.site.urls),

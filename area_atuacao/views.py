@@ -23,8 +23,27 @@ class Area_AtuacaoCreate(CreateView):
     #success_url = reverse_lazy('lista_placer')
 
 
-class Area_AtuacaoList(ListView):
+class Area_AtuacaoListCriacaoPublicitaria(ListView):
     template_name ="area_atuacao/listar_area_atuacao.html"
+    model = Area_Atuacao
+    paginate_by = 10
+    context_object_name = "area_atuacao"
+
+    def get_queryset(self):
+        qs = Area_Atuacao.objects.all()
+        nome_area_atuacao = self.request.GET.get('nome_area_atuacao')
+        if nome_area_atuacao is not None:
+            qs = Area_Atuacao.objects.filter(nome__icontains=nome_area_atuacao)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(Area_AtuacaoList, self).get_context_data(**kwargs)
+        form = BuscarForm()
+        context['form'] = form
+        return context
+
+class Area_AtuacaoList(ListView):
+    template_name ="area_atuacao/listar_area_atuacao_criacaopublicitaria.html"
     model = Area_Atuacao
     paginate_by = 10
     context_object_name = "area_atuacao"

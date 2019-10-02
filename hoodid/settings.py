@@ -86,6 +86,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
 
+
 DEV = config('DEV', default=False, cast=bool)
 if DEV:
     default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
@@ -102,8 +103,6 @@ else:
         'PORT': '',
        }
     }
-
-
 
 
 

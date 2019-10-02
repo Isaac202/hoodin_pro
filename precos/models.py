@@ -11,3 +11,8 @@ class Precos(models.Model):
     valor = models.DecimalField(max_digits=11, decimal_places=2, default=0)
     tipo_servico = models.CharField(max_length=1, null=True, blank=True)
 
+    class Meta:
+        ordering = ('tipo_servico',)
+
+    def __str__(self):
+        return self.tipo_servico

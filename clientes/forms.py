@@ -18,5 +18,11 @@ class ClientesForm(forms.ModelForm):
             indicacoes = forms.ChoiceField(
                 choices=[('0', '--Selecione--')] + [(indicacao.id, indicacao.nome) for indicacao in
                                                     Indicacoes.objects.all()])
+
+            class Meta:
+                ordering = ('nome',)
+
+            def _str_(self):
+                return self.nome
 class BuscarForm(forms.Form):
     nome_cliente = forms.CharField(label='nome', max_length=80, required=False)

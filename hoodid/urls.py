@@ -7,6 +7,7 @@ from extensoes.views import ExtensoesCreate
 from extensoes.views import ExtensoesList
 from extensoes.views import ExtensoesUpdate
 from extensoes.views import ExtensoesDelete
+
 from clientes.views import ClientesCreate
 from clientes.views import ClientesList
 from clientes.views import ClientesUpdate
@@ -27,6 +28,11 @@ from precos.views import PrecosList
 from precos.views import PrecosUpdate
 from precos.views import PrecosDelete
 
+from area_atuacao.views import Area_AtuacaoCreate
+from area_atuacao.views import Area_AtuacaoList
+from area_atuacao.views import Area_AtuacaoUpdate
+from area_atuacao.views import Area_AtuacaoDelete
+from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -61,6 +67,24 @@ urlpatterns = [
     path('novo_precos/', PrecosCreate.as_view(), name='novo_precos'),
     path('atualiza_precos/<int:pk>/', PrecosUpdate.as_view(), name='atualiza_precos'),
     path('delete_precos/<int:pk>/', PrecosDelete.as_view(), name='delete_precos'),
+
+    path('lista_area_atuacao_criacaopublicitaria/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_criacaopublicitaria'),
+    path('lista_area_atuacao_desenhogravura/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_desenhogravura'),
+    path('lista_area_atuacao_escultura/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_escultura'),
+    path('lista_area_atuacao_filmedocumentario/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_filmedocumentario'),
+    path('lista_area_atuacao_fotografia/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_fotografia'),
+    path('lista_area_atuacao_musica/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_musica'),
+    path('lista_area_atuacao_palestraconferencia/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_palestraconferencia'),
+    path('lista_area_atuacao_pintura/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_pintura'),
+    path('lista_area_atuacao_poesia/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_poesia'),
+    path('lista_area_atuacao_projetoarquitetonico/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_projetoarquitetonico'),
+    path('lista_area_atuacao_projetodiverso/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_projetodiverso'),
+    path('lista_area_atuacao_software/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_software'),
+    path('lista_area_atuacao_teatrocoreografia/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_teatrocoreografia'),
+    path('lista_area_atuacao_texto/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_texto'),
+    path('novo_area_atuacao/', Area_AtuacaoCreate.as_view(), name='novo_area_atuacao'),
+    path('atualiza_area_atuacao/<int:pk>/', Area_AtuacaoUpdate.as_view(), name='atualiza_area_atuacao'),
+    path('delete_area_atuacao/<int:pk>/', Area_AtuacaoDelete.as_view(), name='delete_area_atuacao'),
 
 ]
 

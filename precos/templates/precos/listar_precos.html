@@ -66,7 +66,7 @@
               {% for an in precos %}
               <tr>
                 <td width="5%">{{ an.id }}</td>
-                <td width="40%">{{ an.valor }}</td>
+                <td width="40%">{{ an.codservico }}</td>
                 <td width="2%"><a href="{% url 'delete_precos' an.id %}" class="secondary-content"><i class="material-icons">delete_forever</i></a></td>
                 <td width="2%"><a href="{% url 'atualiza_precos' an.id %}" class="secondary-content"><i class="material-icons">edit</i></a></td>
               </tr>

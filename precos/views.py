@@ -28,12 +28,17 @@ class PrecosList(ListView):
     model = Precos
     paginate_by = 10
     context_object_name = "precos"
-
+    '''
     def get_queryset(self):
         qs = Precos.objects.all()
         nome_preco = self.request.GET.get('nome_preco')
         if nome_preco is not None:
             qs = Precos.objects.filter(nome__icontains=nome_preco)
+
+         return qs
+'''
+    def get_queryset(self):
+        qs = Precos.objects.select_related('codservico').all()
         return qs
 
     def get_context_data(self, **kwargs):

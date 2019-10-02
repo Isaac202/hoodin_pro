@@ -1,0 +1,189 @@
+{% extends 'base_cadastro.html' %}
+{% block navegar %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Registro/a>
+        <i class="Large material-icons right">assignment</i>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {% if user.is_authenticated %}
+           <li>
+             <strong>Usuário</strong>
+              {{user.username}}
+             </li>
+
+             {% endif %}
+      </ul>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block main %}
+<div style="padding: 5rem">
+
+    <form class = "col s12" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+                <div class="col s12">
+                  <i class="material-icons prefix">urst_mode</i>
+                  {{form.codcliente.label_tag}}
+                  {{form.codcliente}}
+                  {{ form.codcliente.errors }}
+
+                </div>
+         <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">perm_media</i>
+                  {{form.codservico}}
+                   {{form.codservico.errors}}
+
+                  <label for="icon_telephone">Tipo</label>
+                </div>
+              </div>
+        <div class="row">
+                <div class="input-field col s6">
+
+                 <i class="material-icons prefix">toll</i>
+                  {{form.valor}}
+                   {{form.valor.errors}}
+                    <label for="icon_prefix">Valor</label>
+                </div>
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">create</i>
+                  {{form.data}}
+                    {{form.data.errors}}
+                 <label for="icon_telephone">Data</label>
+                </div>
+              </div>
+
+        <div class="row">
+                <div class="input-field col s6">
+
+                 <i class="material-icons prefix">dashboard</i>
+                  {{form.assinatura}}
+                   {{form.assinatura.errors}}
+                    <label for="icon_prefix">Assinatura</label>
+                </div>
+                <div class="col s6">
+                  <i class="material-icons prefix">file_upload</i>
+                    {{form.versao}}
+                    {{form.versao.errors}}
+
+                 <label for="icon_telephone">Versao</label>
+                </div>
+        </div>
+
+         <div class="row">
+                <div class="input-field col s6">
+
+                 <i class="material-icons prefix">dashboard</i>
+                  {{form.descricao}}
+                   {{form.descricao.errors}}
+                    <label for="icon_prefix">Descrição</label>
+                </div>
+                <div class="col s6">
+                  <i class="material-icons prefix">file_upload</i>
+                    {{form.codqrcode}}
+                    {{form.codqrcode.errors}}
+
+                 <label for="icon_telephone">Qr Code</label>
+                </div>
+
+                <div class="col s6">
+                  <i class="material-icons prefix">file_upload</i>
+                    {{form.codindicacao}}
+                    {{form.codindicacao.errors}}
+
+                 <label for="icon_telephone">Indicação</label>
+                </div>
+
+             <div class="col s6">
+                  <i class="material-icons prefix">file_upload</i>
+                    {{form.desconto}}
+                    {{form.desconto.errors}}
+
+                 <label for="icon_telephone">Desconto</label>
+                </div>
+
+             <div class="col s6">
+                  <i class="material-icons prefix">file_upload</i>
+                    {{form.resumo_obra}}
+                    {{form.resumo_obra.errors}}
+
+                 <label for="icon_telephone">Resumo</label>
+                </div>
+
+           </div>
+
+                <div class="row">
+
+
+                <div class="input-field col s12">
+                     <input class="btn" type="submit" value="Enviar">
+                 </div>
+              </div>
+
+
+
+    </form>
+
+</div>
+
+
+
+{% endblock %}
+{% block script %}
+  <script>
+    $(document).ready(function(){
+        $('select').formSelect();
+        exibir_ocultar();
+
+        });
+
+  function exibir_ocultar(){
+    var valor = $("#id_nome_area").val();
+    switch (valor) {
+
+      case 'Area1':
+         $("#id_media").show();
+         $("#id_area3").hide();
+         $("#id_area4").hide();
+         $("#id_area2").hide();
+
+        break;
+      case 'Area2':
+         $("#id_media").hide();
+         $("#id_area3").hide();
+         $("#id_area4").hide();
+         $("#id_area2").show();
+
+         break;
+      case 'Area3':
+         $("#id_media").hide();
+         $("#id_area3").show();
+         $("#id_area4").hide();
+         $("#id_area2").hide();
+
+        break;
+      case 'Area4':
+         $("#id_media").hide();
+         $("#id_area3").hide();
+         $("#id_area4").show();
+         $("#id_area2").hide();
+        console.log('Mangoes and papayas are $2.79 a pound.');
+        // expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+      default:
+         $("#id_media").hide();
+         $("#id_area3").hide();
+         $("#id_area4").hide();
+         $("#id_area2").hide();
+
+    }
+
+
+};
+  </script>
+
+
+{% endblock script %}
+

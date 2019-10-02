@@ -18,6 +18,13 @@ class BuscarForm(forms.Form):
 class ServicosExtensoesForm(forms.ModelForm):
     class Meta:
         model = ServicosExtensoes
+
+        exclude = (
+            #'token', 'status', 'pontuacao', 'data_cadastro',
+            #'id_usuario', 'valor_atual_credito', 'role','email','senha','confirma_sms',
+            #'status_motorista', 'status_veiculos' #'foto_perfil'
+        )
+
 '''
     def __init__(self, user,  *args, **kwargs):
           super(ServicosExtensoesForms, self).__init__(*args, **kwargs)

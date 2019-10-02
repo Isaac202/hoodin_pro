@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Servicos, ServicosExtensoes
-from .forms import ServicosForm, BuscarForm, ServicosExtensoesForms, BuscarExtensoesForm
+from .forms import ServicosForm, BuscarForm, ServicosExtensoesForm, BuscarExtensoesForm
 #from .forms import BuscaPlacerForm
 
 
@@ -55,7 +55,7 @@ class ServicosDelete(DeleteView):
 class ServicosExtensoesCreate(CreateView):
     model = ServicosExtensoes
     template_name = 'servicos/inc_servicosextensoes.html'
-    form_class = ServicosExtensoesForms
+    form_class = ServicosExtensoesForm
     success_url = reverse_lazy('lista_servicosextensoes')
 
     def dispatch(self, request, *args, **kwargs):
@@ -100,7 +100,7 @@ class ServicosExtensoesList(ListView):
 
 class ServicosExtensoesUpdate(UpdateView):
     model = ServicosExtensoes
-    form_class = ServicosExtensoesForms
+    form_class = ServicosExtensoesForm
     template_name = "servicos/upd_servicosextensoes.html"
     success_url = reverse_lazy('lista_servicosextensoes')
 

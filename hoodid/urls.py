@@ -37,6 +37,8 @@ from servicos.views import ServicosExtensoesCreate
 from servicos.views import ServicosExtensoesList
 from servicos.views import ServicosExtensoesUpdate
 
+from registros.views import RegistrosCreate
+
 from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
 
 urlpatterns = [
@@ -94,6 +96,8 @@ urlpatterns = [
     path('lista_servicosextensoes/', ServicosExtensoesList.as_view(), name='lista_servicosextensoes'),
     path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
     path('atualiza_servicosextensoes/<int:pk>/', ServicosExtensoesUpdate.as_view(), name='atualiza_servicosextensoes'),
+
+    path('registrar/', RegistrosCreate.as_view(), name='registrar'),
 
 ]
 

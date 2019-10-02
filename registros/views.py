@@ -7,21 +7,21 @@ from django.urls import reverse_lazy
 from .models import Registros
 from .forms import RegistrosForm
 
-class RegistroCreate(CreateView):
+class RegistrosCreate(CreateView):
     model = Registros
-    template_name = "regsitros/registros.html"
+    template_name = "registros/registros.html"
     form_class = RegistrosForm
 
     success_url = reverse_lazy('lista_registros')
 
     def form_valid(self, form):
         form.instance.perfil = self.request.user
-        return super(RegistroCreate, self).form_valid(form)
+        return super(RegistrosCreate, self).form_valid(form)
 
     #success_url = reverse_lazy('lista_placer')
 
 
-class RegistroList(ListView):
+class RegistrosList(ListView):
     template_name ="registros/listar_registros.html"
     model = Registros
     paginate_by = 10

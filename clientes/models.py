@@ -55,13 +55,11 @@ class Clientes(models.Model):
     #senha = models.CharField(max_length=8)
 '''
 
-    '''
     class Meta:
         ordering = ('nome',)
 
     def __str__(self):
         return self.nome
-'''
 '''
 @receiver(pre_save, sender=Clientes)
 def criar_usuario(sender, instance, **kwargs):

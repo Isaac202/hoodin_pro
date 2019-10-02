@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db import models
-
+from extensoes.models import Extensoes
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Servicos(models.Model):
@@ -17,3 +18,8 @@ class Servicos(models.Model):
 
     def _str_(self):
         return self.nome
+
+
+class ServicosExtensoes(models.Model):
+    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT)
+    codextensao = models.ForeignKey(Extensoes, on_delete=models.PROTECT)

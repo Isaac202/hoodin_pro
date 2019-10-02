@@ -15,7 +15,7 @@ class ServicosForm(forms.ModelForm):
 class BuscarForm(forms.Form):
     nome_servico = forms.CharField(label='nome', max_length=80, required=False)
 
-class ServicosExtensoesForms(forms.ModelForm):
+class ServicosExtensoesForm(forms.ModelForm):
     class Meta:
         model = ServicosExtensoes
 '''

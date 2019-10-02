@@ -6,19 +6,19 @@ from servicos.models import Servicos
 
 User = get_user_model()
 class Registros(models.Model):
-    codregistro=models.PositiveIntegerField()
-    codcliente=models.ForeignKey(User, on_delete=models.PROTECT)
-    codservico=models.ForeignKey(Servicos, on_delete=models.PROTECT)
-    valor=models.DecimalField(max_digits=9,decimal_places=2)
-    data=models.DateTimeField(auto_now=True)
-    caminho_arquivo=models.CharField(max_length=255) #TODO REFATORAR PRA O AWS S3
-    assinatura=models.BinaryField()
-    versao=models.PositiveIntegerField()
-    descricao=models.CharField(max_length=255)
-    codqrcode=models.PositiveIntegerField()
-    codindicacao=models.PositiveIntegerField()
-    desconto=models.DecimalField(max_digits=9,decimal_places=2)
-    resumo_obra=models.TextField(max_length=5000)
+    codregistro = models.PositiveIntegerField()
+    codcliente = models.ForeignKey(User, on_delete=models.PROTECT)
+    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT)
+    valor = models.DecimalField(max_digits=9, decimal_places=2)
+    data = models.DateTimeField(auto_now=True)
+    caminho_arquivo = models.CharField(max_length=255) #TODO REFATORAR PRA O AWS S3
+    assinatura = models.BinaryField()
+    versao = models.PositiveIntegerField()
+    descricao = models.CharField(max_length=255)
+    codqrcode = models.PositiveIntegerField()
+    codindicacao = models.PositiveIntegerField()
+    desconto = models.DecimalField(max_digits=9,decimal_places=2)
+    resumo_obra = models.TextField(max_length=5000)
 
 
     class Meta:

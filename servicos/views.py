@@ -4,8 +4,8 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Servicos
-from .forms import ServicosForm, BuscarForm
+from .models import Servicos, ServicosExtensoes
+from .forms import ServicosForm, ServicosExtensoesForm, BuscarForm
 #from .forms import BuscaPlacerForm
 
 
@@ -54,9 +54,9 @@ class ServicosDelete(DeleteView):
 
 
 class ServicosExtensoesCreate(CreateView):
-    model = Servicos
+    model = ServicosExtensoes
     template_name = "servicos/inc_servicosextensoes.html"
-    form_class = ServicosForm
+    form_class = ServicosExtensoesForm
 
     success_url = reverse_lazy('lista_servicos')
 

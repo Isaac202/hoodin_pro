@@ -52,6 +52,7 @@ class ServicosDelete(DeleteView):
     template_name = "servicos/del_servicos.html"
     success_url = reverse_lazy('lista_servicos')
 
+'''
 class ServicosExtensoesCreate(CreateView):
     model = Servicos
     template_name = "servicos/inc_servicosextensoes.html"
@@ -62,3 +63,4 @@ class ServicosExtensoesCreate(CreateView):
     def form_valid(self, form):
         form.instance.perfil = self.request.user
         return super(ServicosExtensoesCreate, self).form_valid(form)
+'''

@@ -19,7 +19,6 @@ class Servicos(models.Model):
     def _str_(self):
         return self.nome
 
-
 class ServicosExtensoes(models.Model):
-    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT)
-    codextensao = models.ForeignKey(Extensoes, on_delete=models.PROTECT)
+    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT, null=True)
+    codextensao = models.ForeignKey(Extensoes, on_delete=models.PROTECT, null=True)

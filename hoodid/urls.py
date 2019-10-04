@@ -34,8 +34,9 @@ from area_atuacao.views import Area_AtuacaoUpdate
 from area_atuacao.views import Area_AtuacaoDelete
 
 from servicos.views import ServicosExtensoesCreate
-from servicos.views import ServicosExtensoesList
-from servicos.views import ServicosExtensoesUpdate
+
+#from servicos.views import ServicosExtensoesList
+#from servicos.views import ServicosExtensoesUpdate
 
 from registros.views import RegistrosCreate
 
@@ -93,11 +94,9 @@ urlpatterns = [
     path('atualiza_area_atuacao/<int:pk>/', Area_AtuacaoUpdate.as_view(), name='atualiza_area_atuacao'),
     path('delete_area_atuacao/<int:pk>/', Area_AtuacaoDelete.as_view(), name='delete_area_atuacao'),
 
-    path('lista_servicosextensoes/', ServicosExtensoesList.as_view(), name='lista_servicosextensoes'),
-    path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
-    path('atualiza_servicosextensoes/<int:pk>/', ServicosExtensoesUpdate.as_view(), name='atualiza_servicosextensoes'),
-
     path('registrar/', RegistrosCreate.as_view(), name='registrar'),
+
+    path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
 
 ]
 

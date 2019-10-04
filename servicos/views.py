@@ -60,14 +60,6 @@ class ServicosExtensoesCreate(CreateView):
 
     success_url = reverse_lazy('lista_servicos')
 
-    def dispatch(self, request, *args, **kwargs):
-        self.codservico = kwargs['codservico']
-        self.request.session['codservico'] = kwargs['codservico']
-        servicos = Servicos.objects.filter(id=self.codservico).first()
-        request.session['nome_servico'] = servicos.nome
-        request.session['codigo_servico'] = servicos.codservico
-
-        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.instance.perfil = self.request.user

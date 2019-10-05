@@ -61,7 +61,7 @@ class ServicosExtensoesCreate(CreateView):
     success_url = reverse_lazy('lista_servicos')
 
     def dispatch(self, request, *args, **kwargs):
-        #self.codservico = kwargs['id']
+        self.codservico = kwargs['id']
         #self.request.session['codservico'] = kwargs['id']
         #servicos = Servicos.objects.filter(id=self.codservico).first()
         #request.session['nome_servico'] = servicos.nome

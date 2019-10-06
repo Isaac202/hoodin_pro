@@ -16,7 +16,7 @@ class Servicos(models.Model):
     class Meta:
         ordering = ('nome',)
 
-    def _str_(self):
+    def __str__(self):
         return self.nome
 
 class ServicosExtensoes(models.Model):

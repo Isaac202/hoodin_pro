@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'hoodid.wsgi.application'
 
 DEV = config('DEV', default=False, cast=bool)
 if DEV:
-    default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db1.sqlite3')
+    default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'hdb2.sqlite3')
     DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
                                cast=dburl), }
 else:
@@ -121,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTH_USER_MODEL = 'usuarios.User'
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -139,9 +139,6 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-
-
 
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = config('REDIS_URL')

@@ -1,28 +1,19 @@
 from django import forms
 from .models import Clientes # pega os campos e cria um form
-from indicacoes.models import Indicacoes
+from indicacoes.models import Indicacao
 
 class ClientesForm(forms.ModelForm):
+    senha = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = Clientes
         #colocar os campos que não quer que apareça
-        exclude = (
-            #'token', 'status', 'pontuacao', 'data_cadastro',
-            #'id_usuario', 'valor_atual_credito', 'role','email','senha','confirma_sms',
-            #'status_motorista', 'status_veiculos' #'foto_perfil'
-        )
-
-        class ClientesForm(forms.ModelForm):
-            # no choices eu fiz um list comprehension que apenas gera um list [a,b,c...z] que vai ser renderizado no select
+        exclude = ['id', 'codusuario']
+        ''''
             indicacoes = forms.ChoiceField(
                 choices=[('0', '--Selecione--')] + [(indicacao.id, indicacao.nome) for indicacao in
                                                     Indicacoes.objects.all()])
+        '''
 
-            class Meta:
-                ordering = ('nome',)
-
-            def _str_(self):
-                return self.nome
 class BuscarForm(forms.Form):
     nome_cliente = forms.CharField(label='nome', max_length=80, required=False)

@@ -15,10 +15,11 @@ class PrecosForm(forms.ModelForm):
 
         class PrecosForm(forms.ModelForm):
             # no choices eu fiz um list comprehension que apenas gera um list [a,b,c...z] que vai ser renderizado no select
+            '''
             servicos = forms.ChoiceField(
                 choices=[('0', '--Selecione--')] + [(servicos.id, servicos.nome) for servicos in
                                                     Servicos.objects.all()])
-
+            '''
 
 class BuscarForm(forms.Form):
     nome_preco = forms.CharField(label='nome', max_length=80, required=False)

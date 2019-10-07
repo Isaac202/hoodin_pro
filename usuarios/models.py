@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from tools.genereteKey import generate_hash_key
-
+from indicacoes.models import Indicacao
 #from django.core.validators import validate_email
 #from django.contrib.auth.validators import UnicodeUsernameValidator
 
@@ -129,6 +129,16 @@ def gera_code(sender, instance, **kwargs):
             instance.code_bisavo = pai.code_avo
 
 
+@receiver(post_save, sender=User)
+def indicacao(sender, instance, **kwargs):
+    # se nao for nulo
+    if not instance.code_pai is None:
+        a = Indicacao.objects.create(
+            filho=instance,
+            code_pai=instance.code_pai,
+            code_avo=instance.code_avo,
+            code_bisavo=instance.code_bisavo
+            )
 
 
 class UserConfirm(models.Model):

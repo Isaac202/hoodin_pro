@@ -16,9 +16,6 @@ class ClientesCreate(CreateView):
 
     success_url = reverse_lazy('lista_clientes')
 
-    def form_valid(self, form):
-        form.instance.perfil = self.request.user
-        return super(ClientesCreate, self).form_valid(form)
 
     #success_url = reverse_lazy('lista_placer')
 

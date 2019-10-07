@@ -11,13 +11,13 @@ class Registros(models.Model):
     codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT)
     valor = models.DecimalField(max_digits=9, decimal_places=2)
     data = models.DateTimeField(auto_now=True)
-    caminho_arquivo = models.CharField(max_length=255) #TODO REFATORAR PRA O AWS S3
-    assinatura = models.BinaryField()
+    assinatura = models.FileField(blank=True, null=True)
+    arquivo = models.FileField()
     versao = models.PositiveIntegerField()
     descricao = models.CharField(max_length=255)
-    codqrcode = models.PositiveIntegerField()
-    codindicacao = models.PositiveIntegerField()
-    desconto = models.DecimalField(max_digits=9,decimal_places=2)
+    codqrcode = models.PositiveIntegerField(blank=True, null=True)
+    codindicacao = models.PositiveIntegerField(blank=True, null=True)
+    desconto = models.DecimalField(max_digits=9,decimal_places=2, default=0)
     resumo_obra = models.TextField(max_length=5000)
 
 

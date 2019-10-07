@@ -1,21 +1,18 @@
-from _json import make_encoder
-from django.contrib.auth import get_user_model
 from django.db import models
+from django.conf import settings
+from datetime import datetime
+# 'usuarios.User' = get_'usuarios.User'_model()
 
 
-User = get_user_model()
-class Indicacoes(models.Model):
-   # codindicacao=models.PositiveIntegerField()
-    nome=models.CharField(max_length=100)
+class Indicacao(models.Model):
+    code_bisavo = models.CharField(
+        "Codigo do Bisavó", max_length=100, blank=True, null=True)
+    code_avo = models.CharField(
+        "Codigo do Avó", max_length=100, blank=True, null=True)
+    code_pai = models.CharField("Codigo do Pai", max_length=100)
+    filho = models.ForeignKey(
+        'usuarios.User', verbose_name='cliente', on_delete=models.CASCADE)
+    data_cadastro = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('nome',)
-
-    def _str_(self):
-        return self.nome
-   # percentual_promocional=models.DecimalField(max_digits=5,decimal_places=2)
-
-
-
-
-# Create your models here.
+        ordering = ('-data_cadastro',)

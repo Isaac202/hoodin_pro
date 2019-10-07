@@ -4,13 +4,13 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Indicacoes
+from .models import Indicacao
 from .forms import IndicacoesForm, BuscarForm
 #from .forms import BuscaPlacerForm
 
 #LoginRequiredMixin,
 class IndicacoesCreate(CreateView):
-    model = Indicacoes
+    model = Indicacao
     template_name = "indicacoes/inc_indicacoes.html"
     form_class = IndicacoesForm
 
@@ -25,15 +25,15 @@ class IndicacoesCreate(CreateView):
 
 class IndicacoesList(ListView):
     template_name ="indicacoes/listar_indicacoes.html"
-    model = Indicacoes
+    model = Indicacao
     paginate_by = 10
     context_object_name = "indicacoes"
 
     def get_queryset(self):
-        qs = Indicacoes.objects.all()
+        qs = Indicacao.objects.all()
         nome_indicacao = self.request.GET.get('nome_indicacao')
         if nome_indicacao is not None:
-            qs = Indicacoes.objects.filter(nome__icontains=nome_indicacao)
+            qs = Indicacao.objects.filter(nome__icontains=nome_indicacao)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -44,13 +44,13 @@ class IndicacoesList(ListView):
 
 
 class IndicacoesUpdate(UpdateView):
-    model = Indicacoes
+    model = Indicacao
     template_name = "indicacoes/upd_indicacoes.html"
     form_class = IndicacoesForm
     success_url = reverse_lazy('lista_indicacoes')
 
 
 class IndicacoesDelete(DeleteView):
-    model = Indicacoes
+    model = Indicacao
     template_name = "indicacoes/del_indicacoes.html"
     success_url = reverse_lazy('lista_indicacoes')

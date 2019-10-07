@@ -5,54 +5,36 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from configuracoes.tasks import enviar_sms
 from django.conf import settings
-from indicacoes.models import Indicacoes
+from indicacoes.models import Indicacao
 
 User = get_user_model()
 
 
 class Clientes(models.Model):
-    #padrão é não nulo
-   # codcliente = models.PositiveIntegerField()
     nome = models.CharField(max_length=255)
+    codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
     email = models.EmailField(max_length=255, unique=True)
     valor_credito = models.DecimalField(max_digits=11, decimal_places=2, default=0)
     telefone = models.CharField(max_length=16, null=True, blank=True)
     celular = models.CharField(max_length=16, null=True, blank=True)
-    data_nascimento = models.DateField(null=True)
+    data_nascimento = models.DateField(null=True, blank=True)
     sexo = models.CharField(max_length=1, default='', null=True, blank=True, choices=settings.SEXO_CHOICES)
-    cep = models.CharField(max_length=9, null=True, blank=True)
-    endereco = models.CharField(max_length=255, null=True, blank=True)
-    complemento = models.CharField(max_length=255, null=True, blank=True)
-    numero = models.CharField(max_length=8, null=True, blank=True)
-    pais = models.CharField(max_length=50, null=True, blank=True)
-    estado = models.CharField(max_length=50, null=True, blank=True)
-    cidade = models.CharField(max_length=50, null=True, blank=True)
-    bairro = models.CharField(max_length=50, null=True, blank=True)
     tipo_pessoa = models.CharField(max_length=1, null=True, blank=True)
     nome_mae = models.CharField(max_length=100, null=True, blank=True)
     nome_pai = models.CharField(max_length=100, null=True, blank=True)
     cnpjcpf = models.CharField(max_length=18, null=True, blank=True)
-    documento_identidade = models.CharField(max_length=50, null=True, blank=True)
-    documento_tipo = models.CharField(max_length=20, null=True, blank=True)
-    passaporte = models.CharField(max_length=50, null=True, blank=True)
-    nacionalidade = models.CharField(max_length=20, null=True, blank=True)
-    estadocivil = models.CharField(max_length=1, null=True, blank=True)
-    biografia = models.CharField(max_length=5000, null=True, blank=True)
-    nif = models.CharField(max_length=100, null=True, blank=True)
-    facebook = models.CharField(max_length=100, null=True, blank=True)
-    twitter = models.CharField(max_length=100, null=True, blank=True)
-    homepage = models.CharField(max_length=100, null=True, blank=True)
-    codindicacao = models.OneToOneField(Indicacoes,  on_delete=models.PROTECT, null=True, related_name='indicacao', verbose_name='Indicacao')
-
-    '''
-    #codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
-    codindicacao = models.PositiveIntegerField(null=True)
+    codindicacao = models.OneToOneField(Indicacao,  on_delete=models.PROTECT, null=True,  blank= True, related_name='indicacao', verbose_name='Indicacao')
+    senha = models.CharField(max_length=50)
     data_cadastro = models.DateTimeField(auto_now=True)
+    '''
+    #
+    codindicacao = models.PositiveIntegerField(null=True)
+    
     area_pais = models.CharField(max_length=3, null=True, blank=True)
     identidade = models.CharField(max_length=20, null=True, blank=True)
     identidade_orgaoemissor = models.CharField(max_length=10, null=True, blank=True)
     codindicacao_cliente = models.PositiveIntegerField(null=True)
-    #senha = models.CharField(max_length=8)
+    
 '''
 
     class Meta:
@@ -60,7 +42,7 @@ class Clientes(models.Model):
 
     def __str__(self):
         return self.nome
-'''
+
 @receiver(pre_save, sender=Clientes)
 def criar_usuario(sender, instance, **kwargs):
 
@@ -74,6 +56,34 @@ def criar_usuario(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Clientes)
-def indicacao(sender, instance, **kwargs):
+def sms_aviso(sender, instance, **kwargs):
     enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')
-'''
+
+
+class Endereco(models.Model):
+    codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
+    cep = models.CharField(max_length=9, null=True, blank=True)
+    endereco = models.CharField(max_length=255, null=True, blank=True)
+    complemento = models.CharField(max_length=255, null=True, blank=True)
+    numero = models.CharField(max_length=8, null=True, blank=True)
+    pais = models.CharField(max_length=50, null=True, blank=True)
+    estado = models.CharField(max_length=50, null=True, blank=True)
+    cidade = models.CharField(max_length=50, null=True, blank=True)
+    bairro = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.endereco
+
+
+class Dado(models.Model):
+    codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
+    documento_identidade = models.CharField(max_length=50, null=True, blank=True)
+    documento_tipo = models.CharField(max_length=20, null=True, blank=True)
+    passaporte = models.CharField(max_length=50, null=True, blank=True)
+    nacionalidade = models.CharField(max_length=20, null=True, blank=True)
+    estadocivil = models.CharField(max_length=1, null=True, blank=True)
+    biografia = models.CharField(max_length=5000, null=True, blank=True)
+    nif = models.CharField(max_length=100, null=True, blank=True)
+    facebook = models.CharField(max_length=100, null=True, blank=True)
+    twitter = models.CharField(max_length=100, null=True, blank=True)
+    homepage = models.CharField(max_length=100, null=True, blank=True)

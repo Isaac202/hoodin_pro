@@ -158,6 +158,7 @@ cod_erro_cielo= {
     '321': 'Não é possível definir EndDate para antes da próxima recorrência',
     '322': 'Zero Dollar Auth não está ativado',
     '323': 'Consulta de Lixeira não está ativada',
+    '999': 'comunicação indisponível.',
 }
 
 @task
@@ -182,6 +183,7 @@ def comprar_credito(id_compra, cliente, numero_cartao, seguranca, bandeira, vali
         response_create_sale = cielo_ecommerce.create_sale(sale)
         x = json.dumps(response_create_sale, indent=3, sort_keys=True)
         payment_id = sale.payment.payment_id
+        print('aqui teste')
         print(x)
 
         if payment_id is not None:
@@ -200,6 +202,7 @@ def comprar_credito(id_compra, cliente, numero_cartao, seguranca, bandeira, vali
         p =p.replace(']', '')
         codigo = p
         msg_retorno= str(cod_erro_cielo.get(codigo,0))
+        print(msg_retorno, codigo)
         return (msg_retorno, '0', '0')
 
 
@@ -225,9 +228,9 @@ def gerar_token_cartao(cliente, numero_cartao, seguranca, bandeira, validade):
         credit_card.customer_name = cliente
         cielo_ecommerce = CieloEcommerce(merchant, environment)
         response_create_card_token = cielo_ecommerce.create_card_token(credit_card)
-        print(json.dumps(response_create_card_token, indent=2))
+        #print(json.dumps(response_create_card_token, indent=2))
         new_card_token = credit_card.card_token
-        print('cartao Token:', new_card_token)
+        #print('cartao Token:', new_card_token)
         token_cartao = new_card_token
 
     except KeyError as e:

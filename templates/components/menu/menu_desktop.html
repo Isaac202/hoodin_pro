@@ -143,7 +143,7 @@
 -->
 
     <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
+    <ul id="dropdown" class="dropdown-content">
       <li><a href="#!">one</a></li>
       <li><a href="#!">two</a></li>
       <li class="divider"></li>
@@ -229,3 +229,10 @@
 
 {% endif %}
 <!--</div>-->
+{% block script %}
+  <script>
+    $(document).ready(function(){
+            $(".dropdown-trigger").dropdown();
+    });
+  </script>
+{% endblock script %}

@@ -3,12 +3,11 @@
 <!--menu desktop-->
 <!--ESTÁ LOGADO E NÃO É SUPER USUÁRIO-->
 {% if user.is_authenticated and not request.user.is_superuser%}
-<!--
      <div class="nav-wrapper">
       <a href="#" class="brand-logo center-align">
 
       </a>
- -->
+
 <ul id="nav-mobile" class="right hide-on-med-and-down">
 
    <li>
@@ -63,8 +62,6 @@
 {% endif %}
 <!--ESTÁ LOGADO E É SUPER USUÁRIO-->
 {% if user.is_authenticated and request.user.is_superuser %}
-<!--
-
    <div class="nav-wrapper">
       <a href="#" class="brand-logo ">
       <i class="material-icons left">verified_user</i>
@@ -143,49 +140,10 @@
         </li>
        </ul>
 
--->
-
-     <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
-      <li><a href="#!">one</a></li>
-      <li><a href="#!">two</a></li>
-      <li class="divider"></li>
-      <li><a href="#!">three</a></li>
-    </ul>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
-          <!-- Dropdown Trigger -->
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-        </ul>
-      </div>
-    </nav>
-
 {% endif %}
 <!--NÃO ESTÁ LOGADO-->
-{% if not user.is_authenticated %}<!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content">
-      <li><a href="#!">one</a></li>
-      <li><a href="#!">two</a></li>
-      <li class="divider"></li>
-      <li><a href="#!">three</a></li>
-    </ul>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
-          <!-- Dropdown Trigger -->
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-        </ul>
-      </div>
-    </nav>
+{% if not user.is_authenticated %}
 
-<!--
     <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
            <a href="{% url 'login' %}">
@@ -244,6 +202,6 @@
          </li>
 
      </ul>
--->
+
 {% endif %}
 <!--</div>-->

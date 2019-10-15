@@ -39,7 +39,7 @@ class ServicosList(ListView):
         context = super(ServicosList, self).get_context_data(**kwargs)
         form = BuscarForm()
         context['form'] = form
-        context['codservico'] = 'nome do servico'
+        context['nomeservico'] = 'nome do servico'
         context['codservico'] = 1
         return context
 

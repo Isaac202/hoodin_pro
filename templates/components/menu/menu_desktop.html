@@ -1,3 +1,4 @@
+<!--http://docs.viewflow.io/viewflow_core.html-->
 <!--https://materializecss.com/navbar.html-->
 <!--https://materializecss.com/dropdown.html#!-->
 <!--menu desktop-->
@@ -67,33 +68,10 @@
       <i class="material-icons left">verified_user</i>
       </a>
 
-<!-- Dropdown Structure --
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-</ul>
-<nav>
-  <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Logo</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <-- Dropdown Trigger --
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
-</nav>
--->
-
-<!-- Dropdown Trigger -->
 <li class="divider">
 <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown1'>Drop Me!</a>
 </li>
 
-
-<!--
        <ul id="nav-mobile" class="right hide-on-med-and-down">
            <li>
                 <a href="#">
@@ -165,7 +143,6 @@
                 </a>
             </li>
            </ul>
--->
 {% endif %}
 <!--NÃO ESTÁ LOGADO-->
 {% if not user.is_authenticated %}
@@ -223,7 +200,7 @@
          <li>
            <a href="{% url 'login' %}">
              <i class="material-icons left">account_box</i>
-             Login
+             Loginss
             </a>
          </li>
 

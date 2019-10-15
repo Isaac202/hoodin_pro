@@ -68,8 +68,12 @@ class ServicosExtensoesCreate(CreateView):
         #servicos = Servicos.objects.filter(id=self.codservico).first()
         #request.session['nome_servico'] = servicos.nome
         #request.session['codigo_servico'] = servicos.codservico
-
         return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['codigo'] = self.request.GET.get('codigo',None)
+        return context
 
     def form_valid(self, form):
         form.instance.perfil = self.request.user

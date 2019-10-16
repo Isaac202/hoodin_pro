@@ -1,78 +1,67 @@
-<!--http://docs.viewflow.io/viewflow_core.html-->
-<!--https://materializecss.com/navbar.html-->
-<!--https://materializecss.com/dropdown.html#!-->
 <!--menu desktop-->
 <!--ESTÁ LOGADO E NÃO É SUPER USUÁRIO-->
+<div class="nav-wrapper">
 {% if user.is_authenticated and not request.user.is_superuser%}
-     <div class="nav-wrapper">
-          <a href="#" class="brand-logo center-align">
+          <a href="#" class="brand-logo center-align">   </a>
 
-          </a>
+           <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-       <ul id="nav-mobile" class="right hide-on-med-and-down">
+               <li>
+                      <a href="{% url 'resumo' %}">
+                            <i class="material-icons left">assignment</i>
+                             Home
+                       </a>
+               </li>
 
-           <li>
-                  <a href="{% url 'resumo' %}">
-                        <i class="material-icons left">assignment</i>
-                         Home
-                   </a>
-           </li>
+               <li>
+                     <a href="{% url 'upd_clientes' %}">
+                         <i class="material-icons left">people</i>
+                            Meus Dados
+                    </a>
+                </li>
 
-           <li>
-                 <a href="{% url 'upd_clientes' %}">
-                     <i class="material-icons left">people</i>
-                        Meus Dados
-                </a>
-            </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons left">perm_media</i>
+                        Tabela Preços
+                    </a>
+                </li>
 
-            <li>
-                <a href="#">
-                    <i class="material-icons left">perm_media</i>
-                    Tabela Preços
-                </a>
-            </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons left">perm_media</i>
+                        Registrar
+                    </a>
+                </li>
 
-            <li>
-                <a href="#">
-                    <i class="material-icons left">perm_media</i>
-                    Registrar
-                </a>
-            </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons left">perm_media</i>
+                        Meus Registros
+                    </a>
+                </li>
 
-            <li>
-                <a href="#">
-                    <i class="material-icons left">perm_media</i>
-                    Meus Registros
-                </a>
-            </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons left">perm_media</i>
+                        Fale Conosco
+                    </a>
+                </li>
 
-            <li>
-                <a href="#">
-                    <i class="material-icons left">perm_media</i>
-                    Fale Conosco
-                </a>
-            </li>
+                <li>
+                   <a href="#">
+                     <i class="material-icons left">exit_to_app</i>
+                     Sair
+                    </a>
+                </li>
+        </ul>
 
-            <li>
-               <a href="#">
-                 <i class="material-icons left">exit_to_app</i>
-                 Sair
-                </a>
-            </li>
-    </ul>
 {% endif %}
 <!--ESTÁ LOGADO E É SUPER USUÁRIO-->
 {% if user.is_authenticated and request.user.is_superuser %}
    <!--<div class="nav-wrapper">-->
-      <a href="#" class="brand-logo ">
-      <i class="material-icons left">verified_user</i>
-      </a>
 
-<li class="divider">
-<a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown1'>Drop Me!</a>
-</li>
-
-       <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
            <li>
                 <a href="#">
                     <i class="material-icons left">assignment</i>
@@ -80,33 +69,14 @@
                 </a>
            </li>
 
-           <li>
-                <a href="#">
-                     <i class="material-icons left">web</i>
-                        Usuários
-                </a>
-           </li>
+           <ul id="dropdown1" class="dropdown-content">
+               <li><a href="{% url 'lista_extensoes' %}">Extenções</a></li>
+               <li><a href="{% url 'lista_servicos' %}">Serviços</a></li>
+               <li><a href="{% url 'lista_indicacoes' %}">Indicações</a></li>
+           </ul>
 
-           <li>
-                <a href="{% url 'lista_extensoes' %}">
-                     <i class="material-icons left">people</i>
-                        Extensões
-                </a>
-           </li>
-
-           <li>
-                <a href="{% url 'lista_servicos' %}">
-                     <i class="material-icons left">web</i>
-                        Serviços
-                </a>
-           </li>
-
-           <li>
-                <a href="{% url 'lista_indicacoes' %}">
-                     <i class="material-icons left">web</i>
-                        Indicações
-                </a>
-           </li>
+           <!-- Dropdown Trigger -->
+           <li><a href="#!" class="dropdown-button" data-target="dropdown1">Cadastros<i class="material-icons right">arrow_drop_down</i></a></li>
 
            <li>
                 <a href="#">
@@ -122,12 +92,14 @@
                 </a>
            </li>
 
-           <li>
-                <a href="#">
-                    <i class="material-icons left">burst_mode</i>
-                    Relatórios
-                </a>
-           </li>
+           <ul id="dropdown2" class="dropdown-content">
+               <li><a href="#">Cliente Analítico</a></li>
+               <li><a href="#">Cliente Sintético</a></li>
+               <li><a href="#">Vendas do Período</a></li>
+           </ul>
+
+           <!-- Dropdown Trigger -->
+           <li><a href="#!" class="dropdown-button" data-target="dropdown2">Relatórios<i class="material-icons right">arrow_drop_down</i></a></li>
 
            <li>
                 <a href="#">
@@ -142,89 +114,69 @@
                  Sair
                 </a>
             </li>
-           </ul>
+       </ul>
 {% endif %}
 <!--NÃO ESTÁ LOGADO-->
 {% if not user.is_authenticated %}
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+               <a href="{% url 'login' %}">
+                 <i class="material-icons left">home</i>
+                 Home
+               </a>
+            </li>
 
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-           <a href="{% url 'login' %}">
-             <i class="material-icons left">home</i>
-             Home
-           </a>
-        </li>
+            <li>
+               <a href="#">
+                 <i class="material-icons left">assignment</i>
+                 Quem somos
+                </a>
+            </li>
 
-        <li>
-           <a href="#">
-             <i class="material-icons left">assignment</i>
-             Quem somos
-            </a>
-        </li>
+            <li>
+               <a href="{% url 'login' %}">
+                 <i class="material-icons left">enhanced_encryption</i>
+                 Registrar
+                </a>
+            </li>
 
-        <li>
-           <a href="{% url 'login' %}">
-             <i class="material-icons left">enhanced_encryption</i>
-             Registrar
-            </a>
-        </li>
+            <li>
+               <a href="#">
+                 <i class="material-icons left">monetization_on</i>
+                 Preços
+                </a>
+            </li>
 
-        <li>
-           <a href="#">
-             <i class="material-icons left">monetization_on</i>
-             Preços
-            </a>
-        </li>
+            <li>
+               <a href="#">
+                 <i class="material-icons left">mic</i>
+                 Depoimentos
+                </a>
+            </li>
 
-        <li>
-           <a href="#">
-             <i class="material-icons left">mic</i>
-             Depoimentos
-            </a>
-        </li>
-<!--
-        <li>
-           <a href="#">
-             <i class="material-icons left">email</i>
-             Fale conosco
-            </a>
-        </li>
--->
-        <li>
-           <a href="{% url 'novo_clientes' %}">
-             <i class="material-icons left">people</i>
-             Cadastre-se
-            </a>
-         </li>
+            <li>
+               <a href="#">
+                 <i class="material-icons left">email</i>
+                 Fale conosco
+                </a>
+            </li>
 
-<!-- MENU DESKTOP -->
-        <!-- dropdown trigger -->
-        <li><a href="#!" class="dropdown-button" data-target="dropdown">produtos<i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><a href="#!" class="dropdown-button" data-target="dropdown2">settings<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li>
+               <a href="{% url 'novo_clientes' %}">
+                 <i class="material-icons left">people</i>
+                 Cadastre-se
+                </a>
+             </li>
 
-         <li>
-           <a href="{% url 'login' %}">
-             <i class="material-icons left">account_box</i>
-             Loginss
-            </a>
-         </li>
+             <li>
+               <a href="{% url 'login' %}">
+                 <i class="material-icons left">account_box</i>
+                 Login
+                </a>
+             </li>
 
-     </ul>
-
+        </ul>
 {% endif %}
 </div>
 {% block script %}
-   <script>
-    $('.dropdown-button').dropdown({
-          container: document.body
-        });
-
-    $( document ).ready(function() {
-        $('.sidenav').sidenav();
-        $('.collapsible').collapsible();
-        $('.tooltipped').tooltip();
-        $('.modal').modal();
-     }); // end of document ready
-
-  </script>
 {% endblock script %}

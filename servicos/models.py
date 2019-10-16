@@ -20,5 +20,6 @@ class Servicos(models.Model):
         return self.nome
 
 class ServicosExtensoes(models.Model):
-    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT, null=True)
-    codextensao = models.ForeignKey(Extensoes, on_delete=models.PROTECT, null=True)
+    codservico = models.PositiveIntegerField() # models.ForeignKey(Servicos, on_delete=models.PROTECT, null=True)
+    codextensao = models.OneToOneField(Extensoes,  on_delete=models.PROTECT, null=True,  blank= True, related_name='extensoes', verbose_name='Extensoes')
+        #models.ForeignKey(Extensoes, on_delete=models.PROTECT, null=True)

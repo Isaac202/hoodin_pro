@@ -39,8 +39,8 @@ class ServicosList(ListView):
         context = super(ServicosList, self).get_context_data(**kwargs)
         form = BuscarForm()
         context['form'] = form
-        context['nomeservico'] = 'nome do servico'
-        context['codservico'] = 1
+       # context['nomeservico'] = 'nome do servico'
+        #context['codservico'] = 1
         return context
 
 class ServicosUpdate(UpdateView):
@@ -72,7 +72,8 @@ class ServicosExtensoesCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['codigo'] = self.request.GET.get('codigo',None)
+        context['codservico'] = self.request.GET.get('codservico',None)
+        context['nomeservico'] = self.request.GET.get('nomeservico',None)
         return context
 
     def form_valid(self, form):

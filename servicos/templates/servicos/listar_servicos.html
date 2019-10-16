@@ -20,8 +20,6 @@
 {% endblock %}
 
 
-
-
 {% block main %}
    <h3>Serviços</h3>
    <div  class="center-align">
@@ -70,7 +68,7 @@
                 <td width="40%">{{ an.nome }}</td>
                 <td width="2%"><a href="{% url 'delete_servicos' an.id %}" class="secondary-content"><i class="material-icons">delete_forever</i></a></td>
                 <td width="2%"><a href="{% url 'atualiza_servicos' an.id %}" class="secondary-content"><i class="material-icons">edit</i></a></td>
-                <td width="2%"><a href="{% url 'novo_servicosextensoes'  %}?codigo={{an.id}}" class="btn-floating btn-sm waves-effect waves-light blue-grey"><i class="large material-icons">playlist_add</i></a></td>
+                <td width="2%"><a href="{% url 'novo_servicosextensoes'  %}?codservico={{an.id}}&nomeservico={{an.nome}}" class="btn-floating btn-sm waves-effect waves-light blue-grey"><i class="large material-icons">playlist_add</i></a></td>
               </tr>
              {%endfor%}
             </tbody>

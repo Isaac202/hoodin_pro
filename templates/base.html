@@ -24,16 +24,35 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script type="text/javascript">
 
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+        <script type="text/javascript">
             $(document).ready(function() {
                 $('.slider').slider(); // inicializando slidshow
-                $(".button-collapse").sideNav(); // menu dispositivos moveis
+                $('.button-collapse').sideNav(); // menu dispositivos moveis
                 $('.modal').modal(); // modal
+                $('.collapsible').collapsible();
+                $('.tooltipped').tooltip();
+                $(".dropdown-trigger").dropdown();
+                $('.parallax').parallax();
+                $(".dropdown-button").dropdown({
+                hover: false
+                });
             });
-        </script>
+       </script>
 
-        {% block script %}{% endblock script %}
+       <script>
+        $('.dropdown-button').dropdown({
+              container: document.body
+            });
+       </script>
+       {% block script %}{% endblock script %}
+
 
 
 {% include "modal_aguarde.html" %} {% include "components/footer.html" %}

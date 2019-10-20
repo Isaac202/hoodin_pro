@@ -5,7 +5,8 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from configuracoes.tasks import enviar_sms
 from django.conf import settings
-from indicacoes.models import Indicacao
+from indicacoes.models import Indicacao, IndicadoPor
+from area_atuacao.models import Area_Atuacao
 
 User = get_user_model()
 
@@ -23,9 +24,14 @@ class Clientes(models.Model):
     nome_mae = models.CharField(max_length=100, null=True, blank=True)
     nome_pai = models.CharField(max_length=100, null=True, blank=True)
     cnpjcpf = models.CharField(max_length=18, null=True, blank=True)
-    codindicacao = models.OneToOneField(Indicacao,  on_delete=models.PROTECT, null=True,  blank= True, related_name='indicacao', verbose_name='Indicacao')
+    codindicacao = models.OneToOneField(Indicacao,  on_delete=models.PROTECT, null=True,  blank= True,
+                                        related_name='indicacao', verbose_name='Indicacao')
     senha = models.CharField(max_length=50)
+    codindicacao_por= models.OneToOneField(IndicadoPor, on_delete=models.PROTECT, null=True, blank=True,
+                                        related_name='indicacao_por', verbose_name='Indicado por')
     data_cadastro = models.DateTimeField(auto_now=True)
+    endereco_ok = models.BooleanField(default=False)
+    dados_ok = models.BooleanField(default=False)
     '''
     #
     codindicacao = models.PositiveIntegerField(null=True)

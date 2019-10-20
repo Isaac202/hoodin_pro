@@ -49,6 +49,7 @@ HOODID_APPS = [
     'extensoes',
     'area_atuacao',
     'compras',
+    'clientes_atuacao',
 
 ]
 

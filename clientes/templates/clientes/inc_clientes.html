@@ -40,6 +40,14 @@
                            {{form.email}}
                            {{form.email.label_tag}}
 
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.email.errors}}
+                              </font>
+                          </p>
+
+
+
                         </div>
 
                        <div class="input-field col s2">
@@ -106,6 +114,11 @@
 
                            {{form.cnpjcpf}}
                            {{form.cnpjcpf.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.cnpjcpf.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
@@ -113,14 +126,30 @@
 
                        <div class="input-field col s3">
 
-                           {{form.codindicacao}}
-                          {{form.codindicacao.label_tag}}
+                           {{form.codindicacao_por}}
+                          {{form.codindicacao_por.label_tag}}
 
                        </div>
                        <div class="input-field col s3">
 
                            {{form.senha}}
                            {{form.senha.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.senha.errors}}
+                              </font>
+                          </p>
+
+                       </div>
+                       <div class="input-field col s3">
+                           {{form.confirma_senha}}
+                           {{form.confirma_senha.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.confirma_senha.errors}}
+                              </font>
+                          </p>
+
 
                        </div>
 

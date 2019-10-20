@@ -7,7 +7,6 @@ from django.urls import reverse_lazy
 from django.conf import settings
 from usuarios.models import UserConfirm
 from usuarios.forms import UserCreationForm
-from motoristas.forms import EnderecoMotoristaForm
 from tools.genereteKey import generate_hash_key
 from tarefas_backgroud.tasks import send_mail
 

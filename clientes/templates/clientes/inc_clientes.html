@@ -95,7 +95,6 @@
                        </div>
 
                        <div class="input-field col s6">
-
                            {{form.nome_pai}}
                            {{form.nome_pai.label_tag}}
 
@@ -158,12 +157,139 @@
 
 
                </ul>
+        <div class="row">
+        <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">place</i>Endereço</div>
 
-       <div class="input-field col s6">
-        <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar
-              <i class="material-icons right">done</i>
-        </button>
-      </div>
+                  <div class="collapsible-body">
+                      <div class="row">
+                          <div class="input-field col s3">
+                               {{form.cep}}
+                               {{form.cep.label_tag}}
+                           </div>
+
+                           <div class="input-field col s4">
+                               {{form.endereco}}
+                               {{form.endereco.label_tag}}
+                           </div>
+
+                           <div class="input-field col s3">
+                               {{form.bairro}}
+                               {{form.bairro.label_tag}}
+                           </div>
+
+                      </div>
+                      <div class="row">
+                          <div class="input-field col s3">
+                           {{form.cidade}}
+                           {{form.cidade.label_tag}}
+                           </div>
+                          <div class="input-field col s3">
+                               {{form.numero}}
+                               {{form.numero.label_tag}}
+                           </div>
+
+                           <div class="input-field col s3">
+                               {{form.complemento}}
+                               {{form.complemento.label_tag}}
+                           </div>
+                      </div>
+                      <div class="row">
+                           <div class="input-field col s3">
+                               {{form.estado}}
+                               {{form.estado.label_tag}}
+                           </div>
+
+                           <div class="input-field col s3">
+                               {{form.pais}}
+                               {{form.pais.label_tag}}
+                           </div>
+                      </div>
+
+                  </div>
+
+                </li>
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">portrait</i>Dados</div>
+                  <div class="collapsible-body">
+
+                       <div class="row">
+                          <div class="input-field col s3">
+                               {{form.documento_identidade}}
+                               {{form.cep.documento_identidade}}
+                           </div>
+
+                           <div class="input-field col s4">
+                               {{form.documento_tipo}}
+                               {{form.documento_tipo.label_tag}}
+                           </div>
+
+                           <div class="input-field col s3">
+                               {{form.passaporte}}
+                               {{form.passaporte.label_tag}}
+                           </div>
+
+                      </div>
+                      <div class="row">
+                          <div class="input-field col s3">
+                           {{form.nacionalidade}}
+                           {{form.nacionalidade.label_tag}}
+                           </div>
+                          <div class="input-field col s3">
+                               {{form.estadocivil}}
+                               {{form.estadocivil.label_tag}}
+                           </div>
+
+                           <div class="input-field col s3">
+                               {{form.complemento}}
+                               {{form.complemento.label_tag}}
+                           </div>
+                      </div>
+                      <div class="row">
+                           <div class="input-field col s3">
+                               {{form.nif}}
+                               {{form.nif.label_tag}}
+                           </div>
+
+                           <div class="input-field col s3">
+                               {{form.facebook}}
+                               {{form.facebook.label_tag}}
+                           </div>
+                          <div class="input-field col s3">
+                               {{form.twitter}}
+                               {{form.twitter.label_tag}}
+                           </div>
+                          <div class="input-field col s3">
+                               {{form.homepage}}
+                               {{form.homepage.label_tag}}
+                           </div>
+                      </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               {{form.biografia}}
+                               {{form.biografia.label_tag}}
+                           </div>
+
+                       </div>
+
+
+
+
+                  </div>
+                </li>
+
+              </ul>
+        </div>
+
+           <div class="input-field col s6">
+            <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar
+                  <i class="material-icons right">done</i>
+            </button>
+          </div>
+
+
+        <!-- Modal Structure -->
 
     </div>
    </form>
@@ -179,6 +305,7 @@
         $("#id_telefone").mask("(99) 99999-9999");
         $("#id_celular").mask("(99) 99999-9999");
         $("#id_cnpjcpf").mask("999.999.999-99");
+         $('.collapsible').collapsible();
 
         });
   </script>

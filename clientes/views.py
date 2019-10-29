@@ -30,7 +30,7 @@ class ClientesCreate(CreateView):
     #success_url = reverse_lazy('lista_placer')
 
 
-class ClientesList(ListView):
+class ClientesList(LoginRequiredMixin, ListView):
     template_name ="clientes/listar_clientes.html"
     model = Clientes
     paginate_by = 10
@@ -50,24 +50,15 @@ class ClientesList(ListView):
         return context
 
 
-class ClientesUpdate(UpdateView):
+class ClientesUpdate(LoginRequiredMixin, UpdateView):
     model = Clientes
     template_name = "clientes/upd_clientes.html"
     form_class = ClientesForm
     success_url = reverse_lazy('lista_clientes')
 
 
-class ClientesDelete(DeleteView):
+class ClientesDelete(LoginRequiredMixin, DeleteView):
     model = Clientes
     template_name = "clientes/del_clientes.html"
     success_url = reverse_lazy('lista_clientes')
-
-
-contexto ={
-'seleciona_cliente': ClientesForm()
-}
-
-#https://www.youtube.com/watch?v=wOZz3pgIsNI
-#https://www.pythonsetup.com/how-render-django-forms-manually/
-
-
+    contexto ={'seleciona_cliente': ClientesForm()}

@@ -4,6 +4,7 @@ from django.db import models
 from extensoes.models import Extensoes
 from django.db.models.signals import post_save
 
+
 # Create your models here.
 class Servicos(models.Model):
     #codservico=models.PositiveIntegerField()
@@ -18,6 +19,7 @@ class Servicos(models.Model):
 
     def __str__(self):
         return self.nome
+
 
 class ServicosExtensoes(models.Model):
     codservico = models.PositiveIntegerField() # models.ForeignKey(Servicos, on_delete=models.PROTECT, null=True)

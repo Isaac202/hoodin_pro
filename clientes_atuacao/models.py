@@ -6,6 +6,7 @@ from servicos.models import Servicos
 
 User = get_user_model()
 # Create your models here.
+
 class Clientes_Atuacao(models.Model):
     codcliente = models.ForeignKey(User, on_delete=models.PROTECT)
     codatuacao=models.ForeignKey(Area_Atuacao, on_delete=models.PROTECT, verbose_name='Área de Interesse')

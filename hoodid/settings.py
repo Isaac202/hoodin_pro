@@ -5,6 +5,7 @@ from dj_database_url import parse as dburl
 from datetime import timedelta
 from decimal import Decimal
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
@@ -13,8 +14,6 @@ DEBUG = True # config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
-
-# Application definition
 
 DEFAULT_APPS  = [
     'django.contrib.admin',
@@ -26,11 +25,13 @@ DEFAULT_APPS  = [
      'storages',
 ]
 
+
 LIB_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'rest_framework',
     'django_filters',
+    'simple_email_confirmation',
 ]
 
 HOODID_APPS = [
@@ -50,8 +51,8 @@ HOODID_APPS = [
     'area_atuacao',
     'compras',
     'clientes_atuacao',
-
 ]
+
 
 INSTALLED_APPS = (
     DEFAULT_APPS + LIB_APPS + HOODID_APPS
@@ -164,6 +165,7 @@ EMAIL_HOST_USER = 'vadejet.contato@gmail.com'
 EMAIL_HOST_PASSWORD = 'linux162'
 EMAIL_PORT = 587
 
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -227,6 +229,19 @@ TIPOPESSOA_CHOICES = (
     ('F', 'Fisica'),
 )
 
+ESTADO_CIVIL_CHOICES = (
+    ('C', 'Casado'),
+    ('S', 'Solteiro'),
+    ('D', 'Divorciado'),
+    ('V', 'Viuvo'),
+
+)
+
+
+
+
+
+
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'hoodidfile'
@@ -241,9 +256,11 @@ DEFAULT_FILE_STORAGE = 'hoodid.storage_backends.MediaStorage'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'estaticos'),
 ]
+
 STATICFILES_FINDERS = ('django.contrib.staticfiles.finders.FileSystemFinder',
                        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
                       )
+
 AWS_DEFAULT_ACL = None
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
@@ -252,3 +269,5 @@ LOGIN_REDIRECT_URL = reverse_lazy('users:redirect')
 LOGOUT_REDIRECT_URL = reverse_lazy('users:login')
 
 
+EMAIL_CONFIRMATION_PERIOD_DAYS = 7
+SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS)

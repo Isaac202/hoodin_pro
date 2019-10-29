@@ -8,6 +8,8 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from tools.genereteKey import generate_hash_key
 from indicacoes.models import Indicacao
+from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
+
 #from django.core.validators import validate_email
 #from django.contrib.auth.validators import UnicodeUsernameValidator
 
@@ -42,7 +44,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     )
     is_active = models.BooleanField(
         _('active'),
-        default=False,
+        default=True,
         help_text=_(
             'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'
@@ -89,7 +91,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
         super().save()
 
 
-class User(AbstractUser):
+class User(SimpleEmailConfirmationUserMixin, AbstractUser):
     """
     Users within the Django authentication system are represented by this
     model.

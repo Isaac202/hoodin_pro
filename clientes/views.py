@@ -64,22 +64,24 @@ class ConfirmacaoCadadtro(APIView):
     @csrf_exempt
     def get(self, request):
         resposta = ''
-
         try:
             if request.method == 'GET':
-                chave = request.data.get('chave')
-                email = request.data.get('email')
-                User.confirmation_key = chave
-                if User.is_confirmed:
-                    u = User.objects.filter(email=email).update(is_active=True)
-                    resposta = 'Seu cadastro na Hoodid foi ativado com sucesso!'
+                chave = self.request.query_params.get('chave', None)
+                email = self.request.query_params.get('email', None)
+                if chave:
+                    User.confirmation_key = chave
+                    if User.is_confirmed:
+                        usuario_novo = User.objects.filter(email=email).update(is_active=True)
+                        resposta = 'Seu cadastro na Hoodid foi ativado com sucesso!'
+                    else:
+                          resposta = 'Sua chave está inválida'
                 else:
                     resposta = 'Sua chave está inválida'
 
 
                 return Response({'msg': resposta})
             else:
-                return Response({'msg': 'nao foi post'})
+                return Response({'msg': 'erro'})
 
         except Exception as e:
             return Response({'erro': str(e)}, status=401)

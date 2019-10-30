@@ -76,13 +76,12 @@ def criar_usuario(sender, instance, **kwargs):
         usr = User.objects.create_user(
             username=instance.email,  email=instance.email,
             password=instance.senha, is_active=True)
-        usr.is_confirmed
+
         instance.codusuario = usr
 
         send_mail("Cadastro na Hoodid", 'Usuário %s confirme seu email' % usr.confirmation_key,
                   settings.EMAIL_HOST_USER, [instance.email], fail_silently=False)
-        usr.confirm_email(usr.confirmation_key)
-        usr.is_confirmed  # True
+        # True
 
 
 @receiver(post_save, sender=Clientes)

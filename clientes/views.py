@@ -6,19 +6,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Clientes
 from .forms import ClientesForm, BuscarForm
-from .tokens import account_activation_token
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from .tokens import account_activation_token
-from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
+from rest_framework.views import APIView
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import get_user_model
+from rest_framework.response import Response
 
-#LoginRequiredMixin,
+User = get_user_model()
+
+
 class ClientesCreate(CreateView):
     model = Clientes
     template_name = "clientes/inc_clientes.html"
@@ -62,3 +57,30 @@ class ClientesDelete(LoginRequiredMixin, DeleteView):
     template_name = "clientes/del_clientes.html"
     success_url = reverse_lazy('lista_clientes')
     contexto ={'seleciona_cliente': ClientesForm()}
+
+
+class ConfirmacaoCadadtro(APIView):
+
+    @csrf_exempt
+    def get(self, request):
+        resposta = ''
+
+        try:
+            if request.method == 'GET':
+                chave = request.data.get('chave')
+                email = request.data.get('email')
+                User.confirmation_key = chave
+                if User.is_confirmed:
+                    u = User.objects.filter(email=email).update(is_active=True)
+                    resposta = 'Seu cadastro na Hoodid foi ativado com sucesso!'
+                else:
+                    resposta = 'Sua chave está inválida'
+
+
+                return Response({'msg': resposta})
+            else:
+                return Response({'msg': 'nao foi post'})
+
+        except Exception as e:
+            return Response({'erro': str(e)}, status=401)
+

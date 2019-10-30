@@ -13,6 +13,9 @@ from clientes.views import ClientesList
 from clientes.views import ClientesUpdate
 from clientes.views import ClientesDelete
 
+from clientes.views import ConfirmacaoCadadtro
+
+
 from servicos.views import ServicosCreate
 from servicos.views import ServicosList
 from servicos.views import ServicosUpdate
@@ -75,6 +78,8 @@ urlpatterns = [
     path('novo_precos/', PrecosCreate.as_view(), name='novo_precos'),
     path('atualiza_precos/<int:pk>/', PrecosUpdate.as_view(), name='atualiza_precos'),
     path('delete_precos/<int:pk>/', PrecosDelete.as_view(), name='delete_precos'),
+    path('api/confirmar/', ConfirmacaoCadadtro.as_view()),
+
 
     path('lista_area_atuacao_criacaopublicitaria/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_criacaopublicitaria'),
     path('lista_area_atuacao_desenhogravura/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_desenhogravura'),

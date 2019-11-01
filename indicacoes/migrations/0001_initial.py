@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('codindicacao', models.PositiveIntegerField(null=True)),
                 ('nome', models.CharField(max_length=50)),
-                ('percentual_promocional', models.DecimalField(max_length=9, decimal_places=2)),
+                ('percentual_promocional', models.DecimalField(max_digits=11, decimal_places=2, default=0)),
             ],
             options={
                 'ordering': ('nome',),

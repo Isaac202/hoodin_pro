@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='indicacao',
+            model_name='indicacoes',
             name='filho',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='cliente'),
         ),

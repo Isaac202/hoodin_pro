@@ -1,10 +1,10 @@
 from django import forms
-from .models import IndicadoPor # pega os campos e cria um form
+from .models import Indicacoes # pega os campos e cria um form
 
 class IndicacoesForm(forms.ModelForm):
 
     class Meta:
-        model = IndicadoPor
+        model = Indicacoes
         #colocar os campos que não quer que apareça
         exclude = ['id']
 

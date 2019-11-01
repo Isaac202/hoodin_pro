@@ -122,7 +122,7 @@ def gera_code(sender, instance, **kwargs):
 def indicacao(sender, instance, **kwargs):
     # se nao for nulo
     if not instance.code_pai is None:
-        a = Indicacao.objects.create(
+        a = Indicacoes.objects.create(
             filho=instance,
             code_pai=instance.code_pai,
             code_avo=instance.code_avo,

@@ -7,7 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from tools.genereteKey import generate_hash_key
-from indicacoes.models import Indicacoes
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 
 #from django.core.validators import validate_email
@@ -94,41 +93,9 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
 class User(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     # indicacoes
-    codindicacao = models.PositiveIntegerField(null=True)
-    nome = models.CharField(max_length=50)
-    percentual_promocional = models.DecimalField(max_digits=11, decimal_places=2, default=0)
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
-
-
-@receiver(pre_save, sender=User)
-def gera_code(sender, instance, **kwargs):
-    # crio o codigo de indicação do User
-    if instance.code_indicacao == '':
-        instance.code_indicacao = generate_hash_key(
-            salt=instance.username, random_str_size=5)
-
-    # verifico se possui codigo de indicação, e se o codigo existe
-    if not instance.code_pai is None:
-        result = User.objects.filter(code_indicacao=instance.code_pai)
-        if result.exists():
-            pai = result.first()
-            instance.code_avo = pai.code_pai
-            instance.code_bisavo = pai.code_avo
-
-
-@receiver(post_save, sender=User)
-def indicacao(sender, instance, **kwargs):
-    # se nao for nulo
-    if not instance.code_pai is None:
-        a = Indicacoes.objects.create(
-            filho=instance,
-            code_pai=instance.code_pai,
-            code_avo=instance.code_avo,
-            code_bisavo=instance.code_bisavo
-            )
-
 
 class UserConfirm(models.Model):
     user = models.ForeignKey(

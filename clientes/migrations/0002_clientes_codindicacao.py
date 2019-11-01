@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='clientes',
             name='codindicacao',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.PROTECT, related_name='indicacao', to='indicacoes.Indicacao', verbose_name='Indicacao'),
+            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.PROTECT, related_name='indicacoes', to='indicacoes.Indicacoes', verbose_name='Indicacoes'),
         ),
     ]

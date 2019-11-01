@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='clientes',
             name='codindicacao',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='indicacao', to='indicacoes.Indicacao', verbose_name='Indicacao'),
+            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='indicacoes', to='indicacoes.Indicacoes', verbose_name='Indicacoes'),
         ),
     ]

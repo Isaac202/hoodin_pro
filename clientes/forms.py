@@ -1,6 +1,6 @@
 from django import forms
 from .models import Clientes # pega os campos e cria um form
-from indicacoes.models import Indicacao
+from indicacoes.models import Indicacoes
 from pycpfcnpj import cpfcnpj
 import re
 
@@ -12,7 +12,7 @@ class ClientesForm(forms.ModelForm):
     class Meta:
         model = Clientes
         fields = ['nome', 'codusuario', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
-                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha', 'codindicacao_por',
+                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha',
                    'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
                    'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
                    'homepage']

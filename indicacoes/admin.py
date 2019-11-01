@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import IndicadoPor
+from .models import Indicacoes
 
-admin.site.register(IndicadoPor)
+admin.site.register(Indicacoes)
 

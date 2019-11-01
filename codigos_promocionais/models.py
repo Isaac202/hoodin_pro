@@ -5,7 +5,7 @@ from django.db import models
 User = get_user_model()
 # Create your models here.
 class Codigos_Promocionais(models.Model):
-    codpromocao=models.PositiveIntegerField()
+    codpromocao=models.PositiveIntegerField(null=True)
     promotor=models.CharField(max_length=255)
     qrcode=models.CharField(max_length=255)
     data_emissao=models.DateTimeField(auto_now=True)

@@ -6,7 +6,7 @@ User = get_user_model()
 
 # Create your models here.
 class Area_Atuacao(models.Model):
-    #codextensao=models.PositiveIntegerField()
+    codarea = models.PositiveIntegerField(null=True)
     nome = models.CharField(max_length=20)
     texto = models.CharField(max_length=2500)
 

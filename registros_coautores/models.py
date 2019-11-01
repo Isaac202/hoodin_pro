@@ -5,10 +5,10 @@ from django.db import models
 User = get_user_model()
 # Create your models here.
 class Registros_Coautores(models.Model):
-    codcoautor=models.PositiveIntegerField()
-    codregistro=models.PositiveIntegerField()
-    nome=models.CharField(max_length=255)
-    documento=models.CharField(max_length=100)
-    percentual_obra=models.DecimalField(max_length=5,decimal_places=2)
+    codcoautor = models.PositiveIntegerField(null=True)
+    codregistro = models.PositiveIntegerField()
+    nome = models.CharField(max_length=255)
+    documento = models.CharField(max_length=100)
+    percentual_obra = models.DecimalField(max_length=5,decimal_places=2)
 
 

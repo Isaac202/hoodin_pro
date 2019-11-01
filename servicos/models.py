@@ -7,7 +7,7 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 class Servicos(models.Model):
-    #codservico=models.PositiveIntegerField()
+    codservico=models.PositiveIntegerField(null=True)
     nome = models.CharField(max_length=100)
     preco = models.DecimalField(max_digits=11, decimal_places=2, default=0)
     tamanho = models.PositiveIntegerField()

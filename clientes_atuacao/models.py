@@ -9,7 +9,6 @@ User = get_user_model()
 
 class Clientes_Atuacao(models.Model):
     codcliente = models.ForeignKey(User, on_delete=models.PROTECT)
-    codatuacao=models.ForeignKey(Area_Atuacao, on_delete=models.PROTECT, verbose_name='Área de Interesse')
-    codservico=models.ForeignKey(Servicos, on_delete=models.PROTECT, verbose_name='Serviço')
+    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT, verbose_name='Serviço')
 
 

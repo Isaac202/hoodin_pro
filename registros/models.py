@@ -3,10 +3,9 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from servicos.models import Servicos
 
-
 User = get_user_model()
 class Registros(models.Model):
-    codregistro = models.PositiveIntegerField()
+    codregistro = models.PositiveIntegerField(null=True)
     codcliente = models.ForeignKey(User, on_delete=models.PROTECT)
     codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT)
     valor = models.DecimalField(max_digits=9, decimal_places=2)

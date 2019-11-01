@@ -5,7 +5,7 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from configuracoes.tasks import enviar_sms
 from django.conf import settings
-from indicacoes.models import Indicacao, IndicadoPor
+from indicacoes.models import Indicacoes
 from area_atuacao.models import Area_Atuacao
 from django.core.mail import send_mail
 
@@ -13,6 +13,7 @@ User = get_user_model()
 
 
 class Clientes(models.Model):
+    codcliente = models.PositiveIntegerField(null=True)
     nome = models.CharField(max_length=255)
     codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
     email = models.EmailField(max_length=255, unique=True)
@@ -25,11 +26,9 @@ class Clientes(models.Model):
     nome_mae = models.CharField(max_length=100, null=True, blank=True)
     nome_pai = models.CharField(max_length=100, null=True, blank=True)
     cnpjcpf = models.CharField(max_length=18, null=True, blank=True)
-    codindicacao = models.OneToOneField(Indicacao,  on_delete=models.PROTECT, null=True,  blank= True,
+    codindicacao = models.OneToOneField(Indicacoes,  on_delete=models.PROTECT, null=True,  blank= True,
                                         related_name='indicacao', verbose_name='Indicacao')
     senha = models.CharField(max_length=50)
-    codindicacao_por= models.OneToOneField(IndicadoPor, on_delete=models.PROTECT, null=True, blank=True,
-                                        related_name='indicacao_por', verbose_name='Indicado por')
     cep = models.CharField(max_length=9, null=True, blank=True)
     endereco = models.CharField(max_length=255, null=True, blank=True)
     complemento = models.CharField(max_length=255, null=True, blank=True)

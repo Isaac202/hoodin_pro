@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from tools.genereteKey import generate_hash_key
-from indicacoes.models import Indicacao
+from indicacoes.models import Indicacoes
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 
 #from django.core.validators import validate_email
@@ -94,16 +94,9 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
 class User(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     # indicacoes
-    code_indicacao = models.CharField(
-        "Código de indicação", max_length=100, unique=True, blank=True)
-    code_pai = models.CharField(
-        "Código do pai", max_length=100, blank=True, null=True)
-    code_avo = models.CharField(
-        "Código do avo", max_length=100, blank=True, null=True)
-    code_bisavo = models.CharField(
-        "Código do bisavó", max_length=100, blank=True, null=True)
-    bonus_indicacao = models.DecimalField(
-        max_digits=11, decimal_places=2, default=0)
+    codindicacao = models.PositiveIntegerField(null=True)
+    nome = models.CharField(max_length=50)
+    percentual_promocional = models.DecimalField(max_length=9, decimal_places=2)
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'

@@ -12,16 +12,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Indicacao',
+            name='Indicacoes',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('code_bisavo', models.CharField(blank=True, max_length=100, null=True, verbose_name='Codigo do Bisavó')),
-                ('code_avo', models.CharField(blank=True, max_length=100, null=True, verbose_name='Codigo do Avó')),
-                ('code_pai', models.CharField(max_length=100, verbose_name='Codigo do Pai')),
-                ('data_cadastro', models.DateTimeField(auto_now_add=True)),
+                ('codindicacao', models.PositiveIntegerField(null=True)),
+                ('nome', models.CharField(max_length=50)),
+                ('percentual_promocional', models.DecimalField(max_length=9, decimal_places=2)),
             ],
             options={
-                'ordering': ('-data_cadastro',),
+                'ordering': ('nome',),
             },
         ),
     ]

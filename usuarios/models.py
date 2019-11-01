@@ -96,7 +96,7 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
     # indicacoes
     codindicacao = models.PositiveIntegerField(null=True)
     nome = models.CharField(max_length=50)
-    percentual_promocional = models.DecimalField(max_length=9, decimal_places=2)
+    percentual_promocional = models.DecimalField(max_digits=11, decimal_places=2, default=0)
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'

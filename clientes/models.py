@@ -34,7 +34,7 @@ class Clientes(models.Model):
     complemento = models.CharField(max_length=255, null=True, blank=True)
     numero = models.CharField(max_length=8, null=True, blank=True)
     pais = models.CharField(max_length=50, null=True, blank=True)
-    estado = models.CharField(max_length=50, null=True, blank=True)
+    estado = models.CharField(max_length=50, null=True, blank=True, choices=settings.ESTADOS_CHOICES)
     cidade = models.CharField(max_length=50, null=True, blank=True)
     bairro = models.CharField(max_length=50, null=True, blank=True)
     documento_identidade = models.CharField(max_length=50, null=True, blank=True)

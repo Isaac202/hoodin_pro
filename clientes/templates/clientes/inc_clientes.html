@@ -1,4 +1,5 @@
 {% extends 'base_cadastro.html' %}
+ {% load static %}
 {% block navegar %}
 <nav>
     <div class="nav-wrapper">
@@ -15,7 +16,7 @@
       </ul>
     </div>
   </nav>
-{% endblock %}
+{% endblock navegar%}
 
 {% block main %}
    <form  method="post" class="col 12">
@@ -125,8 +126,8 @@
 
                        <div class="input-field col s3">
 
-                           {{form.codindicacao_por}}
-                          {{form.codindicacao_por.label_tag}}
+                           {{form.codindicacao}}
+                          {{form.codindicacao.label_tag}}
 
                        </div>
                        <div class="input-field col s3">
@@ -295,19 +296,43 @@
    </form>
     <!--Import jQuery before materialize.js-->
 
-{% endblock %}
+{% endblock main %}
 
-{% block script %}
+ {% block script_cad %}
   <script>
     $(document).ready(function(){
         $('select').material_select();
         $('.datepicker').pickadate();
+        $("#id_cep").mask("99999-999");
         $("#id_telefone").mask("(99) 99999-9999");
         $("#id_celular").mask("(99) 99999-9999");
         $("#id_cnpjcpf").mask("999.999.999-99");
-         $('.collapsible').collapsible();
+        $('.collapsible').collapsible();
+
+            $('#id_cep').on('input', function(e) {
+        let cep = $('#id_cep').val();
+        if (cep.length == 9) {
+            //Consulta o webservice viacep.com.br/
+            $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function(dados) {
+                console.log('Buscando');
+                if (!("erro" in dados)) {
+                    console.log('deu certo');
+                        //Atualiza os campos com os valores da consulta.
+                    $("#id_endereco").val(dados.logradouro);
+                    $("#id_bairro").val(dados.bairro);
+                    $("#id_complemento").val(dados.complemento);
+                    $("#id_cidade").val(dados.localidade);
+                    $("#id_estado option[value=" + dados.uf + "]").attr('selected', 'selected');
+                    let estado = $("#id_estado option[value=" + dados.uf + "]").html();
+                    $("#estado_col input.select-dropdown").val(uf);
+
+                }
+            });
+        }
+    });
 
         });
   </script>
-{% endblock script %}
+
+{% endblock script_cad %}
 

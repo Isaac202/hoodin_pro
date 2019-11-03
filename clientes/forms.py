@@ -12,7 +12,7 @@ class ClientesForm(forms.ModelForm):
     class Meta:
         model = Clientes
         fields = ['nome', 'codusuario', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
-                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha',
+                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha', 'confirma_senha',
                    'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
                    'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
                    'homepage']
@@ -22,7 +22,7 @@ class ClientesForm(forms.ModelForm):
 
     def clean_confirma_senha(self):
         senha = self.cleaned_data.get("senha")
-        confirma = self.clean_data.get("confirma_senha")
+        confirma = self.cleaned_data.get("confirma_senha")
         if senha != confirma:
             raise forms.ValidationError("Atenção senha difretne da confirmação")
 

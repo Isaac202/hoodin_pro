@@ -149,15 +149,11 @@
                                 {{form.confirma_senha.errors}}
                               </font>
                           </p>
-
-
                        </div>
-
-
                    </li>
 
-
                </ul>
+
         <div class="row">
         <ul class="collapsible">
                 <li>
@@ -309,11 +305,11 @@
         $("#id_cnpjcpf").mask("999.999.999-99");
         $('.collapsible').collapsible();
 
-            $('#id_cep').on('input', function(e) {
-        let cep = $('#id_cep').val();
-        if (cep.length == 9) {
-            //Consulta o webservice viacep.com.br/
-            $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function(dados) {
+        $('#id_cep').on('input', function(e) {
+            let cep = $('#id_cep').val();
+            if (cep.length == 9) {
+                //Consulta o webservice viacep.com.br/
+                $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function(dados) {
                 console.log('Buscando');
                 if (!("erro" in dados)) {
                     console.log('deu certo');
@@ -324,7 +320,7 @@
                     $("#id_cidade").val(dados.localidade);
                     $("#id_estado option[value=" + dados.uf + "]").attr('selected', 'selected');
                     let estado = $("#id_estado option[value=" + dados.uf + "]").html();
-                    $("#estado_col input.select-dropdown").val(uf);
+                    $("#estado_col input.select-dropdown").val(estado);
 
                 }
             });

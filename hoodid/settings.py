@@ -15,14 +15,14 @@ DEBUG = True # config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 
-DEFAULT_APPS  = [
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'storages',
+
 ]
 
 
@@ -32,6 +32,7 @@ LIB_APPS = [
     'rest_framework',
     'django_filters',
     'simple_email_confirmation',
+
 ]
 
 HOODID_APPS = [
@@ -141,7 +142,7 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = config('REDIS_URL')
@@ -236,34 +237,47 @@ ESTADO_CIVIL_CHOICES = (
     ('V', 'Viuvo'),
 
 )
-
-
-
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "estaticos")
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'hoodidfile'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400',}
-AWS_LOCATION = 'static'
-STATICFILES_DIRS = ['estaticos']
+# STORAGE DE CONFIGRUCAO DO AWS
+#----------------------------------------------------------------------------
+if AWS_ACCESS_KEY_ID:
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_LOAD_METADATA = True
+    AWS_AUTO_CREATE_BUCKET = False
+    AWS_QUERYSTRING_AUTH = True
+    AWS_S3_CUSTOM_DOMAIN = None
+    AWS_DEFAULT_ACL = 'private'
+    #Static assets
+    #---------------------------------------------------------------------------
+    STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
+    STATIC_S3_PATH = 'static'
+    STATIC_ROOT = f'/{STATIC_S3_PATH}/'
+    STATIC_URL = f'///s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/'
+    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+    # uplaod dos arqivos
+    #--------------------------------------------------------------------------
 
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'hoodid.storage_backends.MediaStorage'
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'estaticos'),
-#]
+    DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'
+    DEFAULT_S3_PATH = 'media'
+    MEDIA_ROOT = f'/{DEFAULT_S3_PATH}/'
+    MEDIA_URL = f'///s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{DEFAULT_S3_PATH}/'
+    INSTALLED_APPS.append('s3_folder_storage')
+    INSTALLED_APPS.append('storages')
 
-STATICFILES_FINDERS = ('django.contrib.staticfiles.finders.FileSystemFinder',
-                       'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-                      )
 
-AWS_DEFAULT_ACL = None
-MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media'
+
+
+#STATICFILES_DIRS = ['estaticos']
+
 
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = '/'

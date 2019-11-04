@@ -92,7 +92,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hoodid.wsgi.application'
 
-
+#35.198.56.23 10.158.0.5pytpp
 DEV = config('DEV', default=False, cast=bool)
 if DEV:
     default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'hdb2.sqlite3')

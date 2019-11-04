@@ -205,24 +205,6 @@ def comprar_credito(id_compra, cliente, numero_cartao, seguranca, bandeira, vali
 
     return (msg_retorno, codigo_transacao, codigo_pagamento)
 
-def add_credito_motorista(id_usuario, valor, qtd_parcela,forma_pagamento, codigo_transacao, staus_trasnacao, id_pagamento_cielo):
-    credito = ComprarCredito.objects.create(id_motorista=id_usuario, valor=valor, qtd_parcela=qtd_parcela,
-                                    forma_pagamento=forma_pagamento, codigo_transacao=codigo_transacao,
-                                            staus_trasnacao=staus_trasnacao, id_pagamento_cielo = id_pagamento_cielo)
-
-
-
-def comprar_creditos(id_usuario,  id_compra, cliente, numero_cartao, seguranca, bandeira, validade, valor, qtd_parcela):
-    msg, cod_transacao, codigo_pg = comprar_credito(id_compra, cliente, numero_cartao, seguranca, bandeira,
-                                                validade, valor, qtd_parcela)
-    if msg == 'Transacao autorizada':
-        add_credito_motorista(id_usuario, valor, qtd_parcela,'Cartao', cod_transacao, msg, codigo_pg)
-        return msg
-    else:
-        return msg
-
-
-
 @task
 def gerar_token_cartao(cliente, numero_cartao, seguranca, bandeira, validade):
     token_cartao = ''
@@ -245,59 +227,6 @@ def gerar_token_cartao(cliente, numero_cartao, seguranca, bandeira, validade):
 
     return token_cartao
 
-
-@task
-def comprar_com_token(id_compra, cliente, token_cartao, seguranca, bandeira, valor, qtd_parcela):
-       msg_retorno = ''
-       codigo_transacao = ''
-
-       try:
-        sale = Sale(id_compra)
-        sale.customer = Customer(cliente)
-        credit_card_token = CreditCard(seguranca, bandeira)
-        credit_card_token.card_token = token_cartao
-        sale.payment = Payment(valor)
-        sale.payment.credit_card = credit_card_token
-        sale.payment.installments = qtd_parcela
-        cielo_ecommerce = CieloEcommerce(merchant, environment)
-        response_create_sale = cielo_ecommerce.create_sale(sale)
-        x = json.dumps(response_create_sale, indent=3, sort_keys=True)
-
-        payment_id = sale.payment.payment_id
-        resultado = json.loads(x)
-        codigo_transacao = resultado["Payment"]["Tid"]
-        msg_retorno = resultado["Payment"]["ReturnMessage"]
-
-       except KeyError as e:
-                print(e)
-       return (msg_retorno, codigo_transacao)
-
-@task
-def criar_token_senha(email, senha):
-       data = criar_user(email,senha)
-       resultado= None
-       res=None
-       try:
-
-           r = requests.post('https://vadejet.com.br/api/token/', data=data)
-           resultado = r.json()
-           res = resultado['access']
-       except Exception as e:
-                print(e)
-       return res
-
-def criar_user(email, senha):
-    conta = not User.objects.filter(username=email).exists()
-
-    if conta:
-        usr = User.objects.create_user(
-            username=email, email=email, password=senha, is_active=True)
-        data = {'username': usr.email, 'password': senha}
-
-        return data
-    else:
-        data = {'username': email, 'password': senha}
-        return data
 
 @task
 def cancelar_compra(id_pagamento, valor):

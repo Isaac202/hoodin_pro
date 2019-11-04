@@ -102,7 +102,7 @@ else:
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hoodid',
+        'NAME': 'bd_hoodid',
         'USER': 'postgres',
         'PASSWORD': 'gmCz0OpsnkDpssyp',
         'HOST': '35.198.45.37',

@@ -49,24 +49,6 @@ class TestCielo(TestCase):
 
         assert resposta_cielo == 'Autorizacao negada'
 
-    def test_compra_autorizada_tk(self):
-
-        resposta_cielo, trasacao = comprar_com_token(10, 'Martoele C. Pixão', '3143db6e-37b2-46ba-9f56-520c7c3d5af5',
-                                                     '279', 'HiperCard', 200, 1)
-
-        assert resposta_cielo == 'Autorizacao negada'
-
-
-    def test_gera_token(self):
-
-        tk_cartao = gerar_token_cartao('Martoele C. Pixão', '0662821825086128', '279', 'HiperCard', '07/2022')
-
-        assert tk_cartao != ''
-
-    def test_gera_token_login(self):
-        tk_cartao = criar_token_senha('chiquita@gmail.com', 'linux@162')
-
-        assert tk_cartao != ''
 
     '''
     def test_cacelar_compra(self):

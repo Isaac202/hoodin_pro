@@ -52,6 +52,8 @@ HOODID_APPS = [
     'area_atuacao',
     'compras',
     'clientes_atuacao',
+    'cielo',
+
 ]
 
 

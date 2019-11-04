@@ -1,0 +1,158 @@
+{% extends 'base_cadastro.html' %} {% load static %} {% block main %}
+<div style="padding: 5rem 0 5rem 0">
+    <div class="row">
+        <!--Melhorar design-->
+        <form action="" method="post" enctype="multipart/form-data" class="col s12 m10 offset-m1">
+            {% csrf_token %}
+            <div class="row">
+                 <h4>
+                    Comprar Créditos
+                </h4>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m10 l6">
+                    <i class="material-icons prefix">face</i> {{form.nome_cartao}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.valor.nome_cartao}}
+                        </font>
+                    </div>
+                    <label for="icon_prefix">{{form.nome_cartao.label}}</label><br>
+                </div>
+
+                <div class="input-field col s12 m10 l6">
+                   {{form.qtd_parcela}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.qtd_parcela.errors}}
+                        </font>
+                    </div>
+
+                </div>
+
+                <div class="input-field col s12 m10 l3">
+                    <i class="material-icons prefix">device_hub</i> {{form.forma_pagamento}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.forma_pagamento.errors}}
+                        </font>
+                    </div>
+                    <br>
+                </div>
+
+                 <div class="input-field col s12 m10 l3">
+                    <i class="material-icons prefix">attach_money</i> {{form.valor}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.valor.errors}}
+                        </font>
+                    </div>
+                    <label class="active" for="icon_prefix">{{form.valor.label}}</label><br>
+                </div>
+                <div class="input-field col s12 m10 l6">
+                    <i class="material-icons prefix">credit_card</i> {{form.numero_cartao}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.numero_cartao.errors}}
+                        </font>
+                    </div>
+                    <label for="icon_prefix">{{form.numero_cartao.label}}</label><br>
+                </div>
+                <div class="input-field col s12 m10 l6">
+                    <i class="material-icons prefix">security</i> {{form.seguranca}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.seguranca.errors}}
+                        </font>
+                    </div>
+                    <label for="icon_telephone">{{form.seguranca.label}}</label><br>
+                </div>
+
+                <div class="input-field col s12 m10 l6">
+                    <i class="material-icons prefix">subtitles</i> {{form.bandeira}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.bandeira.errors}}
+                        </font>
+                    </div>
+
+                </div>
+
+
+                <div class="input-field col s12 m10 l6">
+                    <i class="material-icons prefix">date_range</i> {{form.validade}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.validade.errors}}
+                        </font>
+                    </div>
+                    <label class="active">{{form.validade.label}}</label><br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+
+                <div class="divider"></div>
+            </div>
+
+            <div class="row">
+              <div style="" class="container" align="center">
+                    <div class="input-field col s12">
+            <input class="btn" type="submit" value="Comprar">
+         </div>
+ <img  class="materialboxed center-align" src="{% static 'imgs/Bandeiras-da-Cielo.png' %}" width="500" heigth= "364">
+
+</div>
+                <div class="col s12 m10 l2">
+                   {{form.codigo_trasacao}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.codigo_trasacao.errors}}
+                        </font>
+                    </div>
+                </div>
+
+                <div class="col s12 m10 l4">
+                    {{form.statu_trasacao}}
+                    <div class="errornote">
+                        <font color="red">
+                            {{form.statu_trasacao.errors}}
+                        </font>
+                    </div>
+                </div>
+
+            </div>
+
+    </form>
+</div>
+
+{% endblock main %} {% block script_cad %}
+
+<script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      delimiters: ['[[', ']]'],
+      data: {
+        value: 1
+        bandeira:''
+      },
+      computed: {
+          total: function () {
+          return this.value * 10
+        }
+      }
+    });
+    $(document).ready(function() {
+        $("#id_validade").mask("99/9999");
+
+        $("#id_seguranca").mask("999");
+        $("#id_qtd_parcela").hide();
+        $("#id_codigo_trasacao").hide();
+        $("#id_statu_trasacao").hide();
+        $('#id_valor').mask('#.##0,00', {reverse: true});
+
+
+    });
+</script>
+
+{% endblock script_cad %}

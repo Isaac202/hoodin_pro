@@ -3,7 +3,9 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from servicos.models import Servicos
 
+
 User = get_user_model()
+
 class Registros(models.Model):
     codregistro = models.PositiveIntegerField(null=True)
     codcliente = models.ForeignKey(User, on_delete=models.PROTECT)

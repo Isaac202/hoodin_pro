@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block header %}
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    .msg {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        text-align: center
+    }
+
+    .redirect {
+        font-size: 1.5rem
+    }
+
+    .redirect,
+    #time {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+{% endblock header %}
+
+{% block main %}
+<div class="msg">
+    {% block msg %}
+   <div class="card large">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{% static 'imgs/f_img1.jpg' %}">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Reposta do Cartão de Crédito
+       <strong>{{ request.session.msg }}</strong>
+          <i class="material-icons right">credit_card</i></span>
+
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">A gradecemos por usar nossa plataforma<i class="material-icons right">email</i></span>
+
+    </div>
+  </div>
+
+    {% endblock msg %}
+</div>
+{% endblock main %}

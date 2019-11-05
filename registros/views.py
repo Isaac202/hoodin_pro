@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from .models import Registros
 from .forms import RegistrosForm
 
+
 class RegistrosCreate(CreateView):
     model = Registros
     template_name = "registros/registros.html"

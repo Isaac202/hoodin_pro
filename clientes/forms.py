@@ -12,7 +12,7 @@ class ClientesForm(forms.ModelForm):
     class Meta:
         model = Clientes
         fields = ['nome', 'codusuario', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
-                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha',
+                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha', 'confirma_senha',
                    'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
                    'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
                    'homepage']
@@ -20,30 +20,37 @@ class ClientesForm(forms.ModelForm):
         exclude = ['id', 'codusuario']
 
 
-        def clean_confirma_senha(self):
-            senha = self.cleaned_data.get("senha")
-            confirma = self.clean_data.get("confirma_senha")
-            if senha != confirma:
-                raise forms.ValidationError("Atenção senha difretne da confirmação")
+    def clean_confirma_senha(self):
+        senha = self.cleaned_data.get("senha")
+        confirma = self.cleaned_data.get("confirma_senha")
+        if senha != confirma:
+            raise forms.ValidationError("Atenção senha difretne da confirmação")
 
-            return senha
+        return senha
 
-        def clean_email(self):
-            email = self.cleaned_data.get("email")
-            if Clientes.objects.filter(email=email).exists():
-                raise forms.ValidationError("Email Já cadastrado")
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if Clientes.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email Já cadastrado")
 
-            return email
+        return email
 
-        def clean_cnpjcpf(self):
+    def clean_cnpjcpf(self):
 
-            cnpj = self.cleaned_data.get("cnpjcpf")
-            masked_cnpj_number = cpfcnpj.clear_punctuation(cnpj)
+        cnpj = self.cleaned_data.get("cnpjcpf")
+        masked_cnpj_number = cpfcnpj.clear_punctuation(cnpj)
 
-            if cpfcnpj.validate(masked_cnpj_number) == False:
-                raise forms.ValidationError("documento invalido")
+        if cpfcnpj.validate(masked_cnpj_number) == False:
+            raise forms.ValidationError("documento invalido")
 
-            return cnpj
+        return cnpj
+
+    def clean_cep(self):
+        regexCep = re.compile('^[0-9]{5}-[\d]{3}$')
+        data = self.cleaned_data.get("cep")
+        if regexCep.match(data) is None:
+            raise forms.ValidationError("Cep inválido.")
+        return data
 
 
 class BuscarForm(forms.Form):

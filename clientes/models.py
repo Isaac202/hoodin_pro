@@ -13,7 +13,7 @@ User = get_user_model()
 
 
 class Clientes(models.Model):
-    codcliente = models.PositiveIntegerField(null=True, blank=True)
+    codcliente = models.PositiveIntegerField(null=True, blank=True, default=0)
     nome = models.CharField(max_length=255)
     codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
     email = models.EmailField(max_length=255, unique=True)

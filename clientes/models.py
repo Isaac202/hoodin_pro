@@ -13,7 +13,7 @@ User = get_user_model()
 
 
 class Clientes(models.Model):
-    codcliente = models.PositiveIntegerField(null=True)
+    codcliente = models.PositiveIntegerField(null=True, blank=True)
     nome = models.CharField(max_length=255)
     codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
     email = models.EmailField(max_length=255, unique=True)
@@ -79,7 +79,7 @@ def criar_usuario(sender, instance, **kwargs):
         instance.codusuario = usr
 
         send_mail("Cadastro na Hoodid",
-                  'Usuário %s confirme seu email'+ 'http://127.0.0.1:8000/api/confirmar/?chave='+usr.confirmation_key+'&email='+instance.email,
+                  'Usuário %s confirme seu email'+ 'https://registrosonline.com.br/api/confirmar/?chave='+usr.confirmation_key+'&email='+instance.email,
                   settings.EMAIL_HOST_USER, [instance.email], fail_silently=False)
 
 

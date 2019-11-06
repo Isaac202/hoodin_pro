@@ -9,6 +9,7 @@ from indicacoes.models import Indicacoes
 from area_atuacao.models import Area_Atuacao
 from django.core.mail import send_mail
 
+
 User = get_user_model()
 
 
@@ -80,7 +81,7 @@ def criar_usuario(sender, instance, **kwargs):
 
         send_mail("Cadastro na Hoodid",
                   'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave='+usr.confirmation_key+'&email='+instance.email,
-                  'vadejet.contato@gmail.com', [instance.email], fail_silently=False)
+                  'vadejet.contato@gmail.com', [instance.email], fail_silently=True)
 
 
 

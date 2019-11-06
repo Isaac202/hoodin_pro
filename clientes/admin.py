@@ -7,6 +7,8 @@ class ClienteAdmin(admin.ModelAdmin):
     list_filter = ('tipo_pessoa',)
     search_fields = ('nome', 'email')
 
+
+
 admin.site.register(Clientes, ClienteAdmin)
 
 

@@ -79,8 +79,8 @@ def criar_usuario(sender, instance, **kwargs):
         instance.codusuario = usr
 
         send_mail("Cadastro na Hoodid",
-                  'Usuário %s confirme seu email'+ 'https://registrosonline.com.br/api/confirmar/?chave='+usr.confirmation_key+'&email='+instance.email,
-                  settings.EMAIL_HOST_USER, [instance.email], fail_silently=False)
+                  'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave='+usr.confirmation_key+'&email='+instance.email,
+                  'vadejet.contato@gmail.com', [instance.email], fail_silently=False)
 
 
 

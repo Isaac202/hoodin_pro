@@ -1,7 +1,10 @@
 *.sqlite3
 *.idea
 *.vscode
+venv
 media
 *pyc
+*.env
+.env
 *.pyc
 

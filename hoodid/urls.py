@@ -35,17 +35,20 @@ from area_atuacao.views import Area_AtuacaoCreate
 from area_atuacao.views import Area_AtuacaoList
 from area_atuacao.views import Area_AtuacaoUpdate
 from area_atuacao.views import Area_AtuacaoDelete
-
+from rest_framework import routers
 from servicos.views import ServicosExtensoesCreate
 
 #from servicos.views import ServicosExtensoesList
 #from servicos.views import ServicosExtensoesUpdate
 
 from registros.views import RegistrosCreate
-
+from clientes.api.viewsets import ClienteViewSet
 from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
+router = routers.SimpleRouter()
+router.register(r'api/clientes', ClienteViewSet)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),

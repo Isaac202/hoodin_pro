@@ -10,6 +10,7 @@ from area_atuacao.models import Area_Atuacao
 from django.core.mail import send_mail
 
 
+
 User = get_user_model()
 
 
@@ -49,6 +50,7 @@ class Clientes(models.Model):
     twitter = models.CharField(max_length=100, null=True, blank=True)
     homepage = models.URLField(max_length=100, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now=True)
+    confirmation_key = models.CharField(max_length=80, default='0', blank=True, null=True)
 
     '''
     #
@@ -78,15 +80,14 @@ def criar_usuario(sender, instance, **kwargs):
             password=instance.senha, is_active=True)
 
         instance.codusuario = usr
-
-        send_mail("Cadastro na Hoodid",
-                  'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave='+usr.confirmation_key+'&email='+instance.email,
-                  'vadejet.contato@gmail.com', [instance.email], fail_silently=True)
-
-
+        instance.confirmation_key = usr.confirmation_key
 
 
 @receiver(post_save, sender=Clientes)
 def sms_aviso(sender, instance, **kwargs):
     enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')
+    send_mail("Cadastro na Hoodid",
+              'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave=' + instance.confirmation_key + '&email=' + instance.email,
+              settings.EMAIL_HOST_USER, [instance.email], fail_silently=True)
+
 

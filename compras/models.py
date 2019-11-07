@@ -15,8 +15,10 @@ class Compras(models.Model):
         ('Cartão de Crédito', 'Cartão de Crédito'),
         ('Cartão de Débito', 'Cartão de Débito'),
     )
-    codcliente = models.ForeignKey(User, on_delete=models.PROTECT)
-    valor = models.DecimalField(max_digits=11,decimal_places=2)
+
+    codusuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    codcliente = models.ForeignKey(Clientes, on_delete=models.PROTECT)
+    valor = models.DecimalField(max_digits=11, decimal_places=2)
     data = models.DateTimeField(auto_now=True)
     forma_pagamento = models.CharField(max_length=30, choices=FORMA_PG_CHOICES)
     autorizado = models.BooleanField(default=False)

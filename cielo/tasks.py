@@ -6,7 +6,7 @@ import json
 from cieloApi3 import *
 import requests
 from django.contrib.auth import get_user_model
-from compra_credito.models import ComprarCredito
+
 import logging
 User = get_user_model()
 

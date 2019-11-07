@@ -87,7 +87,8 @@ def criar_usuario(sender, instance, **kwargs):
 def sms_aviso(sender, instance, **kwargs):
     enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')
     send_mail("Cadastro na Hoodid",
-              'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave=' + instance.confirmation_key + '&email=' + instance.email,
-              settings.EMAIL_HOST_USER, [instance.email], fail_silently=False)
+              'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave='
+              + instance.confirmation_key + '&email=' + instance.email,
+              settings.EMAIL_HOST_USER, [instance.email], fail_silently=True)
 
 

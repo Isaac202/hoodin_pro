@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .tasks import gerar_token_cartao, comprar_com_token, criar_token_senha, comprar_creditos
+from .tasks import gerar_token_cartao,  comprar_credito
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -10,7 +10,7 @@ class PagamentosCielo(APIView):
     def post(self, request):
         try:
             if request.method == 'POST':
-                msg = comprar_creditos(request.data.get('id_usuario'), request.data.get('id_compra'),
+                msg = comprar_credito(request.data.get('id_usuario'), request.data.get('id_compra'),
                                                           request.data.get('cliente'), request.data.get('numero_cartao'),
                                                           request.data.get('seguranca'), request.data.get('bandeira'),
                                                           request.data.get('validade'), request.data.get('valor'),

@@ -4,8 +4,6 @@
 venv
 media
 *pyc
-*.env
-.env
 *.pyc
-.env
+
 .pyc

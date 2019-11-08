@@ -75,7 +75,8 @@
                        </div>
 
                        <div class="input-field col s2">
-                           <input type="date"  id="data_nascimento" name="data_nascimento">
+                            {{form.data_nascimento}}
+                           {{form.data_nascimento.label_tag}}
                        </div>
 
 
@@ -300,6 +301,7 @@
         $("#id_telefone").mask("(99) 99999-9999");
         $("#id_celular").mask("(99) 99999-9999");
         $("#id_cnpjcpf").mask("999.999.999-99");
+        $("#id_data_nascimento").mask("99/99/9999");
         $('.collapsible').collapsible();
 
         $('#id_cep').on('input', function(e) {

@@ -12,7 +12,7 @@ class ClientesForm(forms.ModelForm):
     confirma_senha = forms.CharField(widget=forms.PasswordInput, required=True)
     atucao = forms.ModelMultipleChoiceField(
                        widget = forms.CheckboxSelectMultiple,
-                       queryset = Servicos.objects.all(), required=True
+                       queryset = Servicos.objects.all()
                       )
 
     class Meta:

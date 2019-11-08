@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from configuracoes.tasks import enviar_sms
 from django.conf import settings
 from indicacoes.models import Indicacoes
-from area_atuacao.models import Area_Atuacao
+from servicos.models import Servicos
 from django.core.mail import send_mail
 import json
 
@@ -52,7 +52,7 @@ class Clientes(models.Model):
     homepage = models.URLField(max_length=100, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now=True)
     confirmation_key = models.CharField(max_length=80, default='0', blank=True, null=True)
-    atuacao = models.ManyToManyField(Area_Atuacao)
+    atuacao = models.ManyToManyField(Servicos, blank=True, null=True)
 
     '''
     #

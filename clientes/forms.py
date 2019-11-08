@@ -4,7 +4,7 @@ from indicacoes.models import Indicacoes
 from pycpfcnpj import cpfcnpj
 import re
 from servicos.models import Servicos
-from area_atuacao.models import Area_Atuacao
+
 
 
 class ClientesForm(forms.ModelForm):
@@ -12,7 +12,7 @@ class ClientesForm(forms.ModelForm):
     confirma_senha = forms.CharField(widget=forms.PasswordInput, required=True)
     atucao = forms.ModelMultipleChoiceField(
                        widget = forms.CheckboxSelectMultiple,
-                       queryset = Area_Atuacao.objects.all(), required=True
+                       queryset = Servicos.objects.all(), required=True
                       )
 
     class Meta:

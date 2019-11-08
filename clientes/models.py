@@ -52,7 +52,7 @@ class Clientes(models.Model):
     homepage = models.URLField(max_length=100, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now=True)
     confirmation_key = models.CharField(max_length=80, default='0', blank=True, null=True)
-    atuacao = models.CharField(max_length=250, blank=True, null=True)
+    atuacao = models.ManyToManyField(Area_Atuacao)
 
     '''
     #
@@ -71,11 +71,6 @@ class Clientes(models.Model):
     def __str__(self):
         return self.nome
 
-    def set_atuacao(self, area):
-        self.atuacao = json.dumps(area)
-
-    def get_atuacao(self):
-        return json.loads(self.atuacao)
 
 
 @receiver(pre_save, sender=Clientes)

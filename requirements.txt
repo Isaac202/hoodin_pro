@@ -13,6 +13,7 @@ Django==2.2.5
 django-celery-beat==1.5.0
 django-celery-results==1.1.2
 django-filter==2.2.0
+django-multiselectfield==0.1.10
 django-s3-folder-storage==0.5
 django-simple-email-confirmation==0.60
 django-storages==1.7.1

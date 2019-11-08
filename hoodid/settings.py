@@ -32,6 +32,7 @@ LIB_APPS = [
     'rest_framework',
     'django_filters',
     'simple_email_confirmation',
+    'multiselectfield',
 
 ]
 

@@ -4,11 +4,16 @@ from indicacoes.models import Indicacoes
 from pycpfcnpj import cpfcnpj
 import re
 from servicos.models import Servicos
+from area_atuacao.models import Area_Atuacao
 
 
 class ClientesForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput, required=True)
     confirma_senha = forms.CharField(widget=forms.PasswordInput, required=True)
+    atucao = forms.ModelMultipleChoiceField(
+                       widget = forms.CheckboxSelectMultiple,
+                       queryset = Area_Atuacao.objects.all(), required=True
+                      )
 
     class Meta:
         model = Clientes
@@ -20,11 +25,8 @@ class ClientesForm(forms.ModelForm):
         #colocar os campos que não quer que apareça
         exclude = ['id', 'codusuario']
 
-    def __init__(self, *args, **kwargs):
 
-        super(ClientesForm, self).__init__(*args, **kwargs)
-        qs = Servicos.objects.all()
-        self.fields['atuacao'].queryset = qs
+
 
 
     def clean_confirma_senha(self):

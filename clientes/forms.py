@@ -10,24 +10,22 @@ from servicos.models import Servicos
 class ClientesForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput, required=True)
     confirma_senha = forms.CharField(widget=forms.PasswordInput, required=True)
-    atucao = forms.ModelMultipleChoiceField(
-                       widget = forms.CheckboxSelectMultiple,
-                       queryset = Servicos.objects.all()
-                      )
+   # atucao = forms.ModelMultipleChoiceField(
+    #                   widget = forms.CheckboxSelectMultiple,
+    #                   queryset = Servicos.objects.all()
+    #                  )
 
     class Meta:
         model = Clientes
-        fields = ['nome', 'codusuario', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
-                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha', 'confirma_senha',
+        fields = ['nome', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
+                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf',     'senha', 'confirma_senha',
                    'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
                    'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
-                   'homepage', 'atuacao']
+                   'homepage']
         #colocar os campos que não quer que apareça
-        exclude = ['id', 'codusuario']
-
-
-
-
+        exclude = ['id', 'codusuario', 'codcliente', 'confirmation_key']
+#'codindicacao',
+#, 'atuacao'
 
     def clean_confirma_senha(self):
         senha = self.cleaned_data.get("senha")

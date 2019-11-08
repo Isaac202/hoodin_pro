@@ -29,14 +29,14 @@ class Clientes(models.Model):
     nome_mae = models.CharField(max_length=100, null=True, blank=True)
     nome_pai = models.CharField(max_length=100, null=True, blank=True)
     cnpjcpf = models.CharField(max_length=18, null=True, blank=True)
-    codindicacao = models.ForeignKey(Indicacoes,  on_delete = models.PROTECT, null = True,  blank = True,
-                                        related_name='indicacao', verbose_name='Indicacao')
+    #codindicacao = models.ForeignKey(Indicacoes,  on_delete = models.PROTECT, null = True,  blank = True,
+    #                                    related_name='indicacao', verbose_name='Indicacao')
     senha = models.CharField(max_length=50)
     cep = models.CharField(max_length=9, null=True, blank=True)
     endereco = models.CharField(max_length=255, null=True, blank=True)
     complemento = models.CharField(max_length=255, null=True, blank=True)
     numero = models.CharField(max_length=8, null=True, blank=True)
-    pais = models.CharField(max_length=50, null=True, blank=True)
+    pais = models.CharField(max_length=50, null=True, blank=True, default='Brasil')
     estado = models.CharField(max_length=50, null=True, blank=True, default='PE', choices=settings.ESTADOS_CHOICES)
     cidade = models.CharField(max_length=50, null=True, blank=True)
     bairro = models.CharField(max_length=50, null=True, blank=True)
@@ -52,7 +52,7 @@ class Clientes(models.Model):
     homepage = models.URLField(max_length=100, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now=True)
     confirmation_key = models.CharField(max_length=80, default='0', blank=True, null=True)
-    atuacao = models.ManyToManyField(Servicos, blank=True, null=True)
+    #atuacao = models.ManyToManyField(Servicos, blank=True, null=True)
 
     '''
     #

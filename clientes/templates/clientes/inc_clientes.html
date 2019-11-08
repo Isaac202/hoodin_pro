@@ -1,6 +1,6 @@
 {% extends 'base_cadastro.html' %}
  {% load static %}
-{% block navegar %}
+ {% block navegar %}
 <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Cadastro de Clientes</a>
@@ -10,7 +10,7 @@
            <li>
              <strong>Usuário</strong>
               {{user.username}}
-             </li>
+           </li>
 
              {% endif %}
       </ul>
@@ -34,6 +34,12 @@
                            {{form.nome}}
                            {{form.nome.label_tag}}
 
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.nome.errors}}
+                              </font>
+                          </p>
+
                         </div>
 
                        <div class="input-field col s5">
@@ -55,6 +61,11 @@
 
                            {{form.valor_credito}}
                            {{form.valor_credito.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.valor_credito.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
@@ -64,6 +75,11 @@
 
                            {{form.telefone}}
                            {{form.telefone.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.fone.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
@@ -71,19 +87,33 @@
 
                            {{form.celular}}
                            {{form.celular.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.celular.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
                        <div class="input-field col s2">
                             {{form.data_nascimento}}
                            {{form.data_nascimento.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.data_nascimento.errors}}
+                              </font>
+                          </p>
                        </div>
 
 
                        <div class="input-field col s4">
-
                            {{form.sexo}}
                            {{form.sexo.errors}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.sexo.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
@@ -93,12 +123,22 @@
 
                            {{form.nome_mae}}
                            {{form.nome_mae.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.nome_mae.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
                        <div class="input-field col s6">
                            {{form.nome_pai}}
                            {{form.nome_pai.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.nome_pai.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
@@ -108,6 +148,11 @@
 
                            {{form.tipo_pessoa}}
                            {{form.tipo_pessoa.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.tipo_pessoa.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
@@ -124,13 +169,19 @@
                        </div>
 
 
-
+<!--
                        <div class="input-field col s3">
 
                            {{form.codindicacao}}
                           {{form.codindicacao.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.codindicacao.errors}}
+                              </font>
+                          </p>
 
                        </div>
+-->
                        <div class="input-field col s3">
 
                            {{form.senha}}
@@ -142,6 +193,7 @@
                           </p>
 
                        </div>
+
                        <div class="input-field col s3">
                            {{form.confirma_senha}}
                            {{form.confirma_senha.label_tag}}
@@ -151,9 +203,11 @@
                               </font>
                           </p>
                        </div>
+
                    </li>
 
-               </ul>
+        </ul>
+
 
         <div class="row">
         <ul class="collapsible">
@@ -165,43 +219,84 @@
                           <div class="input-field col s3">
                                {{form.cep}}
                                {{form.cep.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.cep.errors}}
+                              </font>
+                             </p>
                            </div>
 
                            <div class="input-field col s4">
                                {{form.endereco}}
                                {{form.endereco.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.endereco.errors}}
+                              </font>
+                             </p>
                            </div>
 
                            <div class="input-field col s3">
                                {{form.bairro}}
                                {{form.bairro.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.bairro.errors}}
+                              </font>
+                             </p>
                            </div>
 
                       </div>
+
                       <div class="row">
                           <div class="input-field col s3">
                            {{form.cidade}}
                            {{form.cidade.label_tag}}
+                            <p class="errornote">
+                              <font color="red">
+                                {{form.cidade.errors}}
+                              </font>
+                            </p>
                            </div>
                           <div class="input-field col s3">
                                {{form.numero}}
                                {{form.numero.label_tag}}
+                              <p class="errornote">
+                              <font color="red">
+                                {{form.numero.errors}}
+                              </font>
+                            </p>
                            </div>
 
                            <div class="input-field col s3">
                                {{form.complemento}}
                                {{form.complemento.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.complemento.errors}}
+                              </font>
+                             </p>
                            </div>
                       </div>
                       <div class="row">
                            <div class="input-field col s3">
                                {{form.estado}}
                                {{form.estado.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.estado.errors}}
+                              </font>
+                             </p>
                            </div>
 
                            <div class="input-field col s3">
                                {{form.pais}}
                                {{form.pais.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.pais.errors}}
+                              </font>
+                             </p>
                            </div>
                       </div>
 
@@ -212,31 +307,57 @@
                   <div class="collapsible-header"><i class="material-icons">portrait</i>Dados</div>
                   <div class="collapsible-body">
 
-                       <div class="row">
+                      <div class="row">
                           <div class="input-field col s3">
                                {{form.documento_identidade}}
-                               {{form.cep.documento_identidade}}
+                               {{form.documento_identidade}}
+                              <p class="errornote">
+                              <font color="red">
+                                {{form.documento.errors}}
+                              </font>
+                             </p>
                            </div>
 
                            <div class="input-field col s4">
                                {{form.documento_tipo}}
                                {{form.documento_tipo.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.documento_tipo.errors}}
+                              </font>
+                             </p>
                            </div>
 
                            <div class="input-field col s3">
                                {{form.passaporte}}
                                {{form.passaporte.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.passaporte.errors}}
+                              </font>
+                             </p>
                            </div>
 
                       </div>
+
                       <div class="row">
                           <div class="input-field col s3">
                            {{form.nacionalidade}}
                            {{form.nacionalidade.label_tag}}
+                            <p class="errornote">
+                              <font color="red">
+                                {{form.nacionalidade.errors}}
+                              </font>
+                             </p>
                            </div>
                           <div class="input-field col s3">
                                {{form.estadocivil}}
                                {{form.estadocivil.label_tag}}
+                              <p class="errornote">
+                              <font color="red">
+                                {{form.estadocivil.errors}}
+                              </font>
+                              </p>
                            </div>
 
 
@@ -245,37 +366,72 @@
                            <div class="input-field col s3">
                                {{form.nif}}
                                {{form.nif.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.nif.errors}}
+                              </font>
+                              </p>
                            </div>
 
                            <div class="input-field col s3">
                                {{form.facebook}}
                                {{form.facebook.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.facebook.errors}}
+                              </font>
+                              </p>
                            </div>
                           <div class="input-field col s3">
                                {{form.twitter}}
                                {{form.twitter.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.twitter.errors}}
+                              </font>
+                              </p>
                            </div>
                           <div class="input-field col s3">
                                {{form.homepage}}
                                {{form.homepage.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.homepage.errors}}
+                              </font>
+                              </p>
                            </div>
                       </div>
                        <div class="row">
                            <div class="input-field col s12">
                                {{form.biografia}}
                                {{form.biografia.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.biografia.errors}}
+                              </font>
+                              </p>
                            </div>
 
                        </div>
                   </div>
                 </li>
 
-              </ul>
+        </ul>
+<!--
              <div class="input-field col s12">
                                {{form.atuacao}}
                                {{form.atuacao.label_tag}}
-                           </div>
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.atuacao.errors}}
+                              </font>
+                          </p>
+
+             </div>
+-->
+
         </div>
+
 
            <div class="input-field col s6">
             <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar

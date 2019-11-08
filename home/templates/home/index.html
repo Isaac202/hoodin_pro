@@ -1,6 +1,7 @@
-{% extends 'baseadm.html' %}
-{% block title %}Listagem de Posts{% endblock %}
-{% block content %}
+<!--
+% extends 'baseadm.html' %}
+% block title %}Listagem de Posts{% endblock %}
+% block content %}
     <div class="container">
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
@@ -24,26 +25,25 @@
                 {% endfor %}
         </div>
     </div>
-{% endblock %}
+% endblock %}
+-->
 
 
 
 
 
 
+{% extends 'base.html' %}
+{% load static %}
 
-<!--
-% extends 'base.html' %}
-% load static %}
+{% block main %}
+  <!--Slide show-->
+  {% include "components/slider.html" %}
 
-% block main %}
-  <--Slide show--
-  % include "components/slider.html" %}
-
-% endblock main %}
+{% endblock main %}
 
 
-% block script %}
+{% block script %}
     <script type="text/javascript">
           $(document).ready(function(){
           $('.slider').slider(); // inicializando slidshow
@@ -52,5 +52,5 @@
           $('.modal').modal(); // modal
         });
     </script>
-% endblock script %}
--->
+{% endblock script %}
+<!---->

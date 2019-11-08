@@ -8,6 +8,7 @@ from django.conf import settings
 from indicacoes.models import Indicacoes
 from area_atuacao.models import Area_Atuacao
 from django.core.mail import send_mail
+import json
 
 
 
@@ -51,6 +52,7 @@ class Clientes(models.Model):
     homepage = models.URLField(max_length=100, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now=True)
     confirmation_key = models.CharField(max_length=80, default='0', blank=True, null=True)
+    atuacao = models.CharField(max_length=250, blank=True, null=True)
 
     '''
     #
@@ -68,6 +70,13 @@ class Clientes(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def set_atuacao(self, area):
+        self.atuacao = json.dumps(area)
+
+    def get_atuacao(self):
+        return json.loads(self.atuacao)
+
 
 @receiver(pre_save, sender=Clientes)
 def criar_usuario(sender, instance, **kwargs):

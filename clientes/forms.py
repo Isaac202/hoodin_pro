@@ -3,6 +3,7 @@ from .models import Clientes # pega os campos e cria um form
 from indicacoes.models import Indicacoes
 from pycpfcnpj import cpfcnpj
 import re
+from servicos.models import Servicos
 
 
 class ClientesForm(forms.ModelForm):
@@ -15,9 +16,15 @@ class ClientesForm(forms.ModelForm):
                    'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha', 'confirma_senha',
                    'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
                    'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
-                   'homepage']
+                   'homepage', 'atuacao']
         #colocar os campos que não quer que apareça
         exclude = ['id', 'codusuario']
+
+    def __init__(self, *args, **kwargs):
+
+        super(ClientesForm, self).__init__(*args, **kwargs)
+        qs = Servicos.objects.all()
+        self.fields['atuacao'].queryset = qs
 
 
     def clean_confirma_senha(self):

@@ -36,7 +36,7 @@ class Clientes(models.Model):
     endereco = models.CharField(max_length=255, null=True, blank=True)
     complemento = models.CharField(max_length=255, null=True, blank=True)
     numero = models.CharField(max_length=8, null=True, blank=True)
-    pais = models.CharField(max_length=50, null=True, blank=True)
+    pais = models.CharField(max_length=50, null=True, blank=True, default='Brasil')
     estado = models.CharField(max_length=50, null=True, blank=True, default='PE', choices=settings.ESTADOS_CHOICES)
     cidade = models.CharField(max_length=50, null=True, blank=True)
     bairro = models.CharField(max_length=50, null=True, blank=True)

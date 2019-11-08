@@ -34,6 +34,12 @@
                            {{form.nome}}
                            {{form.nome.label_tag}}
 
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.nome.errors}}
+                              </font>
+                          </p>
+
                         </div>
 
                        <div class="input-field col s5">
@@ -55,6 +61,11 @@
 
                            {{form.valor_credito}}
                            {{form.valor_credito.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.valor_credito.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
@@ -64,6 +75,11 @@
 
                            {{form.telefone}}
                            {{form.telefone.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.fone.errors}}
+                              </font>
+                          </p>
 
                        </div>
 
@@ -77,6 +93,11 @@
                        <div class="input-field col s2">
                             {{form.data_nascimento}}
                            {{form.data_nascimento.label_tag}}
+                           <p class="errornote">
+                              <font color="red">
+                                {{form.data_nascimento.errors}}
+                              </font>
+                          </p>
                        </div>
 
 
@@ -217,7 +238,7 @@
                                {{form.documento_identidade}}
                                {{form.cep.documento_identidade}}
                            </div>
-
+ƒ
                            <div class="input-field col s4">
                                {{form.documento_tipo}}
                                {{form.documento_tipo.label_tag}}
@@ -274,6 +295,12 @@
              <div class="input-field col s12">
                                {{form.atuacao}}
                                {{form.atuacao.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.atuacao.errors}}
+                              </font>
+                          </p>
+
                            </div>
         </div>
 

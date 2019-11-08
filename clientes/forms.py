@@ -17,16 +17,13 @@ class ClientesForm(forms.ModelForm):
 
     class Meta:
         model = Clientes
-        fields = ['nome', 'codusuario', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
+        fields = ['nome', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
                    'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha', 'confirma_senha',
                    'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
                    'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
                    'homepage', 'atuacao']
         #colocar os campos que não quer que apareça
-        exclude = ['id', 'codusuario']
-
-
-
+        exclude = ['id', 'codusuario', 'codcliente', 'confirmation_key']
 
 
     def clean_confirma_senha(self):

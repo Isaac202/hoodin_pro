@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
@@ -72,14 +73,13 @@ class ConfirmacaoCadadtro(APIView):
                     User.confirmation_key = chave
                     if User.is_confirmed:
                         usuario_novo = User.objects.filter(email=email).update(is_active=True)
-                        resposta = 'Seu cadastro na Hoodid foi ativado com sucesso!'
+                        return HttpResponseRedirect(redirect_to='https://registrosonline.com.br/accounts/login/')
                     else:
                           resposta = 'Sua chave está inválida'
                 else:
                     resposta = 'Sua chave está inválida'
 
-
-                return Response({'msg': resposta})
+                return HttpResponseRedirect(redirect_to='https://registrosonline.com.br/accounts/login/')
             else:
                 return Response({'msg': 'erro'})
 

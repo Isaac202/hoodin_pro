@@ -10,10 +10,12 @@ from servicos.models import Servicos
 class ClientesForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput, required=True)
     confirma_senha = forms.CharField(widget=forms.PasswordInput, required=True)
-   # atucao = forms.ModelMultipleChoiceField(
-    #                   widget = forms.CheckboxSelectMultiple,
-    #                   queryset = Servicos.objects.all()
-    #                  )
+    '''atuacao = forms.ModelMultipleChoiceField(
+                       widget = forms.CheckboxSelectMultiple,
+                       queryset = Servicos.objects.all()
+               )
+    '''
+
 
     class Meta:
         model = Clientes
@@ -21,7 +23,7 @@ class ClientesForm(forms.ModelForm):
                    'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf',     'senha', 'confirma_senha',
                    'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
                    'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
-                   'homepage']
+                   'homepage', 'atuacao']
         #colocar os campos que não quer que apareça
         exclude = ['id', 'codusuario', 'codcliente', 'confirmation_key']
 #'codindicacao',

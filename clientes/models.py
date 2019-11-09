@@ -8,8 +8,6 @@ from django.conf import settings
 from indicacoes.models import Indicacoes
 from servicos.models import Servicos
 from django.core.mail import send_mail
-import json
-
 
 
 User = get_user_model()
@@ -52,7 +50,7 @@ class Clientes(models.Model):
     homepage = models.URLField(max_length=100, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now=True)
     confirmation_key = models.CharField(max_length=80, default='0', blank=True, null=True)
-    #atuacao = models.ManyToManyField(Servicos, blank=True, null=True)
+    atuacao = models.ManyToManyField(Servicos, blank=True)
 
     '''
     #

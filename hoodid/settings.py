@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True # config('DEBUG', default=False, cast=bool)
+DEBUG = False # config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
@@ -168,6 +168,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'hoodidregistrosonline@gmail.com'
 EMAIL_HOST_PASSWORD = 'strive@162'
 EMAIL_PORT = 587
+MAIL_USE_SSL = False
+
 
 
 LOGGING = {

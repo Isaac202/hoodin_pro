@@ -8,7 +8,7 @@ from django.conf import settings
 from indicacoes.models import Indicacoes
 from servicos.models import Servicos
 from django.core.mail import send_mail
-
+from datetime import datetime
 
 User = get_user_model()
 
@@ -80,17 +80,20 @@ def criar_usuario(sender, instance, **kwargs):
         usr = User.objects.create_user(
             username=instance.email,  email=instance.email,
             password=instance.senha, is_active=True)
+        agora = datetime.now()
+
 
         instance.codusuario = usr
-        instance.confirmation_key = usr.confirmation_key
+        instance.confirmation_key = str(usr.id) + str((10000*agora.year + 100*agora.month + agora.day))
 
 
 @receiver(post_save, sender=Clientes)
 def sms_aviso(sender, instance, **kwargs):
+
     enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')
-    send_mail("Cadastro na Hoodid",
-              'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave='
-              + instance.confirmation_key + '&email=' + instance.email,
-              settings.EMAIL_HOST_USER, [instance.email], fail_silently=True)
+
+
+    send_mail("Cadastro na Hoodid", 'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave='
+              + instance.confirmation_key + '&email=' + instance.email, settings.EMAIL_HOST_USER, [instance.email])
 
 

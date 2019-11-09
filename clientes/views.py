@@ -11,19 +11,17 @@ from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
+from django.contrib.messages.views import SuccessMessageMixin
 
 User = get_user_model()
 
 
-class ClientesCreate(CreateView):
+class ClientesCreate(SuccessMessageMixin, CreateView):
     model = Clientes
     template_name = "clientes/inc_clientes.html"
     form_class = ClientesForm
-
     success_url = reverse_lazy('lista_clientes')
-
-
-    #success_url = reverse_lazy('lista_placer')
+    success_message = "Verifique seu email pra ativar seu cadastro!"
 
 
 class ClientesList(LoginRequiredMixin, ListView):
@@ -70,8 +68,8 @@ class ConfirmacaoCadadtro(APIView):
                 chave = self.request.query_params.get('chave', None)
                 email = self.request.query_params.get('email', None)
                 if chave:
-                    User.confirmation_key = chave
-                    if User.is_confirmed:
+
+                    if Clientes.objects.filter(confirmation_key=chave).exists():
                         usuario_novo = User.objects.filter(email=email).update(is_active=True)
                         return HttpResponseRedirect(redirect_to='https://registrosonline.com.br/accounts/login/')
                     else:

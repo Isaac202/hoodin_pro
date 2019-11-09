@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from tools.genereteKey import generate_hash_key
-from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
+
 
 #from django.core.validators import validate_email
 #from django.contrib.auth.validators import UnicodeUsernameValidator
@@ -90,7 +90,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
         super().save()
 
 
-class User(SimpleEmailConfirmationUserMixin, AbstractUser):
+class User(AbstractUser):
 
     # indicacoes
 

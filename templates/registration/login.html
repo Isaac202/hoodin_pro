@@ -1,6 +1,32 @@
 {% extends "base.html" %} {% load static %} {% block main %}
 <div class="container" align="center">
     <div class="row">
+         {% if messages %}
+
+          <div class="row">
+             <div class="col s12 m6">
+             <div class="card blue-grey darken-1">
+             <div class="card-content white-text">
+             <span class="card-title">Hoodid Registro online</span>
+             <p>Seja muito bem vindo! pra finalizar o processo falta apenas um passo.</p>
+        </div>
+                 <div class="alert alert-success">
+            {% for m in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</li>
+            {% endfor %}
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+         {% endif %}
         <div class="col s12 l8 offset-l3">
             <form style="padding-top: 8rem; padding-bottom: 8rem" name="meu_form" method="POST">
                 {% csrf_token %}

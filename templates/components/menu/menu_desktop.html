@@ -118,6 +118,7 @@
 {% endif %}
 <!--NÃO ESTÁ LOGADO-->
 {% if not user.is_authenticated %}
+
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
                <a href="{% url 'login' %}">

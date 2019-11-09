@@ -27,8 +27,8 @@ class Clientes(models.Model):
     nome_mae = models.CharField(max_length=100, null=True, blank=True)
     nome_pai = models.CharField(max_length=100, null=True, blank=True)
     cnpjcpf = models.CharField(max_length=18, null=True, blank=True)
-    #codindicacao = models.ForeignKey(Indicacoes,  on_delete = models.PROTECT, null = True,  blank = True,
-    #                                    related_name='indicacao', verbose_name='Indicacao')
+    codindicacao = models.ForeignKey(Indicacoes,  on_delete = models.PROTECT, null = True,  blank = True,
+                                        related_name='indicacao', verbose_name='Indicacao')
     senha = models.CharField(max_length=50)
     cep = models.CharField(max_length=9, null=True, blank=True)
     endereco = models.CharField(max_length=255, null=True, blank=True)

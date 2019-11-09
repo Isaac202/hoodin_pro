@@ -20,7 +20,7 @@ class ClientesForm(forms.ModelForm):
     class Meta:
         model = Clientes
         fields = ['nome', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
-                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf',     'senha', 'confirma_senha',
+                   'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha', 'confirma_senha',
                    'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
                    'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
                    'homepage', 'atuacao']

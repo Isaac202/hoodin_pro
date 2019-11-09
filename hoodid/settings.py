@@ -165,8 +165,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'vadejet.contato@gmail.com'
-EMAIL_HOST_PASSWORD = 'linux162'
+EMAIL_HOST_USER = 'hoodidregistrosonline@gmail.com'
+EMAIL_HOST_PASSWORD = 'strive@162'
 EMAIL_PORT = 587
 
 
@@ -228,7 +228,6 @@ SEXO_CHOICES = (
 
 
 TIPOPESSOA_CHOICES = (
-    ('', ''),
     ('J', 'Juridica'),
     ('F', 'Fisica'),
 )

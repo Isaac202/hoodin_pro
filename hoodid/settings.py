@@ -168,7 +168,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'hoodidregistrosonline@gmail.com'
 EMAIL_HOST_PASSWORD = 'strive@162'
 EMAIL_PORT = 587
-MAIL_USE_SSL = False
+EMAIL_USE_SSL = False
 
 
 

@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False # config('DEBUG', default=False, cast=bool)
+DEBUG = True # config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
@@ -31,7 +31,6 @@ LIB_APPS = [
     'django_celery_beat',
     'rest_framework',
     'django_filters',
-    'simple_email_confirmation',
     'multiselectfield',
 
 ]
@@ -168,7 +167,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'hoodidregistrosonline@gmail.com'
 EMAIL_HOST_PASSWORD = 'strive@162'
 EMAIL_PORT = 587
-EMAIL_USE_SSL = False
+
 
 
 

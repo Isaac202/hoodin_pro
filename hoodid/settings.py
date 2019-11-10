@@ -162,7 +162,7 @@ REST_FRAMEWORK = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'hoodidregistrosonline@gmail.com'
 EMAIL_HOST_PASSWORD = 'strive@162'

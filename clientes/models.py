@@ -71,11 +71,14 @@ class Clientes(models.Model):
 
     def save(self, *args,**kwargs):
         super(Clientes, self).save(*args, **kwargs)
-        send_mail("Cadastro na Hoodid",
+        try:
+
+            send_mail("Cadastro na Hoodid",
                   'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave='
                   + self.confirmation_key + '&email=' + self.email, settings.EMAIL_HOST_USER,
-                  [self.email], fail_silently=True)
-
+                  [ self.email], fail_silently=True)
+        except :
+            print("An exception occurred")
 
 
 @receiver(pre_save, sender=Clientes)

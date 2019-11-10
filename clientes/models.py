@@ -77,8 +77,8 @@ class Clientes(models.Model):
                   'Usuário %s confirme seu email' + 'https://registrosonline.com.br/api/confirmar/?chave='
                   + self.confirmation_key + '&email=' + self.email, settings.EMAIL_HOST_USER,
                   [ self.email], fail_silently=True)
-        except :
-            print("An exception occurred")
+        except Exception as e:
+            print(str(e))
 
 
 @receiver(pre_save, sender=Clientes)

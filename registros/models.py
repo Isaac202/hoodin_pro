@@ -9,7 +9,7 @@ User = get_user_model()
 
 class Registros(models.Model):
     codregistro = models.PositiveIntegerField(null=True)
-    codcliente = models.ForeignKey(Clientes, on_delete=models.PROTECT)
+    codcliente = models.ForeignKey(Clientes, on_delete=models.PROTECT, blank=True, null=True)
     codusuario = models.ForeignKey(User, on_delete=models.PROTECT)
     codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT)
     valor = models.DecimalField(max_digits=9, decimal_places=2)

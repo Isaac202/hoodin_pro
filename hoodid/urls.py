@@ -20,6 +20,7 @@ from servicos.views import ServicosCreate
 from servicos.views import ServicosList
 from servicos.views import ServicosUpdate
 from servicos.views import ServicosDelete
+from servicos.api.viewsets import ServicoViewSet
 
 from indicacoes.views import IndicacoesCreate
 from indicacoes.views import IndicacoesList
@@ -46,6 +47,7 @@ from clientes.api.viewsets import ClienteViewSet
 from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
 router = routers.SimpleRouter()
 router.register(r'api/clientes', ClienteViewSet)
+router.register(r'api/servicos', ServicoViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

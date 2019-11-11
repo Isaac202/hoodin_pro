@@ -23,90 +23,77 @@
     <form class = "col s12" action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
-                <div class="col s12">
-                  <i class="material-icons prefix">urst_mode</i>
-                  {{form.codcliente.label_tag}}
-                  {{form.codcliente}}
-                  {{ form.codcliente.errors }}
-
-                </div>
          <div class="row">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">ac_unit</i>
                   {{form.codservico}}
-                   {{form.codservico.errors}}
-
-                  <label for="icon_telephone">Serviço</label>
+                   {{form.codservico.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.codservico.errors}}
+                              </font>
+                          </p>
                 </div>
               </div>
         <div class="row">
                 <div class="input-field col s6">
 
                  <i class="material-icons prefix">attach_money</i>
-                  {{form.valor}}
-                   {{form.valor.errors}}
-                    <label for="icon_prefix">Valor</label>
+                    {{form.valor}}
+                     {{form.valor.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.valor.errors}}
+                              </font>
+                          </p>
 
                 </div>
-                <div class="input-field col s6">
-                  <i class="material-icons prefix">event</i>
-                  {{form.data}}
-                    {{form.data.errors}}
-                 <label for="icon_telephone">Data</label>
-                </div>
-              </div>
 
-        <div class="row">
-                <div class="input-field col s6">
-
-                 <i class="material-icons prefix"></i>
-                  {{form.assinatura}}
-                   {{form.assinatura.errors}}
-                    <label for="icon_prefix">Assinatura</label>
-                </div>
                 <div class="col s6">
-                  <i class="material-icons prefix">file_upload</i>
+                  <i class="material-icons prefix">drag_handle</i>
                     {{form.versao}}
-                    {{form.versao.errors}}
+                     {{form.versao.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.versao.errors}}
+                              </font>
+                          </p>
 
-                 <label for="icon_telephone">Versao</label>
                 </div>
         </div>
+
 
          <div class="row">
                 <div class="input-field col s6">
 
-                 <i class="material-icons prefix">dashboard</i>
+                 <i class="material-icons prefix">assignment</i>
                   {{form.descricao}}
-                   {{form.descricao.errors}}
-                    <label for="icon_prefix">Descrição</label>
+                    {{form.descricao.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.descricao.errors}}
+                              </font>
+                          </p>
+
                 </div>
                 <div class="col s6">
-                  <i class="material-icons prefix">file_upload</i>
-                    {{form.codqrcode}}
-                    {{form.codqrcode.errors}}
+                  <i class="material-icons prefix">attachment</i>
+                    {{form.arquivo}}
+                     {{form.arquivo.label_tag}}
+                               <p class="errornote">
+                              <font color="red">
+                                {{form.arquivo.errors}}
+                              </font>
+                          </p>
 
-                 <label for="icon_telephone">Qr Code</label>
                 </div>
 
-                <div class="col s6">
-                  <i class="material-icons prefix">file_upload</i>
-                    {{form.codindicacao}}
-                    {{form.codindicacao.errors}}
 
-                 <label for="icon_telephone">Indicação</label>
-                </div>
+
+
 
              <div class="col s6">
-                  <i class="material-icons prefix">file_upload</i>
-                    {{form.desconto}}
-                    {{form.desconto.errors}}
-
-                 <label for="icon_telephone">Desconto</label>
-                </div>
-
-             <div class="col s6">
-                  <i class="material-icons prefix">file_upload</i>
+                  <i class="material-icons prefix">attachment</i>
                     {{form.resumo_obra}}
                     {{form.resumo_obra.errors}}
 
@@ -135,8 +122,27 @@
 {% block script %}
   <script>
     $(document).ready(function(){
-        $('select').formSelect();
+        $('select').material_select();
         exibir_ocultar();
+           $('#id_codservico').on('input', function(e) {
+            let cod = $('#id_codservico').val();
+            if (cod.length == 9) {
+
+                $.getJSON("http://127.0.0.1:8000/api/servicos/" + cod, function(dados) {
+                console.log('Buscando');
+                if (!("erro" in dados)) {
+                    console.log('deu certo');
+                        //Atualiza os campos com os valores da consulta.
+                    $("#id_valor").val(dados.preco);
+                    //$("#id_bairro").val(dados.tamanho);
+                    //$("#id_complemento").val(dados.medida);
+
+
+
+                }
+            });
+        }
+    });
 
         });
 

@@ -53,6 +53,7 @@ HOODID_APPS = [
     'compras',
     'clientes_atuacao',
     'cielo',
+    'servicos_extensoes',
 
 ]
 

@@ -5,7 +5,7 @@ from django.db import models
 
 class Extensoes(models.Model):
     codextensao = models.PositiveIntegerField(null=True)
-    nome = models.CharField(max_length=5)
+    nome = models.CharField(max_length=5, unique=True)
 
     class Meta:
         ordering = ['nome', ]

@@ -12,16 +12,26 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from django.contrib.messages.views import SuccessMessageMixin
+from tools.views import SignUpCreateView
 
 User = get_user_model()
 
 
-class ClientesCreate(SuccessMessageMixin, CreateView):
-    model = Clientes
+class ClientesCreate(SuccessMessageMixin, SignUpCreateView):
+    # model = Clientes
     template_name = "clientes/inc_clientes.html"
     form_class = ClientesForm
     success_url = reverse_lazy('lista_clientes')
     success_message = "Verifique seu email pra ativar seu cadastro!"
+
+
+
+# class ClientesCreate(SuccessMessageMixin, CreateView):
+#     model = Clientes
+#     template_name = "clientes/inc_clientes.html"
+#     form_class = ClientesForm
+#     success_url = reverse_lazy('lista_clientes')
+#     success_message = "Verifique seu email pra ativar seu cadastro!"
 
 
 class ClientesList(LoginRequiredMixin, ListView):

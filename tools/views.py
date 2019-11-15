@@ -66,24 +66,17 @@ class SignUpCreateView(MultiCreateView):
         # Obitenho o modelForm que contem o id_usuario e transformo form_class em um dicionario
         # E adiciono o UserCreationForm ao Formulario
         self.form_class = {'form': self.form_class,
-                           'form_endereco': EnderecoMotoristaForm,
+                        #    'form_endereco': EnderecoMotoristaForm,
                            'form_user': UserCreationForm}
 
     def form_valid(self, **forms):
         context = {}
         person = forms['form'].save(commit=False)
-        endereco = forms['form_endereco'].save(commit=False)
         userForm = forms['form_user']
         user = userForm.save()
         person.id_usuario = user
-        person.token = userForm.getPassword()
-        person.email = user.username
+        # person.token = userForm.getPassword()
         person.save()
-        endereco.id_motorista = person
-        endereco.save()
-        # if settings.DEBUG:
-        #     context['site'] = settings.ALLOWED_HOSTS[1] + ":8000"
-        # else:
         context['site'] = settings.ALLOWED_HOSTS[0]
         context['nome'] = person.nome
         return self.login_redirect(user, context)
@@ -92,7 +85,6 @@ class SignUpCreateView(MultiCreateView):
         key = generate_hash_key(user.email)
         UserConfirm.objects.create(user=user, key=key)
         context['key'] = key
-        # print(reverse_lazy('users:conf',kwargs={'key':key}))
         send_mail.delay(subject="Cadastro", template_name="usuarios/emailCadastro.html",
                         context=context, recipient_list=[user.username])
         return self.get_success_url()

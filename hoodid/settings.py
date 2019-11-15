@@ -54,7 +54,7 @@ HOODID_APPS = [
     'clientes_atuacao',
     'cielo',
     'servicos_extensoes',
-
+    'tarefas_backgroud'
 ]
 
 

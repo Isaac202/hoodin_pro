@@ -21,6 +21,8 @@
 {% block main %}
 <div class="container">
 
+  {{form_user}}
+
   <div class="row">
     <form method="post" class="col 12">
       {% csrf_token %}
@@ -34,7 +36,7 @@
 
             <div class="collapsible-body">
               <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s10 m5 offset-s1">
                   {{form.nome}}
                   {{form.nome.label_tag}}
                   <p class="errornote">
@@ -44,7 +46,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.data_nascimento}}
                   {{form.data_nascimento.label_tag}}
                   <p class="errornote">
@@ -54,7 +56,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.sexo.label_tag}}
                   {{form.sexo}}
                   <p class="errornote">
@@ -63,8 +65,9 @@
                     </font>
                   </p>
                 </div>
-
-                <div class="input-field col s3">
+              </div>
+              <div class="row">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.cnpjcpf}}
                   {{form.cnpjcpf.label_tag}}
                   <p class="errornote">
@@ -74,7 +77,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s2">
+                <div class="input-field col s10 m2 offset-s1">
                   {{form.tipo_pessoa}}
                   {{form.tipo_pessoa.label_tag}}
                   <p class="errornote">
@@ -84,9 +87,7 @@
                   </p>
                 </div>
 
-                <!--LINHA 2-->
-
-                <div class="input-field col s3">
+                <div class="input-field col s10 m2 offset-s1">
                   {{form.telefone}}
                   {{form.telefone.label_tag}}
                   <p class="errornote">
@@ -95,7 +96,8 @@
                     </font>
                   </p>
                 </div>
-                <div class="input-field col s3">
+
+                <div class="input-field col s10 m2 offset-s1">
                   {{form.celular}}
                   {{form.celular.label_tag}}
                   <p class="errornote">
@@ -105,10 +107,10 @@
                   </p>
                 </div>
 
+              </div>
 
-
-                <!--LINHA 5-->
-                <div class="input-field col s6">
+              <div class="row">
+                <div class="input-field col s10 m5 offset-s1">
                   {{form.nome_mae}}
                   {{form.nome_mae.label_tag}}
                   <p class="errornote">
@@ -118,7 +120,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s6">
+                <div class="input-field col s10 m5 offset-s1">
                   {{form.nome_pai}}
                   {{form.nome_pai.label_tag}}
                   <p class="errornote">
@@ -129,7 +131,7 @@
                 </div>
 
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m2 offset-s1">
                   {{form.codindicacao}}
                   {{form.codindicacao.label_tag}}
                   <p class="errornote">
@@ -167,7 +169,15 @@
                     </font>
                   </p>
                 </div>
+                <div class="col s12">
+                  <p>
+                    Sua senha não pode ser tão parecida com suas outras informações pessoais. <br>
+                    Sua senha precisa conter pelo menos 8 caracteres. <br>
+                    Sua senha não pode ser uma senha habitualmente utilizada. <br>
+                    Sua senha não pode ser inteiramente numérica.
+                  </p>
 
+                </div>
               </div>
             </div>
           </li>

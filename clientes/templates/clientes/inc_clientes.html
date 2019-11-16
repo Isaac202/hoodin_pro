@@ -20,10 +20,10 @@
 
 {% block main %}
 <div class="container">
+
   <div class="row">
     <form method="post" class="col 12">
       {% csrf_token %}
-
 
       <div class="row">
         <ul class="collapsible">
@@ -45,33 +45,33 @@
                 </div>
 
                 <div class="input-field col s3">
-                    {{form.data_nascimento}}
-                    {{form.data_nascimento.label_tag}}
-                    <p class="errornote">
-                      <font color="red">
-                        {{form.data_nascimento.errors}}
-                      </font>
-                    </p>
-                  </div>
-
-                  <div class="input-field col s3">
-                      {{form.sexo.label_tag}}
-                      {{form.sexo}}
-                      <p class="errornote">
-                        <font color="red">
-                          {{form.sexo.errors}}
-                        </font>
-                      </p>
-                    </div>
+                  {{form.data_nascimento}}
+                  {{form.data_nascimento.label_tag}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.data_nascimento.errors}}
+                    </font>
+                  </p>
+                </div>
 
                 <div class="input-field col s3">
-                    {{form.cnpjcpf}}
-                    {{form.cnpjcpf.label_tag}}
-                    <p class="errornote">
-                      <font color="red">
-                        {{form.cnpjcpf.errors}}
-                      </font>
-                    </p>
+                  {{form.sexo.label_tag}}
+                  {{form.sexo}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.sexo.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s3">
+                  {{form.cnpjcpf}}
+                  {{form.cnpjcpf.label_tag}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.cnpjcpf.errors}}
+                    </font>
+                  </p>
                 </div>
 
                 <div class="input-field col s2">
@@ -104,8 +104,8 @@
                     </font>
                   </p>
                 </div>
-           
-               
+
+
 
                 <!--LINHA 5-->
                 <div class="input-field col s6">
@@ -240,7 +240,7 @@
                     </font>
                   </p>
                 </div>
-               
+
               </div>
               <div class="row">
                 <div class="input-field col s3">
@@ -412,15 +412,26 @@
 
 {% block script_cad %}
 <script>
+  var cpfMascara = function (val) {
+    return val.replace(/\D/g, '').length > 11 ? '00.000.000/0000-00' : '000.000.000-009';
+  },
+    cpfOptions = {
+      onKeyPress: function (val, e, field, options) {
+        field.mask(cpfMascara.apply({}, arguments), options);
+      }
+    };
+
   $(document).ready(function () {
     $('select').material_select();
     $('.datepicker').pickadate();
     $("#id_cep").mask("99999-999");
     $("#id_telefone").mask("(99) 99999-9999");
     $("#id_celular").mask("(99) 99999-9999");
-    $("#id_cnpjcpf").mask("999.999.999-99");
+    //$("#id_cnpjcpf").mask("999.999.999-99");
     $("#id_data_nascimento").mask("99/99/9999");
     $('.collapsible').collapsible();
+    $('#id_cnpjcpf').mask(cpfMascara, cpfOptions);
+
 
     $('#id_cep').on('input', function (e) {
       let cep = $('#id_cep').val();

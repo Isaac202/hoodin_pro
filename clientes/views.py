@@ -41,12 +41,11 @@ class ClientesList(LoginRequiredMixin, ListView):
     context_object_name = "clientes"
 
     def get_queryset(self):
-
-        qs = Clientes.objects.filter(codusuario=self.request.user)
-        nome_cliente = self.request.GET.get('nome_cliente')
-
-        if nome_cliente is not None:
+        nome_cliente = self.request.GET.get('nome_cliente', None)
+        if nome_cliente:
             qs = Clientes.objects.filter(nome__icontains=nome_cliente)
+        else:
+            qs = Clientes.objects.filter(id_usuario=self.request.user)
         return qs
 
     def get_context_data(self, **kwargs):

@@ -59,10 +59,10 @@ class Clientes(models.Model):
         return self.nome
 
 
-    def get_person(self):
+    def is_cpf(self):
         if len(self.cnpjcpf) > 14: 
-            return "CNPJ"
-        return "CPF"
+            return False
+        return True
 
     # def save(self, *args,**kwargs):
     #     super(Clientes, self).save(*args, **kwargs)
@@ -90,6 +90,12 @@ class Clientes(models.Model):
 
 #         instance.codusuario = usr
 #         instance.confirmation_key = str(usr.id) + str((10000*agora.year + 100*agora.month + agora.day))
+
+
+@receiver(pre_save, sender=Clientes)
+def type_person(sender, instance, **kwargs):
+    if not instance.is_cpf:
+        instance.tipo_pessoa = "J"
 
 
 @receiver(post_save, sender=Clientes)

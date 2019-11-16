@@ -23,13 +23,12 @@ class Clientes(models.Model):
     celular = models.CharField("Celular *", max_length=16)
     data_nascimento = models.DateField("Data de nascimento *")
     sexo = models.CharField("Sexo *", max_length=1, choices=settings.SEXO_CHOICES)
-    tipo_pessoa = models.CharField("Tipo de Pessoa *", max_length=1, null=True, blank=True, choices=settings.TIPOPESSOA_CHOICES)
+    tipo_pessoa = models.CharField("Tipo de Pessoa *", max_length=1, choices=settings.TIPOPESSOA_CHOICES)
     nome_mae = models.CharField("Nome da Mãe",max_length=100, null=True, blank=True)
     nome_pai = models.CharField("Nome do Pai", max_length=100, null=True, blank=True)
     cnpjcpf = models.CharField("CPF/CNPJ *", max_length=18)
     codindicacao = models.ForeignKey(Indicacoes, on_delete = models.PROTECT, 
                 related_name='indicacao', verbose_name="Como conheceu a gente? *")
-    
     cep = models.CharField("Cep *", max_length=9)
     endereco = models.CharField("Endereço *", max_length=255)
     complemento = models.CharField("Complemento", max_length=255, null=True, blank=True)

@@ -14,9 +14,9 @@ User = get_user_model()
 
 
 class Clientes(models.Model):
+    id_usuario = models.OneToOneField(User, on_delete=models.PROTECT)
     codcliente = models.PositiveIntegerField(null=True, blank=True, default=0)
     nome = models.CharField(max_length=255)
-    codusuario = models.OneToOneField(User, on_delete=models.PROTECT)
     # email = models.EmailField(max_length=255, unique=True)
     valor_credito = models.DecimalField(max_digits=11, decimal_places=2, default=0)
     telefone = models.CharField("Telefone Fixo",max_length=16, null=True, blank=True)

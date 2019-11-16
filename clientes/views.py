@@ -17,7 +17,7 @@ from tools.views import SignUpCreateView
 User = get_user_model()
 
 
-class ClientesCreate(SuccessMessageMixin, SignUpCreateView):
+class ClientesCreate(SignUpCreateView, SuccessMessageMixin):
     # model = Clientes
     template_name = "clientes/inc_clientes.html"
     form_class = ClientesForm

@@ -25,22 +25,8 @@ class ClientesForm(forms.ModelForm):
         #            'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
         #            'homepage', 'atuacao']
         #colocar os campos que não quer que apareça
-        exclude = ['id', 'codusuario', 'valor_credito', 'codcliente', 'confirmation_key'] #'codindicacao',#, 'atuacao'
+        exclude = ['id', 'id_usuario', 'valor_credito', 'codcliente', 'confirmation_key'] #'codindicacao',#, 'atuacao'
 
-    def clean_confirma_senha(self):
-        senha = self.cleaned_data.get("senha")
-        confirma = self.cleaned_data.get("confirma_senha")
-        if senha != confirma:
-            raise forms.ValidationError("Atenção senha difretne da confirmação")
-
-        return senha
-
-    def clean_email(self):
-        email = self.cleaned_data.get("email")
-        if Clientes.objects.filter(email=email).exists():
-            raise forms.ValidationError("Email Já cadastrado")
-
-        return email
 
     def clean_cnpjcpf(self):
 

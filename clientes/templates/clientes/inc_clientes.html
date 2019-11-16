@@ -91,7 +91,7 @@
                   {{form.telefone.label_tag}}
                   <p class="errornote">
                     <font color="red">
-                      {{form.fone.errors}}
+                      {{form.telefone.errors}}
                     </font>
                   </p>
                 </div>
@@ -199,6 +199,26 @@
                 </div>
 
                 <div class="input-field col s3">
+                  {{form.numero}}
+                  {{form.numero.label_tag}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.numero.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s3">
+                  {{form.complemento}}
+                  {{form.complemento.label_tag}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.complemento.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s3">
                   {{form.bairro}}
                   {{form.bairro.label_tag}}
                   <p class="errornote">
@@ -220,25 +240,7 @@
                     </font>
                   </p>
                 </div>
-                <div class="input-field col s3">
-                  {{form.numero}}
-                  {{form.numero.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.numero.errors}}
-                    </font>
-                  </p>
-                </div>
-
-                <div class="input-field col s3">
-                  {{form.complemento}}
-                  {{form.complemento.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.complemento.errors}}
-                    </font>
-                  </p>
-                </div>
+               
               </div>
               <div class="row">
                 <div class="input-field col s3">
@@ -427,7 +429,7 @@
         $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function (dados) {
           console.log('Buscando');
           if (!("erro" in dados)) {
-            console.log('deu certo');
+            // console.log('deu certo');
             //Atualiza os campos com os valores da consulta.
             $("#id_endereco").val(dados.logradouro);
             $("#id_bairro").val(dados.bairro);

@@ -278,22 +278,23 @@
             <div class="collapsible-body">
 
               <div class="row">
+
+                <div class="input-field col s4">
+                    {{form.documento_tipo}}
+                    {{form.documento_tipo.label_tag}}
+                    <p class="errornote">
+                      <font color="red">
+                        {{form.documento_tipo.errors}}
+                      </font>
+                    </p>
+                  </div>
+
                 <div class="input-field col s3">
                   {{form.documento_identidade.label_tag}}
                   {{form.documento_identidade}}
                   <p class="errornote">
                     <font color="red">
                       {{form.documento.errors}}
-                    </font>
-                  </p>
-                </div>
-
-                <div class="input-field col s4">
-                  {{form.documento_tipo}}
-                  {{form.documento_tipo.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.documento_tipo.errors}}
                     </font>
                   </p>
                 </div>

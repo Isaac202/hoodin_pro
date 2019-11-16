@@ -15,3 +15,8 @@ loogger = logging.getLogger('tarefa_erro')
 @app.task
 def send_mail(subject, template_name, context, recipient_list):
     return send_mail_template(subject, template_name, context, recipient_list)
+
+
+@app.task
+def teste():
+    print("testando celery\n\n\n")

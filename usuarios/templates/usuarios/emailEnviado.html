@@ -34,26 +34,24 @@
     {% block msg %}
    <div class="card large">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="{% static 'imgs/f_img1.jpg' %}">
+      <!-- <img class="activator" src="{% static 'imgs/f_img1.jpg' %}"> -->
     </div>
     <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Cadastro realizado com sucesso
-          Você receberá um e-mail em breve,por favor confirme o e-mail para concluir seu cadastro. Obrigado!
-
-          <i class="material-icons right">email</i></span>
-
+      <span class="card-title activator grey-text text-darken-4">
+        <i class="material-icons right">email</i>
+        <p>
+          Cadastro realizado com sucesso :) <br>
+          Você receberá um e-mail em breve, <br>
+          por favor confirme o e-mail para concluir seu cadastro. <br>
+          Obrigado!
+        </p>
+      </span>
     </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Email de confirmaçção<i class="material-icons right">email</i></span>
-      <p>Você receberá um e-mail em breve,por favor confirme o e-mail para concluir seu cadastro. Obrigado!</p>
-    </div>
+    <!-- <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Email de confirmação<i class="material-icons right">email</i></span>
+      <p>Você receberá um e-mail, por favor confirme o e-mail para concluir seu cadastro. Obrigado!</p>
+    </div> -->
   </div>
-
-
-
-    <h1>
-       Vá de Jet SEU Novo jeito de dirigir!
-    </h1>
     {% endblock msg %}
 </div>
 {% endblock main %}

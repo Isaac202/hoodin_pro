@@ -25,16 +25,22 @@ class ClientesForm(forms.ModelForm):
         #            'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
         #            'homepage', 'atuacao']
         #colocar os campos que não quer que apareça
-        exclude = ['id', 'id_usuario', 'valor_credito', 'codcliente', 'confirmation_key'] #'codindicacao',#, 'atuacao'
+        exclude = ['id', 'id_usuario', 'tipo_pessoa', 'valor_credito', 'codcliente', 'confirmation_key'] #'codindicacao',#, 'atuacao'
 
 
     def clean_cnpjcpf(self):
 
         cnpj = self.cleaned_data.get("cnpjcpf")
         masked_cnpj_number = cpfcnpj.clear_punctuation(cnpj)
+        doc = "CPF"
+        if len(cnpj) > 14:
+            doc = "CNPJ"
 
         if cpfcnpj.validate(masked_cnpj_number) == False:
-            raise forms.ValidationError("documento invalido")
+            raise forms.ValidationError("{} invalido!".format(doc))
+
+        if Clientes.objects.filter(cnpjcpf=cnpj).exists():
+            raise forms.ValidationError("{} Já cadastrado".format(doc))
 
         return cnpj
 

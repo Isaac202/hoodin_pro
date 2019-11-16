@@ -23,7 +23,7 @@ class Clientes(models.Model):
     celular = models.CharField("Celular *", max_length=16)
     data_nascimento = models.DateField("Data de nascimento *")
     sexo = models.CharField("Sexo *", max_length=1, choices=settings.SEXO_CHOICES)
-    tipo_pessoa = models.CharField("Tipo de Pessoa *", max_length=1, choices=settings.TIPOPESSOA_CHOICES)
+    tipo_pessoa = models.CharField("Tipo de Pessoa *", max_length=1, default="F", choices=settings.TIPOPESSOA_CHOICES)
     nome_mae = models.CharField("Nome da Mãe",max_length=100, null=True, blank=True)
     nome_pai = models.CharField("Nome do Pai", max_length=100, null=True, blank=True)
     cnpjcpf = models.CharField("CPF/CNPJ *", max_length=18)
@@ -58,6 +58,12 @@ class Clientes(models.Model):
     def __str__(self):
         return self.nome
 
+
+    def get_person(self):
+        if len(self.cnpjcpf) > 14: 
+            return "CNPJ"
+        return "CPF"
+
     # def save(self, *args,**kwargs):
     #     super(Clientes, self).save(*args, **kwargs)
     #     try:
@@ -88,9 +94,9 @@ class Clientes(models.Model):
 
 @receiver(post_save, sender=Clientes)
 def sms_aviso(sender, instance, **kwargs):
-    enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')
+    enviar_sms.delay(instance.celular, 'Bem vindo a Hoodid Registros online')
 
 
-
+ 
 
 

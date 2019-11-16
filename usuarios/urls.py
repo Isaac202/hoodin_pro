@@ -10,5 +10,5 @@ urlpatterns = [
     # path('', include('django.contrib.auth.urls')),
     path('users/redirect/', login_redirect, name='redirect'),
     path('users/confirme-o-email/', email_enviado, name='email_enviado'),
-    re_path(r'^users/conf/(?P<key>[\w-]+)/$', confUser, name="conf")
+    re_path(r'^users/conf/(?P<key>[\w-]+)/$', confUser, name="conf") 
 ]

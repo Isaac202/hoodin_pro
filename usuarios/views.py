@@ -25,15 +25,10 @@ def confUser(request, key):
     template_name = "usuarios/confUser.html"
     conf_person = get_object_or_404(UserConfirm.objects.select_related(), key=key)
     user = conf_person.user
-    if not conf_person.status():
+    if not conf_person.status(): 
         conf_person.conf()
         user.active()
-        if hasattr(user, 'motorista'):
-            context['url_redirect'] = reverse_lazy('motoristas:painel')
-        elif hasattr(user, 'cliente'):
-            context['url_redirect'] = reverse_lazy('clientes:painel')
-        else:
-            return redirect('/')
+        context['url_redirect'] = reverse_lazy('cliente:list')    
         return render(request, template_name, context)
     # group = Group.objects.get_or_create(name='new_group')
     return redirect('users:login')

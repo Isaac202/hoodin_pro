@@ -60,11 +60,8 @@ urlpatterns = [
     path('novo_extensoes/', ExtensoesCreate.as_view(), name='novo_extensoes'),
     path('atualiza_extensoes/<int:pk>/', ExtensoesUpdate.as_view(), name='atualiza_extensoes'),
     path('delete_extensoes/<int:pk>/', ExtensoesDelete.as_view(), name='delete_extensoes'),
-
-    path('lista_clientes/', ClientesList.as_view(), name='lista_clientes'),
-    path('novo_clientes/', ClientesCreate.as_view(), name='novo_clientes'),
-    path('atualiza_clientes/<int:pk>/', ClientesUpdate.as_view(), name='atualiza_clientes'),
-    path('delete_clientes/<int:pk>/', ClientesDelete.as_view(), name='delete_clientes'),
+    
+    path('clientes/', include('clientes.urls')),
 
     path('lista_servicos/', ServicosList.as_view(), name='lista_servicos'),
     path('novo_servicos/', ServicosCreate.as_view(), name='novo_servicos'),

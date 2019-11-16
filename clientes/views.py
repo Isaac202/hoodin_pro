@@ -21,7 +21,7 @@ class ClientesCreate(SignUpCreateView, SuccessMessageMixin):
     # model = Clientes
     template_name = "clientes/inc_clientes.html"
     form_class = ClientesForm
-    success_url = reverse_lazy('lista_clientes')
+    success_url = reverse_lazy('cliente:list')
     success_message = "Verifique seu email pra ativar seu cadastro!"
 
 
@@ -30,7 +30,7 @@ class ClientesCreate(SignUpCreateView, SuccessMessageMixin):
 #     model = Clientes
 #     template_name = "clientes/inc_clientes.html"
 #     form_class = ClientesForm
-#     success_url = reverse_lazy('lista_clientes')
+#     success_url = reverse_lazy('cliente:list')
 #     success_message = "Verifique seu email pra ativar seu cadastro!"
 
 
@@ -60,13 +60,13 @@ class ClientesUpdate(LoginRequiredMixin, UpdateView):
     model = Clientes
     template_name = "clientes/upd_clientes.html"
     form_class = ClientesForm
-    success_url = reverse_lazy('lista_clientes')
+    success_url = reverse_lazy('cliente:list')
 
 
 class ClientesDelete(LoginRequiredMixin, DeleteView):
     model = Clientes
     template_name = "clientes/del_clientes.html"
-    success_url = reverse_lazy('lista_clientes')
+    success_url = reverse_lazy('cliente:list')
     contexto ={'seleciona_cliente': ClientesForm()}
 
 

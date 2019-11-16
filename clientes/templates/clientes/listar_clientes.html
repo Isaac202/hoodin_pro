@@ -50,7 +50,7 @@
 
     <ul class="collection with-header">
      <li class="collection-header"><h5>Lista Clientes</h5>
-     <a href="{% url 'novo_clientes' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+     <a href="{% url 'cliente:new' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
 
 
        <table class="striped" width="100%">
@@ -67,8 +67,8 @@
               <tr>
                 <td width="5%">{{ an.id }}</td>
                 <td width="40%">{{ an.nome }}</td>
-                <td width="2%"><a href="{% url 'delete_clientes' an.id %}" class="secondary-content"><i class="material-icons">delete_forever</i></a></td>
-                <td width="2%"><a href="{% url 'atualiza_clientes' an.id %}" class="secondary-content"><i class="material-icons">edit</i></a></td>
+                <td width="2%"><a href="{% url 'cliente:delete' an.id %}" class="secondary-content"><i class="material-icons">delete_forever</i></a></td>
+                <td width="2%"><a href="{% url 'cliente:update' an.id %}" class="secondary-content"><i class="material-icons">edit</i></a></td>
               </tr>
              {%endfor%}
             </tbody>

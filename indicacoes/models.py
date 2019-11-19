@@ -5,9 +5,9 @@ from datetime import datetime
 
 
 class Indicacoes(models.Model):
-    codindicacao = models.PositiveIntegerField(null=True)
+    codindicacao = models.PositiveIntegerField(null=True, blank=True, default=0)
     nome = models.CharField(max_length=50)
-    percentual_promocional = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+    percentual_promocional = models.DecimalField(max_digits=11, decimal_places=2, null=True, blank=True,  default=0)
 
     class Meta:
         ordering = ['nome', ]

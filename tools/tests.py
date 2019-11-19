@@ -71,3 +71,23 @@ class CustonTestCase(TestCase):
 
     def reverse_lazy(self, url):
         return reverse_lazy(url)
+
+
+
+from django.core.mail import EmailMessage
+
+def send_mail():
+    email = EmailMessage(
+        'Hello',
+        'Email funcionando',
+        'hoodidregistrosonline@gmail.com',
+        # 'myconsult.orders@gmail.com',
+        ['jf.interatividade@gmail.com', 'volneyrock@gmail.com'],
+        reply_to=['another@example.com'],
+        headers={'Message-ID': 'foo'},
+    )
+    try:
+        email.send()
+        print("email enviado")
+    except:
+        print('deu merda')

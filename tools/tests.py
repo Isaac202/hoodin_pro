@@ -86,8 +86,8 @@ def send_mail():
         reply_to=['another@example.com'],
         headers={'Message-ID': 'foo'},
     )
-    try:
-        email.send()
-        print("email enviado")
-    except:
-        print('deu merda')
+    # try:
+    email.send()
+    #     print("email enviado")
+    # except:
+    #     print('deu merda')

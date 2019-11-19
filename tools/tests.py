@@ -82,7 +82,7 @@ def send_mail():
         'Email funcionando',
         'hoodidregistrosonline@gmail.com',
         # 'myconsult.orders@gmail.com',
-        ['jf.interatividade@gmail.com',],#,'volneyrock@gmail.com'],
+        ['jf.interatividade@gmail.com', 'volneyrock@gmail.com'],
         reply_to=['another@example.com'],
         headers={'Message-ID': 'foo'},
     )

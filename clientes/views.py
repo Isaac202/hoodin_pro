@@ -6,7 +6,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Clientes
-from .forms import ClientesForm, BuscarForm
+from .forms import ClienteUpdateForm, ClientesForm, BuscarForm
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
@@ -60,8 +60,12 @@ class ClientesList(LoginRequiredMixin, ListView):
 class ClientesUpdate(LoginRequiredMixin, UpdateView):
     model = Clientes
     template_name = "clientes/upd_clientes.html"
-    form_class = ClientesForm
+    form_class = ClienteUpdateForm
     success_url = reverse_lazy('cliente:list')
+
+    def get_object(self):
+        user = self.request.user
+        return Clientes.objects.get(id_usuario=user)
 
 
 class ClientesDelete(LoginRequiredMixin, DeleteView):

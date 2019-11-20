@@ -1,4 +1,4 @@
-{% extends 'base_cadastro.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block navegar %}
 <nav>
@@ -20,8 +20,11 @@
 
 {% block main %}
 <div class="container">
+
+
   <div class="row">
-    <form method="post" class="col 12">
+    {{form.non_fields_errors}}
+    <form action="" method="post" class="col 12">
       {% csrf_token %}
 
       <div class="row">
@@ -34,49 +37,32 @@
             <div class="collapsible-body">
               <div class="row">
                 <div class="input-field col s10 m5 offset-s1">
-                  {{form.nome}}
-                  {{form.nome.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.nome.errors}}
-                    </font>
+                  <label class="active" for="">Nome</label>
+                  <input type="text" disabled value="{{object.nome}}">
+                </div>
+
+                <div class="input-field col s10 m3 offset-s1">
+                  <label class="active" for="">Data de Nascimento</label>
+                  <input type="text" disabled value="{{object.data_nascimento}}">
                   </p>
                 </div>
 
                 <div class="input-field col s10 m3 offset-s1">
-                  {{form.data_nascimento}}
-                  {{form.data_nascimento.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.data_nascimento.errors}}
-                    </font>
-                  </p>
-                </div>
-
-                <div class="input-field col s10 m3 offset-s1">
-                  {{form.sexo.label_tag}}
-                  {{form.sexo}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.sexo.errors}}
-                    </font>
-                  </p>
+                  <label class="active" for="">Sexo</label>
+                  <input type="text" disabled value="{{object.sexo}}">
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s10 m3 offset-s1">
-                  {{form.cnpjcpf}}
-                  {{form.cnpjcpf.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.cnpjcpf.errors}}
-                    </font>
-                  </p>
+                  <label class="active" for="">CPF/CNPJ</label>
+                  <input type="text" disabled value="{{object.cnpjcpf}}">
                 </div>
 
                 <div class="input-field col s10 m2 offset-s1">
-                  {{form.tipo_pessoa}}
-                  {{form.tipo_pessoa.label_tag}}
+                  <label for="" class="active">
+                    Tipo de pessoa
+                  </label>
+                  <input type="text" disabled value="{{object.tipo_pessoa}}">
                   <p class="errornote">
                     <font color="red">
                       {{form.tipo_pessoa.errors}}
@@ -86,7 +72,9 @@
 
                 <div class="input-field col s10 m2 offset-s1">
                   {{form.telefone}}
-                  {{form.telefone.label_tag}}
+                  <label class="active">
+                    {{form.telefone.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.telefone.errors}}
@@ -96,7 +84,9 @@
 
                 <div class="input-field col s10 m2 offset-s1">
                   {{form.celular}}
-                  {{form.celular.label_tag}}
+                  <label class="active">
+                    {{form.celular.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.celular.errors}}
@@ -108,96 +98,48 @@
 
               <div class="row">
                 <div class="input-field col s10 m5 offset-s1">
-                  {{form.nome_mae}}
-                  {{form.nome_mae.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.nome_mae.errors}}
-                    </font>
-                  </p>
+                  <label class="active" for="">Nome da mãe</label>
+                  <input type="text" disabled value="{{object.nome_mae}}">
                 </div>
 
                 <div class="input-field col s10 m5 offset-s1">
-                  {{form.nome_pai}}
-                  {{form.nome_pai.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.nome_pai.errors}}
-                    </font>
-                  </p>
+                  <label class="active" for="">Nome do pai</label>
+                  <input type="text" disabled value="{{object.nome_pai}}">
                 </div>
 
 
-                <div class="input-field col s10 m2 offset-s1">
-                  {{form.codindicacao}}
-                  {{form.codindicacao.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.codindicacao.errors}}
-                    </font>
-                  </p>
+                <div class="input-field col s10 m3 offset-s1">
+                  <label class="active" for="">Como conheceu a gente?</label>
+                  <input type="text" disabled value="{{object.codindicacao}}">
                 </div>
 
                 <div class="input-field col s3">
-                  {{form_user.username}}
-                  {{form_user.username.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form_user.username.errors}}
-                    </font>
-                  </p>
-                </div>
-
-                <div class="input-field col s3">
-                  {{form_user.password1}}
-                  {{form_user.password1.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form_user.password1.errors}}
-                    </font>
-                  </p>
-                </div>
-                <div class="input-field col s3">
-                  {{form_user.password2}}
-                  {{form_user.password2.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form_user.password2.errors}}
-                    </font>
-                  </p>
-                </div>
-                <div class="col s12">
-                  <p>
-                    Sua senha não pode ser tão parecida com suas outras informações pessoais. <br>
-                    Sua senha precisa conter pelo menos 8 caracteres. <br>
-                    Sua senha não pode ser uma senha habitualmente utilizada. <br>
-                    Sua senha não pode ser inteiramente numérica.
-                  </p>
-
+                  <label class="active" for="">Email</label>
+                  <input type="text" disabled value="{{user.username}}">
                 </div>
               </div>
             </div>
           </li>
-
-
           <li>
             <div class="collapsible-header"><i class="material-icons">place</i>Endereço</div>
-
             <div class="collapsible-body">
               <div class="row">
                 <div class="input-field col s3">
                   {{form.cep}}
-                  {{form.cep.label_tag}}
+                  <label for="" class="acitve">
+                    {{form.cep.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.cep.errors}}
                     </font>
                   </p>
                 </div>
-
                 <div class="input-field col s4">
                   {{form.endereco}}
-                  {{form.endereco.label_tag}}
+                  <label for="" class="active">
+                    {{form.endereco.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.endereco.errors}}
@@ -207,7 +149,9 @@
 
                 <div class="input-field col s3">
                   {{form.numero}}
-                  {{form.numero.label_tag}}
+                  <label for="" class="active">
+                    {{form.numero.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.numero.errors}}
@@ -217,7 +161,9 @@
 
                 <div class="input-field col s3">
                   {{form.complemento}}
-                  {{form.complemento.label_tag}}
+                  <label for="" class="active">
+                    {{form.complemento.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.complemento.errors}}
@@ -226,8 +172,10 @@
                 </div>
 
                 <div class="input-field col s3">
+                  <label for="" class="active">
+                    {{form.bairro.label}}
+                  </label>
                   {{form.bairro}}
-                  {{form.bairro.label_tag}}
                   <p class="errornote">
                     <font color="red">
                       {{form.bairro.errors}}
@@ -240,7 +188,9 @@
               <div class="row">
                 <div class="input-field col s3">
                   {{form.cidade}}
-                  {{form.cidade.label_tag}}
+                  <label for="" class="active">
+                    {{form.cidade.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.cidade.errors}}
@@ -251,8 +201,10 @@
               </div>
               <div class="row">
                 <div class="input-field col s3">
+                  <label for="" class="active">
+                    {{form.estado.label}}
+                  </label> <br>
                   {{form.estado}}
-                  {{form.estado.label_tag}}
                   <p class="errornote">
                     <font color="red">
                       {{form.estado.errors}}
@@ -262,7 +214,9 @@
 
                 <div class="input-field col s3">
                   {{form.pais}}
-                  {{form.pais.label_tag}}
+                  <label for="" class="active">
+                    {{form.pais.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.pais.errors}}
@@ -280,50 +234,40 @@
               <div class="row">
 
                 <div class="input-field col s4">
-                  {{form.documento_tipo}}
-                  {{form.documento_tipo.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.documento_tipo.errors}}
-                    </font>
-                  </p>
+                  <input type="text" value="{{object.documento_tipo}}" disabled>
+                  <label for="" class="active">
+                    Tipo de documento
+                  </label>
                 </div>
 
                 <div class="input-field col s3">
-                  {{form.documento_identidade.label_tag}}
-                  {{form.documento_identidade}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.documento.errors}}
-                    </font>
-                  </p>
+                  <input type="text" value="{{object.documento_identidade}}" disabled>
+                  <label for="" class="active">
+                    Documento
+                  </label>
                 </div>
 
                 <div class="input-field col s3">
-                  {{form.passaporte}}
-                  {{form.passaporte.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.passaporte.errors}}
-                    </font>
-                  </p>
+                  <input type="text" value="{{object.passaporte}}" disabled>
+                  <label for="" class="active">
+                    Passaporte
+                  </label>
                 </div>
 
               </div>
 
               <div class="row">
                 <div class="input-field col s3">
-                  {{form.nacionalidade}}
-                  {{form.nacionalidade.label_tag}}
-                  <p class="errornote">
-                    <font color="red">
-                      {{form.nacionalidade.errors}}
-                    </font>
-                  </p>
+                  <input type="text" value="{{object.nacionalidade}}" disabled>
+                  <label for="" class="active">
+                    Nacionalidade
+                  </label>
                 </div>
                 <div class="input-field col s3">
+                  <label for="" class="active">
+                    {{form.estadocivil.label}}
+                  </label> <br>
                   {{form.estadocivil}}
-                  {{form.estadocivil.label_tag}}
                   <p class="errornote">
                     <font color="red">
                       {{form.estadocivil.errors}}
@@ -335,7 +279,9 @@
               <div class="row">
                 <div class="input-field col s3">
                   {{form.nif}}
-                  {{form.nif.label_tag}}
+                  <label for="" class="active">
+                    {{form.nif.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.nif.errors}}
@@ -345,7 +291,9 @@
 
                 <div class="input-field col s3">
                   {{form.facebook}}
-                  {{form.facebook.label_tag}}
+                  <label for="" class="active">
+                    {{form.facebook.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.facebook.errors}}
@@ -354,7 +302,9 @@
                 </div>
                 <div class="input-field col s3">
                   {{form.twitter}}
-                  {{form.twitter.label_tag}}
+                  <label for="" class="active">
+                    {{form.twitter.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.twitter.errors}}
@@ -363,7 +313,9 @@
                 </div>
                 <div class="input-field col s3">
                   {{form.homepage}}
-                  {{form.homepage.label_tag}}
+                  <label for="" class="active">
+                    {{form.homepage.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.homepage.errors}}
@@ -375,7 +327,9 @@
               <div class="row">
                 <div class="input-field col s12">
                   {{form.biografia}}
-                  {{form.biografia.label_tag}}
+                  <label for="" class="active">
+                    {{form.biografia.label}}
+                  </label>
                   <p class="errornote">
                     <font color="red">
                       {{form.biografia.errors}}
@@ -383,9 +337,9 @@
                   </p>
                 </div>
 
-                <div class="input-field col s12">
+                <div class="col s12">
+                  {{form.atuacao.label_tag}} <br>
                   {{form.atuacao}}
-                  {{form.atuacao.label_tag}}
                   <p class="errornote">
                     <font color="red">
                       {{form.atuacao.errors}}
@@ -414,7 +368,24 @@
 
 {% endblock main %}
 
-{% block script_cad %}
+{% block header %}
+<!--autocomplete select2-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<style>
+  .select2 {
+    max-width: 100% !important;
+  }
+
+  span {
+    outline: 0 !important;
+    /*removendo outiline do select2 autocomplete*/
+  }
+</style>
+{% endblock header %} {% block script %}
+<!--autocomplete select2-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
 <script>
   var cpfMascara = function (val) {
     return val.replace(/\D/g, '').length > 11 ? '00.000.000/0000-00' : '000.000.000-009';
@@ -425,8 +396,10 @@
       }
     };
 
+  $('select').select2(); //autocomplete select2
+
   $(document).ready(function () {
-    $('select').material_select();
+    // $('select').material_select();
     $('.datepicker').pickadate();
     $("#id_cep").mask("99999-999");
     $("#id_telefone").mask("(99) 99999-9999");
@@ -453,7 +426,7 @@
             $("#id_estado option[value=" + dados.uf + "]").attr('selected', 'selected');
             let estado = $("#id_estado option[value=" + dados.uf + "]").html();
             $("#estado_col input.select-dropdown").val(estado);
-
+            $('#select2-id_estado-container').html(estado);
           }
         });
       }
@@ -462,4 +435,4 @@
   });
 </script>
 
-{% endblock script_cad %}
+{% endblock script %}

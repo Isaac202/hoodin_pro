@@ -8,15 +8,7 @@ from servicos.models import Servicos
 
 
 class ClientesForm(forms.ModelForm):
-    # senha = forms.CharField(widget=forms.PasswordInput, required=True)
-    # confirma_senha = forms.CharField(widget=forms.PasswordInput, required=True)
-    '''atuacao = forms.ModelMultipleChoiceField(
-                       widget = forms.CheckboxSelectMultiple,
-                       queryset = Servicos.objects.all()
-               )
-    '''
-
-
+   
     class Meta:
         model = Clientes
         # fields = ['nome', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
@@ -50,6 +42,19 @@ class ClientesForm(forms.ModelForm):
         if regexCep.match(data) is None:
             raise forms.ValidationError("Cep inválido.")
         return data
+
+
+class ClienteUpdateForm(forms.ModelForm):
+
+     class Meta:
+        model = Clientes
+        #colocar os campos que não quer que apareça
+        exclude = ['nome' ,'id_usuario', 'passaporte','data_nascimento','nacionalidade',
+            'nome_mae', "nome_pai", 'codindicacao', 'tipo_pessoa',
+            'valor_credito', 'cnpjcpf','documento_tipo', 
+            'documento_identidade', 'sexo' ,
+            'codcliente', 'confirmation_key'] 
+
 
 
 class BuscarForm(forms.Form):

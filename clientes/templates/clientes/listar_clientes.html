@@ -68,7 +68,7 @@
                 <td width="5%">{{ an.id }}</td>
                 <td width="40%">{{ an.nome }}</td>
                 <td width="2%"><a href="{% url 'cliente:delete' an.id %}" class="secondary-content"><i class="material-icons">delete_forever</i></a></td>
-                <td width="2%"><a href="{% url 'cliente:update' an.id %}" class="secondary-content"><i class="material-icons">edit</i></a></td>
+                <td width="2%"><a href="{% url 'cliente:update' %}" class="secondary-content"><i class="material-icons">edit</i></a></td>
               </tr>
              {%endfor%}
             </tbody>

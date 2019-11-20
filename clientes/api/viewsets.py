@@ -12,5 +12,5 @@ class ClienteViewSet(ModelViewSet):
     serializer_class = ClienteSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('nome', 'email')
-    lookup_field = 'codusuario'
+    lookup_field = 'id_usuario'
 

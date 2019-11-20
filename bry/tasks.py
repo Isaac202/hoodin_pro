@@ -7,7 +7,7 @@ from registros.models import Registros
 
 @task
 def extrair_has(usuario):
-    arqu_usr = Registros.objects.filter(codcliente=usuario).frist()
+    arqu_usr = Registros.objects.filter(id_cliente=usuario).frist()
     arquivo = arqu_usr.arquivo
     BLOCK_SIZE = 85536  # The size of each read from the file
 
@@ -23,5 +23,5 @@ def extrair_has(usuario):
 
 @task
 def enviar_arqivo_para_bry(usuario):
-    has_usr = Registros.objects.filter(codcliente=usuario).frist()
+    has_usr = Registros.objects.filter(id_cliente=usuario).frist()
     #TODO ENVAIR PARA BRY

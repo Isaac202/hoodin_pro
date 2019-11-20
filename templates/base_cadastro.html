@@ -46,11 +46,26 @@
         </form>
     </div>
 </div>
-{% endblock main %} {% block script %}
+{% endblock main %} 
 
+{% block header %}
+<!--autocomplete select2-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2 {
+        max-width: 100% !important;
+    }
+    
+    span {
+        outline: 0 !important;
+        /*removendo outiline do select2 autocomplete*/
+    }
+</style>
+{% endblock header %} {% block script %}
+<!--autocomplete select2-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
-    $(function() {
-        // $('select').material_select(); //inicializando a select compomente
-    })
+  $('select').select2(); //autocomplete select2
 </script>
-{% block script_cad %}{% endblock script_cad %} {% endblock script %}
+
+{% endblock script %}

@@ -209,8 +209,8 @@ def comprar_credito(id_compra, cliente, numero_cartao, seguranca, bandeira, vali
 
     return (msg_retorno, codigo_transacao, codigo_pagamento)
 
-def add_credito(codcliente, valor, forma_pagamento, autorizado, codigo_compra_cielo, transacao_cielo, msg_cielo ):
-    credito = Compras.objects.create(codcliente = codcliente, valor=valor, forma_pagamento =forma_pagamento,
+def add_credito(id_cliente, valor, forma_pagamento, autorizado, codigo_compra_cielo, transacao_cielo, msg_cielo ):
+    credito = Compras.objects.create(id_cliente = id_cliente, valor=valor, forma_pagamento =forma_pagamento,
                                      autorizado=autorizado, codigo_compra_cielo=codigo_compra_cielo,
                                      transacao_cielo = transacao_cielo, msg_cielo= msg_cielo)
 

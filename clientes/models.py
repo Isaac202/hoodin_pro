@@ -15,7 +15,7 @@ User = get_user_model()
 
 class Clientes(models.Model):
     id_usuario = models.OneToOneField(User, on_delete=models.PROTECT)
-    codcliente = models.PositiveIntegerField(null=True, blank=True, default=0)
+    id_cliente = models.PositiveIntegerField(null=True, blank=True, default=0)
     nome = models.CharField(max_length=255)
     # email = models.EmailField(max_length=255, unique=True)
     valor_credito = models.DecimalField(max_digits=11, decimal_places=2, default=0)
@@ -88,7 +88,7 @@ class Clientes(models.Model):
 #         agora = datetime.now()
 
 
-#         instance.codusuario = usr
+#         instance.id_usuario = usr
 #         instance.confirmation_key = str(usr.id) + str((10000*agora.year + 100*agora.month + agora.day))
 
 

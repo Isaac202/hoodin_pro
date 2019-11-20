@@ -16,7 +16,7 @@ class RegistrosCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('lista_registros')
 
     def form_valid(self, form):
-        form.instance.codusuario = self.request.user
+        form.instance.id_usuario = self.request.user
         return super(RegistrosCreate, self).form_valid(form)
 
     def get_form_kwargs(self):
@@ -33,7 +33,7 @@ class RegistrosList(LoginRequiredMixin, ListView):
     context_object_name = "registros"
 
     def get_queryset(self):
-        qs = Registros.objects.filter(codusuario=self.request.user)
+        qs = Registros.objects.filter(id_usuario=self.request.user)
         descricao = self.request.GET.get('descricao')
         if descricao is not None:
             qs = Registros.objects.filter(descricao__icontains=descricao)

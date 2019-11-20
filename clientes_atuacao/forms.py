@@ -6,6 +6,6 @@ class ClientesAtuacaoForm(forms.ModelForm):
 
     class Meta:
         model = Clientes_Atuacao
-        fields = ['codcliente', 'codatuacao', 'codservico']
+        fields = ['id_cliente', 'codatuacao', 'codservico']
         #colocar os campos que não quer que apareça
         exclude = ['id']

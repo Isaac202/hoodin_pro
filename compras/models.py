@@ -16,8 +16,8 @@ class Compras(models.Model):
         ('Cartão de Débito', 'Cartão de Débito'),
     )
 
-    codusuario = models.ForeignKey(User, on_delete=models.PROTECT)
-    codcliente = models.ForeignKey(Clientes, on_delete=models.PROTECT)
+    id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    id_cliente = models.ForeignKey(Clientes, on_delete=models.PROTECT)
     valor = models.DecimalField(max_digits=11, decimal_places=2)
     data = models.DateTimeField(auto_now=True)
     forma_pagamento = models.CharField(max_length=30, choices=FORMA_PG_CHOICES)
@@ -32,8 +32,8 @@ class Compras(models.Model):
 @receiver(post_save, sender=Compras)
 def autalizar_salado_cliente(sender, instance, **kwargs):
     if instance.statu_trasacao == 'Transacao autorizada':
-        cli = Clientes.objects.filter(codusuario=instance.codcliente).first()
+        cli = Clientes.objects.filter(id_usuario=instance.id_cliente).first()
         valor_atualizado = cli.valor_credito + instance.valor
-        Clientes.objects.filter(codusuario=instance.codcliente).update(valor_credito=valor_atualizado)
+        Clientes.objects.filter(id_usuario=instance.id_cliente).update(valor_credito=valor_atualizado)
 
 

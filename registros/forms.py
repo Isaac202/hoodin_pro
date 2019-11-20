@@ -11,9 +11,9 @@ from servicos_extensoes.models import Servicos_Extensoes
 class RegistrosForm(forms.ModelForm):
     class Meta:
         model = Registros
-        fields = [ 'codservico', 'codusuario', 'valor', 'arquivo', 'assinatura', 'versao',
+        fields = [ 'codservico', 'id_usuario', 'valor', 'arquivo', 'assinatura', 'versao',
                  'descricao', 'codqrcode', 'codindicacao', 'desconto', 'resumo_obra']
-        exclude = ['data', 'assinatura', 'codcliente']
+        exclude = ['data', 'assinatura', 'id_cliente']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -21,7 +21,7 @@ class RegistrosForm(forms.ModelForm):
 
     def clean(self):
         try:
-            cli = Clientes.objects.filter(codusuario=self.user).first()
+            cli = Clientes.objects.filter(id_usuario=self.user).first()
             saldo = Decimal(cli.valor_credito)
             servico_nome = self.cleaned_data.get('codservico')
             servi = Servicos.objects.filter(nome=servico_nome).frist()

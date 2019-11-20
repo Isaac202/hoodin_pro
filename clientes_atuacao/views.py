@@ -10,10 +10,10 @@ class CadClienteAtuacao(APIView):
     def post(self, request):
         try:
             if request.method == 'POST':
-                codusuario = request.data.get('codusuario')
-                codcliente = request.data.get('codcliente')
+                id_usuario = request.data.get('id_usuario')
+                id_cliente = request.data.get('id_cliente')
                 codservico = request.data.get('codservico')
-                salva_atuacao  = Clientes_Atuacao.objects.create(codcliente=codcliente, codusuario= codusuario, codservico=codservico)
+                salva_atuacao  = Clientes_Atuacao.objects.create(id_cliente=id_cliente, id_usuario= id_usuario, codservico=codservico)
                 msg = "Area de atuação cadastrada com sucesso"
 
                 return Response({'msg': msg})

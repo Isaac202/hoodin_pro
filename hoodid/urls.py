@@ -37,7 +37,7 @@ from area_atuacao.views import Area_AtuacaoList
 from area_atuacao.views import Area_AtuacaoUpdate
 from area_atuacao.views import Area_AtuacaoDelete
 from rest_framework import routers
-from servicos.views import ServicosExtensoesCreate
+# from servicos.views import ServicosExtensoesCreate
 
 #from servicos.views import ServicosExtensoesList
 #from servicos.views import ServicosExtensoesUpdate
@@ -103,7 +103,7 @@ urlpatterns = [
 
     path('registrar/', RegistrosCreate.as_view(), name='registrar'),
 
-    path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
+    # path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
 
 ]
 

@@ -17,7 +17,7 @@ class ClientesForm(forms.ModelForm):
         #            'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
         #            'homepage', 'atuacao']
         #colocar os campos que não quer que apareça
-        exclude = ['id', 'id_usuario', 'tipo_pessoa', 'valor_credito', 'codcliente', 'confirmation_key'] #'codindicacao',#, 'atuacao'
+        exclude = ['id', 'id_usuario', 'tipo_pessoa', 'valor_credito', 'id_cliente', 'confirmation_key'] #'codindicacao',#, 'atuacao'
 
 
     def clean_cnpjcpf(self):
@@ -53,7 +53,7 @@ class ClienteUpdateForm(forms.ModelForm):
             'nome_mae', "nome_pai", 'codindicacao', 'tipo_pessoa',
             'valor_credito', 'cnpjcpf','documento_tipo', 
             'documento_identidade', 'sexo' ,
-            'codcliente', 'confirmation_key'] 
+            'id_cliente', 'confirmation_key'] 
 
 
 

@@ -24,102 +24,22 @@
     {% csrf_token %}
 
          <div class="row">
-                <div class="input-field col s12">
-                  <i class="material-icons prefix">ac_unit</i>
-                  {{form.codservico}}
-                   {{form.codservico.label_tag}}
-                               <p class="errornote">
-                              <font color="red">
-                                {{form.codservico.errors}}
-                              </font>
-                          </p>
-                </div>
+              <div class="col s6"> 
+                {{form.as_p}}
               </div>
-        <div class="row">
-                <div class="input-field col s6">
-
-                 <i class="material-icons prefix">attach_money</i>
-                    {{form.valor}}
-                     {{form.valor.label_tag}}
-                               <p class="errornote">
-                              <font color="red">
-                                {{form.valor.errors}}
-                              </font>
-                          </p>
-
-                </div>
-
-                <div class="col s6">
-                  <i class="material-icons prefix">drag_handle</i>
-                    {{form.versao}}
-                     {{form.versao.label_tag}}
-                               <p class="errornote">
-                              <font color="red">
-                                {{form.versao.errors}}
-                              </font>
-                          </p>
-
-                </div>
-        </div>
-
-
-         <div class="row">
-                <div class="input-field col s6">
-
-                 <i class="material-icons prefix">assignment</i>
-                  {{form.descricao}}
-                    {{form.descricao.label_tag}}
-                               <p class="errornote">
-                              <font color="red">
-                                {{form.descricao.errors}}
-                              </font>
-                          </p>
-
-                </div>
-                <div class="col s6">
-                  <i class="material-icons prefix">attachment</i>
-                    {{form.arquivo}}
-                     {{form.arquivo.label_tag}}
-                               <p class="errornote">
-                              <font color="red">
-                                {{form.arquivo.errors}}
-                              </font>
-                          </p>
-
-                </div>
-
-
-
-
-             <div class="col s6">
-                  <i class="material-icons prefix">attachment</i>
-                    {{form.resumo_obra}}
-                    {{form.resumo_obra.errors}}
-
-                 <label for="icon_telephone">Resumo</label>
-                </div>
-
            </div>
 
-                <div class="row">
-
-
-                <div class="input-field col s12">
-                     <input class="btn" type="submit" value="Enviar">
-                 </div>
+          <div class="row">
+            <div class="input-field col s12">
+                  <input class="btn" type="submit" value="Enviar">
               </div>
-
-
-
+          </div>
     </form>
-
 </div>
 
-
-
 {% endblock %}
-{% block script %}
-  <script>
+
+<script>
     $(document).ready(function(){
         $('select').material_select();
         exibir_ocultar();
@@ -191,5 +111,4 @@
   </script>
 
 
-{% endblock script %}
 

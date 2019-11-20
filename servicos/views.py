@@ -4,8 +4,8 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Servicos, ServicosExtensoes
-from .forms import ServicosForm, ServicosExtensoesForm, BuscarForm
+from .models import Servicos
+from .forms import ServicosForm, BuscarForm
 #from .forms import BuscaPlacerForm
 
 
@@ -55,27 +55,27 @@ class ServicosDelete(DeleteView):
     success_url = reverse_lazy('lista_servicos')
 
 
-class ServicosExtensoesCreate(CreateView):
-    model = ServicosExtensoes
-    template_name = "servicos/inc_servicosextensoes.html"
-    form_class = ServicosExtensoesForm
+# class ServicosExtensoesCreate(CreateView):
+#     model = ServicosExtensoes
+#     template_name = "servicos/inc_servicosextensoes.html"
+#     form_class = ServicosExtensoesForm
 
-    success_url = reverse_lazy('lista_servicos')
+#     success_url = reverse_lazy('lista_servicos')
 
-    def dispatch(self, request, *args, **kwargs):
-        #self.codservico = kwargs['id']
-        #self.request.session['codservico'] = kwargs['id']
-        #servicos = Servicos.objects.filter(id=self.codservico).first()
-        #request.session['nome_servico'] = servicos.nome
-        #request.session['codigo_servico'] = servicos.codservico
-        return super().dispatch(request, *args, **kwargs)
+#     def dispatch(self, request, *args, **kwargs):
+#         #self.codservico = kwargs['id']
+#         #self.request.session['codservico'] = kwargs['id']
+#         #servicos = Servicos.objects.filter(id=self.codservico).first()
+#         #request.session['nome_servico'] = servicos.nome
+#         #request.session['codigo_servico'] = servicos.codservico
+#         return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['codservico'] = self.request.GET.get('codservico',None)
-        context['nomeservico'] = self.request.GET.get('nomeservico',None)
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['codservico'] = self.request.GET.get('codservico',None)
+#         context['nomeservico'] = self.request.GET.get('nomeservico',None)
+#         return context
 
-    def form_valid(self, form):
-        form.instance.perfil = self.request.user
-        return super(ServicosExtensoesCreate, self).form_valid(form)
+#     def form_valid(self, form):
+#         form.instance.perfil = self.request.user
+#         return super(ServicosExtensoesCreate, self).form_valid(form)

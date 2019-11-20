@@ -16,6 +16,6 @@ class Codigos_Promocionais(models.Model):
     email=models.CharField(max_length=255)
     tipo=models.CharField(max_length=1)
     valor=models.DecimalField(max_digits=11,decimal_places=2)
-    codcliente=models.PositiveIntegerField()
+    id_cliente=models.PositiveIntegerField()
 
 

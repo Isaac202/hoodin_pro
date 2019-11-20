@@ -196,7 +196,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s4">
+                <div class="input-field col s10 m4 offset-s1">
                   {{form.endereco}}
                   {{form.endereco.label_tag}}
                   <p class="errornote">
@@ -280,7 +280,7 @@
 
               <div class="row">
 
-                <div class="input-field col s4">
+                <div class="input-field col s10 m3 offset-s1">
                     {{form.documento_tipo}}
                     {{form.documento_tipo.label_tag}}
                     <p class="errornote">
@@ -323,8 +323,8 @@
                   </p>
                 </div>
                 <div class="col s10 m3 offset-s1">
-                  {{form.estadocivil}} <br>
-                  {{form.estadocivil.label_tag}}
+                  {{form.estadocivil.label_tag}} <br>
+                  {{form.estadocivil}}
                   <p class="errornote">
                     <font color="red">
                       {{form.estadocivil.errors}}

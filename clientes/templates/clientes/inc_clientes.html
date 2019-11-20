@@ -1,5 +1,6 @@
-{% extends 'base_cadastro.html' %}
+{% extends 'base.html' %}
 {% load static %}
+
 {% block navegar %}
 <nav>
   <div class="nav-wrapper">
@@ -53,8 +54,8 @@
                   </p>
                 </div>
 
-                <div class="input-field col s10 m3 offset-s1">
-                  {{form.sexo.label_tag}}
+                <div class="col s10 m4 offset-s1">
+                  {{form.sexo.label_tag}} <br>
                   {{form.sexo}}
                   <p class="errornote">
                     <font color="red">
@@ -117,7 +118,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s10 m5 offset-s1">
+                <div class="input-field col s10 m4 offset-s1">
                   {{form.nome_pai}}
                   {{form.nome_pai.label_tag}}
                   <p class="errornote">
@@ -128,9 +129,9 @@
                 </div>
 
 
-                <div class="input-field col s10 m2 offset-s1">
+                <div class="col s10 m3 offset-s1">
+                  {{form.codindicacao.label_tag}} <br>
                   {{form.codindicacao}}
-                  {{form.codindicacao.label_tag}}
                   <p class="errornote">
                     <font color="red">
                       {{form.codindicacao.errors}}
@@ -138,7 +139,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m4 offset-s1">
                   {{form_user.username}}
                   {{form_user.username.label_tag}}
                   <p class="errornote">
@@ -148,7 +149,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form_user.password1}}
                   {{form_user.password1.label_tag}}
                   <p class="errornote">
@@ -157,7 +158,7 @@
                     </font>
                   </p>
                 </div>
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form_user.password2}}
                   {{form_user.password2.label_tag}}
                   <p class="errornote">
@@ -185,7 +186,7 @@
 
             <div class="collapsible-body">
               <div class="row">
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.cep}}
                   {{form.cep.label_tag}}
                   <p class="errornote">
@@ -205,7 +206,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.numero}}
                   {{form.numero.label_tag}}
                   <p class="errornote">
@@ -215,7 +216,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.complemento}}
                   {{form.complemento.label_tag}}
                   <p class="errornote">
@@ -225,7 +226,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.bairro}}
                   {{form.bairro.label_tag}}
                   <p class="errornote">
@@ -238,7 +239,7 @@
               </div>
 
               <div class="row">
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.cidade}}
                   {{form.cidade.label_tag}}
                   <p class="errornote">
@@ -250,9 +251,9 @@
 
               </div>
               <div class="row">
-                <div class="input-field col s3">
+                <div class="col s10 m5 offset-s1">
+                  {{form.estado.label_tag}} <br>
                   {{form.estado}}
-                  {{form.estado.label_tag}}
                   <p class="errornote">
                     <font color="red">
                       {{form.estado.errors}}
@@ -260,7 +261,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.pais}}
                   {{form.pais.label_tag}}
                   <p class="errornote">
@@ -289,7 +290,7 @@
                     </p>
                   </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.documento_identidade.label_tag}}
                   {{form.documento_identidade}}
                   <p class="errornote">
@@ -299,7 +300,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.passaporte}}
                   {{form.passaporte.label_tag}}
                   <p class="errornote">
@@ -312,7 +313,7 @@
               </div>
 
               <div class="row">
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.nacionalidade}}
                   {{form.nacionalidade.label_tag}}
                   <p class="errornote">
@@ -321,8 +322,8 @@
                     </font>
                   </p>
                 </div>
-                <div class="input-field col s3">
-                  {{form.estadocivil}}
+                <div class="col s10 m3 offset-s1">
+                  {{form.estadocivil}} <br>
                   {{form.estadocivil.label_tag}}
                   <p class="errornote">
                     <font color="red">
@@ -333,7 +334,7 @@
               </div>
 
               <div class="row">
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.nif}}
                   {{form.nif.label_tag}}
                   <p class="errornote">
@@ -343,7 +344,7 @@
                   </p>
                 </div>
 
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.facebook}}
                   {{form.facebook.label_tag}}
                   <p class="errornote">
@@ -352,7 +353,7 @@
                     </font>
                   </p>
                 </div>
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.twitter}}
                   {{form.twitter.label_tag}}
                   <p class="errornote">
@@ -361,7 +362,7 @@
                     </font>
                   </p>
                 </div>
-                <div class="input-field col s3">
+                <div class="input-field col s10 m3 offset-s1">
                   {{form.homepage}}
                   {{form.homepage.label_tag}}
                   <p class="errornote">
@@ -383,9 +384,9 @@
                   </p>
                 </div>
 
-                <div class="input-field col s12">
+                <div class="col s10 m3 offset-s1">
+                  {{form.atuacao.label_tag}} <br>
                   {{form.atuacao}}
-                  {{form.atuacao.label_tag}}
                   <p class="errornote">
                     <font color="red">
                       {{form.atuacao.errors}}
@@ -407,10 +408,6 @@
       <i class="material-icons right">done</i>
     </button>
   </div>
-
-
-  <!-- Modal Structure -->
-
   </form>
 </div>
 </div>
@@ -418,7 +415,24 @@
 
 {% endblock main %}
 
-{% block script_cad %}
+{% block header %}
+<!--autocomplete select2-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2 {
+        max-width: 100% !important;
+    }
+    
+    span {
+        outline: 0 !important;
+        /*removendo outiline do select2 autocomplete*/
+    }
+</style>
+{% endblock header %} {% block script %}
+<!--autocomplete select2-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
 <script>
   var cpfMascara = function (val) {
     return val.replace(/\D/g, '').length > 11 ? '00.000.000/0000-00' : '000.000.000-009';
@@ -429,8 +443,10 @@
       }
     };
 
+  $('select').select2(); //autocomplete select2
+
   $(document).ready(function () {
-    $('select').material_select();
+    // $('select').material_select();
     $('.datepicker').pickadate();
     $("#id_cep").mask("99999-999");
     $("#id_telefone").mask("(99) 99999-9999");
@@ -457,7 +473,7 @@
             $("#id_estado option[value=" + dados.uf + "]").attr('selected', 'selected');
             let estado = $("#id_estado option[value=" + dados.uf + "]").html();
             $("#estado_col input.select-dropdown").val(estado);
-
+            $('#select2-id_estado-container').html(estado);
           }
         });
       }
@@ -466,4 +482,4 @@
   });
 </script>
 
-{% endblock script_cad %}
+{% endblock script %}

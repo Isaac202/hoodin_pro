@@ -8,7 +8,8 @@ from django.conf import settings
 from usuarios.models import UserConfirm
 from usuarios.forms import UserCreationForm
 from tools.genereteKey import generate_hash_key
-from tarefas_backgroud.tasks import send_mail
+# from tarefas_backgroud.tasks import send_mail
+from tools.mail import send_mail_template
 
 
 class MultiCreateView(CreateView):
@@ -85,6 +86,5 @@ class SignUpCreateView(MultiCreateView):
         key = generate_hash_key(user.email)
         UserConfirm.objects.create(user=user, key=key)
         context['key'] = key
-        send_mail.delay(subject="Cadastro", template_name="usuarios/emailCadastro.html",
-                        context=context, recipient_list=[user.username])
+        send_mail_template(subject="Cadastro", template_name="usuarios/emailCadastro.html", context=context, recipient_list=[user.username])
         return self.get_success_url()

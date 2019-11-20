@@ -100,7 +100,7 @@ def type_person(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Clientes)
 def sms_aviso(sender, instance, **kwargs):
-    enviar_sms.delay(instance.celular, 'Bem vindo a Hoodid Registros online')
+    enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')
 
 
  

@@ -42,7 +42,7 @@ from rest_framework import routers
 #from servicos.views import ServicosExtensoesList
 #from servicos.views import ServicosExtensoesUpdate
 
-from registros.views import RegistrosCreate
+from registros.views import RegistrosCreate, BasicUploadView
 from clientes.api.viewsets import ClienteViewSet
 from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
 router = routers.SimpleRouter()
@@ -102,6 +102,7 @@ urlpatterns = [
     path('delete_area_atuacao/<int:pk>/', Area_AtuacaoDelete.as_view(), name='delete_area_atuacao'),
 
     path('registrar/', RegistrosCreate.as_view(), name='registrar'),
+    path('upload/', BasicUploadView.as_view(), name='upload'),
 
     # path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
 

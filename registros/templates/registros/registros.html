@@ -1,114 +1,166 @@
 {% extends 'base_cadastro.html' %}
 {% block navegar %}
 <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Registro/a>
-        <i class="Large material-icons right">assignment</i>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Registro/a>
+      <i class="Large material-icons right">assignment</i>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-          {% if user.is_authenticated %}
-           <li>
-             <strong>Usuário</strong>
-              {{user.username}}
-             </li>
+        {% if user.is_authenticated %}
+        <li>
+          <strong>Usuário</strong>
+          {{user.username}}
+        </li>
 
-             {% endif %}
+        {% endif %}
       </ul>
-    </div>
-  </nav>
+  </div>
+</nav>
 {% endblock %}
 
 {% block main %}
 <div style="padding: 5rem">
 
-    <form class = "col s12" action="" method="post" enctype="multipart/form-data">
+     <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <div class="progress">
+                <div  class="determinate" style="width: 50%">
+                </div>
+            </div>
+        </div>
+      </div>
+            
+
+  <form class="col s12" action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
-         <div class="row">
-              <div class="col s6"> 
-                {{form.as_p}}
-              </div>
-           </div>
+    <div class="row">
+        <div class="progress">
+            <div  class="determinate" style="width: 50%">
+            </div>
+        </div>
+        <h1 id="percent"></h1>
+    </div>
 
-          <div class="row">
-            <div class="input-field col s12">
-                  <input class="btn" type="submit" value="Enviar">
-              </div>
-          </div>
-    </form>
+    <div class="row">
+      <div class="col s6">
+        {{form.as_p}}
+      </div>
+      <div class="col s6">
+          <div class="well text-muted text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
+              <span class="glyphicon glyphicon-arrow-down" style="font-size: 4rem;"></span>
+              <h3>Drop Photos Here to Upload</h3>
+            </div>
+
+          {# 1. BUTTON TO TRIGGER THE ACTION #}
+          <button type="button" class="btn btn-primary js-upload-photos">
+            <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
+          </button>
+          
+          {# 2. FILE INPUT TO BE USED BY THE PLUG-IN #}
+          <input id="fileupload" type="file" name="file" multiple="multiple"
+                 style="display: none;"
+                 data-url="{% url 'upload' %}"
+                 data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+          
+          {# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}
+          <table id="gallery" class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Photo</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for photo in photos %}
+                <tr>
+                  <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input class="btn" type="submit" value="Enviar">
+      </div>
+    </div>
+  </form>
 </div>
 
 {% endblock %}
 
 <script>
-    $(document).ready(function(){
-        $('select').material_select();
-        exibir_ocultar();
-           $('#id_codservico').on('input', function(e) {
-            let cod = $('#id_codservico').val();
-            if (cod.length == 9) {
+  $(document).ready(function () {
+    $('select').material_select();
+    exibir_ocultar();
+    $('#id_codservico').on('input', function (e) {
+      let cod = $('#id_codservico').val();
+      if (cod.length == 9) {
 
-                $.getJSON("http://127.0.0.1:8000/api/servicos/" + cod, function(dados) {
-                console.log('Buscando');
-                if (!("erro" in dados)) {
-                    console.log('deu certo');
-                        //Atualiza os campos com os valores da consulta.
-                    $("#id_valor").val(dados.preco);
-                    //$("#id_bairro").val(dados.tamanho);
-                    //$("#id_complemento").val(dados.medida);
+        $.getJSON("http://127.0.0.1:8000/api/servicos/" + cod, function (dados) {
+          console.log('Buscando');
+          if (!("erro" in dados)) {
+            console.log('deu certo');
+            //Atualiza os campos com os valores da consulta.
+            $("#id_valor").val(dados.preco);
+            //$("#id_bairro").val(dados.tamanho);
+            //$("#id_complemento").val(dados.medida);
 
 
 
-                }
-            });
-        }
+          }
+        });
+      }
     });
 
-        });
+  });
 
-  function exibir_ocultar(){
+  function exibir_ocultar() {
     var valor = $("#id_nome_area").val();
     switch (valor) {
 
       case 'Area1':
-         $("#id_media").show();
-         $("#id_area3").hide();
-         $("#id_area4").hide();
-         $("#id_area2").hide();
+        $("#id_media").show();
+        $("#id_area3").hide();
+        $("#id_area4").hide();
+        $("#id_area2").hide();
 
         break;
       case 'Area2':
-         $("#id_media").hide();
-         $("#id_area3").hide();
-         $("#id_area4").hide();
-         $("#id_area2").show();
+        $("#id_media").hide();
+        $("#id_area3").hide();
+        $("#id_area4").hide();
+        $("#id_area2").show();
 
-         break;
+        break;
       case 'Area3':
-         $("#id_media").hide();
-         $("#id_area3").show();
-         $("#id_area4").hide();
-         $("#id_area2").hide();
+        $("#id_media").hide();
+        $("#id_area3").show();
+        $("#id_area4").hide();
+        $("#id_area2").hide();
 
         break;
       case 'Area4':
-         $("#id_media").hide();
-         $("#id_area3").hide();
-         $("#id_area4").show();
-         $("#id_area2").hide();
+        $("#id_media").hide();
+        $("#id_area3").hide();
+        $("#id_area4").show();
+        $("#id_area2").hide();
         console.log('Mangoes and papayas are $2.79 a pound.');
         // expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       default:
-         $("#id_media").hide();
-         $("#id_area3").hide();
-         $("#id_area4").hide();
-         $("#id_area2").hide();
+        $("#id_media").hide();
+        $("#id_area3").hide();
+        $("#id_area4").hide();
+        $("#id_area2").hide();
 
     }
 
 
-};
-  </script>
-
-
-
+  };
+</script>

@@ -40,5 +40,19 @@ class RegistrosList(LoginRequiredMixin, ListView):
         return qs
 
 
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.views import View
 
 
+class BasicUploadView(View):
+    def get(self, request):
+        photos_list = Photo.objects.all()
+        return render(self.request, 'photos/basic_upload/index.html', {'photos': photos_list})
+
+    def post(self, request):
+        file = request.FILES
+        print(file)
+        data = {'is_valid': True, 'name': "photo.file.name", 'url': "photo.file.url"}
+        # data = {'is_valid': False}
+        return JsonResponse(data)

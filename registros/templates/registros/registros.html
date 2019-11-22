@@ -20,67 +20,45 @@
 {% block main %}
 <div style="padding: 5rem">
 
-     <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-
-
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <div class="progress">
-                <div  class="determinate" style="width: 50%">
-                </div>
-            </div>
-        </div>
-      </div>
-            
 
   <form class="col s12" action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-
-    <div class="row">
-        <div class="progress">
-            <div  class="determinate" style="width: 50%">
-            </div>
-        </div>
-        <h1 id="percent"></h1>
-    </div>
 
     <div class="row">
       <div class="col s6">
         {{form.as_p}}
       </div>
       <div class="col s6">
-          <div class="well text-muted text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
-              <span class="glyphicon glyphicon-arrow-down" style="font-size: 4rem;"></span>
-              <h3>Drop Photos Here to Upload</h3>
-            </div>
 
-          {# 1. BUTTON TO TRIGGER THE ACTION #}
-          <button type="button" class="btn btn-primary js-upload-photos">
-            <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
-          </button>
-          
-          {# 2. FILE INPUT TO BE USED BY THE PLUG-IN #}
-          <input id="fileupload" type="file" name="file" multiple="multiple"
-                 style="display: none;"
-                 data-url="{% url 'upload' %}"
-                 data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
-          
-          {# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}
-          <table id="gallery" class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Photo</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for photo in photos %}
-                <tr>
-                  <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+        <button type="button" class="js-upload-photos grey lighten-3"
+          style="border: none; padding: 4rem; border-radius: 10px">
+          <h3>Drop Photos Here to Upload</h3>
+        </button>
+
+        <input id="fileupload" type="file" name="file" multiple="multiple" style="display: none;"
+          data-url="{% url 'upload' %}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+
+        <table id="gallery" class="highlight">
+          <thead>
+            <tr>
+              <th>Photo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <h5 class="center" id="percent">0%</h5>
+              <div class="progress blue lighten-3">
+                <div class="determinate blue darken-2" style="width: 0%">
+                  </div>
+                </div>
+            </tr>
+            {% for photo in photos %}
+            <tr>
+              <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
 

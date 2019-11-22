@@ -1,5 +1,5 @@
- {% extends "base.html" %} {% block main %}
- {% load static %}
+{% extends "base.html" %} {% block main %}
+{% load static %}
 <div class="row">
     <div class="col s12 l10 offset-l1" style="padding: 3rem 0 5rem 0">
         <!--Melhorar design-->
@@ -47,7 +47,7 @@
         </form>
     </div>
 </div>
-{% endblock main %} 
+{% endblock main %}
 
 {% block header %}
 <!--autocomplete select2-->
@@ -56,7 +56,7 @@
     .select2 {
         max-width: 100% !important;
     }
-    
+
     span {
         outline: 0 !important;
         /*removendo outiline do select2 autocomplete*/
@@ -66,13 +66,60 @@
 <!--autocomplete select2-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
-  $('select').select2(); //autocomplete select2
+    $('select').select2(); //autocomplete select2
 </script>
 
 
 <script src="{% static 'registros/js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
 <script src="{% static 'registros/js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
 <script src="{% static 'registros/js/jquery-file-upload/jquery.fileupload.js' %}"></script>
-<script src="{% static 'registros/js/basic-upload.js' %}"></script>
+<!-- <script src="{% static 'registros/js/basic-upload.js' %}"></script> -->
+<script>
+    $(function () {
+
+        $(".js-upload-photos").click(function () {
+            $("#fileupload").click();
+        });
+
+        $('#fileupload').bind('change', function () {
+
+            //this.files[0].size gets the size of your file.
+            // alert(this.files[0].size);
+
+        });
+
+        $("#fileupload").fileupload({
+            dataType: 'json',
+            sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
+            // autoUpload: false,
+            start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
+                console.log(e)
+            },
+            stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
+
+            },
+            progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                var strProgress = progress + "%";
+                console.log(strProgress)
+                $(".determinate").css({ "width": strProgress });
+                $(".determinate").text(strProgress);
+                $("#percent").text(strProgress);
+            },
+            done: function (e, data) {
+                $(".determinate").css({ "width": "0%" });
+                $("#percent").text("concluido ;)");
+                if (data.result.is_valid) {
+                    $("#gallery tbody").prepend(
+                        "<tr><td><a href=''>" + data.result.name + " - " + data.result.size + " - " + data.result.key + "</a></td></tr>"
+                    )
+                }
+            }
+
+        });
+
+    });
+
+</script>
 
 {% endblock script %}

@@ -6,7 +6,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Registros
 from .forms import RegistrosForm
-
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.views import View
+from tools.genereteKey import get_size_file, file_to_shar256
 
 class RegistrosCreate(LoginRequiredMixin, CreateView):
     model = Registros
@@ -40,19 +43,15 @@ class RegistrosList(LoginRequiredMixin, ListView):
         return qs
 
 
-from django.shortcuts import render
-from django.http import JsonResponse
-from django.views import View
-
-
 class BasicUploadView(View):
     def get(self, request):
         photos_list = Photo.objects.all()
         return render(self.request, 'photos/basic_upload/index.html', {'photos': photos_list})
 
     def post(self, request):
-        file = request.FILES
-        print(file)
-        data = {'is_valid': True, 'name': "photo.file.name", 'url': "photo.file.url"}
+        file = request.FILES['file']
+        shar256 = file_to_shar256(file)
+        size = get_size_file(file)
+        data = {'is_valid': True, 'name': file.name, 'size': size, "key":shar256}
         # data = {'is_valid': False}
         return JsonResponse(data)

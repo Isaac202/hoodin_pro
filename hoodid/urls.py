@@ -44,6 +44,12 @@ from rest_framework import routers
 
 from registros.views import RegistrosCreate, BasicUploadView
 from clientes.api.viewsets import ClienteViewSet
+
+from codigos_promocionais.views import Codigos_PromocionaisCreate
+from codigos_promocionais.views import Codigos_PromocionaisList
+from codigos_promocionais.views import Codigos_PromocionaisUpdate
+from codigos_promocionais.views import Codigos_PromocionaisDelete
+
 from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
 router = routers.SimpleRouter()
 router.register(r'api/clientes', ClienteViewSet)
@@ -103,6 +109,11 @@ urlpatterns = [
 
     path('registrar/', RegistrosCreate.as_view(), name='registrar'),
     path('upload/', BasicUploadView.as_view(), name='upload'),
+
+    path('lista_codigos_promocionais/', Codigos_PromocionaisList.as_view(), name='lista_codigos_promocionais'),
+    path('novo_codigos_promocionais/', Codigos_PromocionaisCreate.as_view(), name='novo_codigos_promocionais'),
+    path('atualiza_codigos_promocionais/<int:pk>/', Codigos_PromocionaisUpdate.as_view(), name='atualiza_codigos_promocionais'),
+    path('delete_codigos_promocionais/<int:pk>/', Codigos_PromocionaisDelete.as_view(), name='delete_codigos_promocionais'),
 
     # path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
 

@@ -88,3 +88,5 @@ class SignUpCreateView(MultiCreateView):
         context['key'] = key
         send_mail_template(subject="Cadastro", template_name="usuarios/emailCadastro.html", context=context, recipient_list=[user.username])
         return self.get_success_url()
+
+

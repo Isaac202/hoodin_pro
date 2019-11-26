@@ -14,7 +14,7 @@ class Codigos_PromocionaisCreate(CreateView):
     template_name = "codigos_promocionais/inc_codigos_promocionais.html"
     form_class = Codigos_PromocionaisForm
 
-    success_url = reverse_lazy('lista_servicos')
+    success_url = reverse_lazy('lista_codigos_promocionais')
 
     def form_valid(self, form):
         form.instance.perfil = self.request.user

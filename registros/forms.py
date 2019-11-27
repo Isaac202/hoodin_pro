@@ -38,6 +38,12 @@ class RegistrosForm(forms.ModelForm):
 
 
 
+class ArquivoRegistroForm(forms.ModelForm):
+    
+    class Meta:
+        model = ArquivoRegistro
+        fields = ("file",)
+
 
 
 

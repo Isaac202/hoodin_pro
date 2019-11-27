@@ -3,23 +3,39 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from servicos.models import Servicos
 from clientes.models import Clientes
-
+from datetime import date
 
 User = get_user_model()
 
-class Registros(models.Model):
-    codregistro = models.PositiveIntegerField(null=True)
-    id_cliente = models.ForeignKey(Clientes, on_delete=models.PROTECT, blank=True, null=True)
+def user_directory_path(instance, filename):
+    return 'registros/{}/{}/{}'.format(instance.id_usuario.username, date.today(), filename)
+
+
+
+class ArquivoRegistro(models.Model):
     id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
-    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT)
+    name = models.CharField(max_length=50)
+    size = models.PositiveIntegerField()
+    shar256 = models.CharField(max_length=90)
+    file = models.FileField(upload_to=user_directory_path)
+    signature = models.FileField(blank=True, null=True, upload_to=user_directory_path)
+    version = models.DecimalField(max_digits=9,decimal_places=2, default=1.0)
+    paid = models.BooleanField(default=False)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+
+class Registros(models.Model):
+    codregistro = models.PositiveIntegerField(blank=True, null=True)
+    id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    id_cliente = models.ForeignKey(Clientes, on_delete=models.PROTECT, blank=True, null=True)
+    codservico = models.ForeignKey(Servicos, verbose_name="Serviço", on_delete=models.PROTECT)
     valor = models.DecimalField(max_digits=9, decimal_places=2)
     data = models.DateTimeField(auto_now=True)
-    assinatura = models.FileField(blank=True, null=True)
-    arquivo = models.FileField()
-    versao = models.DecimalField(max_digits=9,decimal_places=2, default=1.0)
+    arquivo = models.OneToOneField(ArquivoRegistro, verbose_name="arquivo", on_delete=models.CASCADE)
     descricao = models.CharField(max_length=255)
-    codqrcode = models.PositiveIntegerField(blank=True, null=True)
-    codindicacao = models.PositiveIntegerField(blank=True, null=True)
+    # codqrcode = models.PositiveIntegerField(blank=True, null=True)
+    # codindicacao = models.PositiveIntegerField(blank=True, null=True)
     desconto = models.DecimalField(max_digits=9,decimal_places=2, default=0)
     resumo_obra = models.TextField(max_length=5000)
 

@@ -11,7 +11,7 @@ from django.http import JsonResponse
 from django.views import View
 from tools.genereteKey import get_size_file, file_to_shar256
 
-class RegistrosCreate(LoginRequiredMixin, CreateView):
+class RegistrosCreate( CreateView):
     model = Registros
     template_name = "registros/registros.html"
     form_class = RegistrosForm

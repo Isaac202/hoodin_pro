@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 from django import forms
-from registros.models import Registros
+from registros.models import Registros, ArquivoRegistro
 from clientes.models import Clientes
 from servicos.models import Servicos
 from extensoes.models import Extensoes
@@ -11,9 +11,7 @@ from servicos_extensoes.models import Servicos_Extensoes
 class RegistrosForm(forms.ModelForm):
     class Meta:
         model = Registros
-        fields = [ 'codservico', 'id_usuario', 'valor', 'arquivo', 'assinatura', 'versao',
-                 'descricao', 'codqrcode', 'codindicacao', 'desconto', 'resumo_obra']
-        exclude = ['data', 'assinatura', 'id_cliente']
+        exclude = ['data','codregistro','arquivo', 'assinatura', 'id_cliente', 'id_usuario']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')

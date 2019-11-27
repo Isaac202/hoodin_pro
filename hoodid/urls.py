@@ -56,6 +56,7 @@ router.register(r'api/clientes', ClienteViewSet)
 router.register(r'api/servicos', ServicoViewSet)
 
 urlpatterns = [
+    path('api/', include("api.urls")),
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('', include('home.urls')),

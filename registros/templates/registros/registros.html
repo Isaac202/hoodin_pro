@@ -25,40 +25,53 @@
     {% csrf_token %}
 
     <div class="row">
-      <div class="col s6">
+      <div class="col s12 m5 l6">
         {{form.as_p}}
       </div>
-      <div class="col s6">
-
-        <button type="button" class="js-upload-photos grey lighten-3"
-          style="border: none; padding: 4rem; border-radius: 10px">
-          <h3>Drop Photos Here to Upload</h3>
-        </button>
-
-
-
-        <table id="gallery" class="highlight">
-          <thead>
-            <tr>
-              <th>Photo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <h5 class="center" id="percent">0%</h5>
-              <div class="progress blue lighten-3">
-                <div class="determinate blue darken-2" style="width: 0%">
+      <div class="col s12 m7 l6">
+        <div class="row">
+          <div class="col s3 left">
+            <h5>Tamanho</h5>
+            <h5 id="tamanho">0.00</h5>
+          </div>
+          <div class="col s3 center">
+              <h5>Valor</h5>
+              <h5 id="valor">0.00</h5>
+          </div>
+          <div class="col s3 right">
+              <h5>Total</h5>
+              <h5 id="total">0.00</h5>
+          </div>
+        </div>
+        <div class="row">
+          <button id="btn-upload" type="button" class="grey lighten-4"
+            style="border: none; padding: 15%; border-radius: 10px">
+            <h3 style="font-size: 200%">Clique ou Arraste aqui!</h3>
+          </button>
+          <table id="gallery" class="highlight">
+            <thead>
+              <tr>
+                <th>Photo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <h5 class="center" id="percent">0%</h5>
+                <div class="progress blue lighten-3">
+                  <div class="determinate blue darken-2" style="width: 0%">
+                  </div>
                 </div>
-              </div>
-            </tr>
-            {% for photo in files %}
-            <tr>
-              <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+              </tr>
+              {% for photo in files %}
+              <tr>
+                <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
+
     </div>
 
     <div class="row">
@@ -67,7 +80,8 @@
       </div>
     </div>
   </form>
-  <input id="fileupload" type="file" name="file" multiple="multiple" style="display: none;"
+
+  <input disabled id="fileupload" type="file" name="file" multiple="multiple" style="display: none;"
     data-url="{% url 'upload' %}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
 </div>
 

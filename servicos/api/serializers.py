@@ -18,6 +18,5 @@ class ServiceExtentionSerializer(ModelSerializer):
 
     class Meta:
         model = Servicos
-        fields = ['id','nome', 'preco', 'tamanho', 'medida', 'servico_digitalizacao','extensoes']
+        fields = ['id','nome', 'preco', 'tamanho', 'medida', 'servico_digitalizacao','extensoes',]
         read_only_fields = ['codservico']
-

@@ -12,5 +12,7 @@ class ServicoExtentionsApi(APIView):
 
     def get(self, request, pk, format=None):
         s = Servicos.objects.get(pk=pk)
+        # s.tamanho = 10000000000000
         serializer = ServiceExtentionSerializer(s, many=False)
-        return Response(serializer.data)
+        data = serializer.data
+        return Response(data)

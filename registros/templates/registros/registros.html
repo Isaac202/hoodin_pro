@@ -32,43 +32,49 @@
         <div class="row">
           <div class="col s3 left">
             <h5>Tamanho</h5>
-            <h5 id="tamanho">0.00</h5 >
+            <h5 id="tamanho">0.00</h5>
           </div>
           <div class="col s3 center">
-              <h5>Valor</h5>
-              <h5 id="valor">0.00</h5>
+            <h5>Valor</h5>
+            <h5 id="valor">0.00</h5>
           </div>
           <div class="col s3 right">
-              <h5>Total</h5>
-              <h5 id="total">0.00</h5>
+            <h5>Total</h5>
+            <h5 id="total">0.00</h5>
           </div>
         </div>
         <div class="row">
-          <button id="btn-upload" type="button" class="grey lighten-4"
-            style="border: none; padding: 15%; border-radius: 10px">
-            <h3 style="font-size: 200%">Clique ou Arraste aqui!</h3>
-          </button>
-          <table id="gallery" class="highlight">
-            <thead>
-              <tr>
-                <th>Photo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <h5 class="center" id="percent">0%</h5>
-                <div class="progress blue lighten-3">
-                  <div class="determinate blue darken-2" style="width: 0%">
+          <div class="col s10 offset-s1">
+            <button id="btn-upload" type="button" class="grey lighten-4"
+              style="border: none; padding: 15%; border-radius: 10px">
+              <h3 style="font-size: 200%">Clique ou Arraste aqui!</h3>
+            </button>
+          </div>
+
+          <div class="col s10 offset-s1" style="margin-top: 1rem">
+            <table id="gallery" class="highlight">
+              <thead>
+                <tr>
+                  <th>Arquivo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <div class="progress blue lighten-3">
+                    <div class="determinate blue darken-2" style="width: 0%"></div>
                   </div>
-                </div>
-              </tr>
-              {% for photo in files %}
-              <tr>
-                <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+                  <h5 class="center" id="percent">0%</h5>
+                </tr>
+                {% for file in files %}
+                <tr id="file{{file.pk}}">
+                  <td><a href="{{ file.file.url }}">{{ file.name }} - {{file.pk}}</a></td>
+                  <td><a class="red-text delete_file" href="{% url 'delete_file' file.pk %}">excluir</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
 
@@ -82,78 +88,7 @@
   </form>
 
   <input disabled id="fileupload" type="file" name="file" multiple="multiple" style="display: none;"
-    data-url="{% url 'upload' %}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+    data-url="{% url 'base_upload' %}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
 </div>
 
 {% endblock %}
-
-<script>
-  $(document).ready(function () {
-    $('select').material_select();
-    exibir_ocultar();
-    $('#id_codservico').on('input', function (e) {
-      let cod = $('#id_codservico').val();
-      if (cod.length == 9) {
-
-        $.getJSON("http://127.0.0.1:8000/api/servicos/" + cod, function (dados) {
-          console.log('Buscando');
-          if (!("erro" in dados)) {
-            console.log('deu certo');
-            //Atualiza os campos com os valores da consulta.
-            $("#id_valor").val(dados.preco);
-            //$("#id_bairro").val(dados.tamanho);
-            //$("#id_complemento").val(dados.medida);
-
-
-
-          }
-        });
-      }
-    });
-
-  });
-
-  function exibir_ocultar() {
-    var valor = $("#id_nome_area").val();
-    switch (valor) {
-
-      case 'Area1':
-        $("#id_media").show();
-        $("#id_area3").hide();
-        $("#id_area4").hide();
-        $("#id_area2").hide();
-
-        break;
-      case 'Area2':
-        $("#id_media").hide();
-        $("#id_area3").hide();
-        $("#id_area4").hide();
-        $("#id_area2").show();
-
-        break;
-      case 'Area3':
-        $("#id_media").hide();
-        $("#id_area3").show();
-        $("#id_area4").hide();
-        $("#id_area2").hide();
-
-        break;
-      case 'Area4':
-        $("#id_media").hide();
-        $("#id_area3").hide();
-        $("#id_area4").show();
-        $("#id_area2").hide();
-        console.log('Mangoes and papayas are $2.79 a pound.');
-        // expected output: "Mangoes and papayas are $2.79 a pound."
-        break;
-      default:
-        $("#id_media").hide();
-        $("#id_area3").hide();
-        $("#id_area4").hide();
-        $("#id_area2").hide();
-
-    }
-
-
-  };
-</script>

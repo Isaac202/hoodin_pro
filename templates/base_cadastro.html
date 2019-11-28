@@ -91,13 +91,13 @@
                     });
                     size = data.tamanho;
 
-                }).done(function(data){
-                    $("#tamanho").html(data.tamanho+"MB")
-                    $("#valor").html("R$ "+data.preco)
+                }).done(function (data) {
+                    $("#tamanho").html(data.tamanho + "MB")
+                    $("#valor").html("R$ " + data.preco)
                 }).fail(function (resp) {
                     alert('erro')
                 }).always(function (data) {
-                    console.log(data)
+                    // console.log(data)
                 })
                 $("#fileupload").removeAttr('disabled')
             } else {
@@ -120,7 +120,7 @@
             var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
             return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
         }
-        
+
 
         var is_valid = false;
         $("#fileupload").fileupload({
@@ -130,24 +130,17 @@
             add: function (e, data) {
                 // var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
                 data.files.forEach(element => {
-                    console.log(element)
+                    // console.log(element)
                     let extention = element.name.split('.').pop().toLowerCase()
                     if ($.inArray(extention, fileExtension) == -1) {
                         alert("Only formats are allowed : " + fileExtension.join(', '));
 
                     } else {
-                        // var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-                        // let a = element.size / Math.pow(1024, 2)
-                        // alert(a)
-                        // alert(bytesToSize(element.size))
-                        // alert(size)
-                        // alert(element.size / 1024 / 1024)
                         if ((element.size / Math.pow(1024, 2)) < size) {
-                            // alert('valido')
                             data.submit()
                         } else {
                             let s = element.size / Math.pow(1024, 2)
-                            let msg ='seu arquivo possui '+ s.toFixed(2) +"MB e pode ter no maximo "+size+'MB'
+                            let msg = 'seu arquivo possui ' + s.toFixed(2) + "MB e pode ter no maximo " + size + 'MB'
                             alert(msg)
                         }
                     }
@@ -171,14 +164,42 @@
                 $("#total").html("10")
                 $(".determinate").css({ "width": "0%" });
                 $("#percent").text("concluido ;)");
-                if (data.result.is_valid) {
-                    $("#gallery tbody").prepend(
-                        "<tr><td><a href=''>" + data.result.name + " - " + data.result.size + " - " + data.result.key + "</a></td></tr>"
-                    )
+                let result = data.result
+                if (result.is_valid) {
+                    let a = $('<a></a>').html(result.name).attr('href', result.file)
+                    let d = $('<a></a>').html("Excluir").attr('href', result.delete).attr('class', 'btn red')
+                    d.attr('class', 'delete_file')
+                    let td = $('<td></td>')
+                    let td2 = td.clone()
+                    td.append(a)
+                    td2.append(d)
+                    let tr = $('<tr></tr>').append(td)
+                    tr.append(td2)
+                    $("#gallery tbody").prepend(tr)
                 }
-            }
+            },
+            // always:function(){
+            //     alert('teste')
+            // }
 
         });
+
+        $(".delete_file").click(function (e) {
+            e.preventDefault()
+            let url = $(this).attr('href')
+            let element = $(this).closest("tr");
+            element.fadeOut(1000)
+            data = { "csrfmiddlewaretoken": "{{ csrf_token }}" }
+            $.post(url, data, function (data) {
+
+            }).fail(function (e, data) {
+                element.fadeIn(005)
+            }).done(function (data) {
+                element.remove()
+            }).always(function (data) {
+                console.log(data)
+            })
+        })
 
     });
 

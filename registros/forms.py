@@ -13,9 +13,9 @@ class RegistrosForm(forms.ModelForm):
         model = Registros
         exclude = ['data','codregistro','arquivo', 'assinatura', 'id_cliente', 'id_usuario', 'valor', 'desconto']
 
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        super(RegistrosForm, self).__init__(*args, **kwargs)
+    # def __init__(self, *args, **kwargs):
+    #     self.user = kwargs.pop('user')
+    #     super(RegistrosForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         try:

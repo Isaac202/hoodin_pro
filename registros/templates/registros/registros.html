@@ -20,15 +20,14 @@
 {% block main %}
 
 <div class="container">
-
-  <div class="row" style="margin-top: 1rem">
-    <form class="col s12" action="" method="post" enctype="multipart/form-data">
+  <div class="row" style="margin-top: 1rem;">
+    <form id="registro-form" class="col s12" action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
       <div class="row">
         <h3>Tipo de Registro</h3>
         <hr><br>
-        <div class="col s12 m10 l6 offset-m1">
+        <div class="col s12 m10 l6 offset-m1" style="margin-bottom: 2rem">
           {{form.as_p}}
           <div class="lighten-1 center white-text" style="border-radius: 20px ;padding: 0.5rem" id="extentions"></div>
           <div class="input-field col s12">
@@ -38,6 +37,7 @@
         <div class="col s12 m10 l6 offset-m1">
           <div class="row">
             <div class="col s11 offset-s1">
+              <h4 class="center">Informações</h4>
               <div class="row grey lighten-1">
                 <div class="col s4 center grey lighten-2">
                   <h6>Tamanho</h6>
@@ -55,8 +55,8 @@
             </div>
 
             <div class="col s11 offset-s1">
-              <button id="btn-upload" type="button" class="grey lighten-4"
-                style="border: none; padding: 15%; border-radius: 10px">
+              <button id="btn-upload" type="button" class="center grey lighten-4"
+                style="border: none; padding: 10%; border-radius: 10px; width: 100%">
                 <h3 style="font-size: 200%">Clique ou Arraste aqui!</h3>
               </button>
             </div>
@@ -77,8 +77,10 @@
                   </tr>
                   {% for file in files %}
                   <tr id="file{{file.pk}}">
-                    <td><a href="{{ file.file.url }}">{{ file.name }} - {{file.pk}}</a></td>
-                    <td><a class="red-text delete_file" href="{% url 'delete_file' file.pk %}">excluir</a></td>
+                    <td><a target="_blank" href="{{ file.file.url }}">{{ file.name }} - {{file.pk}}</a></td>
+                    <td class="delete_file" link="{% url 'delete_file' file.pk %}">
+                      <a style="cursor: pointer;" class="red-text" >excluir</a>
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>

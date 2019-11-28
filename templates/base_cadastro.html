@@ -75,139 +75,151 @@
 <script src="{% static 'registros/js/jquery-file-upload/jquery.fileupload.js' %}"></script>
 <!-- <script src="{% static 'registros/js/basic-upload.js' %}"></script> -->
 <script>
+    // $(document).ready(function () {
+    var fileExtension = [];
+    var size = 0;
 
-    $(function () {
-
-        var fileExtension = [];
-        var size = 0;
-
-        $('#id_codservico').change(function () {
-            if ($(this).val() != "") {
-                let url = "http://localhost:8000/api/servicos/" + $(this).val()
-                let extentions = ""
-                $.getJSON(url, function (data) {
-                    fileExtension = []
-                    data.extensoes.forEach(element => {
-                        fileExtension.push(element.nome)
-                        extentions += element.nome + ", "
-                    });
-                    size = data.tamanho;
-
-                }).done(function (data) {
-                    $("#tamanho").html(data.tamanho + "MB")
-                    $("#valor").html("R$ " + data.preco)
-                    $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase() )
-                    $("#extentions").toggleClass('grey')
-                }).fail(function (resp) {
-                    alert('erro')
-                }).always(function (data) {
-                    // console.log(data)
-                })
-                $("#fileupload").removeAttr('disabled')
-            } else {
-                $("#fileupload").attr('disabled', true)
-                $("#extentions").html("")
-                $("#extentions").toggleClass('grey')
-
-            }
-        })
-
-
-        $("#btn-upload").click(function () {
-            if ($("#fileupload").prop('disabled')) {
-                alert('selecione o serviço!')
-            } else {
-                $("#fileupload").click();
-            }
-        });
-
-        function bytesToSize(bytes) {
-            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-            if (bytes == 0) return '0 Byte';
-            var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-            return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-        }
-
-
-        var is_valid = false;
-        $("#fileupload").fileupload({
-            dataType: 'json',
-            sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
-            autoUpload: false,
-            add: function (e, data) {
-                // var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
-                data.files.forEach(element => {
-                    // console.log(element)
-                    let extention = element.name.split('.').pop().toLowerCase()
-                    if ($.inArray(extention, fileExtension) == -1) {
-                        alert("Somente arquivos no formato : " + fileExtension.join(', '));
-
-                    } else {
-                        if ((element.size / Math.pow(1024, 2)) < size) {
-                            data.submit()
-                        } else {
-                            let s = element.size / Math.pow(1024, 2)
-                            let msg = 'seu arquivo possui ' + s.toFixed(2) + "MB e pode ter no maximo " + size + 'MB'
-                            alert(msg)
-                        }
-                    }
+    $('#id_codservico').change(function () {
+        if ($(this).val() != "") {
+            let url = "http://localhost:8000/api/servicos/" + $(this).val()
+            let extentions = ""
+            $.getJSON(url, function (data) {
+                fileExtension = []
+                data.extensoes.forEach(element => {
+                    fileExtension.push(element.nome)
+                    extentions += element.nome + ", "
                 });
-            },
-            start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
-                // console.log(e)
-            },
-            stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
+                size = data.tamanho;
 
-            },
-            progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                var strProgress = progress + "%";
-                // console.log(strProgress)
-                $(".determinate").css({ "width": strProgress });
-                $(".determinate").text(strProgress);
-                $("#percent").text(strProgress);
-            },
-            done: function (e, data) {
-                $("#total").html("10")
-                $(".determinate").css({ "width": "0%" });
-                $("#percent").text("concluido ;)");
-                let result = data.result
-                if (result.is_valid) {
-                    let a = $('<a></a>').html(result.name).attr('href', result.file)
-                    let d = $('<a></a>').html("Excluir").attr('href', result.delete).attr('class', 'red-text delete_file')
-                    let td = $('<td></td>')
-                    let td2 = td.clone()
-                    td.append(a)
-                    td2.append(d)
-                    let tr = $('<tr></tr>').append(td)
-                    tr.append(td2)
-                    $("#gallery tbody").prepend(tr)
-                }
-            },
-            // always:function(){
-            //     alert('teste')
-            // }
-
-        });
-
-        $(".delete_file").click(function (e) {
-            e.preventDefault()
-            let url = $(this).attr('href')
-            let element = $(this).closest("tr");
-            element.fadeOut(1000)
-            data = { "csrfmiddlewaretoken": "{{ csrf_token }}" }
-            $.post(url, data, function (data) {
-
-            }).fail(function (e, data) {
-                element.fadeIn(005)
             }).done(function (data) {
-                element.remove()
+                $("#tamanho").html(data.tamanho + "MB")
+                $("#valor").html("R$ " + data.preco)
+                $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase())
+                $("#extentions").toggleClass('grey')
+            }).fail(function (resp) {
+                alert('erro')
             }).always(function (data) {
-                console.log(data)
+                // console.log(data)
             })
-        })
+            $("#fileupload").removeAttr('disabled')
+        } else {
+            $("#fileupload").attr('disabled', true)
+            $("#extentions").html("")
+            $("#extentions").toggleClass('grey')
+
+        }
+    })
+
+
+    $("#btn-upload").click(function () {
+        if ($("#fileupload").prop('disabled')) {
+            alert('selecione o serviço!')
+        } else {
+            $("#fileupload").click();
+        }
+    });
+
+    function bytesToSize(bytes) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes == 0) return '0 Byte';
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+
+
+    var is_valid = false;
+    $("#fileupload").fileupload({
+        dataType: 'json',
+        sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
+        autoUpload: false,
+        add: function (e, data) {
+            // var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+            data.files.forEach(element => {
+                // console.log(element)
+                let extention = element.name.split('.').pop().toLowerCase()
+                if ($.inArray(extention, fileExtension) == -1) {
+                    alert("Somente arquivos no formato : " + fileExtension.join(', '));
+
+                } else {
+                    if ((element.size / Math.pow(1024, 2)) < size) {
+                        data.submit()
+                    } else {
+                        let s = element.size / Math.pow(1024, 2)
+                        let msg = 'seu arquivo possui ' + s.toFixed(2) + "MB e pode ter no maximo " + size + 'MB'
+                        alert(msg)
+                    }
+                }
+            });
+        },
+        start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
+            // console.log(e)
+        },
+        stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
+
+        },
+        progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            var strProgress = progress + "%";
+            // console.log(strProgress)
+            $(".determinate").css({ "width": strProgress });
+            $(".determinate").text(strProgress);
+            $("#percent").text(strProgress);
+        },
+        success: function (data) {
+            // console.log(data)
+            $("#registro-form").append(
+                $('<input type="checkbox"/>').val(data.id)
+                    .attr('name', 'files')
+                    .attr('checked', true)
+
+            )
+        },
+        done: function (e, data) {
+            $("#total").html("10")
+            $(".determinate").css({ "width": "0%" });
+            $("#percent").text("concluido ;)");
+            let result = data.result
+            if (result.is_valid) {
+                $("#gallery tbody").prepend(
+                    $("<tr>").append(
+                        $('<td>').append(
+                            $("<a>").html(result.name)
+                                .attr('href', result.file)
+                                .attr("target", "_blank")
+                        ),
+                        $('<td>').append(
+                            $("<a>").html("excluir").addClass('red-text')
+                        ).addClass('delete_file')
+                            .attr('link', result.delete)
+                            .attr('style', 'cursor: pointer;')
+                    )
+                )
+                // $(document).ready()
+            }
+        },
+        // always:function(){
+        //     alert('teste')
+        // }
 
     });
+
+    $(".delete_file").on("click", function (event) {
+        // alert('kdkdk')
+        let url = $(this).attr('link')
+        let element = $(this).closest("tr");
+        element.fadeOut(1000)
+        data = { "csrfmiddlewaretoken": "{{ csrf_token }}" }
+        $.post(url, data, function (data) {
+
+        }).fail(function (e, data) {
+            element.fadeIn(005)
+        }).done(function (data) {
+            element.remove()
+        }).always(function (data) {
+            console.log(data)
+        })
+    })
+    // })
 
 </script>
 

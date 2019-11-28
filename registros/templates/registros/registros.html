@@ -18,77 +18,81 @@
 {% endblock %}
 
 {% block main %}
-<div style="padding: 5rem">
 
+<div class="container">
 
-  <form class="col s12" action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+  <div class="row" style="margin-top: 1rem">
+    <form class="col s12" action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
 
-    <div class="row">
-      <div class="col s12 m5 l6">
-        {{form.as_p}}
-      </div>
-      <div class="col s12 m7 l6">
-        <div class="row">
-          <div class="col s3 left">
-            <h5>Tamanho</h5>
-            <h5 id="tamanho">0.00</h5>
-          </div>
-          <div class="col s3 center">
-            <h5>Valor</h5>
-            <h5 id="valor">0.00</h5>
-          </div>
-          <div class="col s3 right">
-            <h5>Total</h5>
-            <h5 id="total">0.00</h5>
+      <div class="row">
+        <h3>Tipo de Registro</h3>
+        <hr><br>
+        <div class="col s12 m10 l6 offset-m1">
+          {{form.as_p}}
+          <div class="lighten-1 center white-text" style="border-radius: 20px ;padding: 0.5rem" id="extentions"></div>
+          <div class="input-field col s12">
+            <input class="btn right" type="submit" value="Enviar">
           </div>
         </div>
-        <div class="row">
-          <div class="col s10 offset-s1">
-            <button id="btn-upload" type="button" class="grey lighten-4"
-              style="border: none; padding: 15%; border-radius: 10px">
-              <h3 style="font-size: 200%">Clique ou Arraste aqui!</h3>
-            </button>
-          </div>
+        <div class="col s12 m10 l6 offset-m1">
+          <div class="row">
+            <div class="col s11 offset-s1">
+              <div class="row grey lighten-1">
+                <div class="col s4 center grey lighten-2">
+                  <h6>Tamanho</h6>
+                  <h6 id="tamanho">0.00</h6>
+                </div>
+                <div class="col s4 center ">
+                  <h6>Valor</h6>
+                  <h6 id="valor">0.00</h6>
+                </div>
+                <div class="col s4 grey lighten-2 center">
+                  <h6 >Total</h6>
+                  <h6 id="total">0.00</h6>
+                </div>
+              </div>
+            </div>
 
-          <div class="col s10 offset-s1" style="margin-top: 1rem">
-            <table id="gallery" class="highlight">
-              <thead>
-                <tr>
-                  <th>Arquivo</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <div class="progress blue lighten-3">
-                    <div class="determinate blue darken-2" style="width: 0%"></div>
-                  </div>
-                  <h5 class="center" id="percent">0%</h5>
-                </tr>
-                {% for file in files %}
-                <tr id="file{{file.pk}}">
-                  <td><a href="{{ file.file.url }}">{{ file.name }} - {{file.pk}}</a></td>
-                  <td><a class="red-text delete_file" href="{% url 'delete_file' file.pk %}">excluir</a></td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
+            <div class="col s11 offset-s1">
+              <button id="btn-upload" type="button" class="grey lighten-4"
+                style="border: none; padding: 15%; border-radius: 10px">
+                <h3 style="font-size: 200%">Clique ou Arraste aqui!</h3>
+              </button>
+            </div>
 
+            <div class="col s10 offset-s1" style="margin-top: 1rem">
+              <table id="gallery" class="highlight">
+                <thead>
+                  <tr>
+                    <th>Arquivo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <div class="progress blue lighten-3">
+                      <div class="determinate blue darken-2" style="width: 0%"></div>
+                    </div>
+                    <h6 class="center" id="percent">0%</h6>
+                  </tr>
+                  {% for file in files %}
+                  <tr id="file{{file.pk}}">
+                    <td><a href="{{ file.file.url }}">{{ file.name }} - {{file.pk}}</a></td>
+                    <td><a class="red-text delete_file" href="{% url 'delete_file' file.pk %}">excluir</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+          </div>
         </div>
       </div>
+    </form>
 
-    </div>
+    <input disabled id="fileupload" type="file" name="file" multiple="multiple" style="display: none;"
+      data-url="{% url 'base_upload' %}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+  </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <input class="btn" type="submit" value="Enviar">
-      </div>
-    </div>
-  </form>
-
-  <input disabled id="fileupload" type="file" name="file" multiple="multiple" style="display: none;"
-    data-url="{% url 'base_upload' %}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
 </div>
-
 {% endblock %}

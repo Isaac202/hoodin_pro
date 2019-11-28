@@ -84,16 +84,20 @@
         $('#id_codservico').change(function () {
             if ($(this).val() != "") {
                 let url = "http://localhost:8000/api/servicos/" + $(this).val()
+                let extentions = ""
                 $.getJSON(url, function (data) {
                     fileExtension = []
                     data.extensoes.forEach(element => {
                         fileExtension.push(element.nome)
+                        extentions += element.nome + ", "
                     });
                     size = data.tamanho;
 
                 }).done(function (data) {
                     $("#tamanho").html(data.tamanho + "MB")
                     $("#valor").html("R$ " + data.preco)
+                    $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase() )
+                    $("#extentions").toggleClass('grey')
                 }).fail(function (resp) {
                     alert('erro')
                 }).always(function (data) {
@@ -102,6 +106,9 @@
                 $("#fileupload").removeAttr('disabled')
             } else {
                 $("#fileupload").attr('disabled', true)
+                $("#extentions").html("")
+                $("#extentions").toggleClass('grey')
+
             }
         })
 
@@ -133,7 +140,7 @@
                     // console.log(element)
                     let extention = element.name.split('.').pop().toLowerCase()
                     if ($.inArray(extention, fileExtension) == -1) {
-                        alert("Only formats are allowed : " + fileExtension.join(', '));
+                        alert("Somente arquivos no formato : " + fileExtension.join(', '));
 
                     } else {
                         if ((element.size / Math.pow(1024, 2)) < size) {
@@ -167,8 +174,7 @@
                 let result = data.result
                 if (result.is_valid) {
                     let a = $('<a></a>').html(result.name).attr('href', result.file)
-                    let d = $('<a></a>').html("Excluir").attr('href', result.delete).attr('class', 'btn red')
-                    d.attr('class', 'delete_file')
+                    let d = $('<a></a>').html("Excluir").attr('href', result.delete).attr('class', 'red-text delete_file')
                     let td = $('<td></td>')
                     let td2 = td.clone()
                     td.append(a)

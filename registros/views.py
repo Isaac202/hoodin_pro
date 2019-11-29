@@ -26,7 +26,7 @@ class RegistrosCreate(View):
         context = {}
         context['form'] = RegistrosForm()
         context["files"] = ArquivoRegistro.objects.filter(
-            id_usuario=self.request.user)
+            id_usuario=self.request.user, paid=False)
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
@@ -36,25 +36,21 @@ class RegistrosCreate(View):
             id_usuario=request.user,
             paid=False
             )
-        form = RegistrosForm(request.POST)
-        # if form.is_valid():
-        a = ArquivoSerializer(files, many=True)
-        return HttpResponse(a.data)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-
-    #     return context
-
-    # def form_valid(self, form):
-    #     form.instance.id_usuario = self.request.user
-    #     return super(RegistrosCreate, self).form_valid(form)
-
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs.update({'user': self.request.user})
-    #     return kwargs
-    # success_urls = reverse_lazy('lista_placer')
+        registros = []
+        if files:
+            for file in files:
+                form = RegistrosForm(request.POST)
+                if form.is_valid():
+                    registro = form.save(commit=False)
+                    registro.arquivo = file
+                    registro.valor = registro.codservico.preco
+                    registro.id_usuario = request.user
+                    registro.save()
+                    file.paid = True
+                    file.save()
+                    registros.append(registro.pk)
+        return HttpResponse(registros)
 
 
 class RegistrosList(LoginRequiredMixin, ListView):
@@ -93,5 +89,4 @@ class BasicUploadView(View):
             data = {'is_valid': True, 'name': file.name,
                     'size': size, "key": shar256}
 
-        # data = {'is_valid': False}
         return JsonResponse(data)

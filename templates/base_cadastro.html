@@ -185,6 +185,7 @@
                     .attr('id', 'check_file' + data.id)
 
             )
+            $('#total').html(data.price)
         },
         done: function (e, data) {
             //$("#total").html("10")
@@ -192,7 +193,6 @@
             let result = data.result
             if (result.is_valid) {
                 console.log(result)
-                $('#total').html(result.price)
                 let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
                 $("#gallery tbody").prepend(
                     $("<tr>").append(
@@ -210,7 +210,8 @@
                         )
                     ).attr('id', 'tr_file' + result.id)
                 )
-            }else{
+            }
+            if(result.error){
                 alert(result.error)
             }
         },

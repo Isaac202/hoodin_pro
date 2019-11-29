@@ -245,16 +245,17 @@ ESTADO_CIVIL_CHOICES = (
 
 )
 
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR)
+STATIC_ROOT = os.path.join(BASE_DIR, "estaticos")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default=None)
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 # STORAGE DE CONFIGRUCAO DO AWS
 #----------------------------------------------------------------------------
-if  AWS_ACCESS_KEY_ID:
+if AWS_ACCESS_KEY_ID:
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
@@ -266,11 +267,11 @@ if  AWS_ACCESS_KEY_ID:
     AWS_DEFAULT_ACL = 'private'
     #Static assets
     #---------------------------------------------------------------------------
-    # STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
+    STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
     STATIC_S3_PATH = 'static'
-    # STATIC_ROOT = f'/{STATIC_S3_PATH}/'
-    # STATIC_URL = f'///s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/'
-    ADMIN_MEDIA_PREFIX =  f'///s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/' + 'admin/'
+    STATIC_ROOT = f'/{STATIC_S3_PATH}/'
+    STATIC_URL = f'///s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/'
+    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
     # uplaod dos arqivos
     #--------------------------------------------------------------------------
 
@@ -282,10 +283,9 @@ if  AWS_ACCESS_KEY_ID:
     INSTALLED_APPS.append('storages')
 
 
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'estaticos')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'estaticos')
+# ]
 
 
 LOGIN_URL = '/login/'

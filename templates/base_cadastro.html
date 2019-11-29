@@ -69,10 +69,12 @@
     $('select').select2(); //autocomplete select2
 </script>
 
-
-<script src="{% static 'registros/js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
-<script src="{% static 'registros/js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
-<script src="{% static 'registros/js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.2.0/js/vendor/jquery.ui.widget.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.2.0/js/jquery.iframe-transport.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.2.0/js/jquery.fileupload.js"></script>
+<!-- <script src="{% static 'registros/js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script> -->
+<!-- <script src="{% static 'registros/js/jquery-file-upload/jquery.iframe-transport.js' %}"></script> -->
+<!-- <script src="{% static 'registros/js/jquery-file-upload/jquery.fileupload.js' %}"></script> -->
 <!-- <script src="{% static 'registros/js/basic-upload.js' %}"></script> -->
 <script>
     // $(document).ready(function () {
@@ -176,11 +178,11 @@
 
             )
             
-            let total = parseFloat($("#total").html())
-            total = total + valor
-            console.log(total)
-            console.log(valor)
-            $("#total").html(total.toFixed(2))
+            // let total = parseFloat($("#total").html())
+            // total = total + valor
+            // console.log(total)
+            // console.log(valor)
+            // $("#total").html(total.toFixed(2))
 
         },
         done: function (e, data) {

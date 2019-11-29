@@ -37,7 +37,15 @@
         <div class="col s12 m10 l6 offset-m1">
           <div class="row">
             <div class="col s11 offset-s1">
-              <h4 class="center">Informações</h4>
+              <div class="row">
+                <div class="col s8">
+                    <h4 class="center">Informações</h4>
+                </div>
+                <div class="col s4 center grey lighten-2">
+                    <h6>Saldo atual</h6>
+                    <h6 id="credito">{{user.clientes.get_credit}}</h6>
+                </div>
+              </div>
               <div class="row grey lighten-1">
                 <div class="col s4 center grey lighten-2">
                   <h6>Tamanho</h6>

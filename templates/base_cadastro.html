@@ -81,29 +81,31 @@
     var fileExtension = [];
     var size = 0;
     var valor = 0;
-
+    var extentions = ""
     $('#id_codservico').change(function () {
         if ($(this).val() != "") {
             let url = "/api/servicos/" + $(this).val()
-            let extentions = ""
+            let url_upload = "{% url 'base_upload' %}"
             $.getJSON(url, function (data) {
                 fileExtension = []
                 data.extensoes.forEach(element => {
                     fileExtension.push(element.nome)
                     extentions += element.nome + ", "
                 });
+                extentions = extentions.substring(0, extentions.length - 2)
                 size = data.tamanho;
-
             }).done(function (data) {
                 valor = parseFloat(data.preco).toFixed(2)
                 $("#tamanho").html(data.tamanho + "MB")
                 $("#valor").html("R$ " + data.preco)
                 $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase())
-                $("#extentions").toggleClass('grey')
+                $("#extentions").addClass('grey')
             }).fail(function (resp) {
                 alert('erro')
+                $("#extentions").removeClass('grey')
             }).always(function (data) {
-                // console.log(data)
+                console.log(data)
+                extentions = ""
             })
             $("#fileupload").removeAttr('disabled')
         } else {
@@ -133,6 +135,7 @@
 
     var is_valid = false;
     $("#fileupload").fileupload({
+        // url:"{% url 'base_upload' %}",
         dataType: 'json',
         sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
         autoUpload: false,
@@ -175,14 +178,9 @@
                 $('<input type="checkbox"/>').val(data.id)
                     .attr('name', 'files')
                     .attr('checked', true)
+                    .attr('id', 'check_file' + result.id)
 
             )
-            
-            // let total = parseFloat($("#total").html())
-            // total = total + valor
-            // console.log(total)
-            // console.log(valor)
-            // $("#total").html(total.toFixed(2))
 
         },
         done: function (e, data) {
@@ -191,6 +189,7 @@
             $("#percent").text("concluido ;)");
             let result = data.result
             if (result.is_valid) {
+                let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
                 $("#gallery tbody").prepend(
                     $("<tr>").append(
                         $('<td>').append(
@@ -200,10 +199,12 @@
                         ),
                         $('<td>').append(
                             $("<a>").html("excluir").addClass('red-text')
-                        ).addClass('delete_file')
-                            .attr('link', result.delete)
-                            .attr('style', 'cursor: pointer;')
-                    )
+                                .addClass('delete_file')
+                                .attr('link', result.delete)
+                                .attr('style', 'cursor: pointer;')
+                                .attr('onclick', str_func)
+                        )
+                    ).attr('id', 'tr_file' + result.id)
                 )
                 // $(document).ready()
             }
@@ -231,6 +232,22 @@
         })
     })
     // })
+
+    function remove_file(url, id) {
+        let element = $("#tr_file" + id)
+        element.fadeOut(1000)
+        data = { "csrfmiddlewaretoken": "{{ csrf_token }}" }
+        $.post(url, data, function (data) {
+
+        }).fail(function (e, data) {
+            element.fadeIn(005)
+        }).done(function (data) {
+            element.remove()
+            $('#check_file'+id)
+        }).always(function (data) {
+            console.log(data)
+        })
+    }
 
 </script>
 

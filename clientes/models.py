@@ -64,6 +64,9 @@ class Clientes(models.Model):
             return False
         return True
 
+    def get_credit(self):
+        return "%.2f" % self.valor_credito
+
     # def save(self, *args,**kwargs):
     #     super(Clientes, self).save(*args, **kwargs)
     #     try:

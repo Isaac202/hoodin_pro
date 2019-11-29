@@ -84,7 +84,7 @@
 
     $('#id_codservico').change(function () {
         if ($(this).val() != "") {
-            let url = "http://localhost:8000/api/servicos/" + $(this).val()
+            let url = "/api/servicos/" + $(this).val()
             let extentions = ""
             $.getJSON(url, function (data) {
                 fileExtension = []

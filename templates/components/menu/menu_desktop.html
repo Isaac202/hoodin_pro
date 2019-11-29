@@ -2,12 +2,12 @@
 <!--ESTÁ LOGADO E NÃO É SUPER USUÁRIO-->
 <div class="nav-wrapper">
 {% if user.is_authenticated and not request.user.is_superuser%}
-          <a href="#" class="brand-logo center-align">   </a>
+          <a href="/" class="brand-logo center-align">   </a>
 
            <ul id="nav-mobile" class="right hide-on-med-and-down">
 
                <li>
-                      <a href="#">
+                      <a href="/">
                             <i class="material-icons left">assignment</i>
                              Home
                        </a>
@@ -63,7 +63,7 @@
 
       <ul id="nav-mobile" class="right hide-on-med-and-down">
            <li>
-                <a href="#">
+                <a href="/">
                     <i class="material-icons left">assignment</i>
                        Home
                 </a>
@@ -121,7 +121,7 @@
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
-               <a href="{% url 'login' %}">
+               <a href="/">
                  <i class="material-icons left">home</i>
                  Home
                </a>

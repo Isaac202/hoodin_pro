@@ -1,27 +1,113 @@
-
-
-
-
-
-
 {% extends 'base.html' %}
 {% load static %}
 
 {% block main %}
-  <!--Slide show-->
-  {% include "components/slider.html" %}
+
+<div>
+
+  <center>
+    <div style="position: relative;">
+      <h2 style="color: #2965b3; top: 30%; left: 5%; position: absolute;">DIREITOS AUTORAIS COM VALIDADE EM 177 PAÍSES <br>ONLINE,
+        FÁCIL, RÁPIDO E SEGURO</h2>
+      <img
+        src="https://www.hoodid.com/site/conteudo/arquivo_adm/imagens/2015/03/hoodid-site-1-1-20150303152132-banner-home-1-png.png"></a>
+    </div>
+  </center>
+
+  <center>
+  <div class=" blue darken-1" style="padding: 1rem">
+      <h4 style="color: white">
+        Ok, entendi. Agora, quero registrar minha obra.
+      </h4>
+      <a class="btn blue" href="{% url 'login' %}">login</a>
+    </div>
+  </center>
+ 
+  <br>
+  <div class="" id="sobre">
+    <center>
+      <h4 style="color: #616161">
+        Quem Somos
+      </h4>
+    </center>
+  </div>
+
+  <div align="center">
+
+    <video class="responsive-video" controls width="640" height="380">
+      <source src="https://youtu.be/eVTXPUF4Oz4" type="video/mp4"> </video>
+
+  </div>
+  <br>
+
+
+
+
+
+  <div class="" >
+    <center>
+      <h4 style="color: #616161">
+        Contato
+      </h4>
+    </center>
+  </div>
+  <br>
+
+
+
+  <div class="row container" id="contato">
+    <form name="meu_form">
+      <div class="input-field">
+        <p class="nome">
+
+          <i class="material-icons prefix">account_box</i>
+          <input type="text" id="nomeid" placeholder="Seu nome" required="required" name="nome" />
+          <label for="nome">Nome</label>
+        </p>
+      </div>
+      <div class="input-field">
+        <p class="fone">
+          <i class="material-icons prefix">phone</i>
+          <input type="text" id="foneid" placeholder="(xx)xx-xx-xx-xx" name="fone" />
+          <label for="fone">Fone</label>
+        </p>
+      </div>
+      <div class="input-field ">
+        <p>
+          <i class="material-icons prefix">email</i>
+          <input type="email" id="emailid" placeholder="email@mail.com" name="email" />
+          <label for="email">Email</label>
+        </p>
+      </div>
+      <div class="input-field ">
+        <p>
+          <i class="material-icons prefix">insert_comment</i>
+          <textarea placeholder="Deixe sua mensagem"></textarea>
+        </p>
+      </div>
+      <div class="input-field ">
+        <p class="submit">
+          <input type="submit" class="orange accent-4  btn" onclick="Enviar();" value="Enviar" />
+        </p>
+      </div>
+    </form>
+  </div>
+
+  <br><br>
+
+</div>
 
 {% endblock main %}
 
 
 {% block script %}
-    <script type="text/javascript">
-          $(document).ready(function(){
-          $('.slider').slider(); // inicializando slidshow
-          $('select').material_select();//inicializando a select compomente
-          $(".button-collapse").sideNav();  // menu dispositivos moveis
-          $('.modal').modal(); // modal
-        });
-    </script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.slider').slider(); // inicializando slidshow
+    $('select').material_select();//inicializando a select compomente
+    $(".button-collapse").sideNav();  // menu dispositivos moveis
+    $('.modal').modal(); // modal
+  });
+</script>
 {% endblock script %}
 <!---->

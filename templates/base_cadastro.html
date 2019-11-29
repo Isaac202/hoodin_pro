@@ -82,10 +82,13 @@
     var size = 0;
     var valor = 0;
     var extentions = ""
+    var formData = new FormData()
+
     $('#id_codservico').change(function () {
         if ($(this).val() != "") {
             let url = "/api/servicos/" + $(this).val()
-            let url_upload = "{% url 'base_upload' %}"
+            formData.set('service', $(this).val());
+            formData.set('csrfmiddlewaretoken', "{{ csrf_token }}")
             $.getJSON(url, function (data) {
                 fileExtension = []
                 data.extensoes.forEach(element => {
@@ -104,7 +107,7 @@
                 alert('erro')
                 $("#extentions").removeClass('grey')
             }).always(function (data) {
-                console.log(data)
+                // console.log(data)
                 extentions = ""
             })
             $("#fileupload").removeAttr('disabled')
@@ -135,10 +138,11 @@
 
     var is_valid = false;
     $("#fileupload").fileupload({
-        // url:"{% url 'base_upload' %}",
+        url:"{% url 'base_upload' %}",
         dataType: 'json',
         sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
         autoUpload: false,
+        formData: formData,
         add: function (e, data) {
             // var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
             data.files.forEach(element => {
@@ -178,14 +182,12 @@
                 $('<input type="checkbox"/>').val(data.id)
                     .attr('name', 'files')
                     .attr('checked', true)
-                    .attr('id', 'check_file' + result.id)
+                    .attr('id', 'check_file' + data.id)
 
             )
-
         },
         done: function (e, data) {
-            $("#total").html("10")
-            $(".determinate").css({ "width": "0%" });
+            //$("#total").html("10")
             $("#percent").text("concluido ;)");
             let result = data.result
             if (result.is_valid) {
@@ -209,9 +211,13 @@
                 // $(document).ready()
             }
         },
-        // always:function(){
-        //     alert('teste')
-        // }
+        fail: function(e){
+            alert('erro')
+        },
+        always:function(){
+            $(".determinate").css({ "width": "0%" });
+            $("#percent").text("0%");
+        }
 
     });
 
@@ -243,7 +249,7 @@
             element.fadeIn(005)
         }).done(function (data) {
             element.remove()
-            $('#check_file'+id)
+            $('#check_file' + id).remove()
         }).always(function (data) {
             console.log(data)
         })

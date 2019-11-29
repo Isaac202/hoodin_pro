@@ -7,6 +7,8 @@ from registros.models import Registros, ArquivoRegistro
 from registros.forms import RegistrosForm, ArquivoRegistroForm
 from registros.api.serializers import ArquivoSerializer
 from tools.genereteKey import get_size_file, file_to_shar256
+from servicos.models import Servicos
+from django.shortcuts import get_object_or_404
 
 
 class BasicUploadView(APIView):
@@ -23,6 +25,8 @@ class BasicUploadView(APIView):
 
     def post(self, request, format=None):
         file = request.FILES['file']
+        service = get_object_or_404(Servicos, pk=request.POST.get('service'))
+        
         name = file.name
         shar256 = file_to_shar256(file)
         size = file.size  # get_size_file(file)

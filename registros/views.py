@@ -18,9 +18,9 @@ from django.http import HttpResponse
 class RegistrosCreate(View):
     template_name = "registros/registros.html"
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     print(files,'\n\n\n')
-    #     return super().dispatch(request, *args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        # request.session['files'] = []
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         context = {}

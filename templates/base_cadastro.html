@@ -191,6 +191,8 @@
             $("#percent").text("concluido ;)");
             let result = data.result
             if (result.is_valid) {
+                console.log(result)
+                $('#total').html(result.price)
                 let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
                 $("#gallery tbody").prepend(
                     $("<tr>").append(
@@ -208,7 +210,8 @@
                         )
                     ).attr('id', 'tr_file' + result.id)
                 )
-                // $(document).ready()
+            }else{
+                alert(result.error)
             }
         },
         fail: function(e){

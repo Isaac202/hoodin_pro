@@ -18,9 +18,14 @@
 {% endblock %}
 
 {% block main %}
-
 <div class="container">
   <div class="row" style="margin-top: 1rem;">
+    
+    {% for file in request.session.files %}
+      <h1>s{{file}}</h1>
+      
+    {% endfor %}
+      
     <form id="registro-form" class="col s12" action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 

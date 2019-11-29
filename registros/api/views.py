@@ -16,33 +16,38 @@ class BasicUploadView(APIView):
     # authentication_classes = [authentication.TokenAuthentication]
     # permission_classes = [permissions.IsAdminUser]
 
-    # def get(self, request, format=None):
-    #     data = {}
-    #     url = str(reverse_lazy('delete_file', kwargs={'pk':1}))
-    #     print(url)
-    #     data['url'] = url
-    #     return Response(data)
+    def get(self, request, format=None):
+        # data = {}
+        # url = str(reverse_lazy('delete_file', kwargs={'pk':1}))
+        # print(url)
+        # data['url'] = url
+        # request.session['files'].append(1)
+        data = request.session['files']
+        return Response(data)
 
     def post(self, request, format=None):
-        file = request.FILES['file']
         service = get_object_or_404(Servicos, pk=request.POST.get('service'))
-        
-        name = file.name
-        shar256 = file_to_shar256(file)
-        size = file.size  # get_size_file(file)
-        form = ArquivoRegistroForm(request.POST, request.FILES)
+        file = request.FILES['file']
+        cliente = request.user.clientes
         data = {'is_valid':False}
-        if form.is_valid():
-            file = form.save(commit=False)
-            file.id_usuario = request.user
-            file.shar256 = shar256
-            file.name = name
-            file.size = size
-            file.save()
-            serializer = ArquivoSerializer(file, many=False)
-            data = serializer.data
-            data['delete'] = str(reverse_lazy('delete_file', kwargs={'pk':file.pk}))
-            data['is_valid'] = True
+        if cliente.valor_credito >= service.preco:
+            name = file.name
+            shar256 = file_to_shar256(file)
+            size = file.size  # get_size_file(file)
+            form = ArquivoRegistroForm(request.POST, request.FILES)
+            if form.is_valid():
+                file = form.save(commit=False)
+                file.id_usuario = request.user
+                file.shar256 = shar256
+                file.name = name
+                file.size = size
+                file.save()
+                serializer = ArquivoSerializer(file, many=False)
+                data = serializer.data
+                data['delete'] = str(reverse_lazy('delete_file', kwargs={'pk':file.pk}))
+                data['is_valid'] = True
+        else:
+            data['error'] = "Crédito insuficiente"
         return Response(data)
 
 

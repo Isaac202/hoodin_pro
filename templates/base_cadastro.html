@@ -78,6 +78,7 @@
     // $(document).ready(function () {
     var fileExtension = [];
     var size = 0;
+    var valor = 0;
 
     $('#id_codservico').change(function () {
         if ($(this).val() != "") {
@@ -92,6 +93,7 @@
                 size = data.tamanho;
 
             }).done(function (data) {
+                valor = parseFloat(data.preco).toFixed(2)
                 $("#tamanho").html(data.tamanho + "MB")
                 $("#valor").html("R$ " + data.preco)
                 $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase())
@@ -173,6 +175,13 @@
                     .attr('checked', true)
 
             )
+            
+            let total = parseFloat($("#total").html())
+            total = total + valor
+            console.log(total)
+            console.log(valor)
+            $("#total").html(total.toFixed(2))
+
         },
         done: function (e, data) {
             $("#total").html("10")

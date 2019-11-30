@@ -51,7 +51,7 @@ class BasicUploadView(APIView):
         files = ArquivoRegistro.objects.filter(
             id_usuario=request.user, paid=False
         )
-        
+
         price = service.preco * files.count()
         data['price'] = price
 
@@ -60,9 +60,8 @@ class BasicUploadView(APIView):
         return Response(data)
 
 
-
 class SetResumeFileView(APIView):
-    
+
     # authentication_classes = [authentication.TokenAuthentication]
     # permission_classes = [permissions.IsAdminUser]
 
@@ -71,12 +70,10 @@ class SetResumeFileView(APIView):
         file = ArquivoRegistro.objects.filter(pk=pk, id_usuario=request.user)
         if file.exists():
             file.update(resume=request.POST['resume'])
-            # file.resume = 
+            # file.resume =
             # file.save()
             data['success'] = True
         return Response(data)
-
-
 
 
 class DeleteFileView(APIView):

@@ -1,183 +1,185 @@
 <!--menu desktop-->
 <!--ESTÁ LOGADO E NÃO É SUPER USUÁRIO-->
 <div class="nav-wrapper">
-{% if user.is_authenticated and not request.user.is_superuser%}
-          <a href="/" class="brand-logo center-align">   </a>
+    {% if user.is_authenticated and not request.user.is_superuser%}
+    <a href="/" class="brand-logo center-align"> </a>
 
-           <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-               <li>
-                      <a href="/">
-                            <i class="material-icons left">assignment</i>
-                             Home
-                       </a>
-               </li>
+        <li>
+            <a href="/">
+                <i class="material-icons left">assignment</i>
+                Home
+            </a>
+        </li>
 
-               <li>
-                     <a href="{% url 'cliente:update' %}">
-                         <i class="material-icons left">people</i>
-                            Meus Dados
-                    </a>
-                </li>
+        <li>
+            <a href="{% url 'cliente:update' %}">
+                <i class="material-icons left">people</i>
+                Meus Dados
+            </a>
+        </li>
 
-                <li>
-                    <a href="#">
-                        <i class="material-icons left">perm_media</i>
-                        Tabela Preços
-                    </a>
-                </li>
+        <li>
+            <a href="#">
+                <i class="material-icons left">perm_media</i>
+                Tabela Preços
+            </a>
+        </li>
 
-                <li>
-                    <a href="{% url 'registrar' %}">
-                        <i class="material-icons left">perm_media</i>
-                        Registrar
-                    </a>
-                </li>
+        <li>
+            <a href="{% url 'registrar' %}">
+                <i class="material-icons left">perm_media</i>
+                Registrar
+            </a>
+        </li>
 
-                <li>
-                    <a href="#">
-                        <i class="material-icons left">perm_media</i>
-                        Meus Registros
-                    </a>
-                </li>
+        <li>
+            <a href="#">
+                <i class="material-icons left">perm_media</i>
+                Meus Registros
+            </a>
+        </li>
 
-                <li>
-                    <a href="#">
-                        <i class="material-icons left">perm_media</i>
-                        Fale Conosco
-                    </a>
-                </li>
+        <li>
+            <a href="#">
+                <i class="material-icons left">perm_media</i>
+                Fale Conosco
+            </a>
+        </li>
 
-                <li>
-                   <a href="{% url 'logout' %}">
-                     <i class="material-icons left">exit_to_app</i>
-                     Sair
-                    </a>
-                </li>
+        <li>
+            <a href="{% url 'logout' %}">
+                <i class="material-icons left">exit_to_app</i>
+                Sair
+            </a>
+        </li>
+    </ul>
+
+    {% endif %}
+    <!--ESTÁ LOGADO E É SUPER USUÁRIO-->
+    {% if user.is_authenticated and request.user.is_superuser %}
+    <!--<div class="nav-wrapper">-->
+
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+            <a href="/">
+                <i class="material-icons left">assignment</i>
+                Home
+            </a>
+        </li>
+
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="{% url 'lista_extensoes' %}">Extenções</a></li>
+            <li><a href="{% url 'lista_servicos' %}">Serviços</a></li>
+            <li><a href="{% url 'lista_indicacoes' %}">Indicações</a></li>
         </ul>
 
-{% endif %}
-<!--ESTÁ LOGADO E É SUPER USUÁRIO-->
-{% if user.is_authenticated and request.user.is_superuser %}
-   <!--<div class="nav-wrapper">-->
+        <!-- Dropdown Trigger -->
+        <li><a href="#!" class="dropdown-button" data-target="dropdown1">Cadastros<i
+                    class="material-icons right">arrow_drop_down</i></a></li>
 
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-           <li>
-                <a href="/">
-                    <i class="material-icons left">assignment</i>
-                       Home
-                </a>
-           </li>
+        <li>
+            <a href="#">
+                <i class="material-icons left">perm_media</i>
+                Tabela de Preços
+            </a>
+        </li>
 
-           <ul id="dropdown1" class="dropdown-content">
-               <li><a href="{% url 'lista_extensoes' %}">Extenções</a></li>
-               <li><a href="{% url 'lista_servicos' %}">Serviços</a></li>
-               <li><a href="{% url 'lista_indicacoes' %}">Indicações</a></li>
-           </ul>
+        <li>
+            <a href="#">
+                <i class="material-icons left">burst_mode</i>
+                QRCode
+            </a>
+        </li>
 
-           <!-- Dropdown Trigger -->
-           <li><a href="#!" class="dropdown-button" data-target="dropdown1">Cadastros<i class="material-icons right">arrow_drop_down</i></a></li>
-
-           <li>
-                <a href="#">
-                    <i class="material-icons left">perm_media</i>
-                       Tabela de Preços
-                </a>
-           </li>
-
-           <li>
-                <a href="#">
-                    <i class="material-icons left">burst_mode</i>
-                    QRCode
-                </a>
-           </li>
-
-           <ul id="dropdown2" class="dropdown-content">
-               <li><a href="#">Cliente Analítico</a></li>
-               <li><a href="#">Cliente Sintético</a></li>
-               <li><a href="#">Vendas do Período</a></li>
-           </ul>
-
-           <!-- Dropdown Trigger -->
-           <li><a href="#!" class="dropdown-button" data-target="dropdown2">Relatórios<i class="material-icons right">arrow_drop_down</i></a></li>
-
-           <li>
-                <a href="#">
-                    <i class="material-icons left">burst_mode</i>
-                    Config
-                </a>
-           </li>
-
-           <li>
-               <a href="{% url 'logout' %}">
-                 <i class="material-icons left">exit_to_app</i>
-                 Sair
-                </a>
-            </li>
-       </ul>
-{% endif %}
-<!--NÃO ESTÁ LOGADO-->
-{% if not user.is_authenticated %}
-
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li>
-               <a href="/">
-                 <i class="material-icons left">home</i>
-                 Home
-               </a>
-            </li>
-
-            <li>
-               <a href="#">
-                 <i class="material-icons left">assignment</i>
-                 Quem somos
-                </a>
-            </li>
-
-            <li>
-               <a href="{% url 'login' %}">
-                 <i class="material-icons left">enhanced_encryption</i>
-                 Registrar
-                </a>
-            </li>
-
-            <li>
-               <a href="#">
-                 <i class="material-icons left">monetization_on</i>
-                 Preços
-                </a>
-            </li>
-
-            <li>
-               <a href="#">
-                 <i class="material-icons left">mic</i>
-                 Depoimentos
-                </a>
-            </li>
-
-            <li>
-               <a href="#">
-                 <i class="material-icons left">email</i>
-                 Fale conosco
-                </a>
-            </li>
-
-            <li>
-               <a href="{% url 'cliente:new' %}">
-                 <i class="material-icons left">people</i>
-                 Cadastre-se
-                </a>
-             </li>
-
-             <li>
-               <a href="{% url 'login' %}">
-                 <i class="material-icons left">account_box</i>
-                 Login
-                </a>
-             </li>
-
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a href="#">Cliente Analítico</a></li>
+            <li><a href="#">Cliente Sintético</a></li>
+            <li><a href="#">Vendas do Período</a></li>
         </ul>
-{% endif %}
+
+        <!-- Dropdown Trigger -->
+        <li><a href="#!" class="dropdown-button" data-target="dropdown2">Relatórios<i
+                    class="material-icons right">arrow_drop_down</i></a></li>
+
+        <li>
+            <a href="#">
+                <i class="material-icons left">burst_mode</i>
+                Config
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'logout' %}">
+                <i class="material-icons left">exit_to_app</i>
+                Sair
+            </a>
+        </li>
+    </ul>
+    {% endif %}
+    <!--NÃO ESTÁ LOGADO-->
+    {% if not user.is_authenticated %}
+
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+            <a href="/">
+                <i class="material-icons left">home</i>
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="material-icons left">assignment</i>
+                Quem somos
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'login' %}">
+                <i class="material-icons left">enhanced_encryption</i>
+                Registrar
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="material-icons left">monetization_on</i>
+                Preços
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="material-icons left">mic</i>
+                Depoimentos
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="material-icons left">email</i>
+                Fale conosco
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'cliente:new' %}">
+                <i class="material-icons left">people</i>
+                Cadastre-se
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'login' %}">
+                <i class="material-icons left">account_box</i>
+                Login
+            </a>
+        </li>
+
+    </ul>
+    {% endif %}
 </div>
 {% block script %}
 {% endblock script %}

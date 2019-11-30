@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from tools.tests import send_mail as s
 
 class IndexView(TemplateView):
-    template_name = 'home/index.html'
+    template_name = 'home.html'
 
 
 def sair(request):

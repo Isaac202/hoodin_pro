@@ -28,12 +28,33 @@
     var valor = 0;
     var extentions = ""
     var formData = new FormData()
+    let url_up = "{% url 'base_upload' %}"
+
+
+    $("#btn-upload").click(function () {
+        if ($("#fileupload").prop('disabled')) {
+            alert('selecione o serviço!')
+        } else {
+            $("#fileupload").click();
+        }
+    });
+
+    function bytesToSize(bytes) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes == 0) return '0 Byte';
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+
+
+
 
     $('#id_codservico').change(function () {
         if ($(this).val() != "") {
             let url = "/api/servicos/" + $(this).val()
-            formData.set('service', $(this).val());
-            formData.set('csrfmiddlewaretoken', "{{ csrf_token }}")
+            let data = '{"csrfmiddlewaretoken": "{{ csrf_token }}",' + '"service":' + $(this).val()+'}'
+
+            $("#fileupload").attr('data-form-data', data)
             let resp = $.getJSON(url, function (data) {
                 fileExtension = []
                 data.extensoes.forEach(element => {
@@ -63,151 +84,131 @@
             // $("#extentions").toggleClass('grey')
 
         }
-    })
 
 
-    $("#btn-upload").click(function () {
-        if ($("#fileupload").prop('disabled')) {
-            alert('selecione o serviço!')
-        } else {
-            $("#fileupload").click();
-        }
-    });
+        $("#fileupload").fileupload({
+            // url: url_up,
+            dataType: 'json',
+            sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
+            autoUpload: false,
+            // formData: formData,
+            add: function (e, data) {
+                // var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+                data.files.forEach(element => {
+                    // console.log(element)
+                    let extention = element.name.split('.').pop().toLowerCase()
+                    if ($.inArray(extention, fileExtension) == -1) {
+                        alert("Somente arquivos no formato : " + fileExtension.join(', '));
 
-    function bytesToSize(bytes) {
-        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-        if (bytes == 0) return '0 Byte';
-        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-    }
-
-
-    var is_valid = false;
-    $("#fileupload").fileupload({
-        url: "{% url 'base_upload' %}",
-        dataType: 'json',
-        sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
-        autoUpload: false,
-        formData: formData,
-        add: function (e, data) {
-            // var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
-            data.files.forEach(element => {
-                // console.log(element)
-                let extention = element.name.split('.').pop().toLowerCase()
-                if ($.inArray(extention, fileExtension) == -1) {
-                    alert("Somente arquivos no formato : " + fileExtension.join(', '));
-
-                } else {
-                    if ((element.size / Math.pow(1024, 2)) < size) {
-                        data.submit()
                     } else {
-                        let s = element.size / Math.pow(1024, 2)
-                        let msg = 'seu arquivo possui ' + s.toFixed(2) + "MB e pode ter no maximo " + size + 'MB'
-                        alert(msg)
+                        if ((element.size / Math.pow(1024, 2)) < size) {
+                            data.submit()
+                        } else {
+                            let s = element.size / Math.pow(1024, 2)
+                            let msg = 'seu arquivo possui ' + s.toFixed(2) + "MB e pode ter no maximo " + size + 'MB'
+                            alert(msg)
+                        }
                     }
+                });
+            },
+            start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
+                // console.log(e)
+            },
+            stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
+
+            },
+            progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                var strProgress = progress + "%";
+                // console.log(strProgress)
+                $(".progress-bar").css({ "width": strProgress });
+                $(".progress-bar").text(strProgress);
+            },
+            success: function (data) {
+                // console.log(data)
+                $("#registro-form").append(
+                    $('<input type="checkbox"/>').val(data.id)
+                        .attr('name', 'files')
+                        .attr('checked', true)
+                        .attr('id', 'check_file' + data.id)
+                        .addClass('d-none')
+
+                )
+                $('#total').html(data.price)
+            },
+            done: function (e, data) {
+                //$("#total").html("10")
+                $("#percent").text("concluido ;)");
+                let result = data.result
+                if (result.is_valid) {
+                    console.log(result)
+                    let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
+                    $("#gallery tbody").prepend(
+                        $("<tr>").append(
+                            $('<td>').append(
+                                $("<a>").html(result.name)
+                                    .attr('href', result.file)
+                                    .attr("target", "_blank")
+                                    .addClass('ml-5 text-white')
+                            ).addClass('mt-2 pt-2'),
+                            $('<td>').append(
+                                $("<a>").html("excluir").addClass('btn btn-danger text-white ')
+                                    .addClass('delete_file')
+                                    .attr('link', result.delete)
+                                    .attr('style', 'cursor: pointer;')
+                                    .attr('onclick', str_func)
+                            ).addClass("float-right"),
+                        ).attr('id', 'tr_file' + result.id)
+                    )
+
+                    $('#description tbody').prepend(
+                        $('<tr>').append(
+                            $('<td>').append(
+                                $('<label>').attr('for', 'desc_file' + result.id)
+                                    .html(result.name),
+                                $("<textarea>")
+                                    .attr('id', 'desc_file' + result.id)
+                                    .addClass('form-control form-control-lg resume')
+                                    .attr('onchange', "myFunction('" + result.id + "')"),
+                                $("<a>").html("Salvar").addClass('btn btn-primary text-white')
+                                    .addClass('float-right mt-2')
+                                    .attr('link', result.delete)
+                                    .attr('style', 'cursor: pointer;')
+
+                            ),
+                        ).attr('id', 'tr_desc' + result.id)
+                    )
+                    $('#coautores tbody').prepend(
+                        $('<tr>').append(
+                            $('<td>').append(
+                                $('<label>').attr('for', 'desc_file' + result.id)
+                                    .html(result.name),
+                                $("<textarea>")
+                                    .attr('id', 'desc_file' + result.id)
+                                    .addClass('form-control form-control-lg'),
+                                $("<a>").html("Salvar").addClass('btn btn-primary text-white')
+                                    .addClass('float-right mt-2')
+                                    .attr('link', result.delete)
+                                    .attr('style', 'cursor: pointer;')
+
+                            ),
+                        ).attr('id', 'tr_desc' + result.id)
+                    )
+
                 }
-            });
-        },
-        start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
-            // console.log(e)
-        },
-        stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
-
-        },
-        progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            var strProgress = progress + "%";
-            // console.log(strProgress)
-            $(".progress-bar").css({ "width": strProgress });
-            $(".progress-bar").text(strProgress);
-        },
-        success: function (data) {
-            // console.log(data)
-            $("#registro-form").append(
-                $('<input type="checkbox"/>').val(data.id)
-                    .attr('name', 'files')
-                    .attr('checked', true)
-                    .attr('id', 'check_file' + data.id)
-                    .addClass('d-none')
-
-            )
-            $('#total').html(data.price)
-        },
-        done: function (e, data) {
-            //$("#total").html("10")
-            $("#percent").text("concluido ;)");
-            let result = data.result
-            if (result.is_valid) {
-                console.log(result)
-                let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
-                // let new_description = $("#modal1").clone()
-                // new_description.attr('id', 'description' + result.id)
-                // new_description.children("p").html(result.name)
-                // $('body').append(new_description)
-                $("#gallery tbody").prepend(
-                    $("<tr>").append(
-                        $('<td>').append(
-                            $("<a>").html(result.name)
-                                .attr('href', result.file)
-                                .attr("target", "_blank")
-                                .addClass('ml-5 text-white')
-                        ).addClass('mt-2 pt-2'),
-                        $('<td>').append(
-                            $("<a>").html("excluir").addClass('btn btn-danger text-white ')
-                                .addClass('delete_file')
-                                .attr('link', result.delete)
-                                .attr('style', 'cursor: pointer;')
-                                .attr('onclick', str_func)
-                        ).addClass("float-right"),
-                    ).attr('id', 'tr_file' + result.id)
-                )
-                
-                $('#description tbody').prepend(
-                    $('<tr>').append(
-                        $('<td>').append(
-                            $('<label>').attr('for', 'desc_file' + result.id)
-                                .html(result.name),
-                            $("<textarea>")
-                                .attr('id', 'desc_file' + result.id)
-                                .addClass('form-control form-control-lg resume')
-                                .attr('onchange',"myFunction('"+result.id+"')"),
-                            $("<a>").html("Salvar").addClass('btn btn-primary text-white')
-                                .addClass('float-right mt-2')
-                                .attr('link', result.delete)
-                                .attr('style', 'cursor: pointer;')
-
-                        ),
-                    ).attr('id', 'tr_desc' + result.id)
-                )
-                $('#coautores tbody').prepend(
-                    $('<tr>').append(
-                        $('<td>').append(
-                            $('<label>').attr('for', 'desc_file' + result.id)
-                                .html(result.name),
-                            $("<textarea>")
-                                .attr('id', 'desc_file' + result.id)
-                                .addClass('form-control form-control-lg'),
-                            $("<a>").html("Salvar").addClass('btn btn-primary text-white')
-                                .addClass('float-right mt-2')
-                                .attr('link', result.delete)
-                                .attr('style', 'cursor: pointer;')
-
-                        ),
-                    ).attr('id', 'tr_desc' + result.id)
-                )
-
+                if (result.error) {
+                    alert(result.error)
+                }
+            },
+            fail: function (e) {
+                alert('erro')
+            },
+            always: function () {
+                $(".progress-bar").css({ "width": "0%" });
+                $(".progress-bar").text("0%");
             }
-            if (result.error) {
-                alert(result.error)
-            }
-        },
-        fail: function (e) {
-            alert('erro')
-        },
-        always: function () {
-            $(".progress-bar").css({ "width": "0%" });
-            $(".progress-bar").text("0%");
-        }
+
+        })
 
     });
 
@@ -266,16 +267,16 @@
 
     }
 
-    function myFunction(id){
-        let text = document.getElementById("desc_file"+id).value
-        let url = '/api/resume-file/'+id
+    function myFunction(id) {
+        let text = document.getElementById("desc_file" + id).value
+        let url = '/api/resume-file/' + id
         let data = {
             csrfmiddlewaretoken: "{{ csrf_token }}",
-            resume:text
+            resume: text
         }
-        $.post(url, data, function(data){
+        $.post(url, data, function (data) {
             console.log(data)
-        }).fail(function(e){
+        }).fail(function (e) {
             alert("erro")
         })
     }

@@ -27,7 +27,8 @@ class BasicUploadView(APIView):
         # return Response(data)
 
     def post(self, request, format=None):
-        service = get_object_or_404(Servicos, pk=request.POST.get('service'))
+        service = get_object_or_404(Servicos, pk=1)
+        # print(request.POST)
         cliente = request.user.clientes
         file = request.FILES['file']
         data = {'is_valid': False}
@@ -54,6 +55,7 @@ class BasicUploadView(APIView):
 
         price = service.preco * files.count()
         data['price'] = price
+        data['post'] = request.POST
 
         # if not cliente.valor_credito >= price:
         #     data['error'] = "Crédito insuficiente"

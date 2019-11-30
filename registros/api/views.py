@@ -27,7 +27,7 @@ class BasicUploadView(APIView):
         # return Response(data)
 
     def post(self, request, format=None):
-        service = get_object_or_404(Servicos, pk=1)
+        service = get_object_or_404(Servicos, pk=request.POST.get('service'))
         # print(request.POST)
         cliente = request.user.clientes
         file = request.FILES['file']

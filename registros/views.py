@@ -11,32 +11,32 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 from tools.genereteKey import get_size_file, file_to_shar256
-from django.http import HttpResponse    
+from django.http import HttpResponse
 
 
-
-class RegistrosCreate(View):
-    template_name = "registros/registros.html"
+class RegistrosCreate(LoginRequiredMixin, View):
+    template_name = "registros/registro.html"
 
     def dispatch(self, request, *args, **kwargs):
-        # request.session['files'] = []
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         context = {}
         context['form'] = RegistrosForm()
-        context["files"] = ArquivoRegistro.objects.filter(
+        files = ArquivoRegistro.objects.filter(
             id_usuario=self.request.user, paid=False)
+        for file in files:
+            file.file.delete()
+        files.delete()
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         files = request.POST.getlist('files', None)
         files = ArquivoRegistro.objects.filter(
-            pk__in=files, 
+            pk__in=files,
             id_usuario=request.user,
             paid=False
-            )
-
+        )
         registros = []
         if files:
             for file in files:

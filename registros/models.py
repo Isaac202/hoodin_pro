@@ -21,6 +21,7 @@ class ArquivoRegistro(models.Model):
     signature = models.FileField(blank=True, null=True, upload_to=user_directory_path)
     version = models.DecimalField(max_digits=9,decimal_places=2, default=1.0)
     paid = models.BooleanField(default=False)
+    resume = models.TextField(max_length=5000, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -33,11 +34,10 @@ class Registros(models.Model):
     valor = models.DecimalField(max_digits=9, decimal_places=2)
     data = models.DateTimeField(auto_now=True)
     arquivo = models.OneToOneField(ArquivoRegistro, verbose_name="arquivo", on_delete=models.CASCADE)
-    descricao = models.CharField(max_length=255)
-    # codqrcode = models.PositiveIntegerField(blank=True, null=True)
-    # codindicacao = models.PositiveIntegerField(blank=True, null=True)
+    descricao = models.CharField(max_length=255, blank=True, null=True)
+    codqrcode = models.PositiveIntegerField(blank=True, null=True)
+    codindicacao = models.PositiveIntegerField("Código de indicação", blank=True, null=True)
     desconto = models.DecimalField(max_digits=9,decimal_places=2, default=0)
-    resumo_obra = models.TextField(max_length=5000)
 
 
     class Meta:

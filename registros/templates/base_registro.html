@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_bootstrap.html" %}
 {% load static %}
 {% block header %}
 <!--autocomplete select2-->
@@ -8,6 +8,7 @@
         max-width: 100% !important;
     }
 
+    button,
     span {
         outline: 0 !important;
         /*removendo outiline do select2 autocomplete*/
@@ -20,13 +21,6 @@
     $('select').select2(); //autocomplete select2
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.2.0/js/vendor/jquery.ui.widget.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.2.0/js/jquery.iframe-transport.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.2.0/js/jquery.fileupload.js"></script>
-<!-- <script src="{% static 'registros/js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script> -->
-<!-- <script src="{% static 'registros/js/jquery-file-upload/jquery.iframe-transport.js' %}"></script> -->
-<!-- <script src="{% static 'registros/js/jquery-file-upload/jquery.fileupload.js' %}"></script> -->
-<!-- <script src="{% static 'registros/js/basic-upload.js' %}"></script> -->
 <script>
     // $(document).ready(function () {
     var fileExtension = [];
@@ -40,7 +34,7 @@
             let url = "/api/servicos/" + $(this).val()
             formData.set('service', $(this).val());
             formData.set('csrfmiddlewaretoken', "{{ csrf_token }}")
-            $.getJSON(url, function (data) {
+            let resp = $.getJSON(url, function (data) {
                 fileExtension = []
                 data.extensoes.forEach(element => {
                     fileExtension.push(element.nome)
@@ -124,9 +118,8 @@
             var progress = parseInt(data.loaded / data.total * 100, 10);
             var strProgress = progress + "%";
             // console.log(strProgress)
-            $(".determinate").css({ "width": strProgress });
-            $(".determinate").text(strProgress);
-            $("#percent").text(strProgress);
+            $(".progress-bar").css({ "width": strProgress });
+            $(".progress-bar").text(strProgress);
         },
         success: function (data) {
             // console.log(data)
@@ -135,6 +128,7 @@
                     .attr('name', 'files')
                     .attr('checked', true)
                     .attr('id', 'check_file' + data.id)
+                    .addClass('d-none')
 
             )
             $('#total').html(data.price)
@@ -146,35 +140,62 @@
             if (result.is_valid) {
                 console.log(result)
                 let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
-                let new_description = $("#modal1").clone()
-                new_description.attr('id', 'description' + result.id)
-                new_description.children("p").html(result.name)
-                $('body').append(new_description)
+                // let new_description = $("#modal1").clone()
+                // new_description.attr('id', 'description' + result.id)
+                // new_description.children("p").html(result.name)
+                // $('body').append(new_description)
                 $("#gallery tbody").prepend(
                     $("<tr>").append(
                         $('<td>').append(
                             $("<a>").html(result.name)
                                 .attr('href', result.file)
                                 .attr("target", "_blank")
-                        ),
+                                .addClass('ml-5 text-white')
+                        ).addClass('mt-2 pt-2'),
                         $('<td>').append(
-                            $("<a>").html('Descrição')
-                                .addClass('btn blue white-text')
-                                .append(
-                                    $('<i>').html('add').addClass('material-icons left')
-                                )
-                                .attr('onclick', "show_description('" + result.id + "')")
-
-                        ),
-                        $('<td>').append(
-                            $("<a>").html("excluir").addClass('btn red white-text')
+                            $("<a>").html("excluir").addClass('btn btn-danger text-white ')
                                 .addClass('delete_file')
                                 .attr('link', result.delete)
                                 .attr('style', 'cursor: pointer;')
                                 .attr('onclick', str_func)
-                        ),
+                        ).addClass("float-right"),
                     ).attr('id', 'tr_file' + result.id)
                 )
+                
+                $('#description tbody').prepend(
+                    $('<tr>').append(
+                        $('<td>').append(
+                            $('<label>').attr('for', 'desc_file' + result.id)
+                                .html(result.name),
+                            $("<textarea>")
+                                .attr('id', 'desc_file' + result.id)
+                                .addClass('form-control form-control-lg resume')
+                                .attr('onchange',"myFunction('"+result.id+"')"),
+                            $("<a>").html("Salvar").addClass('btn btn-primary text-white')
+                                .addClass('float-right mt-2')
+                                .attr('link', result.delete)
+                                .attr('style', 'cursor: pointer;')
+
+                        ),
+                    ).attr('id', 'tr_desc' + result.id)
+                )
+                $('#coautores tbody').prepend(
+                    $('<tr>').append(
+                        $('<td>').append(
+                            $('<label>').attr('for', 'desc_file' + result.id)
+                                .html(result.name),
+                            $("<textarea>")
+                                .attr('id', 'desc_file' + result.id)
+                                .addClass('form-control form-control-lg'),
+                            $("<a>").html("Salvar").addClass('btn btn-primary text-white')
+                                .addClass('float-right mt-2')
+                                .attr('link', result.delete)
+                                .attr('style', 'cursor: pointer;')
+
+                        ),
+                    ).attr('id', 'tr_desc' + result.id)
+                )
+
             }
             if (result.error) {
                 alert(result.error)
@@ -184,8 +205,8 @@
             alert('erro')
         },
         always: function () {
-            $(".determinate").css({ "width": "0%" });
-            $("#percent").text("0%");
+            $(".progress-bar").css({ "width": "0%" });
+            $(".progress-bar").text("0%");
         }
 
     });
@@ -218,6 +239,7 @@
             element.fadeIn(005)
         }).done(function (data) {
             element.remove()
+            $("#tr_desc" + id).remove()
             $('#check_file' + id).remove()
         }).always(function (data) {
             console.log(data)
@@ -232,13 +254,31 @@
     }
 
     function teste() {
-        // console.log('modal')
-        // $("#modal1").modal('show');
-        var instance = M.Modal.getInstance(document.getElementById('modal1'));
-        instance.open()
+        jQuery.noConflict();
+        // $('#modal1').modal('show'); 
+        $('#exampleModalLong').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
+        // var instance = M.Modal.getInstance(document.getElementById('modal1'));
+        // instance.open()
 
     }
 
+    function myFunction(id){
+        let text = document.getElementById("desc_file"+id).value
+        let url = '/api/resume-file/'+id
+        let data = {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            resume:text
+        }
+        $.post(url, data, function(data){
+            console.log(data)
+        }).fail(function(e){
+            alert("erro")
+        })
+    }
 
 </script>
 

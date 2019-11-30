@@ -55,9 +55,28 @@ class BasicUploadView(APIView):
         price = service.preco * files.count()
         data['price'] = price
 
-        if not cliente.valor_credito >= price:
-            data['error'] = "Crédito insuficiente"
+        # if not cliente.valor_credito >= price:
+        #     data['error'] = "Crédito insuficiente"
         return Response(data)
+
+
+
+class SetResumeFileView(APIView):
+    
+    # authentication_classes = [authentication.TokenAuthentication]
+    # permission_classes = [permissions.IsAdminUser]
+
+    def post(self, request, pk, format=None):
+        data = {'success': False}
+        file = ArquivoRegistro.objects.filter(pk=pk, id_usuario=request.user)
+        if file.exists():
+            file.update(resume=request.POST['resume'])
+            # file.resume = 
+            # file.save()
+            data['success'] = True
+        return Response(data)
+
+
 
 
 class DeleteFileView(APIView):

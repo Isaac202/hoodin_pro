@@ -1,0 +1,181 @@
+{% extends 'base_registro.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 p-2">
+      <div class="float-right">
+        <div class="p-1">
+          Saldo atual <br>
+          <div id="credito" class="text-center">
+            {{user.clientes.get_credit}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+
+  <section id="tabs">
+    <div class="container">
+      <!-- <h6 class="section-title h2"></h6> -->
+      <div class="row">
+        <div class="col-12 ">
+          <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                aria-controls="nav-home" aria-selected="true">
+                Arquivos
+              </a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                aria-controls="nav-profile" aria-selected="false">
+                Resumo das obras
+              </a>
+              <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                aria-controls="nav-contact" aria-selected="false">
+                Coautores
+              </a>
+              <!-- <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab"
+              aria-controls="nav-about" aria-selected="false">About</a> -->
+            </div>
+          </nav>
+          <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+            <div class="bg-light tab-pane fade show active" id="nav-home" role="tabpanel"
+              aria-labelledby="nav-home-tab">
+              <form id="registro-form" class="form-group" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-12 col-lg-6">
+                    <div class="card">
+                      <div class="card-body mb-lg-5">
+                        <div class="row mb-lg-3 p-lg-1">
+                          <div class="col-12">
+                            <label for="id_codindicacao">{{form.codindicacao.label}}</label>
+                            {{form.codindicacao}}
+                            <div class="alert-danger"></div>
+                          </div>
+                          <div class="col-12">
+                            <label for="id_codservico">{{form.codservico.label}}</label><br>
+                            {{form.codservico}}
+                            <div class="alert-danger"></div>
+                          </div>
+                          <div class="col-12 text-center mt-1 p-2">
+                            <div class="p-3 bg-light" id="extentions">
+                              Extensões permitidas: <br>
+                              Selecione o serviço!
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-6 mt-3 mt-lg-0">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <button id="btn-upload" type="button" class="btn btn-block card bg-light"
+                                  style="border: none; padding: 12%; border-radius: 10px; outline: none">
+                                  <h3 class="text-center" style="font-size: 200%">Clique ou Arraste até aqui!</h3>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 my-2">
+                            <div class="progress bg-white">
+                              <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100">0%</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="col-12 my-2">
+                        <div class="card ">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-4 text-left">
+                                <h6>Tamanho</h6>
+                                <h6 id="tamanho">0.00</h6>
+                              </div>
+                              <div class="col-4 text-center">
+                                <h6>Valor</h6>
+                                <h6 id="valor">0.00</h6>
+                              </div>
+                              <div class="col-4 text-right">
+                                <h6>Total</h6>
+                                <h6 id="total">0.00</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <div class="table-responsive">
+                      <table id="gallery" class="table table-sm table-dark">
+                        <tbody></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>
+
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <table id="description" class="table">
+                <tbody>
+
+                  <!-- <tr>
+                    <textarea class="form-control" onblur="myFunction()" name="" id="" cols="30" rows="10" class="resume"></textarea>
+                  </tr>
+                  <tr>
+                      <textarea class="form-control" onblur="myFunction()" name="" id="" cols="30" rows="10" class="resume"></textarea>
+                    </tr> -->
+                </tbody>
+              </table>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+              <table id="coautores" class="table">
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <!-- <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+          </div> -->
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <button type="button" class="btn btn-primary" onclick="teste()">
+  Launch demo modal
+</button> -->
+<input disabled id="fileupload" type="file" name="file" multiple="multiple" style="display: none;">
+<!-- data-url="{% url 'base_upload' %}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'> -->
+
+{% endblock %}

@@ -7,6 +7,10 @@ VENV_NAME := ./venv
 run:
 	python manage.py runserver
 
+db-up:
+	python manage.py makemigrations
+	python manage.py migrate
+
 delay:
 	celery -A viralize worker -l info
 

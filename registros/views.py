@@ -5,13 +5,20 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Registros, ArquivoRegistro
-from .forms import RegistrosForm, ArquivoRegistroForm
+from .forms import RegistrosForm, ArquivoRegistroForm, ArquivoRegistroTesteForm
 from registros.api.serializers import ArquivoSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 from tools.genereteKey import get_size_file, file_to_shar256
 from django.http import HttpResponse
+
+
+class TesteCreateView(CreateView):
+    form_class = ArquivoRegistroTesteForm
+    template_name = "registros/teste.html"
+    success_url = "/"
+
 
 
 class RegistrosCreate(LoginRequiredMixin, View):

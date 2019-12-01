@@ -30,7 +30,7 @@
     var formData = new FormData()
     let url_up = "{% url 'base_upload' %}"
 
-
+    
     $("#btn-upload").click(function () {
         if ($("#fileupload").prop('disabled')) {
             alert('selecione o serviço!')
@@ -178,6 +178,7 @@
 
 
     $('#id_codservico').change(function () {
+        // jQuery.noConflict();
         if ($(this).val() != "") {
             let url = "/api/servicos/" + $(this).val()
             // let data = '{"csrfmiddlewaretoken": "{{ csrf_token }}",' + '"service":' + $(this).val()+'}'

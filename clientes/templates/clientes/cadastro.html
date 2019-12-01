@@ -5,30 +5,181 @@
 {% block content %}
 
 <div class="container">
-    <div class="row">
-        <form method="post" class="col 12">
-            {% csrf_token %}
+    <form method="post" class="form-group">
+        {% csrf_token %}
 
-            {{form.as_p}}
-            {{form_user.as_p}}
+        <div class="row">
 
-
-            <div class="input-field col s6">
-                <button class="btn btn-block btn-success" type="submit" name="action">Salvar</button>
+            <div class="col-12 col-md-6">
+                {{form.nome.label_tag}}
+                {{form.nome}}
+                {% if form.nome.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.nome.error}}
+                </div>
+                {% endif %}
             </div>
-        </form>
-    </div>
+            <div class="col-12 col-md-6">
+                {{form.data_nascimento.label_tag}}
+                {{form.data_nascimento}}
+                {% if form.data_nascimento.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.data_nascimento.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6">
+                {{form.sexo.label_tag}} <br>
+                {{form.sexo}}
+                {% if form.sexo.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.sexo.error}}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-row align-items-center">
+
+            <div class="col-12 col-md-6">
+                {{form.cnpjcpf.label_tag}}
+                {{form.cnpjcpf}}
+                {% if form.cnpjcpf.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.cnpjcpf.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {{form.telefone.label_tag}}
+                {{form.telefone}}
+                {% if form.telefone.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.telefone.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {{form.celular.label_tag}}
+                {{form.celular}}
+                {% if form.celular.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.celular.error}}
+                </div>
+                {% endif %}
+            </div>
+
+
+            <div class="col-12 col-md-6">
+                {{form.nome_mae.label_tag}}
+                {{form.nome_mae}}
+                {% if form.nome_mae.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.nome_mae.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {{form.nome_pai.label_tag}}
+                {{form.nome_pai}}
+                {% if form.nome_pai.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.nome_pai.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {{form.codindicacao.label_tag}}
+                {{form.codindicacao}}
+                {% if form.codindicacao.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.codindicacao.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {{form_user.username.label_tag}}
+                {{form_user.username}}
+                {% if form.celular.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form_user.username.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {{form_user.password1.label_tag}}
+                {{form_user.password1}}
+                {% if form.celular.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form_user.password1.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6">
+                {{form_user.password2.label_tag}}
+                {{form_user.password2}}
+                {% if form.celular.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form_user.password2.error}}
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <!-- {{form.as_p}} -->
+        <!-- {{form_user.as_p}} -->
+        <button class="btn btn-block btn-success" type="submit" name="action">Salvar</button>
+    </form>
 </div>
 <!--Import jQuery before materialize.js-->
 
 {% endblock content %}
 
 {% block header %}
-<!--autocomplete select2-->
+<!--12 col-md-6complete select2-->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <style>
     .select2 {
         max-width: 100% !important;
+    }
+
+    .select2.select2-container.select2-container--default{
+        display: block;
+        width: 100%;
+        padding: .200rem .55rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        margin-bottom: 8px
+
+    }
+
+    /* .select2 .select2-container .select2-container--default .select2-container--below {
+      
+    } */
+
+
+    .select2-container--default .select2-selection--single {
+        border: none
+        /* padding: 1.1rem; */
+        /* background-color: #fff;
+        line-height: 1.8;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
+
     }
 
     span {
@@ -37,7 +188,7 @@
     }
 </style>
 {% endblock header %} {% block script %}
-<!--autocomplete select2-->
+<!--12 col-md-6complete select2-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
     integrity="sha256-Kg2zTcFO9LXOc7IwcBx1YeUBJmekycsnTsq2RuFHSZU=" crossorigin="anonymous"></script>
@@ -47,8 +198,8 @@
         return val.replace(/\D/g, '').length > 11 ? '00.000.000/0000-00' : '000.000.000-009';
     },
         cpfOptions = {
-            onKeyPress: function (val, e, field, options) {
-                field.mask(cpfMascara.apply({}, arguments), options);
+            onKeyPress: function (val, e, nome, options) {
+                nome.mask(cpfMascara.apply({}, arguments), options);
             }
         };
 

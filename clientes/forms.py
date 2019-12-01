@@ -41,7 +41,7 @@ class ClientesForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({
                 # 'placeholder': field.capitalize(),
-                'class': 'form-control'
+                'class': 'form-control my-2'
             })
 
 

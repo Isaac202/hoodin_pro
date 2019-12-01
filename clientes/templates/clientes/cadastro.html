@@ -4,13 +4,13 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container my-2">
     <form method="post" class="form-group">
         {% csrf_token %}
-
+        <h3 class="mt-5">Dados Pessoais</h3>
+        <hr>
         <div class="row">
-
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.nome.label_tag}}
                 {{form.nome}}
                 {% if form.nome.error %}
@@ -19,7 +19,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.data_nascimento.label_tag}}
                 {{form.data_nascimento}}
                 {% if form.data_nascimento.error %}
@@ -28,7 +28,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form.sexo.label_tag}} <br>
                 {{form.sexo}}
                 {% if form.sexo.error %}
@@ -37,10 +37,27 @@
                 </div>
                 {% endif %}
             </div>
-        </div>
-        <div class="form-row align-items-center">
 
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-12 col-lg-4 my-2">
+                {{form.documento_tipo.label_tag}}
+                {{form.documento_tipo}}
+                {% if form.documento_tipo.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.documento_tipo.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 my-2">
+                {{form.documento_identidade.label_tag}}
+                {{form.documento_identidade}}
+                {% if form.documento_identidade.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.documento_identidade.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.cnpjcpf.label_tag}}
                 {{form.cnpjcpf}}
                 {% if form.cnpjcpf.error %}
@@ -50,7 +67,38 @@
                 {% endif %}
             </div>
 
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 col-lg-4 my-2">
+                {{form.nacionalidade.label_tag}}
+                {{form.nacionalidade}}
+                {% if form.nacionalidade.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.nacionalidade.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 my-2">
+                {{form.passaporte.label_tag}}
+                {{form.passaporte}}
+                {% if form.passaporte.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.passaporte.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-4 my-2">
+                {{form.estadocivil.label_tag}}
+                {{form.estadocivil}}
+                {% if form.estadocivil.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.estadocivil.error}}
+                </div>
+                {% endif %}
+            </div>
+
+
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.telefone.label_tag}}
                 {{form.telefone}}
                 {% if form.telefone.error %}
@@ -59,8 +107,7 @@
                 </div>
                 {% endif %}
             </div>
-
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.celular.label_tag}}
                 {{form.celular}}
                 {% if form.celular.error %}
@@ -69,29 +116,7 @@
                 </div>
                 {% endif %}
             </div>
-
-
-            <div class="col-12 col-md-6">
-                {{form.nome_mae.label_tag}}
-                {{form.nome_mae}}
-                {% if form.nome_mae.error %}
-                <div class="alert alert-danger" role="alert">
-                    {{form.nome_mae.error}}
-                </div>
-                {% endif %}
-            </div>
-
-            <div class="col-12 col-md-6">
-                {{form.nome_pai.label_tag}}
-                {{form.nome_pai}}
-                {% if form.nome_pai.error %}
-                <div class="alert alert-danger" role="alert">
-                    {{form.nome_pai.error}}
-                </div>
-                {% endif %}
-            </div>
-
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form.codindicacao.label_tag}}
                 {{form.codindicacao}}
                 {% if form.codindicacao.error %}
@@ -100,8 +125,25 @@
                 </div>
                 {% endif %}
             </div>
-
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 my-2">
+                {{form.nome_mae.label_tag}}
+                {{form.nome_mae}}
+                {% if form.nome_mae.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.nome_mae.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 my-2">
+                {{form.nome_pai.label_tag}}
+                {{form.nome_pai}}
+                {% if form.nome_pai.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.nome_pai.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form_user.username.label_tag}}
                 {{form_user.username}}
                 {% if form.celular.error %}
@@ -110,8 +152,7 @@
                 </div>
                 {% endif %}
             </div>
-
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form_user.password1.label_tag}}
                 {{form_user.password1}}
                 {% if form.celular.error %}
@@ -120,7 +161,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form_user.password2.label_tag}}
                 {{form_user.password2}}
                 {% if form.celular.error %}
@@ -129,12 +170,148 @@
                 </div>
                 {% endif %}
             </div>
-
         </div>
 
-        <!-- {{form.as_p}} -->
-        <!-- {{form_user.as_p}} -->
-        <button class="btn btn-block btn-success" type="submit" name="action">Salvar</button>
+        <h3 class="mt-5">Endereço</h3>
+        <hr>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3 my-2">
+                {{form.cep.label_tag}}
+                {{form.cep}}
+                {% if form.cep.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.cep.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 my-2">
+                {{form.endereco.label_tag}}
+                {{form.endereco}}
+                {% if form.endereco.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.endereco.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-2 my-2">
+                {{form.numero.label_tag}}
+                {{form.numero}}
+                {% if form.numero.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.numero.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3 my-2">
+                {{form.complemento.label_tag}}
+                {{form.complemento}}
+                {% if form.complemento.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.complemento.error}}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 my-2">
+                {{form.cidade.label_tag}}
+                {{form.cidade}}
+                {% if form.cidade.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.cidade.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 my-2">
+                {{form.bairro.label_tag}}
+                {{form.bairro}}
+                {% if form.bairro.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.bairro.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 col-lg-2 my-2">
+                {{form.estado.label_tag}}
+                {{form.estado}}
+                {% if form.estado.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.estado.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 col-lg-2 my-2">
+                {{form.pais.label_tag}}
+                {{form.pais}}
+                {% if form.pais.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.pais.error}}
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+        <h3 class="mt-5">Informações</h3>
+        <hr>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3 my-2">
+                {{form.nif.label_tag}}
+                {{form.nif}}
+                {% if form.nif.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.nif.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 my-2">
+                {{form.facebook.label_tag}}
+                {{form.facebook}}
+                {% if form.facebook.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.facebook.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 my-2">
+                {{form.twitter.label_tag}}
+                {{form.twitter}}
+                {% if form.twitter.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.twitter.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 my-2">
+                {{form.homepage.label_tag}}
+                {{form.homepage}}
+                {% if form.homepage.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.homepage.error}}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-12 my-2">
+                    {{form.atuacao.label_tag}}
+                    {{form.atuacao}}
+                    {% if form.atuacao.error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{form.atuacao.error}}
+                    </div>
+                    {% endif %}
+                </div>
+            <div class="col-12 my-2">
+                {{form.biografia.label_tag}}
+                {{form.biografia}}
+                {% if form.biografia.error %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.biografia.error}}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <button class="btn btn-block btn-success mt-2" type="submit" name="action">Salvar</button>
     </form>
 </div>
 <!--Import jQuery before materialize.js-->
@@ -142,17 +319,17 @@
 {% endblock content %}
 
 {% block header %}
-<!--12 col-md-6complete select2-->
+<!--12 col-md-6 col-lg-4 my-2complete select2-->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <style>
     .select2 {
         max-width: 100% !important;
     }
 
-    .select2.select2-container.select2-container--default{
+    .select2.select2-container.select2-container--default {
         display: block;
         width: 100%;
-        padding: .200rem .55rem;
+        padding: .220rem .90rem;
         font-size: 1rem;
         line-height: 1.5;
         color: #495057;
@@ -161,25 +338,15 @@
         border: 1px solid #ced4da;
         border-radius: .25rem;
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        margin-bottom: 8px
+        /* margin-bottom: 8px */
 
     }
 
-    /* .select2 .select2-container .select2-container--default .select2-container--below {
-      
-    } */
-
-
     .select2-container--default .select2-selection--single {
-        border: none
-        /* padding: 1.1rem; */
-        /* background-color: #fff;
-        line-height: 1.8;
-        box-sizing: border-box;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
-
+        border: none !important;
+    }
+    .select2-container--default .select2-selection--multiple  {
+        border: none !important;
     }
 
     span {
@@ -188,7 +355,7 @@
     }
 </style>
 {% endblock header %} {% block script %}
-<!--12 col-md-6complete select2-->
+<!--12 col-md-6 col-lg-4 my-2complete select2-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
     integrity="sha256-Kg2zTcFO9LXOc7IwcBx1YeUBJmekycsnTsq2RuFHSZU=" crossorigin="anonymous"></script>
@@ -210,7 +377,6 @@
         $("#id_telefone").mask("(99) 99999-9999");
         $("#id_celular").mask("(99) 99999-9999");
         $("#id_data_nascimento").mask("99/99/9999");
-        $('.collapsible').collapsible();
         $('#id_cnpjcpf').mask(cpfMascara, cpfOptions);
 
         $('#id_cep').on('input', function (e) {

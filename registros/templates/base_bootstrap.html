@@ -16,8 +16,8 @@
 
 <body>
     <div class="d-none" id="loading" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1;">
-
     </div>
+
     {% include "bootstrap/menu.html" %}
     {% block content %}
 
@@ -44,5 +44,6 @@
 
     {% endblock script %}
 </body>
+    {% include "bootstrap/footer.html" %}
 
 </html>

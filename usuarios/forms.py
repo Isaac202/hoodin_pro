@@ -40,7 +40,7 @@ class UserCreationForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({
                 # 'placeholder': field.capitalize(),
-                'class': 'form-control my-2'
+                'class': 'form-control'
             })
 
         if self._meta.model.USERNAME_FIELD in self.fields:

@@ -30,7 +30,7 @@
     var formData = new FormData()
     let url_up = "{% url 'base_upload' %}"
     var service_active = false
-    
+
     $("#btn-upload").click(function () {
         if ($("#fileupload").prop('disabled')) {
             alert('selecione o serviço!')
@@ -97,6 +97,32 @@
 
                 )
                 $('#total').html(data.price)
+                let result = data
+                $('#coautores tbody').prepend(
+                    $('<tr>').append(
+                        $('<td>').append(
+                            $("<table>").append(
+                                $('<tbody>').append(
+                                    $("<tr>").append(
+                                        $('<td>').append(
+                                            $('<p>').text(result.name)
+                                        ),
+                                        $('<td>').append(
+                                            $("<a>").html("Adicionar").addClass('btn btn-primary text-white')
+                                                .addClass('float-right mt-2')
+                                                .attr('link', result.delete)
+                                                .attr('style', 'cursor: pointer;')
+                                                .attr('onclick', 'add_coautor("' + result.id + '")')
+                                        ),
+                                    )
+                                ).attr('id', 'table_coautor' + result.id)
+                            ).addClass('table')
+                        )
+                        $('<ul>').attr('id','ul_coautor'+result.id)
+                    ).attr('id', 'tr_autor' + result.id)
+                )
+
+
             },
             done: function (e, data) {
                 //$("#total").html("10")
@@ -141,22 +167,6 @@
                             ),
                         ).attr('id', 'tr_desc' + result.id)
                     )
-                    $('#coautores tbody').prepend(
-                        $('<tr>').append(
-                            $('<td>').append(
-                                $('<label>').attr('for', 'desc_file' + result.id)
-                                    .html(result.name),
-                                $("<textarea>")
-                                    .attr('id', 'desc_file' + result.id)
-                                    .addClass('form-control form-control-lg'),
-                                $("<a>").html("Salvar").addClass('btn btn-primary text-white')
-                                    .addClass('float-right mt-2')
-                                    .attr('link', result.delete)
-                                    .attr('style', 'cursor: pointer;')
-
-                            ),
-                        ).attr('id', 'tr_desc' + result.id)
-                    )
 
                 }
                 if (result.error) {
@@ -177,7 +187,7 @@
     }
     $('#id_codservico').change(function () {
         // jQuery.noConflict();
-        if ($(this).val() != "" && !service_active ) {
+        if ($(this).val() != "" && !service_active) {
             let url = "/api/servicos/" + $(this).val()
             // let data = '{"csrfmiddlewaretoken": "{{ csrf_token }}",' + '"service":' + $(this).val()+'}'
             // $("#fileupload").attr('data-form-data', data)
@@ -241,6 +251,7 @@
         }).done(function (data) {
             element.remove()
             $("#tr_desc" + id).remove()
+            $("#tr_autor" + id).remove()
             $('#check_file' + id).remove()
         }).always(function (data) {
             console.log(data)
@@ -279,6 +290,19 @@
         }).fail(function (e) {
             alert("erro")
         })
+    }
+
+    function add_coautor(id) {
+        $('#table_coautor' + id).append(
+            $("<tr>").append(
+                $("<td>").append(
+                    $('<input type="text"/>').addClass('form-control')
+                ),
+                $("<td>").append(
+                    $('<input type="text"/>').addClass('form-control')
+                )
+            )
+        )
     }
 
 </script>

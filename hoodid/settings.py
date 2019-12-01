@@ -55,7 +55,8 @@ HOODID_APPS = [
     'cielo',
     'servicos_extensoes',
     'tarefas_backgroud',
-    'codigos_promocionais'
+    'codigos_promocionais',
+    'registros_coautores'
 ]
 
 

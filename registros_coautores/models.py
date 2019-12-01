@@ -9,10 +9,10 @@ class Registros_Coautores(models.Model):
     codregistro = models.PositiveIntegerField()
     nome = models.CharField(max_length=255)
     documento = models.CharField(max_length=100)
-    percentual_obra = models.DecimalField(max_length=5,decimal_places=2)
+    percentual_obra = models.DecimalField(max_digits=5, decimal_places=2)
 
 
 class Coautores(models.Model):
     nome = models.CharField(max_length=255)
     documento = models.ForeignKey("registros.ArquivoRegistro", verbose_name="Arquivo", on_delete=models.CASCADE)
-    percentual_obra = models.DecimalField(max_length=5,decimal_places=2)
+    percentual_obra = models.DecimalField(max_digits=5, decimal_places=2)

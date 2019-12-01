@@ -1,0 +1,90 @@
+{% extends "base_bootstrap.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <form method="post" class="col 12">
+            {% csrf_token %}
+
+            {{form.as_p}}
+            {{form_user.as_p}}
+
+
+            <div class="input-field col s6">
+                <button class="btn btn-block btn-success" type="submit" name="action">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--Import jQuery before materialize.js-->
+
+{% endblock content %}
+
+{% block header %}
+<!--autocomplete select2-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2 {
+        max-width: 100% !important;
+    }
+
+    span {
+        outline: 0 !important;
+        /*removendo outiline do select2 autocomplete*/
+    }
+</style>
+{% endblock header %} {% block script %}
+<!--autocomplete select2-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+    integrity="sha256-Kg2zTcFO9LXOc7IwcBx1YeUBJmekycsnTsq2RuFHSZU=" crossorigin="anonymous"></script>
+
+<script>
+    var cpfMascara = function (val) {
+        return val.replace(/\D/g, '').length > 11 ? '00.000.000/0000-00' : '000.000.000-009';
+    },
+        cpfOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(cpfMascara.apply({}, arguments), options);
+            }
+        };
+
+    $('select').select2(); //autocomplete select2
+
+    $(document).ready(function () {
+        $("#id_cep").mask("99999-999");
+        $("#id_telefone").mask("(99) 99999-9999");
+        $("#id_celular").mask("(99) 99999-9999");
+        $("#id_data_nascimento").mask("99/99/9999");
+        $('.collapsible').collapsible();
+        $('#id_cnpjcpf').mask(cpfMascara, cpfOptions);
+
+        $('#id_cep').on('input', function (e) {
+            let cep = $('#id_cep').val();
+            if (cep.length == 9) {
+                //Consulta o webservice viacep.com.br/
+                $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function (dados) {
+                    console.log('Buscando');
+                    if (!("erro" in dados)) {
+                        // console.log('deu certo');
+                        //Atualiza os campos com os valores da consulta.
+                        $("#id_endereco").val(dados.logradouro);
+                        $("#id_bairro").val(dados.bairro);
+                        $("#id_complemento").val(dados.complemento);
+                        $("#id_cidade").val(dados.localidade);
+                        $("#id_estado option[value=" + dados.uf + "]").attr('selected', 'selected');
+                        let estado = $("#id_estado option[value=" + dados.uf + "]").html();
+                        $("#estado_col input.select-dropdown").val(estado);
+                        $('#select2-id_estado-container').html(estado);
+                    }
+                });
+            }
+        });
+
+    });
+</script>
+
+{% endblock script %}

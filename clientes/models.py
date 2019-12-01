@@ -86,5 +86,6 @@ def type_person(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Clientes)
-def sms_aviso(sender, instance, **kwargs):
-    enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')
+def sms_aviso(sender, instance, created, **kwargs):
+    if created:
+        enviar_sms(instance.celular, 'Bem vindo a Hoodid Registros online')

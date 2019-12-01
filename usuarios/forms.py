@@ -33,14 +33,21 @@ class UserCreationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("username",)
-        #field_classes = {'username': UsernameField}
+        # field_classes = {'username': UsernameField}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                # 'placeholder': field.capitalize(),
+                'class': 'form-control'
+            })
+
         if self._meta.model.USERNAME_FIELD in self.fields:
-            self.fields[self._meta.model.USERNAME_FIELD].widget.attrs.update(
-                {'placeholder': 'cliente@mail.com', 'autofocus': False
-                 })
+            self.fields[self._meta.model.USERNAME_FIELD].widget.attrs.update({
+                'placeholder': 'cliente@mail.com',
+                'autofocus': False
+            })
 
     def clean_username(self):
         username = self.cleaned_data.get("username")

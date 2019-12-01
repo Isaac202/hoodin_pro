@@ -20,9 +20,8 @@ User = get_user_model()
 
 class ClientesCreate(SignUpCreateView, SuccessMessageMixin):
     # model = Clientes
-    template_name = "clientes/inc_clientes.html"
+    template_name = "clientes/cadastro.html"
     form_class = ClientesForm
-    # success_url = reverse_lazy('cliente:list')
     success_message = "Verifique seu email pra ativar seu cadastro!"
 
 

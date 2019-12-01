@@ -24,24 +24,24 @@ class RegistrosForm(forms.ModelForm):
             })
 
 
-    def clean(self):
-        try:
-            cli=Clientes.objects.filter(id_usuario = self.user).first()
-            saldo=Decimal(cli.valor_credito)
-            servico_nome=self.cleaned_data.get('codservico')
-            servi=Servicos.objects.filter(nome = servico_nome).frist()
-            val_servico=Decimal(servi.preco)
-            cod_servico=servi.id
-            Servicos_Extensoes.objects.prefetch_related(
-                'Servico', 'Extensoes').filter(codservico = cod_servico).all()
+    # def clean(self):
+    #     try:
+    #         cli=Clientes.objects.filter(id_usuario = self.user).first()
+    #         saldo=Decimal(cli.valor_credito)
+    #         servico_nome=self.cleaned_data.get('codservico')
+    #         servi=Servicos.objects.filter(nome = servico_nome).frist()
+    #         val_servico=Decimal(servi.preco)
+    #         cod_servico=servi.id
+    #         Servicos_Extensoes.objects.prefetch_related(
+    #             'Servico', 'Extensoes').filter(codservico = cod_servico).all()
 
 
-            if saldo < val_servico:
-                raise forms.ValidationError(
-                   "a valor do servico maior que seu Saldo: " + str(saldo) + "coloque credito")
-        except Exception as e:
-            print(str(e))
-        return self.cleaned_data
+    #         if saldo < val_servico:
+    #             raise forms.ValidationError(
+    #                "a valor do servico maior que seu Saldo: " + str(saldo) + "coloque credito")
+    #     except Exception as e:
+    #         print(str(e))
+    #     return self.cleaned_data
 
 
 
@@ -53,17 +53,11 @@ class ArquivoRegistroForm(forms.ModelForm):
         fields=("file",)
 
 
-class ArquivoRegistroTesteForm(forms.ModelForm):
+# class ArquivoRegistroTesteForm(forms.ModelForm):
     
-    class Meta:
-        model=ArquivoRegistro
-        fields= "__all__"
+#     class Meta:
+#         model=ArquivoRegistro
+#         fields= "__all__"
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].widget.attrs.update({
-                # 'placeholder': field.capitalize(),
-                'class': 'form-control'
-            })
+   
     

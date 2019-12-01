@@ -1,24 +1,17 @@
 from django import forms
-from .models import Clientes # pega os campos e cria um form
+from .models import Clientes  # pega os campos e cria um form
 from indicacoes.models import Indicacoes
 from pycpfcnpj import cpfcnpj
 import re
 from servicos.models import Servicos
 
 
-
 class ClientesForm(forms.ModelForm):
-   
+
     class Meta:
         model = Clientes
-        # fields = ['nome', 'email', 'valor_credito', 'telefone', 'celular', 'data_nascimento', 'sexo',
-        #            'tipo_pessoa', 'nome_mae', 'nome_pai', 'cnpjcpf', 'codindicacao', 'senha', 'confirma_senha',
-        #            'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro', 'documento_identidade',
-        #            'documento_tipo', 'passaporte', 'nacionalidade', 'estadocivil', 'biografia', 'nif', 'facebook', 'twitter',
-        #            'homepage', 'atuacao']
-        #colocar os campos que não quer que apareça
-        exclude = ['id', 'id_usuario', 'tipo_pessoa', 'valor_credito', 'id_cliente', 'confirmation_key'] #'codindicacao',#, 'atuacao'
-
+        exclude = ['id', 'id_usuario', 'tipo_pessoa', 'valor_credito',
+            'id_cliente', 'confirmation_key']  # 'codindicacao',#, 'atuacao'
 
     def clean_cnpjcpf(self):
 
@@ -43,12 +36,20 @@ class ClientesForm(forms.ModelForm):
             raise forms.ValidationError("Cep inválido.")
         return data
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                # 'placeholder': field.capitalize(),
+                'class': 'form-control'
+            })
+
 
 class ClienteUpdateForm(forms.ModelForm):
 
      class Meta:
         model = Clientes
-        #colocar os campos que não quer que apareça
+        # colocar os campos que não quer que apareça
         exclude = ['nome' ,'id_usuario', 'passaporte','data_nascimento','nacionalidade',
             'nome_mae', "nome_pai", 'codindicacao', 'tipo_pessoa',
             'valor_credito', 'cnpjcpf','documento_tipo', 

@@ -27,8 +27,8 @@ class BasicUploadView(APIView):
         # return Response(data)
 
     def post(self, request, format=None):
-        service = Servicos.objects.first() #get_object_or_404(Servicos, pk=request.POST.get('service'))
-        # print(service,'\n\n')
+        service = request.GET.get('service')
+        service = get_object_or_404(Servicos, pk=service)
         cliente = request.user.clientes
         file = request.FILES['file']
         data = {'is_valid': False}
@@ -45,8 +45,7 @@ class BasicUploadView(APIView):
             file.save()
             serializer = ArquivoSerializer(file, many=False)
             data = serializer.data
-            data['delete'] = str(reverse_lazy(
-                'delete_file', kwargs={'pk': file.pk}))
+            data['delete'] = str(reverse_lazy('delete_file', kwargs={'pk': file.pk}))
             data['is_valid'] = True
 
         files = ArquivoRegistro.objects.filter(
@@ -55,7 +54,7 @@ class BasicUploadView(APIView):
 
         price = service.preco * files.count()
         data['price'] = price
-        data['post'] = request.POST
+        # data['post'] = request.POST
 
         # if not cliente.valor_credito >= price:
         #     data['error'] = "Crédito insuficiente"

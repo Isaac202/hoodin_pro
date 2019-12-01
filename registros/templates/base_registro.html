@@ -47,47 +47,9 @@
     }
 
 
-
-
-    $('#id_codservico').change(function () {
-        if ($(this).val() != "") {
-            let url = "/api/servicos/" + $(this).val()
-            let data = '{"csrfmiddlewaretoken": "{{ csrf_token }}",' + '"service":' + $(this).val()+'}'
-
-            $("#fileupload").attr('data-form-data', data)
-            let resp = $.getJSON(url, function (data) {
-                fileExtension = []
-                data.extensoes.forEach(element => {
-                    fileExtension.push(element.nome)
-                    extentions += element.nome + ", "
-                });
-                extentions = extentions.substring(0, extentions.length - 2)
-                size = data.tamanho;
-            }).done(function (data) {
-                valor = parseFloat(data.preco).toFixed(2)
-                $("#tamanho").html(data.tamanho + "MB")
-                $("#valor").html("R$ " + data.preco)
-                $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase())
-                $("#extentions").addClass('grey')
-            }).fail(function (resp) {
-                alert('erro')
-                $("#extentions").removeClass('grey')
-            }).always(function (data) {
-                // console.log(data)
-                extentions = ""
-            })
-            $("#fileupload").removeAttr('disabled')
-        } else {
-            location.reload()
-            // $("#fileupload").attr('disabled', true)
-            // $("#extentions").html("")
-            // $("#extentions").toggleClass('grey')
-
-        }
-
-
+    function upload(url_up) {
         $("#fileupload").fileupload({
-            // url: url_up,
+            url: url_up,
             dataType: 'json',
             sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
             autoUpload: false,
@@ -211,6 +173,46 @@
 
         })
 
+    }
+
+
+
+    $('#id_codservico').change(function () {
+        if ($(this).val() != "") {
+            let url = "/api/servicos/" + $(this).val()
+            // let data = '{"csrfmiddlewaretoken": "{{ csrf_token }}",' + '"service":' + $(this).val()+'}'
+            // $("#fileupload").attr('data-form-data', data)
+            let url_up = "{% url 'base_upload' %}?service=" + $(this).val()
+            console.log(url_up)
+            let resp = $.getJSON(url, function (data) {
+                fileExtension = []
+                data.extensoes.forEach(element => {
+                    fileExtension.push(element.nome)
+                    extentions += element.nome + ", "
+                });
+                extentions = extentions.substring(0, extentions.length - 2)
+                size = data.tamanho;
+            }).done(function (data) {
+                valor = parseFloat(data.preco).toFixed(2)
+                $("#tamanho").html(data.tamanho + "MB")
+                $("#valor").html("R$ " + data.preco)
+                $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase())
+                $("#extentions").addClass('grey')
+                $("#fileupload").removeAttr('disabled')
+                upload(url_up)
+            }).fail(function (resp) {
+                alert('erro')
+                $("#extentions").removeClass('grey')
+            }).always(function (data) {
+                extentions = ""
+            })
+        } else {
+            location.reload()
+            // $("#fileupload").attr('disabled', true)
+            // $("#extentions").html("")
+            // $("#extentions").toggleClass('grey')
+
+        }
     });
 
     $(".delete_file").on("click", function (event) {

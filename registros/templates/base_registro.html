@@ -29,7 +29,7 @@
     var extentions = ""
     var formData = new FormData()
     let url_up = "{% url 'base_upload' %}"
-
+    var service_active = false
     
     $("#btn-upload").click(function () {
         if ($("#fileupload").prop('disabled')) {
@@ -103,7 +103,8 @@
                 $("#percent").text("concluido ;)");
                 let result = data.result
                 if (result.is_valid) {
-                    console.log(result)
+                    service_active = true
+                    // console.log(result)
                     let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
                     $("#gallery tbody").prepend(
                         $("<tr>").append(
@@ -174,12 +175,9 @@
         })
 
     }
-
-
-
     $('#id_codservico').change(function () {
         // jQuery.noConflict();
-        if ($(this).val() != "") {
+        if ($(this).val() != "" && !service_active ) {
             let url = "/api/servicos/" + $(this).val()
             // let data = '{"csrfmiddlewaretoken": "{{ csrf_token }}",' + '"service":' + $(this).val()+'}'
             // $("#fileupload").attr('data-form-data', data)
@@ -208,10 +206,8 @@
                 extentions = ""
             })
         } else {
+            $("#loading").removeClass('d-none')
             location.reload()
-            // $("#fileupload").attr('disabled', true)
-            // $("#extentions").html("")
-            // $("#extentions").toggleClass('grey')
 
         }
     });

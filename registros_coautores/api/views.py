@@ -31,7 +31,7 @@ class SetCoautorAquivoView(APIView):
         )
         # print(request.POST, '\n\n')
         data = {'is_valid': False}
-        data['error'] = "inválido"
+        data['error'] = "Preencha os campos corretamente!"
         form = CoautoresForm(request.POST)
         if form.is_valid():
             if file.exists():

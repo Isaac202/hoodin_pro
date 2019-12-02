@@ -35,7 +35,7 @@
             </div>
           </nav>
           <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-            <div class="bg-light tab-pane fade show active" id="nav-home" role="tabpanel"
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
               aria-labelledby="nav-home-tab">
               <form id="registro-form" class="form-group" action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -67,14 +67,14 @@
                   <div class="col-12 col-lg-6 mt-3 mt-lg-0">
                     <div class="row">
                       <div class="col-12">
-                        <div class="card">
+                        <div id="btn-upload"  class="card">
                           <div class="card-body">
                             <div class="row">
                               <div class="col-sm-12">
-                                <button id="btn-upload" type="button" class="btn btn-block card bg-light"
-                                  style="border: none; padding: 12%; border-radius: 10px; outline: none">
-                                  <h3 class="text-center" style="font-size: 200%">Clique ou Arraste até aqui!</h3>
-                                </button>
+                                <div class="card"
+                                  style="padding: 2.5%; border-radius: 10px; outline: none; border: none">
+                                  <h3 class="text-center display-4">Clique ou Arraste até aqui!</h3>
+                              </div>
                               </div>
                             </div>
                           </div>
@@ -134,9 +134,14 @@
               </table>
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-              <table id="coautores" class="table">
+              <button id="btn-teste">Teste</button><br>
+              <!-- <table id="coautores" class="table">
                 <tbody></tbody>
-              </table>
+              </table> -->
+              <!-- <ul id="coautores"></ul> -->
+              <div id="coautores">
+
+              </div>
             </div>
           </div>
           <!-- <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">

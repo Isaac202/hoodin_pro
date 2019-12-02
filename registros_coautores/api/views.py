@@ -31,7 +31,7 @@ class SetCoautorAquivoView(APIView):
                     total_percent=Sum('book__pages')).total_percent
                 if (total + percent) <= Decimal('90'):
                     coautor = form.save(commit=False)
-                    coautor.documento = file
+                    coautor.arquivo = file
                     coautor.sava()
                     data['is_valid'] = True
                     data['delete'] = str(reverse_lazy(

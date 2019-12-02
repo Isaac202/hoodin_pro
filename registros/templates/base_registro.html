@@ -97,31 +97,6 @@
 
                 )
                 $('#total').html(data.price)
-                let result = data
-                $('#coautores tbody').prepend(
-                    $('<tr>').append(
-                        $('<td>').append(
-                            $("<table>").append(
-                                $('<tbody>').append(
-                                    $("<tr>").append(
-                                        $('<td>').append(
-                                            $('<p>').text(result.name)
-                                        ),
-                                        $('<td>').append(
-                                            $("<a>").html("Adicionar").addClass('btn btn-primary text-white')
-                                                .addClass('float-right mt-2')
-                                                .attr('link', result.delete)
-                                                .attr('style', 'cursor: pointer;')
-                                                .attr('onclick', 'add_coautor("' + result.id + '")')
-                                        ),
-                                    )
-                                ).attr('id', 'table_coautor' + result.id)
-                            ).addClass('table')
-                        )
-                        $('<ul>').attr('id','ul_coautor'+result.id)
-                    ).attr('id', 'tr_autor' + result.id)
-                )
-
 
             },
             done: function (e, data) {
@@ -167,6 +142,27 @@
                             ),
                         ).attr('id', 'tr_desc' + result.id)
                     )
+
+                    $('#coautores').prepend(
+                        $('<div>').append(
+                            $('<div>').append(
+                                $("<div>").append(
+                                    $('<p>').text(result.name).addClass(),
+                                ).addClass('col-12 col-lg-10'),
+                                $('<div>').append(
+                                    $("<a>").html("Adicionar")
+                                        .addClass('btn btn-primary btn-block text-white')
+                                        .addClass('float-right mt-2')
+                                        .attr('link', "result.delete")
+                                        .attr('style', 'cursor: pointer;')
+                                        .attr('onclick', 'add_coautor("' + result.id + '")')
+                                ).addClass('col-12 col-lg-2 my-2'),
+                                $("<div>").attr('id', 'col_coautor' + result.id)
+                                    .addClass('col-12'),
+                            ).addClass("row"),
+                        ).addClass("list-group-item").attr('id', 'table_coautor' + result.id)
+                    ).addClass('container')
+
 
                 }
                 if (result.error) {
@@ -292,18 +288,58 @@
         })
     }
 
+   
+
     function add_coautor(id) {
-        $('#table_coautor' + id).append(
-            $("<tr>").append(
-                $("<td>").append(
+        $('#col_coautor' + id).append(
+            $("<div>").append(
+                $("<div>").append(
+                    $("<label>").text("Nome"),
                     $('<input type="text"/>').addClass('form-control')
-                ),
-                $("<td>").append(
+                ).addClass('col-12 col-lg-4'),
+                $("<div>").append(
+                    $("<label>").text("Documento"),
                     $('<input type="text"/>').addClass('form-control')
-                )
-            )
+                ).addClass('col-12 col-lg-4'),
+                $("<div>").append(
+                    $("<label>").text("Porcentagem"),
+                    $('<input type="text"/>').addClass('form-control')
+                ).addClass('col-12 col-lg-4'),
+            ).addClass('row'),
+            $('<div>').append(
+                $("<div>").append(
+                    $('<button>').text("Salvar")
+                        .addClass('float-right m-2')
+                        .addClass('btn btn-success'),
+                    $('<button>').text("Excluir")
+                        .addClass('float-right m-2')
+                        .addClass('btn btn-danger'),
+                ).addClass('col-12 col-lg-4 offset-lg-8'),
+            ).addClass('row my-2')
         )
     }
+
+    $("#btn-teste").click(function () {
+        $('#coautores').prepend(
+            $('<div>').append(
+                $('<div>').append(
+                    $("<div>").append(
+                        $('<p>').text("result.name").addClass(),
+                    ).addClass('col-12 col-lg-10'),
+                    $('<div>').append(
+                        $("<a>").html("Adicionar")
+                            .addClass('btn btn-primary btn-block text-white')
+                            .addClass('float-right mt-2')
+                            .attr('link', "result.delete")
+                            .attr('style', 'cursor: pointer;')
+                            .attr('onclick', 'add_coautor("' + 1 + '")')
+                    ).addClass('col-12 col-lg-2 my-2'),
+                    $("<div>").attr('id', 'col_coautor' + 1)
+                        .addClass('col-12'),
+                ).addClass("row"),
+            ).addClass("list-group-item").attr('id', 'table_coautor' + 1)
+        ).addClass('container')
+    })
 
 </script>
 

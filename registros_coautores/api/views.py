@@ -51,7 +51,8 @@ class SetCoautorAquivoView(APIView):
                     data['delete'] = str(reverse_lazy(
                         'delete_coautor', kwargs={'pk': coautor.pk}))
                 else:
-                    data['error'] = "Limite de {} excedido, limite maxímo 90%.".format(file.name)
+                    limite = Decimal('90') - total
+                    data['error'] = "Limite de {} excedido, limite restante {}%.".format(file.name, limite)
         return Response(data)
 
 

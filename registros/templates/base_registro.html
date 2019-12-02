@@ -144,15 +144,37 @@
                             $('<div>').append(
                                 $("<div>").append(
                                     $('<p>').text(result.name).addClass(),
-                                ).addClass('col-12 col-lg-10'),
+                                ).addClass('col-12'),
                                 $('<div>').append(
-                                    $("<a>").html("Adicionar")
-                                        .addClass('btn btn-primary btn-block text-white')
-                                        .addClass('float-right mt-2')
-                                        .attr('link', "result.delete")
-                                        .attr('style', 'cursor: pointer;')
-                                        .attr('onclick', 'add_coautor("' + result.id + '")')
-                                ).addClass('col-12 col-lg-2 my-2'),
+                                    $("<form>").append(
+                                        $("<div>").append(
+                                        $("<div>").append(
+                                            $('<input type="text"/>')
+                                                .addClass('form-control')
+                                                .attr('placeholder', 'Nome')
+                                                .attr('name', "nome")
+                                        ).addClass('col-12 col-lg-3 my-1'),
+                                        $("<div>").append(
+                                            $('<input type="number"/>')
+                                                .addClass('form-control')
+                                                .attr('placeholder', 'Documento')
+                                                .attr('name', "documento")
+                                        ).addClass('col-12 col-lg-3 my-1'),
+                                        $("<div>").append(
+                                            $('<input type="number"/>')
+                                                .attr('name', "percentual_obra")
+                                                .attr("step", "0.01")
+                                                .attr('placeholder', 'Porcentagem')
+                                                .addClass('form-control')
+                                        ).addClass('col-12 col-lg-3 my-1'),
+                                        $("<div>").append(
+                                            $("<a>").html("Adicionar")
+                                                .addClass('btn btn-primary btn-block text-white')
+                                                .attr('onclick', 'add_coautor("' + result.id + '")')
+                                        ).addClass('col-12 col-lg-3 my-1'),
+                                    ).addClass('row'),
+                                    ).attr('id', 'form_coautor'+result.id)
+                                ).addClass('col-12'),
                                 $("<div>").attr('id', 'col_coautor' + result.id)
                                     .addClass('col-12'),
                             ).addClass("row"),
@@ -279,61 +301,116 @@
 
 
     function add_coautor(id) {
-        $('#col_coautor' + id).append(
-            $("<form>").append(
-                $("<div>").append(
-                    $("<div>").append(
-                        $("<label>").text("Nome"),
-                        $('<input type="text"/>').addClass('form-control')
-                            .attr('name', "nome")
-                    ).addClass('col-12 col-lg-4'),
-                    $("<div>").append(
-                        $("<label>").text("Documento"),
-                        $('<input type="text"/>').addClass('form-control')
-                            .attr('name', "documento")
-                    ).addClass('col-12 col-lg-4'),
-                    $("<div>").append(
-                        $("<label>").text("Porcentagem"),
-                        $('<input type="number"/>')
-                            .attr('name', "percentual_obra")
-                            .attr("step", "0.01")
-                            .addClass('form-control')
-                    ).addClass('col-12 col-lg-4'),
-                ).addClass('row'),
-                $('<div>').append(
-                    $("<div>").append(
-                        $('<a>').text("Salvar")
-                            .addClass('float-right m-2')
-                            .addClass('btn btn-success')
-                            .attr('onclick', 'save_coautor("' + id + '")'),
-                        $('<a>').text("Excluir")
-                            .addClass('float-right m-2')
-                            .addClass('btn btn-danger')
-                            .attr('onclick', 'del_coautor("' + id + '")'),
-                    ).addClass('col-12 col-lg-4 offset-lg-8'),
-                ).addClass('row')
-            ).addClass('my-2').attr('id','form_coautor'+id).attr('method', 'post')
-        )
-    }
-
-    function save_coautor(id) {
         let url = '/api/coautor-file/' + id
         let data = {
             csrfmiddlewaretoken: "{{ csrf_token }}",
             file: id
         }
-        let formData =  $('#form_coautor'+id).serializeArray()
-        formData.forEach(element =>{
+        let form = $('#form_coautor' + id)
+        let formData = form.serializeArray()
+        formData.forEach(element => {
             data[element.name] = element.value
         })
-        console.log(data)
         $.post(url, data, function (data) {
-            console.log(data)
+            // console.log(data)
+            if (data.is_valid) {
+                console.log(data)
+                $('#col_coautor' + id).append(
+                    $("<div>").append(
+                        $("<div>").append(
+                            $('<input type="text"/>')
+                                .addClass('form-control')
+                                .attr('value', data.nome)
+                                .attr('disabled', true)
+                        ).addClass('col-12 col-lg-3 my-1'),
+                        $("<div>").append(
+                            $('<input type="text"/>')
+                                .addClass('form-control')
+                                .attr('value', data.documento)
+                                .attr('disabled', true)
+                        ).addClass('col-12 col-lg-3 my-1'),
+                        $("<div>").append(
+                            $('<input type="text"/>')
+                                .attr('disabled', true)
+                                .attr('value', data.percentual_obra+"%")
+                                .addClass('form-control')
+                        ).addClass('col-12 col-lg-3 my-1'),
+                        $("<div>").append(
+                            $('<a>').text("Excluir")
+                                .addClass('btn btn-danger btn-block text-white')
+                                .attr('onclick', 'del_coautor("' + data.id + '")')
+                        ).addClass('col-12 col-lg-3 my-2'),
+                    ).addClass('row my-3').attr('id', 'coautor_row' + data.id),
+                )
+                form.trigger("reset");
+            }else{
+                alert(data.error)
+            }
         }).fail(function (e, data) {
             console.log(data)
         })
     }
-    
+
+    function del_coautor(id) {
+        let url = "/api/delete-coautor/" + id
+        let data = {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+        }
+        let element = $('#coautor_row' + id)
+        $.post(url, data, function (data) {
+            if (data.success) {
+                element.fadeOut(1000, function () {
+                    element.remove()
+                })
+            }
+        }).fail(function (e) {
+            console.alert('ops! algo deu errado :(')
+        })
+    }
+
+    // $('#btn-teste').click(function () {
+    //     let result = { name: "arquivo", id: 1 }
+    //     $('#coautores').prepend(
+    //         $('<div>').append(
+    //             $('<div>').append(
+    //                 $("<div>").append(
+    //                     $('<p>').text(result.name).addClass(),
+    //                 ).addClass('col-12'),
+    //                 $('<div>').append(
+    //                     $("<div>").append(
+    //                         $("<div>").append(
+    //                             $('<input type="text"/>')
+    //                                 .addClass('form-control')
+    //                                 .attr('placeholder', 'Nome')
+    //                                 .attr('name', "nome")
+    //                         ).addClass('col-12 col-lg-3 my-1'),
+    //                         $("<div>").append(
+    //                             $('<input type="number"/>')
+    //                                 .addClass('form-control')
+    //                                 .attr('placeholder', 'Documento')
+    //                                 .attr('name', "documento")
+    //                         ).addClass('col-12 col-lg-3 my-1'),
+    //                         $("<div>").append(
+    //                             $('<input type="number"/>')
+    //                                 .attr('name', "percentual_obra")
+    //                                 .attr("step", "0.01")
+    //                                 .attr('placeholder', 'Porcentagem')
+    //                                 .addClass('form-control')
+    //                         ).addClass('col-12 col-lg-3 my-1'),
+    //                         $("<div>").append(
+    //                             $("<a>").html("Adicionar")
+    //                                 .addClass('btn btn-primary btn-block text-white')
+    //                                 .attr('onclick', 'add_coautor("' + result.id + '")')
+    //                         ).addClass('col-12 col-lg-3 my-1'),
+    //                     ).addClass('row'),
+    //                 ).addClass('col-12'),
+    //                 $("<div>").attr('id', 'col_coautor' + result.id)
+    //                     .addClass('col-12'),
+    //             ).addClass("row"),
+    //         ).addClass("list-group-item").attr('id', 'table_coautor' + result.id)
+    //     ).addClass('container')
+    // })
+
 </script>
 
 {% endblock script %}

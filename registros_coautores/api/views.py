@@ -6,6 +6,7 @@ from registros.models import ArquivoRegistro
 from django.shortcuts import get_object_or_404
 from registros_coautores.models import Coautores
 from registros_coautores.forms import CoautoresForm
+from registros_coautores.api.serializers import CoautorSerializer
 from django.utils import timezone
 from decimal import Decimal
 # Author.objects.annotate(total_pages=Sum('book__pages'))
@@ -30,6 +31,7 @@ class SetCoautorAquivoView(APIView):
         )
         # print(request.POST, '\n\n')
         data = {'is_valid': False}
+        data['error'] = "inválido"
         form = CoautoresForm(request.POST)
         if form.is_valid():
             if file.exists():
@@ -44,17 +46,18 @@ class SetCoautorAquivoView(APIView):
                     coautor = form.save(commit=False)
                     coautor.arquivo = file
                     coautor.save()
+                    data = CoautorSerializer(coautor, many=False).data
                     data['is_valid'] = True
                     data['delete'] = str(reverse_lazy(
                         'delete_coautor', kwargs={'pk': coautor.pk}))
                 else:
-                    data['error'] = "Limite excedido, max 90%"
+                    data['error'] = "Limite de {} excedido, limite maxímo 90%.".format(file.name)
         return Response(data)
 
 
 class DeleteCoautorFileView(APIView):
 
-    def get(self, request, pk, format=None):
+    def post(self, request, pk, format=None):
         data = {'success': False}
         coautor = Coautores.objects.filter(pk=pk, arquivo__id_usuario=request.user)
         if coautor.exists():

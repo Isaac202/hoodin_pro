@@ -13,27 +13,27 @@
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.nome.label_tag}}
                 {{form.nome}}
-                {% if form.nome.error %}
+                {% if form.nome.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.nome.error}}
+                    {{form.nome.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.data_nascimento.label_tag}}
                 {{form.data_nascimento}}
-                {% if form.data_nascimento.error %}
+                {% if form.data_nascimento.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.data_nascimento.error}}
+                    {{form.data_nascimento.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form.sexo.label_tag}} <br>
                 {{form.sexo}}
-                {% if form.sexo.error %}
+                {% if form.sexo.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.sexo.error}}
+                    {{form.sexo.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -41,18 +41,18 @@
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form.documento_tipo.label_tag}}
                 {{form.documento_tipo}}
-                {% if form.documento_tipo.error %}
+                {% if form.documento_tipo.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.documento_tipo.error}}
+                    {{form.documento_tipo.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.documento_identidade.label_tag}}
                 {{form.documento_identidade}}
-                {% if form.documento_identidade.error %}
+                {% if form.documento_identidade.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.documento_identidade.error}}
+                    {{form.documento_identidade.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -60,9 +60,9 @@
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.cnpjcpf.label_tag}}
                 {{form.cnpjcpf}}
-                {% if form.cnpjcpf.error %}
+                {% if form.cnpjcpf.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.cnpjcpf.error}}
+                    {{form.cnpjcpf.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -70,9 +70,9 @@
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.nacionalidade.label_tag}}
                 {{form.nacionalidade}}
-                {% if form.nacionalidade.error %}
+                {% if form.nacionalidade.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.nacionalidade.error}}
+                    {{form.nacionalidade.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -80,9 +80,9 @@
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.passaporte.label_tag}}
                 {{form.passaporte}}
-                {% if form.passaporte.error %}
+                {% if form.passaporte.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.passaporte.error}}
+                    {{form.passaporte.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -90,9 +90,9 @@
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form.estadocivil.label_tag}}
                 {{form.estadocivil}}
-                {% if form.estadocivil.error %}
+                {% if form.estadocivil.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.estadocivil.error}}
+                    {{form.estadocivil.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -101,72 +101,72 @@
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.telefone.label_tag}}
                 {{form.telefone}}
-                {% if form.telefone.error %}
+                {% if form.telefone.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.telefone.error}}
+                    {{form.telefone.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.celular.label_tag}}
                 {{form.celular}}
-                {% if form.celular.error %}
+                {% if form.celular.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.celular.error}}
+                    {{form.celular.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form.codindicacao.label_tag}}
                 {{form.codindicacao}}
-                {% if form.codindicacao.error %}
+                {% if form.codindicacao.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.codindicacao.error}}
+                    {{form.codindicacao.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 my-2">
                 {{form.nome_mae.label_tag}}
                 {{form.nome_mae}}
-                {% if form.nome_mae.error %}
+                {% if form.nome_mae.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.nome_mae.error}}
+                    {{form.nome_mae.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 my-2">
                 {{form.nome_pai.label_tag}}
                 {{form.nome_pai}}
-                {% if form.nome_pai.error %}
+                {% if form.nome_pai.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.nome_pai.error}}
+                    {{form.nome_pai.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form_user.username.label_tag}}
                 {{form_user.username}}
-                {% if form.celular.error %}
+                {% if form_user.username.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form_user.username.error}}
+                    {{form_user.username.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form_user.password1.label_tag}}
                 {{form_user.password1}}
-                {% if form.celular.error %}
+                {% if form_user.password1.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form_user.password1.error}}
+                    {{form_user.password1.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form_user.password2.label_tag}}
                 {{form_user.password2}}
-                {% if form.celular.error %}
+                {% if form_user.password2.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form_user.password2.error}}
+                    {{form_user.password2.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -178,9 +178,9 @@
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.cep.label_tag}}
                 {{form.cep}}
-                {% if form.cep.error %}
+                {% if form.cep.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.cep.error}}
+                    {{form.cep.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -188,9 +188,9 @@
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.endereco.label_tag}}
                 {{form.endereco}}
-                {% if form.endereco.error %}
+                {% if form.endereco.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.endereco.error}}
+                    {{form.endereco.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -198,9 +198,9 @@
             <div class="col-12 col-md-6 col-lg-2 my-2">
                 {{form.numero.label_tag}}
                 {{form.numero}}
-                {% if form.numero.error %}
+                {% if form.numero.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.numero.error}}
+                    {{form.numero.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -208,9 +208,9 @@
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.complemento.label_tag}}
                 {{form.complemento}}
-                {% if form.complemento.error %}
+                {% if form.complemento.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.complemento.error}}
+                    {{form.complemento.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -218,36 +218,36 @@
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.cidade.label_tag}}
                 {{form.cidade}}
-                {% if form.cidade.error %}
+                {% if form.cidade.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.cidade.error}}
+                    {{form.cidade.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.bairro.label_tag}}
                 {{form.bairro}}
-                {% if form.bairro.error %}
+                {% if form.bairro.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.bairro.error}}
+                    {{form.bairro.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-2 my-2">
                 {{form.estado.label_tag}}
                 {{form.estado}}
-                {% if form.estado.error %}
+                {% if form.estado.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.estado.error}}
+                    {{form.estado.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-2 my-2">
                 {{form.pais.label_tag}}
                 {{form.pais}}
-                {% if form.pais.error %}
+                {% if form.pais.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.pais.error}}
+                    {{form.pais.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -259,54 +259,54 @@
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.nif.label_tag}}
                 {{form.nif}}
-                {% if form.nif.error %}
+                {% if form.nif.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.nif.error}}
+                    {{form.nif.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.facebook.label_tag}}
                 {{form.facebook}}
-                {% if form.facebook.error %}
+                {% if form.facebook.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.facebook.error}}
+                    {{form.facebook.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.twitter.label_tag}}
                 {{form.twitter}}
-                {% if form.twitter.error %}
+                {% if form.twitter.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.twitter.error}}
+                    {{form.twitter.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.homepage.label_tag}}
                 {{form.homepage}}
-                {% if form.homepage.error %}
+                {% if form.homepage.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.homepage.error}}
+                    {{form.homepage.errors}}
                 </div>
                 {% endif %}
             </div>
             <div class="col-12 my-2">
                     {{form.atuacao.label_tag}}
                     {{form.atuacao}}
-                    {% if form.atuacao.error %}
+                    {% if form.atuacao.errors %}
                     <div class="alert alert-danger" role="alert">
-                        {{form.atuacao.error}}
+                        {{form.atuacao.errors}}
                     </div>
                     {% endif %}
                 </div>
             <div class="col-12 my-2">
                 {{form.biografia.label_tag}}
                 {{form.biografia}}
-                {% if form.biografia.error %}
+                {% if form.biografia.errors %}
                 <div class="alert alert-danger" role="alert">
-                    {{form.biografia.error}}
+                    {{form.biografia.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -314,7 +314,6 @@
         <button class="btn btn-block btn-success mt-2" type="submit" name="action">Salvar</button>
     </form>
 </div>
-<!--Import jQuery before materialize.js-->
 
 {% endblock content %}
 

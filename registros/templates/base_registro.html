@@ -97,7 +97,6 @@
 
                 )
                 $('#total').html(data.price)
-
             },
             done: function (e, data) {
                 //$("#total").html("10")
@@ -124,7 +123,6 @@
                             ).addClass("float-right"),
                         ).attr('id', 'tr_file' + result.id)
                     )
-
                     $('#description tbody').prepend(
                         $('<tr>').append(
                             $('<td>').append(
@@ -138,11 +136,9 @@
                                     .addClass('float-right mt-2')
                                     .attr('link', result.delete)
                                     .attr('style', 'cursor: pointer;')
-
                             ),
                         ).attr('id', 'tr_desc' + result.id)
                     )
-
                     $('#coautores').prepend(
                         $('<div>').append(
                             $('<div>').append(
@@ -162,8 +158,6 @@
                             ).addClass("row"),
                         ).addClass("list-group-item").attr('id', 'table_coautor' + result.id)
                     ).addClass('container')
-
-
                 }
                 if (result.error) {
                     alert(result.error)
@@ -177,9 +171,7 @@
                 $(".progress-bar").css({ "width": "0%" });
                 $(".progress-bar").text("0%");
             }
-
         })
-
     }
     $('#id_codservico').change(function () {
         // jQuery.noConflict();
@@ -268,10 +260,6 @@
             backdrop: 'static',
             keyboard: false
         });
-
-        // var instance = M.Modal.getInstance(document.getElementById('modal1'));
-        // instance.open()
-
     }
 
     function myFunction(id) {
@@ -288,59 +276,64 @@
         })
     }
 
-   
+
 
     function add_coautor(id) {
         $('#col_coautor' + id).append(
-            $("<div>").append(
+            $("<form>").append(
                 $("<div>").append(
-                    $("<label>").text("Nome"),
-                    $('<input type="text"/>').addClass('form-control')
-                ).addClass('col-12 col-lg-4'),
-                $("<div>").append(
-                    $("<label>").text("Documento"),
-                    $('<input type="text"/>').addClass('form-control')
-                ).addClass('col-12 col-lg-4'),
-                $("<div>").append(
-                    $("<label>").text("Porcentagem"),
-                    $('<input type="text"/>').addClass('form-control')
-                ).addClass('col-12 col-lg-4'),
-            ).addClass('row'),
-            $('<div>').append(
-                $("<div>").append(
-                    $('<button>').text("Salvar")
-                        .addClass('float-right m-2')
-                        .addClass('btn btn-success'),
-                    $('<button>').text("Excluir")
-                        .addClass('float-right m-2')
-                        .addClass('btn btn-danger'),
-                ).addClass('col-12 col-lg-4 offset-lg-8'),
-            ).addClass('row my-2')
+                    $("<div>").append(
+                        $("<label>").text("Nome"),
+                        $('<input type="text"/>').addClass('form-control')
+                            .attr('name', "nome")
+                    ).addClass('col-12 col-lg-4'),
+                    $("<div>").append(
+                        $("<label>").text("Documento"),
+                        $('<input type="text"/>').addClass('form-control')
+                            .attr('name', "documento")
+                    ).addClass('col-12 col-lg-4'),
+                    $("<div>").append(
+                        $("<label>").text("Porcentagem"),
+                        $('<input type="number"/>')
+                            .attr('name', "percentual_obra")
+                            .attr("step", "0.01")
+                            .addClass('form-control')
+                    ).addClass('col-12 col-lg-4'),
+                ).addClass('row'),
+                $('<div>').append(
+                    $("<div>").append(
+                        $('<a>').text("Salvar")
+                            .addClass('float-right m-2')
+                            .addClass('btn btn-success')
+                            .attr('onclick', 'save_coautor("' + id + '")'),
+                        $('<a>').text("Excluir")
+                            .addClass('float-right m-2')
+                            .addClass('btn btn-danger')
+                            .attr('onclick', 'del_coautor("' + id + '")'),
+                    ).addClass('col-12 col-lg-4 offset-lg-8'),
+                ).addClass('row')
+            ).addClass('my-2').attr('id','form_coautor'+id).attr('method', 'post')
         )
     }
 
-    $("#btn-teste").click(function () {
-        $('#coautores').prepend(
-            $('<div>').append(
-                $('<div>').append(
-                    $("<div>").append(
-                        $('<p>').text("result.name").addClass(),
-                    ).addClass('col-12 col-lg-10'),
-                    $('<div>').append(
-                        $("<a>").html("Adicionar")
-                            .addClass('btn btn-primary btn-block text-white')
-                            .addClass('float-right mt-2')
-                            .attr('link', "result.delete")
-                            .attr('style', 'cursor: pointer;')
-                            .attr('onclick', 'add_coautor("' + 1 + '")')
-                    ).addClass('col-12 col-lg-2 my-2'),
-                    $("<div>").attr('id', 'col_coautor' + 1)
-                        .addClass('col-12'),
-                ).addClass("row"),
-            ).addClass("list-group-item").attr('id', 'table_coautor' + 1)
-        ).addClass('container')
-    })
-
+    function save_coautor(id) {
+        let url = '/api/coautor-file/' + id
+        let data = {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            file: id
+        }
+        let formData =  $('#form_coautor'+id).serializeArray()
+        formData.forEach(element =>{
+            data[element.name] = element.value
+        })
+        console.log(data)
+        $.post(url, data, function (data) {
+            console.log(data)
+        }).fail(function (e, data) {
+            console.log(data)
+        })
+    }
+    
 </script>
 
 {% endblock script %}

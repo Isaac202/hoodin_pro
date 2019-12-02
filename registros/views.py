@@ -13,7 +13,6 @@ from django.views import View
 from tools.genereteKey import get_size_file, file_to_shar256
 from django.http import HttpResponse
 
-
 # class TesteCreateView(CreateView):
 #     form_class = ArquivoRegistroTesteForm
 #     template_name = "registros/teste.html"

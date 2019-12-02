@@ -5,4 +5,4 @@ class CoautoresForm(forms.ModelForm):
     
     class Meta:
         model = Coautores
-        exclude = ("documento",)
+        exclude = ("arquivo",)

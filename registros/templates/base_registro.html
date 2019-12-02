@@ -261,7 +261,7 @@
         }).done(function (data) {
             element.remove()
             $("#tr_desc" + id).remove()
-            $("#tr_autor" + id).remove()
+            $("#table_coautor" + id).remove()
             $('#check_file' + id).remove()
         }).always(function (data) {
             console.log(data)
@@ -343,6 +343,7 @@
                     ).addClass('row my-3').attr('id', 'coautor_row' + data.id),
                 )
                 form.trigger("reset");
+                form.find('input').first().focus()
             }else{
                 alert(data.error)
             }

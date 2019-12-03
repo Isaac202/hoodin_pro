@@ -2,6 +2,9 @@
 
 {% block content %}
 <div class="container mt-5">
+
+    <p>{{data}}</p>
+
     <form class="form-group" action="" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{form.as_p}}

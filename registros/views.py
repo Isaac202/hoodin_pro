@@ -15,11 +15,41 @@ from tools.genereteKey import get_size_file, file_to_shar256
 from django.http import HttpResponse
 from compras.forms import InserirCreditoForm
 from django.contrib import messages
+from decimal import Decimal
 
-# class TesteCreateView(CreateView):
-#     form_class = ArquivoRegistroTesteForm
-#     template_name = "registros/teste.html"
-#     success_url = "/"
+from cielo.tasks import comprar_credito
+from random import randint
+
+
+class TesteCreateView(View):
+    template_name = "registros/teste.html"
+
+    def get(self, request, *args, **kwargs):
+        context = {'form': InserirCreditoForm()}
+        context["data"] = comprar_credito(10, 'Martoele C. Pixão', '0000000000000001', '279',
+                               'Master', '07/2022', 200, 1)
+        
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        print(request.POST, '\n\n\n')
+        nome_cartao = request.POST.get("nome_cartao")
+        numero_cartao = request.POST.get("numero_cartao")
+        seguranca = request.POST.get("seguranca")
+        bandeira = request.POST.get("bandeira")
+        validade = request.POST.get("validade")
+        valor = request.POST.get("valor")
+        qtd = request.POST.get('qtd_parcela', 1)
+        val = Decimal(valor) * 100
+        val = int(val)
+        pedido = randint(1, 1000000)
+        
+
+        # data = comprar_credito(10, nome_cartao, numero_cartao, seguranca, bandeira, validade, val, 1)
+        data = comprar_credito(10, 'Martoele C. Pixão', '0662821825086128', '279',
+                               'HiperCard', '07/2022', 200, 1)
+        
+        return render(request, self.template_name,{'data':data})
 
 
 class RegistrosCreate(LoginRequiredMixin, View):

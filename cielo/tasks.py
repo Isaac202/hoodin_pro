@@ -160,7 +160,7 @@ cod_erro_cielo= {
     '323': 'Consulta de Lixeira não está ativada',
 }
 
-@task
+# @task
 def comprar_credito(id_compra, cliente, numero_cartao, seguranca, bandeira, validade, valor, qtd_parcela):
     x = ''
     msg_retorno = ''
@@ -200,10 +200,11 @@ def comprar_credito(id_compra, cliente, numero_cartao, seguranca, bandeira, vali
         p =p.replace(']', '')
         codigo = p
         msg_retorno= str(cod_erro_cielo.get(codigo,0))
+        # print(codigo,'\n\n')
         return (msg_retorno, '0', '0')
 
 
-    return (msg_retorno, codigo_transacao, codigo_pagamento)
+    return ( msg_retorno, codigo_transacao, codigo_pagamento)
 
 @task
 def gerar_token_cartao(cliente, numero_cartao, seguranca, bandeira, validade):

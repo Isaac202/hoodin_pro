@@ -55,12 +55,13 @@ class InserirCreditoForm(forms.Form):
         bandeira = self.cleaned_data.get("bandeira")
         validade = self.cleaned_data.get("validade")
         valor = self.cleaned_data.get("valor")
-        qtd = self.cleaned_data.get('qtd_parcela')
+        qtd = 1#self.cleaned_data.get('qtd_parcela')
         val = valor *100
         val = int(val)
         pedido = randint(1,1000000)
-        resposta_cielo, codigo_tran = comprar_credito(pedido, nome_cartao,numero_cartao, seguranca, bandeira, validade, val, qtd)
-
+        data = comprar_credito(pedido, nome_cartao,numero_cartao, seguranca, bandeira, validade, val, qtd)
+        resposta_cielo, codigo_tran = data
+        print(data,'\n\n')
         # self.cleaned_data.__setitem__("codigo_trasacao", codigo_tran)
         # self.cleaned_data.__setitem__("statu_trasacao", resposta_cielo)
 

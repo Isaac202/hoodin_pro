@@ -35,13 +35,15 @@
             </div>
           </nav>
           <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-              aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
               <form id="registro-form" class="form-group" action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
                   <div class="col-12 col-lg-6">
                     <div class="card">
+                      <div class="col-12 mt-2">
+                        Saldo R$ <samp id="credit">{{user.clientes.get_credit}}</samp>
+                      </div>
                       <div class="card-body mb-lg-5">
                         <div class="row mb-lg-3 p-lg-1">
                           <div class="col-12">
@@ -67,14 +69,14 @@
                   <div class="col-12 col-lg-6 mt-3 mt-lg-0">
                     <div class="row">
                       <div class="col-12">
-                        <div id="btn-upload"  class="card" style="cursor: pointer">
+                        <div id="btn-upload" class="card" style="cursor: pointer">
                           <div class="card-body">
                             <div class="row">
                               <div class="col-sm-12">
                                 <div class="card"
                                   style="padding: 2.5%; border-radius: 10px; outline: none; border: none">
                                   <h3 class="text-center display-4">Clique ou Arraste até aqui!</h3>
-                              </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -168,7 +170,38 @@
   Launch demo modal
 </button> -->
 <input disabled id="fileupload" type="file" name="file" multiple="multiple" style="display: none;"
-data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
-
+  data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
 <!-- data-url="{% url 'base_upload' %}"  -->
+
+
+
+
+<!-- Modal grande -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Modal
+  grande</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <form id="cielo">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="TituloModalCentralizado">Título do modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{cielo.as_p}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Salvar mudanças</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 {% endblock %}

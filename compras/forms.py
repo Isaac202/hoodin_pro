@@ -1,18 +1,10 @@
 from cielo.tasks import comprar_credito
 from django import forms
 from random import randint
-from .models import Compras
+from .models import Compras 
 
 
-class InserirCreditoForm(forms.ModelForm):
-    def __init__(self,  *args, **kwargs):
-
-        super(InserirCreditoForm, self).__init__(*args, **kwargs)
-        self.request = kwargs.pop('request', None)
-        self.fields['codigo_trasacao'].widget.attrs['readonly'] = True
-        self.fields['statu_trasacao'].widget.attrs['readonly'] = True
-        self.fields['statu_trasacao'].widget = forms.HiddenInput()
-        self.fields['qtd_parcela'].widget.attrs['readonly'] = True
+class InserirCreditoForm(forms.Form):
 
     BANDEIRA_CHOICES = (
         ('Visa', 'Visa'),
@@ -29,23 +21,25 @@ class InserirCreditoForm(forms.ModelForm):
 
     )
 
-
-
-
     nome_cartao = forms.CharField(max_length=60, required=False)
     numero_cartao = forms.CharField(max_length=30, required=False)
     seguranca = forms.CharField(max_length=3, required=False)
     bandeira = forms.ChoiceField(required=False, choices=BANDEIRA_CHOICES)
     validade = forms.CharField(max_length=7, required=False)
-    valor = forms.DecimalField(max_digits=10, decimal_places=2, required=True, localize=True)
+    valor = forms.DecimalField(
+        max_digits=10, decimal_places=2, required=True, localize=True)
 
+    # class Meta:
+    #     model = Compras
+    #     # fields = ['valor', 'forma_pagamento', 'nome_cartao', 'numero_cartao', 'seguranca', 'bandeira',
+    #     #           'validade', 'valor', 'qtd_parcela', 'codigo_trasacao', 'statu_trasacao']
+    #     exclude = ['id', 'data_compra','id_usuario']
 
-
-    class Meta:
-        model = Compras
-        fields = ['valor', 'forma_pagamento', 'nome_cartao','numero_cartao', 'seguranca', 'bandeira',
-                  'validade', 'valor', 'qtd_parcela', 'codigo_trasacao', 'statu_trasacao']
-        exclude = ['id','data_compra']
+    def __init__(self,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] ='form-control'
+     
 
     def clean(self):
       try:

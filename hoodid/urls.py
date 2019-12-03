@@ -55,6 +55,8 @@ router = routers.SimpleRouter()
 router.register(r'api/clientes', ClienteViewSet)
 router.register(r'api/servicos', ServicoViewSet)
 
+from compras.views import CompraCreditoCreate
+
 urlpatterns = [
     path('api/', include("api.urls")),
     path('', include(router.urls)),
@@ -116,6 +118,8 @@ urlpatterns = [
     path('novo_codigos_promocionais/', Codigos_PromocionaisCreate.as_view(), name='novo_codigos_promocionais'),
     path('atualiza_codigos_promocionais/<int:pk>/', Codigos_PromocionaisUpdate.as_view(), name='atualiza_codigos_promocionais'),
     path('delete_codigos_promocionais/<int:pk>/', Codigos_PromocionaisDelete.as_view(), name='delete_codigos_promocionais'),
+
+    path('compra/', CompraCreditoCreate.as_view(), name='credito'),
 
     # path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
 

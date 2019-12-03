@@ -12,9 +12,9 @@ from django.http import JsonResponse
 from django.views import View
 from tools.genereteKey import get_size_file, file_to_shar256
 from django.http import HttpResponse
-
+from compras.forms import InserirCreditoForm
 # class TesteCreateView(CreateView):
-#     form_class = ArquivoRegistroTesteForm
+#     form_class = ArquivoRegistroTesteForm 
 #     template_name = "registros/teste.html"
 #     success_url = "/"
 
@@ -29,6 +29,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         context = {}
         context['form'] = RegistrosForm()
+        context['cielo'] = InserirCreditoForm()
         files = ArquivoRegistro.objects.filter(
             id_usuario=self.request.user, paid=False)
         for file in files:

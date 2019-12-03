@@ -28,7 +28,7 @@ def confUser(request, key):
     if not conf_person.status(): 
         conf_person.conf()
         user.active()
-        context['url_redirect'] = "/" #reverse_lazy('cliente:list')    
+        context['url_redirect'] = reverse_lazy('cliente:update')    
         return render(request, template_name, context)
     # group = Group.objects.get_or_create(name='new_group')
     return redirect('users:login')

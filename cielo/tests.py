@@ -2,9 +2,11 @@ from django.test import TestCase
 from decouple import config
 from .tasks import  comprar_credito
 from cielo.tasks import gerar_token_cartao
-from cielo.tasks import comprar_com_token
-from cielo.tasks import criar_token_senha
+# from cielo.tasks import comprar_com_token
+# from cielo.tasks import criar_token_senha
 from cielo.tasks import cancelar_compra
+
+
 
 
 class TestCielo(TestCase):
@@ -22,7 +24,7 @@ class TestCielo(TestCase):
 
     def test_merchant_key_box(self):
             mid = config('MERCHANT_KEY_BOX')
-            assert mid=='SGZZBNYUQFFBCCXABXJRDSSEDCPAWBYXCZGYQSMF'
+            assert mid=='SGZZBNYUQFFBCCXABXJRDStrasacaoEDCPAWBYXCZGYQSMF'
 
     def test_url_token_sms(self):
             mid = config('URL_TOKEN_SMS')
@@ -44,9 +46,10 @@ class TestCielo(TestCase):
 
 
     def test_compra_autorizada(self):
-        resposta_cielo, trasacao, codigo = comprar_credito(10, 'Martoele C. Pixão', '0662821825086128', '279',
-                                                   'HiperCardCLS', '07/2022', 200, 1)
-
+        data = comprar_credito(10, 'Martoele C. Pixão', '0662821825086128', '279',
+                                                   'HiperCard', '07/2022', 200, 1)
+        resposta_cielo, trasacao, codigo_compra = data    
+        print(data,'\n\n')
         assert resposta_cielo == 'Autorizacao negada'
 
 

@@ -56,11 +56,12 @@ class ClientesList(LoginRequiredMixin, ListView):
         return context
 
 
-class ClientesUpdate(LoginRequiredMixin, UpdateView):
+class ClientesUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Clientes
     template_name = "clientes/upd_clientes.html"
     form_class = ClienteUpdateForm
-    success_url = reverse_lazy('cliente:list')
+    success_message = "Dados Atualizados!"
+    success_url = reverse_lazy('cliente:update')
 
     def get_object(self):
         user = self.request.user

@@ -27,7 +27,9 @@ class CompraCreditoCreate(LoginRequiredMixin, CreateView):
         return reverse_lazy('retorno_card')
 
     def form_valid(self, form):
-        form.instance.id_motorista = self.request.user
+        # form.instance.id_motorista = self.request.user
+        print('\n\n\estou aqui')
+
 
 
         return super(CompraCreditoCreate, self).form_valid(form)

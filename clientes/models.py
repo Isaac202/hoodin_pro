@@ -12,6 +12,15 @@ from datetime import datetime
 
 User = get_user_model()
 
+TIPO_DOCUMENTO = (
+    ('RG', 'RG'),
+    ('CNH', 'CNH'),
+    ('Seguro Social', 'Seguro Social'),
+    ('Titulo de Eleitor', 'Titulo de Eleitor'),
+    ('Conselho de Classe', 'Conselho de Classe'),
+    ('Outros', 'Outros'),
+)
+
 
 class Clientes(models.Model):
     id_usuario = models.OneToOneField(User, on_delete=models.PROTECT)
@@ -48,7 +57,7 @@ class Clientes(models.Model):
     bairro = models.CharField("Bairro *", max_length=50)
     documento_identidade = models.CharField(
         "Documento de identificação *", max_length=50)
-    documento_tipo = models.CharField("Tipo de Documento *", max_length=20)
+    documento_tipo = models.CharField("Tipo de Documento *", max_length=20, choices=TIPO_DOCUMENTO)
     passaporte = models.CharField(max_length=50, null=True, blank=True)
     nacionalidade = models.CharField(
         "Nacionalidade *", max_length=20, default='Brasileiro')

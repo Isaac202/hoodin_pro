@@ -275,14 +275,14 @@
         });
     }
 
-    function teste() {
-        jQuery.noConflict();
+    //function teste() {
+       // jQuery.noConflict();
         // $('#modal1').modal('show'); 
-        $('#exampleModalLong').modal({
-            backdrop: 'static',
-            keyboard: false
-        });
-    }
+        // $('#exampleModalLong').modal({
+        //     backdrop: 'static',
+        //     keyboard: false
+        // });
+   // }
 
     function myFunction(id) {
         let text = document.getElementById("desc_file" + id).value
@@ -411,6 +411,35 @@
     //         ).addClass("list-group-item").attr('id', 'table_coautor' + result.id)
     //     ).addClass('container')
     // })
+
+
+    $('#check_acept_terms').click(function() {
+        // alert('kdkdk')
+        if($(this).is(":checked")) {
+            $("#btn_submit").removeAttr("disabled");
+        }else{
+            $("#btn_submit").attr("disabled", true);
+        }
+    });
+
+    $('#registro-form').submit(function (e) {
+        e.preventDefault()
+        let url = '/api/very-credit/?service=' + $('#id_codservico').val()
+        // alert(url)
+        $.getJSON(url, function(data){
+            console.log(data)
+            if( !data.result && data.cielo){
+                $('#modal_cielo').modal({
+                    backdrop:'static',
+                    keyboard:false
+                })
+            }
+        }).fail(function(e){
+            alert('Ops! algo deu errado')
+        })
+
+    })
+
 
 </script>
 

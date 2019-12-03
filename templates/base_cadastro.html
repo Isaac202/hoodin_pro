@@ -34,7 +34,6 @@
     var valor = 0;
     var extentions = ""
     var formData = new FormData()
-
     $('#id_codservico').change(function () {
         if ($(this).val() != "") {
             let url = "/api/servicos/" + $(this).val()
@@ -231,15 +230,7 @@
         });
     }
 
-    function teste() {
-        // console.log('modal')
-        // $("#modal1").modal('show');
-        var instance = M.Modal.getInstance(document.getElementById('modal1'));
-        instance.open()
 
-    }
-
-
+   
 </script>
-
 {% endblock script %}

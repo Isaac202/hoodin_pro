@@ -45,7 +45,8 @@ class BasicUploadView(APIView):
             file.save()
             serializer = ArquivoSerializer(file, many=False)
             data = serializer.data
-            data['delete'] = str(reverse_lazy('delete_file', kwargs={'pk': file.pk}))
+            data['delete'] = str(reverse_lazy(
+                'delete_file', kwargs={'pk': file.pk}))
             data['is_valid'] = True
 
         files = ArquivoRegistro.objects.filter(
@@ -90,4 +91,30 @@ class DeleteFileView(APIView):
             file.file.delete()
             file.delete()
             data['success'] = True
+        return Response(data)
+
+
+class VeryCredit(APIView):
+
+    def get(self, request, format=None):
+        data = {}
+        data['result'] = False
+        data['cielo'] = False
+        service = request.GET.get('service', None)
+        if service:
+            service = get_object_or_404(Servicos, pk=service)
+            cliente = request.user.clientes
+            files = ArquivoRegistro.objects.filter(
+                id_usuario=request.user, paid=False
+            )
+            total = service.preco * files.count()
+            cliente = request.user.clientes
+            if cliente.valor_credito <= total:
+                data['result'] = True
+            else:
+                data['cielo'] = True
+                data['error'] = "Saldo insuficiente"
+        else:
+            data['error'] = 'serviço não encontrado'
+
         return Response(data)

@@ -1,7 +1,7 @@
 {% extends 'base_registro.html' %}
 
 {% block content %}
-{% include "registros/components/termos.html" %}
+
 <div class="container mt-5">
   <section id="tabs">
     <div class="container">
@@ -114,14 +114,15 @@
                 <hr>
                 <div class="row float-right">
                   <div class="col-12">
-                    <input class="form-check-input" required type="checkbox" name="acept" id="acept_terms">
-                    Concordo com os <a href="#modal_terms" data-toggle="modal" data-target="#modal_terms">termos de uso</a>.
+                    <input class="form-check-input" type="checkbox" name="acept" id="check_acept_terms">
+                    Concordo com os <a href="#modal_terms" data-toggle="modal" data-target="#modal_terms">termos de
+                      uso</a>.
                   </div>
                 </div>
                 <br>
                 <div class="row">
                   <div class="col-12 col-lg-3 offset-lg-9">
-                    <button class="btn btn-success float-right mt-1 btn-md btn-block" type="submit">Enviar</button>
+                    <button disabled type="submit" id="btn_submit" class="text-white btn btn-success float-right mt-1 btn-md btn-block">Enviar</button>
                   </div>
                 </div>
 
@@ -162,13 +163,13 @@
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Modal
   grande</button> -->
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div id="modal_cielo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_cielo"
   aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+  <div class="modal-dialog modal-lg">
     <form id="cielo">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="TituloModalCentralizado">Título do modal</h5>
+          <h5 class="modal-title" id="TituloModalCentralizado">Comprar Crédito</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -186,4 +187,5 @@
 </div>
 
 
+{% include "registros/components/termos.html" %}
 {% endblock %}

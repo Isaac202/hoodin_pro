@@ -17,6 +17,7 @@
             </li>
             <li class="nav-item active">
                 <a href="#" class="nav-link font-weight-bold">
+                    <i class="fas fa-receipt"></i>
                     Tabela Preços
                 </a>
             </li>
@@ -24,45 +25,54 @@
             {% if user.is_authenticated %}
             <li class="nav-item active">
                 <a href="{% url 'registrar' %}" class="nav-link font-weight-bold">
+                    <i class="far fa-registered"></i>
                     Registrar
                 </a>
             </li>
-
+            <li class="nav-item active">
+                <a class="nav-link font-weight-bold">
+                    <i class="fas fa-user-circle"></i>
+                    {{user.username}}
+                </a>
+            </li>
             <li class="nav-item dropdown active font-weight-bold">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i>
                     Minha conta
                 </a>
                 <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item text-white" href="{% url 'cliente:update' %}">
+                        <i class="fas fa-database"></i>
                         Meus Dados</a>
                     <a class="dropdown-item text-white" href="{% url 'meus_registros' %}">
+                        <i class="fas fa-list"></i>
                         Meus Registros
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-white">
+                        <i class="fas fa-money-bill"></i>
                         Saldo R$ <span class="credit">{{user.clientes.get_credit}}</span>
                     </a>
                 </div>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link font-weight-bold">
-                    {{user.username}}
-            </li>
-            </a>
+
             <li class="nav-item active">
                 <a class="nav-link font-weight-bold" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </a>
             </li>
             {% else %}
             <li class="nav-item active">
-                    <a class="nav-link font-weight-bold" href="{% url 'cliente:new' %}">
-                        Cadastre-se
-                    </a>
-                </li>
+                <a class="nav-link font-weight-bold" href="{% url 'cliente:new' %}">
+                    <i class="fas fa-user-plus"></i>
+                    Cadastre-se
+                </a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link font-weight-bold" href="{% url 'login' %}">
+                    <i class="fas fa-sign-in-alt"></i>
                     Entre
                 </a>
             </li>

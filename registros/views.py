@@ -97,3 +97,20 @@ class BasicUploadView(View):
                     'size': size, "key": shar256}
 
         return JsonResponse(data)
+
+
+from django.core.paginator import Paginator
+
+class MeusRegistrosList(ListView):
+    model = Registros
+    context_object_name = 'registros'
+    template_name='registros/meus_registros.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = Registros.objects.all().select_related()
+        paginator = Paginator(queryset, 25)
+        page = self.request.GET.get('page', 1)
+        registros = paginator.get_page(page)
+        return registros
+    

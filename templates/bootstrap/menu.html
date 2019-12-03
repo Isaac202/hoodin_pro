@@ -9,52 +9,57 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="nav navbar-nav ml-auto">
+        <ul class="nav navbar-nav ml-auto text-center">
             <li class="nav-item active">
                 <a class="nav-link font-weight-bold" href="/">Home <span class="sr-only">(Página atual)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="{% url 'cliente:update' %}">
-                    Meus Dados
-                </a>
-            </li>
-
             <li class="nav-item active">
                 <a href="#" class="nav-link font-weight-bold">
                     Tabela Preços
                 </a>
             </li>
 
+            {% if user.is_authenticated %}
             <li class="nav-item active">
                 <a href="{% url 'registrar' %}" class="nav-link font-weight-bold">
                     Registrar
                 </a>
             </li>
-
-            <li class="nav-item active">
-                <a href="#" class="nav-link font-weight-bold">
-                    Meus Registros
+            
+            <li class="nav-item dropdown active font-weight-bold">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Minha conta
                 </a>
+                <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item text-white" href="{% url 'cliente:update' %}">
+                        Meus Dados</a>
+                    <a class="dropdown-item text-white" href="{% url 'meus_registros' %}">
+                        Meus Registros
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-white">
+                        Saldo R$ <span class="credit">{{user.clientes.get_credit}}</span>
+                    </a>
+                </div>
             </li>
-
             <li class="nav-item active">
-                <a href="#" class="nav-link font-weight-bold">
-                    Fale Conosco
-                </a>
+                <a class="nav-link font-weight-bold">
+                    {{user.username}}
             </li>
+            </a>
             <li class="nav-item active">
-                <a href="" class="nav-link font-weight-bold text-center">
-                    Saldo atual <br>
-                    {{user.clientes.get_credit}}
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a href="{% url 'logout' %}" class="nav-link font-weight-bold">
+                <a class="nav-link font-weight-bold" href="{% url 'logout' %}">
                     Sair
                 </a>
             </li>
-
-
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link font-weight-bold" href="{% url 'login' %}">
+                    Entrar
+                </a>
+            </li>
+            {% endif %}
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">

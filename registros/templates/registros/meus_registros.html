@@ -1,0 +1,52 @@
+{% extends 'base_registro.html' %}
+
+{% block content %}
+<div class="container-fluid mt-2">
+    <hr>
+    <p class="h2 text-center">Meus registros</p>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Serviço</th>
+                    <th scope="col">Arquivo</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Versão</th>
+                    <th scope="col">Download</th>
+                    <th scope="col">PDF</th>
+                    <th scope="col">Assinatura</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for r in registros %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{r.codservico.nome}}</td>
+                    <td>{{r.arquivo.name}}</td>
+                    <td>{{r.data|date:'d/m/Y'}}</td>
+                    <td>{{r.arquivo.version}}</td>
+                    <td>
+                        <a target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.nome}}" >
+                            baixar
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" download="{{r.arquivo.nome}}" href="{{r.arquivo.file.url}}">
+                            PDF
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" download="{{r.arquivo.nome}}" href="{{r.arquivo.file.url}}">
+                            Assinatura
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

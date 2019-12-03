@@ -24,8 +24,12 @@
 
     {% include "bootstrap/menu.html" %}
     {% block content %}
-
     {% endblock content %}
+    <div style="position: relative; top: 50%;">
+        {% include "home/fale_conosco.html" %}
+        {% include "bootstrap/footer.html" %}
+    </div>
+    <script src="https://kit.fontawesome.com/8e40491662.js" crossorigin="anonymous"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -47,7 +51,6 @@
     {% block script %}
 
     {% endblock script %}
-    {% include "bootstrap/footer.html" %}
 </body>
 
 </html>

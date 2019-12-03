@@ -26,30 +26,14 @@ class TesteCreateView(View):
 
     def get(self, request, *args, **kwargs):
         context = {'form': InserirCreditoForm()}
-        context["data"] = comprar_credito(10, 'Martoele C. Pixão', '0000000000000001', '279',
-                               'Master', '07/2022', 200, 1)
-        
+        # context["data"] = comprar_credito(10, 'matorele calixto', '5582859906117878', '463',
+        #                        'Master', '07/2020', 100, 1)
+        # Transacao autorizada
         return render(request, self.template_name, context)
-
-    def post(self, request, *args, **kwargs):
-        print(request.POST, '\n\n\n')
-        nome_cartao = request.POST.get("nome_cartao")
-        numero_cartao = request.POST.get("numero_cartao")
-        seguranca = request.POST.get("seguranca")
-        bandeira = request.POST.get("bandeira")
-        validade = request.POST.get("validade")
-        valor = request.POST.get("valor")
-        qtd = request.POST.get('qtd_parcela', 1)
-        val = Decimal(valor) * 100
-        val = int(val)
-        pedido = randint(1, 1000000)
+        # data = comprar_credito(10, 'Martoele C. Pixão', '0662821825086128', '279',
+        #                        'HiperCard', '07/2022', 200, 1)
         
-
-        # data = comprar_credito(10, nome_cartao, numero_cartao, seguranca, bandeira, validade, val, 1)
-        data = comprar_credito(10, 'Martoele C. Pixão', '0662821825086128', '279',
-                               'HiperCard', '07/2022', 200, 1)
-        
-        return render(request, self.template_name,{'data':data})
+        # return render(request, self.template_name,{'data':data})
 
 
 class RegistrosCreate(LoginRequiredMixin, View):

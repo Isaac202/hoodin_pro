@@ -93,7 +93,7 @@
                         .attr('name', 'files')
                         .attr('checked', true)
                         .attr('id', 'check_file' + data.id)
-                        // .addClass('d-none')
+                        .addClass('d-none')
 
                 )
                 $('#total').html(data.price)
@@ -427,7 +427,7 @@
         let url_check = '/api/very-credit/?service=' + $('#id_codservico').val()
         // alert(url)
         
-        await $.getJSON(url_check, function(data){
+        await $.getJSON(url_check, function(data){ 
             console.log(data)
             if( !data.result && data.cielo){
                 $('#id_valor').val(data.value)
@@ -445,6 +445,34 @@
         }).fail(function(e){
             alert('Ops! algo deu errado')
         })
+    })
+
+    $('#cielo').submit(function(e) {
+        e.preventDefault()
+        let url = '/api/buy-credit/'
+        let data = {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+        }
+        let form = $('#cielo')
+        let formData = form.serializeArray()
+        formData.forEach(element => {
+            data[element.name] = element.value
+        })
+        $.post(url, data, function(data){
+            if(data.result){
+                $('msg_cielo').text(data.msg)
+                // $('#modal_cielo').close()
+                $('#registro-form').submit()
+            }else{
+                $('msg_cielo').text(data.msg)
+                alert(data.msg)
+            }
+        }).fail(function(e){
+            console.log(e)
+            alert(data.msg)
+            $('msg_cielo').text(data.msg)
+        })
+
 
     })
 

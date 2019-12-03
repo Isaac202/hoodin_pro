@@ -1,5 +1,9 @@
+from random import randint
+from compras.models import Compras
+from cielo.tasks import comprar_credito
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
@@ -10,6 +14,7 @@ from tools.genereteKey import get_size_file, file_to_shar256
 from servicos.models import Servicos
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from decimal import Decimal
 
 
 class BasicUploadView(APIView):
@@ -122,29 +127,40 @@ class VeryCredit(APIView):
         return Response(data)
 
 
-# class BuyCredit(APIView):
+class BuyCredit(APIView):
 
-#     def post(self, request, format=None):
-#         data = {}
-#         data['result'] = False
-#         data['cielo'] = False
-#         service = request.GET.get('service', None)
-#         if service:
-#             service = get_object_or_404(Servicos, pk=service)
-#             cliente = request.user.clientes
-#             files = ArquivoRegistro.objects.filter(
-#                 id_usuario=request.user, paid=False
-#             )
-#             if files:
-#                 total = service.preco * files.count()
-#                 cliente = request.user.clientes
-#                 if cliente.valor_credito <= total:
-#                     data['result'] = True
-#                 else:
-#                     data['value'] = total - cliente.valor_credito
-#                     data['cielo'] = True
-#                     data['error'] = "Saldo insuficiente"
-#         else:
-#             data['error'] = 'serviço não encontrado'
+    def post(self, request, format=None):
+        cliente = request.user.clientes
+        nome_cartao = request.POST.get("nome_cartao")
+        numero_cartao = request.POST.get("numero_cartao")
+        seguranca = request.POST.get("seguranca")
+        bandeira = request.POST.get("bandeira")
+        validade = request.POST.get("validade")
+        valor = request.POST.get("valor")
+        qtd = request.POST.get('qtd_parcela', 1)
+        val_decimail = Decimal(valor)
+        val = int(val_decimail * 100)
+        pedido = randint(1, 1000000)
+        data = comprar_credito(
+            10, nome_cartao, numero_cartao, seguranca, bandeira, validade, val, 1)
+        resposta_cielo, trasacao, codigo_compra = data
+        
+        # resp = status.HTTP_400_BAD_REQUEST
+        autorizado = False
+        if resposta_cielo in "Transacao autorizada":
+            # resp = status.HTTP_201_CREATED
+            autorizado = True
+            cliente.valor_credito += val_decimail
+            cliente.save()
 
-#         return Response(data)
+        compra = Compras.objects.create(
+            id_usuario=request.user,
+            id_cliente=cliente,
+            valor=val_decimail,
+            codigo_compra_cielo=codigo_compra,
+            transacao_cielo=trasacao
+        )
+
+        print(resposta_cielo,'\n\n')
+        return Response({'msg':resposta_cielo, 'result':autorizado})#, status=resp)
+        

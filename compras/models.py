@@ -20,7 +20,7 @@ class Compras(models.Model):
     id_cliente = models.ForeignKey(Clientes, on_delete=models.PROTECT)
     valor = models.DecimalField(max_digits=11, decimal_places=2)
     data = models.DateTimeField(auto_now=True)
-    forma_pagamento = models.CharField(max_length=30, choices=FORMA_PG_CHOICES)
+    forma_pagamento = models.CharField(max_length=30, default="Cartão de Crédito", choices=FORMA_PG_CHOICES)
     autorizado = models.BooleanField(default=False)
     codigo_compra_cielo = models.CharField(max_length=80, blank=True, null=True, default='0')
     transacao_cielo = models.CharField(max_length=80, blank=True, null=True)
@@ -29,11 +29,11 @@ class Compras(models.Model):
 
 
 
-@receiver(post_save, sender=Compras)
-def autalizar_salado_cliente(sender, instance, **kwargs):
-    if instance.statu_trasacao == 'Transacao autorizada':
-        cli = Clientes.objects.filter(id_usuario=instance.id_cliente).first()
-        valor_atualizado = cli.valor_credito + instance.valor
-        Clientes.objects.filter(id_usuario=instance.id_cliente).update(valor_credito=valor_atualizado)
+# @receiver(post_save, sender=Compras)
+# def autalizar_salado_cliente(sender, instance, **kwargs):
+#     if instance.statu_trasacao == 'Transacao autorizada':
+#         cli = Clientes.objects.filter(id_usuario=instance.id_cliente).first()
+#         valor_atualizado = cli.valor_credito + instance.valor
+#         Clientes.objects.filter(id_usuario=instance.id_cliente).update(valor_credito=valor_atualizado)
 
 

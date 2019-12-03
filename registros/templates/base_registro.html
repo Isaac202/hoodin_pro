@@ -88,12 +88,12 @@
             },
             success: function (data) {
                 // console.log(data)
-                $("#registro-form").append(
+                $("#complete").append(
                     $('<input type="checkbox"/>').val(data.id)
                         .attr('name', 'files')
                         .attr('checked', true)
                         .attr('id', 'check_file' + data.id)
-                        .addClass('d-none')
+                        // .addClass('d-none')
 
                 )
                 $('#total').html(data.price)
@@ -438,7 +438,9 @@
             }else if(!data.result && !data.cielo){
                 alert('nenhum arquivo enviado')
             }else if(!data.cielo && data.result){
-                alert('valido')
+                $('#complete').append($('#id_codindicacao'))
+                $('#complete').append($('#id_codservico'))
+                $('#complete').submit()
             }
         }).fail(function(e){
             alert('Ops! algo deu errado')

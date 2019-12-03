@@ -11,7 +11,7 @@ from servicos_extensoes.models import Servicos_Extensoes
 class RegistrosForm(forms.ModelForm):
     class Meta:
         model = Registros
-        exclude = ['data', 'codregistro', 'arquivo',
+        exclude = ['data', 'codregistro', 'arquivo','descricao',
         'id_cliente', 'id_usuario', 'valor', 'desconto']
 
     def __init__(self, *args, **kwargs):

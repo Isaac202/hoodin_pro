@@ -3,6 +3,21 @@
 {% block content %}
 
 <div class="container mt-5">
+  {% if messages %}
+  <div class="row">
+    <div class="col-12 col-lg-9 my-2">
+      <ul class="messages list-group">
+        {% for message in messages %}
+        <li class="list-group-item text-success text-center" {% if message.tags %} class="{{ message.tags }}"
+          {% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-12 col-lg-3 my-2">
+      <a href="{% url 'meus_registros' %}" class="btn btn-success btn-block btn-lg">Ver Registros</a>
+    </div>
+  </div>
+  {% endif %}
   <section id="tabs">
     <div class="container">
       <!-- <h6 class="section-title h2"></h6> -->
@@ -122,7 +137,8 @@
                 <br>
                 <div class="row">
                   <div class="col-12 col-lg-3 offset-lg-9">
-                    <button disabled type="submit" id="btn_submit" class="text-white btn btn-success float-right mt-1 btn-md btn-block">Enviar</button>
+                    <button disabled type="submit" id="btn_submit"
+                      class="text-white btn btn-success float-right mt-1 btn-md btn-block">Enviar</button>
                   </div>
                 </div>
 
@@ -163,8 +179,7 @@
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Modal
   grande</button> -->
 
-<div id="modal_cielo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_cielo"
-  aria-hidden="true">
+<div id="modal_cielo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_cielo" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <form id="cielo">
       <div class="modal-content">
@@ -186,6 +201,9 @@
   </div>
 </div>
 
+<form class="" id="complete" action="" method="post">
+  {% csrf_token %}
+</form>
 
 {% include "registros/components/termos.html" %}
 {% endblock %}

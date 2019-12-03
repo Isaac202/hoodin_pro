@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
@@ -5,7 +6,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Registros, ArquivoRegistro
-from .forms import RegistrosForm, ArquivoRegistroForm #, ArquivoRegistroTesteForm
+from .forms import RegistrosForm, ArquivoRegistroForm  # , ArquivoRegistroTesteForm
 from registros.api.serializers import ArquivoSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -13,11 +14,12 @@ from django.views import View
 from tools.genereteKey import get_size_file, file_to_shar256
 from django.http import HttpResponse
 from compras.forms import InserirCreditoForm
+from django.contrib import messages
+
 # class TesteCreateView(CreateView):
-#     form_class = ArquivoRegistroTesteForm 
+#     form_class = ArquivoRegistroTesteForm
 #     template_name = "registros/teste.html"
 #     success_url = "/"
-
 
 
 class RegistrosCreate(LoginRequiredMixin, View):
@@ -39,15 +41,16 @@ class RegistrosCreate(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         files = request.POST.getlist('files', None)
-        print(files)
         files = ArquivoRegistro.objects.filter(
             pk__in=files,
             id_usuario=request.user,
             paid=False
         )
-        print(files)
         registros = []
-        if files:
+        context = {}
+        if files.exists():
+            msg = "Arquivo(s) registrado(s) com sucesso!"
+            messages.success(request, msg)
             for file in files:
                 form = RegistrosForm(request.POST)
                 if form.is_valid():
@@ -58,8 +61,8 @@ class RegistrosCreate(LoginRequiredMixin, View):
                     registro.save()
                     file.paid = True
                     file.save()
-                    registros.append(registro.pk)
-        return HttpResponse(registros)
+                    # registros.append(registro.pk)
+        return render(request, self.template_name, context)
 
 
 class RegistrosList(LoginRequiredMixin, ListView):
@@ -101,13 +104,11 @@ class BasicUploadView(View):
         return JsonResponse(data)
 
 
-from django.core.paginator import Paginator
-
 class MeusRegistrosList(ListView):
     model = Registros
     context_object_name = 'registros'
-    template_name='registros/meus_registros.html'
-    
+    template_name = 'registros/meus_registros.html'
+
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = Registros.objects.all().select_related()
@@ -115,4 +116,3 @@ class MeusRegistrosList(ListView):
         page = self.request.GET.get('page', 1)
         registros = paginator.get_page(page)
         return registros
-    

@@ -226,7 +226,6 @@ ESTADOS_CHOICES = (
 )
 
 SEXO_CHOICES = (
-    ('', ''),
     ('M', 'Masculino'),
     ('F', 'Feminino'),
     ('O', 'Outros'),

@@ -57,7 +57,8 @@ class Clientes(models.Model):
     bairro = models.CharField("Bairro *", max_length=50)
     documento_identidade = models.CharField(
         "Documento de identificação *", max_length=50)
-    documento_tipo = models.CharField("Tipo de Documento *", max_length=20, choices=TIPO_DOCUMENTO)
+    documento_tipo = models.CharField(
+        "Tipo de Documento *", max_length=20, choices=TIPO_DOCUMENTO)
     passaporte = models.CharField(max_length=50, null=True, blank=True)
     nacionalidade = models.CharField(
         "Nacionalidade *", max_length=20, default='Brasileiro')
@@ -78,6 +79,13 @@ class Clientes(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def get_sexo(self):
+        sexo = self.sexo
+        for s in settings.SEXO_CHOICES:
+            print(s)
+            if s[0] in sexo:
+                return s[1]
 
     def is_cpf(self):
         if len(self.cnpjcpf) > 14:

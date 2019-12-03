@@ -11,7 +11,7 @@ class ClientesForm(forms.ModelForm):
     class Meta:
         model = Clientes
         exclude = ['id', 'id_usuario', 'tipo_pessoa', 'valor_credito',
-            'id_cliente', 'confirmation_key']  # 'codindicacao',#, 'atuacao'
+                   'id_cliente', 'confirmation_key']  # 'codindicacao',#, 'atuacao'
 
     def clean_cnpjcpf(self):
 
@@ -44,22 +44,37 @@ class ClientesForm(forms.ModelForm):
                 'class': 'form-control'
             })
 
+def editable_fields(field):
+    fields = ['celular', 'telefone', 'passaporte','nome_mae',"nome_pai",
+              'biografia', 'nif', 'facebook', 'twitter', 'homepage', 'atuacao','estadocivil',
+              'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro']
+    if field in fields:
+        return True
+    return False
+
 
 class ClienteUpdateForm(forms.ModelForm):
 
-     class Meta:
+    class Meta:
         model = Clientes
         # colocar os campos que não quer que apareça
-        exclude = ['nome' ,'id_usuario', 'passaporte','data_nascimento','nacionalidade',
-            'nome_mae', "nome_pai", 'codindicacao', 'tipo_pessoa',
-            'valor_credito', 'cnpjcpf','documento_tipo', 
-            'documento_identidade', 'sexo' ,
-            'id_cliente', 'confirmation_key'] 
+        exclude = ['nome', 'id_usuario', 'data_nascimento', 'nacionalidade',
+                  'codindicacao', 'tipo_pessoa',
+                   'valor_credito', 'cnpjcpf', 'documento_tipo',
+                   'documento_identidade', 'sexo',
+        'id_usuario','id_cliente', 'confirmation_key']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control',
+                # 'placeholder': field.capitalize(),
+            })
+            if not editable_fields(field):
+                self.fields[field].widget.attrs['disabled'] = 'disabled'
 
 
 class BuscarForm(forms.Form):
     nome_cliente = forms.CharField(label='nome', max_length=80, required=False)
-
-
-
+  

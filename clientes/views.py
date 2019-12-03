@@ -58,7 +58,7 @@ class ClientesList(LoginRequiredMixin, ListView):
 
 class ClientesUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Clientes
-    template_name = "clientes/upd_clientes.html"
+    template_name = "clientes/update.html"
     form_class = ClienteUpdateForm
     success_message = "Dados Atualizados!"
     success_url = reverse_lazy('cliente:update')

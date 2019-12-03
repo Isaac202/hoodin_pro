@@ -110,9 +110,38 @@ class VeryCredit(APIView):
             if files:
                 total = service.preco * files.count()
                 cliente = request.user.clientes
-                if cliente.valor_credito >= total:
+                if cliente.valor_credito <= total:
                     data['result'] = True
                 else:
+                    data['value'] = total - cliente.valor_credito
+                    data['cielo'] = True
+                    data['error'] = "Saldo insuficiente"
+        else:
+            data['error'] = 'serviço não encontrado'
+
+        return Response(data)
+
+
+class BuyCredit(APIView):
+
+    def post(self, request, format=None):
+        data = {}
+        data['result'] = False
+        data['cielo'] = False
+        service = request.GET.get('service', None)
+        if service:
+            service = get_object_or_404(Servicos, pk=service)
+            cliente = request.user.clientes
+            files = ArquivoRegistro.objects.filter(
+                id_usuario=request.user, paid=False
+            )
+            if files:
+                total = service.preco * files.count()
+                cliente = request.user.clientes
+                if cliente.valor_credito <= total:
+                    data['result'] = True
+                else:
+                    data['value'] = total - cliente.valor_credito
                     data['cielo'] = True
                     data['error'] = "Saldo insuficiente"
         else:

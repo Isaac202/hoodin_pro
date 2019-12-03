@@ -39,11 +39,13 @@ class RegistrosCreate(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         files = request.POST.getlist('files', None)
+        print(files)
         files = ArquivoRegistro.objects.filter(
             pk__in=files,
             id_usuario=request.user,
             paid=False
         )
+        print(files)
         registros = []
         if files:
             for file in files:

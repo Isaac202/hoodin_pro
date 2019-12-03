@@ -422,22 +422,23 @@
         }
     });
 
-    $('#registro-form').submit(function (e) {
+    $('#registro-form').submit( async function (e) {
+        e.preventDefault()
         let url_check = '/api/very-credit/?service=' + $('#id_codservico').val()
         // alert(url)
-        $.getJSON(url_check, function(data){
+        
+        await $.getJSON(url_check, function(data){
             console.log(data)
             if( !data.result && data.cielo){
-                e.preventDefault()
+                $('#id_valor').val(data.value)
                 $('#modal_cielo').modal({
                     backdrop:'static',
                     keyboard:false
                 })
             }else if(!data.result && !data.cielo){
-                e.preventDefault()
                 alert('nenhum arquivo enviado')
             }else if(!data.cielo && data.result){
-                $('#registro-form').submit()
+                alert('valido')
             }
         }).fail(function(e){
             alert('Ops! algo deu errado')

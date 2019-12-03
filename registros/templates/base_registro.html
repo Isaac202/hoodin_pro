@@ -198,12 +198,12 @@
     $('#id_codservico').change(function () {
         // jQuery.noConflict();
         if ($(this).val() != "" && !service_active) {
-            let url = "/api/servicos/" + $(this).val()
+            let url_service = "/api/servicos/" + $(this).val()
             // let data = '{"csrfmiddlewaretoken": "{{ csrf_token }}",' + '"service":' + $(this).val()+'}'
             // $("#fileupload").attr('data-form-data', data)
             let url_up = "{% url 'base_upload' %}?service=" + $(this).val()
-            console.log(url_up)
-            let resp = $.getJSON(url, function (data) {
+            // console.log(url_up)
+            let resp = $.getJSON(url_service, function (data) {
                 fileExtension = []
                 data.extensoes.forEach(element => {
                     fileExtension.push(element.nome)
@@ -423,16 +423,21 @@
     });
 
     $('#registro-form').submit(function (e) {
-        e.preventDefault()
-        let url = '/api/very-credit/?service=' + $('#id_codservico').val()
+        let url_check = '/api/very-credit/?service=' + $('#id_codservico').val()
         // alert(url)
-        $.getJSON(url, function(data){
+        $.getJSON(url_check, function(data){
             console.log(data)
             if( !data.result && data.cielo){
+                e.preventDefault()
                 $('#modal_cielo').modal({
                     backdrop:'static',
                     keyboard:false
                 })
+            }else if(!data.result && !data.cielo){
+                e.preventDefault()
+                alert('nenhum arquivo enviado')
+            }else if(!data.cielo && data.result){
+                $('#registro-form').submit()
             }
         }).fail(function(e){
             alert('Ops! algo deu errado')

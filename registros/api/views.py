@@ -107,13 +107,14 @@ class VeryCredit(APIView):
             files = ArquivoRegistro.objects.filter(
                 id_usuario=request.user, paid=False
             )
-            total = service.preco * files.count()
-            cliente = request.user.clientes
-            if cliente.valor_credito <= total:
-                data['result'] = True
-            else:
-                data['cielo'] = True
-                data['error'] = "Saldo insuficiente"
+            if files:
+                total = service.preco * files.count()
+                cliente = request.user.clientes
+                if cliente.valor_credito >= total:
+                    data['result'] = True
+                else:
+                    data['cielo'] = True
+                    data['error'] = "Saldo insuficiente"
         else:
             data['error'] = 'serviço não encontrado'
 

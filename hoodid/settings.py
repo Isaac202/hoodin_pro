@@ -289,8 +289,8 @@ if AWS_ACCESS_KEY_ID:
 
 
 LOGIN_URL = '/login/'
-LOGOUT_REDIRECT_URL = reverse_lazy('cliente:update')
-LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('cliente:update')
 
 
 SIMPLE_EMAIL_CONFIRMATION_AUTO_ADD = True

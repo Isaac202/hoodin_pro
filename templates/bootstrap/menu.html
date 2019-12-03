@@ -8,7 +8,7 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse mr-lg-3" id="navbarNav">
         <ul class="nav navbar-nav ml-auto text-center">
             <li class="nav-item active">
                 <a class="nav-link font-weight-bold" href="/">Home <span class="sr-only">(Página atual)</span></a>
@@ -25,7 +25,7 @@
                     Registrar
                 </a>
             </li>
-            
+
             <li class="nav-item dropdown active font-weight-bold">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -55,15 +55,16 @@
             </li>
             {% else %}
             <li class="nav-item active">
+                    <a class="nav-link font-weight-bold" href="{% url 'cliente:new' %}">
+                        Cadastre-se
+                    </a>
+                </li>
+            <li class="nav-item active">
                 <a class="nav-link font-weight-bold" href="{% url 'login' %}">
-                    Entrar
+                    Entre
                 </a>
             </li>
             {% endif %}
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-        </form> -->
     </div>
 </nav>

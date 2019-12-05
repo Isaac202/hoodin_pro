@@ -6,6 +6,7 @@ import re
 from servicos.models import Servicos
 
 
+
 class ClientesForm(forms.ModelForm):
 
     class Meta:
@@ -45,7 +46,7 @@ class ClientesForm(forms.ModelForm):
             })
 
 def editable_fields(field):
-    fields = ['celular', 'telefone', 'passaporte','nome_mae',"nome_pai",
+    fields = ['celular', 'telefone', 'passaporte','nome_mae',"nome_pai", 'codigo_promocional',
               'biografia', 'nif', 'facebook', 'twitter', 'homepage', 'atuacao','estadocivil',
               'cep', 'endereco', 'complemento', 'numero', 'pais', 'estado', 'cidade', 'bairro']
     if field in fields:

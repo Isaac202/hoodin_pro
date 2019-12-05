@@ -152,6 +152,15 @@
                 </div>
                 {% endif %}
             </div>
+            <div class="col-12 col-md-6 my-2">
+                {{form.link_indicacao.label_tag}}
+                {{form.link_indicacao}}
+                {% if form.link_indicacao.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.link_indicacao.errors}}
+                </div>
+                {% endif %}
+            </div>
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form_user.username.label_tag}}
                 {{form_user.username}}

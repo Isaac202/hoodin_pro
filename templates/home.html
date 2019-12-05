@@ -53,3 +53,34 @@
 </div>
 {% include "home/fale_conosco.html" %}
 {% endblock content %}
+
+{% block script %}
+<script>
+
+    $('#contato-form').submit(function (e) {
+        e.preventDefault()
+        let url = "{% url 'home:contato' %}"
+        let data = {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+        }
+        let form = $(this)
+        let formData = form.serializeArray()
+        formData.forEach(element => {
+            data[element.name] = element.value
+        })
+        $('#btn_contato').attr('disabled', true)
+        $('#btn_contato').text('Aguarde..')
+        $.post(url, data, function (data) {
+            form.trigger("reset");
+            alert(data.msg)
+        }).fail(function(data){
+            console.log(data)
+            alert('ops! algo deu errado :(')
+        }).always(function(){
+            $('#btn_contato').removeAttr('disabled')
+            $('#btn_contato').text('Enviar')
+        })
+    })
+
+</script>
+{% endblock script %}

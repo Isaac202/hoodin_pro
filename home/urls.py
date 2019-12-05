@@ -1,9 +1,10 @@
 from django.urls import path
-from home.views import IndexView, enviar_mail_teste
+from home.views import IndexView, ContatoView
 
 app_name = "home"
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('send-mail', enviar_mail_teste)
+    path('contato/', ContatoView.as_view(), name='contato'),
+    # path('send-mail', enviar_mail_teste)
 ]

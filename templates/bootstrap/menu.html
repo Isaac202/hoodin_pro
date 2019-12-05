@@ -42,15 +42,15 @@
                     Minha conta
                 </a>
                 <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item text-white" href="{% url 'cliente:update' %}">
+                    <a class="dropdown-item text-white item-menu" href="{% url 'cliente:update' %}">
                         <i class="fas fa-database"></i>
                         Meus Dados</a>
-                    <a class="dropdown-item text-white" href="{% url 'meus_registros' %}">
+                    <a class="dropdown-item text-white item-menu" href="{% url 'meus_registros' %}">
                         <i class="fas fa-list"></i>
                         Meus Registros
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-white">
+                    <div class="dropdown-divider item-menu"></div>
+                    <a class="dropdown-item text-white item-menu">
                         <i class="fas fa-money-bill"></i>
                         Saldo R$ <span class="credit">{{user.clientes.get_credit}}</span>
                     </a>
@@ -58,20 +58,20 @@
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="{% url 'logout' %}">
+                <a class="nav-link font-weight-bold item-menu" href="{% url 'logout' %}">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </a>
             </li>
             {% else %}
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="{% url 'cliente:new' %}">
+                <a class="nav-link font-weight-bold item-menu" href="{% url 'cliente:new' %}">
                     <i class="fas fa-user-plus"></i>
                     Cadastre-se
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="{% url 'login' %}">
+                <a class="nav-link font-weight-bold item-menu" href="{% url 'login' %}">
                     <i class="fas fa-sign-in-alt"></i>
                     Entre
                 </a>

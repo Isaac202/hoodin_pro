@@ -116,7 +116,7 @@ class VeryCredit(APIView):
             if files:
                 total = service.preco * files.count()
                 cliente = request.user.clientes
-                if cliente.valor_credito <= total:
+                if cliente.valor_credito >= total:
                     data['result'] = True
                 else:
                     data['value'] = total - cliente.valor_credito

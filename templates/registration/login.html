@@ -1,57 +1,33 @@
-{% extends "base.html" %} {% load static %} {% block main %}
-<div class="container" align="center">
-    <div class="row">
-         {% if messages %}
-
-          <div class="row">
-             <div class="col s12 m6">
-             <div class="card blue-grey darken-1">
-             <div class="card-content white-text">
-             <span class="card-title">Hoodid Registro online</span>
-             <p>Seja muito bem vindo! pra finalizar o processo falta apenas um passo.</p>
-        </div>
-                 <div class="alert alert-success">
-            {% for m in messages %}
-              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</li>
-            {% endfor %}
-          </div>
-
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-         {% endif %}
-        <div class="col s12 l8 offset-l3">
-            <form style="padding-top: 8rem; padding-bottom: 8rem" name="meu_form" method="POST">
-                {% csrf_token %}
-                <div class="input-field col s12 l10">
-                    <p class="nome">
-                        <i class="material-icons prefix">account_circle</i> {{form.username}} {{form.username.label_tag}} {{form.username.errors}}
-                    </p>
+{% extends "base_bootstrap.html" %} {% load static %} {% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-9 col-md-7 col-lg-5 shadow-lg mx-auto">
+            <div class="card card-signin my-5 p-3">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Login</h5>
+                    <form action=""  method="POST" class="form-signin">
+                        {% csrf_token %}
+                        <div class="form-label-group">
+                            {{form.username.label_tag}}
+                            <input class="form-control" type="text" name="username" autofocus="" required=""
+                                id="id_username">
+                            {{form.username.errors}}
+                        </div>
+                        <div class="form-label-group">
+                            {{form.password.label_tag}}
+                            <input class="form-control" type="password" name="password" required="" id="id_password">
+                            {{form.password.errors}}
+                        </div>
+                        <div class="form-label-group mt-3">
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">entrar</button>
+                            <a href="{% url 'password_reset' %}" class="text-white btn btn-lg btn-danger btn-block text-uppercase" type="submit">Esqueci a senha</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="input-field col s12 l10">
-                    <p class="fone">
-                        <i class="material-icons prefix">lock</i> {{form.password}} {{form.password.label_tag}} {{form.password.errors}}
-                    </p>
-                </div>
-                <div class="input-field col s12 l10">
-                    {{form.non_field_errors}}
-                </div>
-                <div class="input-field col s12 l6" align="center">
-                    <a class="btn red darken-4 col s12 l9" href="#">Esqueci a senha</a>
-                </div>
-                <div class="input-field col s12 l6" align="center">
-                    <input type="submit" class="green darken-4 btn col s12 l9" value="Entrar" />
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
-{% endblock main %}
+
+{% endblock %}

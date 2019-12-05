@@ -16,7 +16,7 @@ from django.http import HttpResponse
 from compras.forms import InserirCreditoForm
 from django.contrib import messages
 from decimal import Decimal
-
+from django.db.models import Sum
 from cielo.tasks import comprar_credito
 from random import randint
 
@@ -63,6 +63,9 @@ class RegistrosCreate(LoginRequiredMixin, View):
         registros = []
         context = {}
         if files.exists():
+            valor = files.aggregate(total=Sum('value'))["total"]
+            cliente = request.user.clientes
+            cliente.valor_credito-=valor
             msg = "Arquivo(s) registrado(s) com sucesso!"
             messages.success(request, msg)
             for file in files:

@@ -21,6 +21,7 @@ class ArquivoRegistro(models.Model):
     signature = models.FileField(blank=True, null=True, upload_to=user_directory_path)
     version = models.DecimalField(max_digits=9,decimal_places=2, default=1.0)
     paid = models.BooleanField(default=False)
+    value = models.DecimalField(max_digits=9, decimal_places=2,default=0)
     resume = models.TextField(max_length=5000, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

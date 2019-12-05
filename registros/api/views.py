@@ -47,6 +47,7 @@ class BasicUploadView(APIView):
             file.shar256 = shar256
             file.name = name
             file.size = size
+            file.value = service.preco
             file.save()
             serializer = ArquivoSerializer(file, many=False)
             data = serializer.data

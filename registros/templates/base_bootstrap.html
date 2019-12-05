@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+{% load static %}
 
 <head>
     <!-- Required meta tags -->
@@ -14,17 +15,17 @@
         body {
             height: 100%;
         }
-        .item-menu:hover{
+
+        .item-menu:hover {
             background-color: lightseagreen !important;
         }
     </style>
     {% block header %}{% endblock header %}
 </head>
 
-<body>
+<body style="background-size: cover; background-image: url({% static 'imgs/bg.jpeg'%}">
     <div class="d-none" id="loading" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1;">
-    </div>
-
+    </div>  
     {% include "bootstrap/menu.html" %}
     {% block content %}
     {% endblock content %}

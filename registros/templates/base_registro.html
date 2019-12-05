@@ -96,7 +96,8 @@
                         .addClass('d-none')
 
                 )
-                $('#total').html(data.price)
+                let price = parseFloat(data.price).toFixed(2).valueOf().replace('.',',')
+                $('#total').html(price)
             },
             done: function (e, data) {
                 //$("#total").html("10")
@@ -155,7 +156,7 @@
                                                     .attr('name', "nome")
                                             ).addClass('col-12 col-lg-3 my-1'),
                                             $("<div>").append(
-                                                $('<input type="number"/>')
+                                                $('<input type="text"/>')
                                                     .addClass('form-control')
                                                     .attr('placeholder', 'Documento')
                                                     .attr('name', "documento")
@@ -212,9 +213,9 @@
                 extentions = extentions.substring(0, extentions.length - 2)
                 size = data.tamanho;
             }).done(function (data) {
-                valor = parseFloat(data.preco).toFixed(2)
+                valor = parseFloat(data.preco).toFixed(2).valueOf().replace('.',',')
                 $("#tamanho").html(data.tamanho + "MB")
-                $("#valor").html("R$ " + data.preco)
+                $("#valor").html("R$ " + valor)
                 $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase())
                 $("#extentions").addClass('grey')
                 $("#fileupload").removeAttr('disabled')

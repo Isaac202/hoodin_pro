@@ -138,13 +138,18 @@ class BuyCredit(APIView):
         validade = request.POST.get("validade")
         valor = request.POST.get("valor")
         qtd = request.POST.get('qtd_parcela', 1)
-        val_decimail = Decimal(valor)
+        try:
+            val_decimail = Decimal(valor)
+        except:
+            valor = valor.replace('.', '')
+            valor = valor.replace(',', '.')
+            val_decimail = Decimal(valor)
         val = int(val_decimail * 100)
         pedido = randint(1, 1000000)
         data = comprar_credito(
             10, nome_cartao, numero_cartao, seguranca, bandeira, validade, val, 1)
         resposta_cielo, trasacao, codigo_compra = data
-        
+
         # resp = status.HTTP_400_BAD_REQUEST
         autorizado = False
         if resposta_cielo in "Transacao autorizada":
@@ -161,6 +166,6 @@ class BuyCredit(APIView):
             transacao_cielo=trasacao
         )
 
-        print(resposta_cielo,'\n\n')
-        return Response({'msg':resposta_cielo, 'result':autorizado})#, status=resp)
-        
+        print(resposta_cielo, '\n\n')
+        # , status=resp)
+        return Response({'msg': resposta_cielo, 'result': autorizado})

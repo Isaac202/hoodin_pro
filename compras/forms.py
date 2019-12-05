@@ -38,11 +38,11 @@ class InserirCreditoForm(forms.Form):
     def __init__(self,  *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            if field == 'valor':
-                self.fields[field].widget = forms.NumberInput(attrs={
-                    'min':"0.00",
-                    "step":"0.01"
-                })
+            # if field == 'valor':
+            #     self.fields[field].widget = forms.NumberInput(attrs={
+            #         'min':"0.00",
+            #         "step":"0.01"
+            #     })
             self.fields[field].widget.attrs['class'] ='form-control'
      
 
@@ -61,7 +61,7 @@ class InserirCreditoForm(forms.Form):
         pedido = randint(1,1000000)
         data = comprar_credito(pedido, nome_cartao,numero_cartao, seguranca, bandeira, validade, val, qtd)
         resposta_cielo, codigo_tran = data
-        print(data,'\n\n')
+        # print(data,'\n\n')
         # self.cleaned_data.__setitem__("codigo_trasacao", codigo_tran)
         # self.cleaned_data.__setitem__("statu_trasacao", resposta_cielo)
 

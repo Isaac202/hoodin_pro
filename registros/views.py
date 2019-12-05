@@ -125,8 +125,8 @@ class MeusRegistrosList(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = Registros.objects.all().select_related()
-        paginator = Paginator(queryset, 25)
+        queryset = Registros.objects.filter(id_usuario=self.request.user).select_related()
+        paginator = Paginator(queryset, 5)
         page = self.request.GET.get('page', 1)
         registros = paginator.get_page(page)
         return registros

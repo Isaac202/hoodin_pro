@@ -148,32 +148,32 @@
                                 $('<div>').append(
                                     $("<form>").append(
                                         $("<div>").append(
-                                        $("<div>").append(
-                                            $('<input type="text"/>')
-                                                .addClass('form-control')
-                                                .attr('placeholder', 'Nome')
-                                                .attr('name', "nome")
-                                        ).addClass('col-12 col-lg-3 my-1'),
-                                        $("<div>").append(
-                                            $('<input type="number"/>')
-                                                .addClass('form-control')
-                                                .attr('placeholder', 'Documento')
-                                                .attr('name', "documento")
-                                        ).addClass('col-12 col-lg-3 my-1'),
-                                        $("<div>").append(
-                                            $('<input type="number"/>')
-                                                .attr('name', "percentual_obra")
-                                                .attr("step", "0.01")
-                                                .attr('placeholder', 'Porcentagem')
-                                                .addClass('form-control')
-                                        ).addClass('col-12 col-lg-3 my-1'),
-                                        $("<div>").append(
-                                            $("<a>").html("Adicionar")
-                                                .addClass('btn btn-primary btn-block text-white')
-                                                .attr('onclick', 'add_coautor("' + result.id + '")')
-                                        ).addClass('col-12 col-lg-3 my-1'),
-                                    ).addClass('row'),
-                                    ).attr('id', 'form_coautor'+result.id)
+                                            $("<div>").append(
+                                                $('<input type="text"/>')
+                                                    .addClass('form-control')
+                                                    .attr('placeholder', 'Nome')
+                                                    .attr('name', "nome")
+                                            ).addClass('col-12 col-lg-3 my-1'),
+                                            $("<div>").append(
+                                                $('<input type="number"/>')
+                                                    .addClass('form-control')
+                                                    .attr('placeholder', 'Documento')
+                                                    .attr('name', "documento")
+                                            ).addClass('col-12 col-lg-3 my-1'),
+                                            $("<div>").append(
+                                                $('<input type="number"/>')
+                                                    .attr('name', "percentual_obra")
+                                                    .attr("step", "0.01")
+                                                    .attr('placeholder', 'Porcentagem')
+                                                    .addClass('form-control')
+                                            ).addClass('col-12 col-lg-3 my-1'),
+                                            $("<div>").append(
+                                                $("<a>").html("Adicionar")
+                                                    .addClass('btn btn-primary btn-block text-white')
+                                                    .attr('onclick', 'add_coautor("' + result.id + '")')
+                                            ).addClass('col-12 col-lg-3 my-1'),
+                                        ).addClass('row'),
+                                    ).attr('id', 'form_coautor' + result.id)
                                 ).addClass('col-12'),
                                 $("<div>").attr('id', 'col_coautor' + result.id)
                                     .addClass('col-12'),
@@ -276,13 +276,13 @@
     }
 
     //function teste() {
-       // jQuery.noConflict();
-        // $('#modal1').modal('show'); 
-        // $('#exampleModalLong').modal({
-        //     backdrop: 'static',
-        //     keyboard: false
-        // });
-   // }
+    // jQuery.noConflict();
+    // $('#modal1').modal('show'); 
+    // $('#exampleModalLong').modal({
+    //     backdrop: 'static',
+    //     keyboard: false
+    // });
+    // }
 
     function myFunction(id) {
         let text = document.getElementById("desc_file" + id).value
@@ -332,7 +332,7 @@
                         $("<div>").append(
                             $('<input type="text"/>')
                                 .attr('disabled', true)
-                                .attr('value', data.percentual_obra+"%")
+                                .attr('value', data.percentual_obra + "%")
                                 .addClass('form-control')
                         ).addClass('col-12 col-lg-3 my-1'),
                         $("<div>").append(
@@ -344,7 +344,7 @@
                 )
                 form.trigger("reset");
                 form.find('input').first().focus()
-            }else{
+            } else {
                 alert(data.error)
             }
         }).fail(function (e, data) {
@@ -413,41 +413,41 @@
     // })
 
 
-    $('#check_acept_terms').click(function() {
+    $('#check_acept_terms').click(function () {
         // alert('kdkdk')
-        if($(this).is(":checked")) {
+        if ($(this).is(":checked")) {
             $("#btn_submit").removeAttr("disabled");
-        }else{
+        } else {
             $("#btn_submit").attr("disabled", true);
         }
     });
 
-    $('#registro-form').submit( async function (e) {
+    $('#registro-form').submit(async function (e) {
         e.preventDefault()
         let url_check = '/api/very-credit/?service=' + $('#id_codservico').val()
         // alert(url)
-        
-        await $.getJSON(url_check, function(data){ 
+
+        await $.getJSON(url_check, function (data) {
             console.log(data)
-            if( !data.result && data.cielo){
+            if (!data.result && data.cielo) {
                 $('#id_valor').val(data.value)
                 $('#modal_cielo').modal({
-                    backdrop:'static',
-                    keyboard:false
+                    backdrop: 'static',
+                    keyboard: false
                 })
-            }else if(!data.result && !data.cielo){
+            } else if (!data.result && !data.cielo) {
                 alert('nenhum arquivo enviado')
-            }else if(!data.cielo && data.result){
+            } else if (!data.cielo && data.result) {
                 $('#complete').append($('#id_codindicacao'))
                 $('#complete').append($('#id_codservico'))
                 $('#complete').submit()
             }
-        }).fail(function(e){
+        }).fail(function (e) {
             alert('Ops! algo deu errado')
         })
     })
 
-    $('#cielo').submit(function(e) {
+    $('#cielo').submit(function (e) {
         e.preventDefault()
         let url = '/api/buy-credit/'
         let data = {
@@ -458,25 +458,28 @@
         formData.forEach(element => {
             data[element.name] = element.value
         })
-        $.post(url, data, function(data){
-            if(data.result){
+        $.post(url, data, function (data) {
+            if (data.result) {
                 $('msg_cielo').text(data.msg)
                 // $('#modal_cielo').close()
                 $('#registro-form').submit()
-            }else{
+            } else {
                 $('msg_cielo').text(data.msg)
                 alert(data.msg)
             }
-        }).fail(function(e){
+        }).fail(function (e) {
             console.log(e)
             alert(data.msg)
             $('msg_cielo').text(data.msg)
         })
-
-
     })
-
-
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+          $("#id_valor").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+    });
+</script>t>
 
 {% endblock script %}

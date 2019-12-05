@@ -25,10 +25,10 @@
                     <th scope="row">{{forloop.counter}}</th>
                     <td>{{r.codservico.nome}}</td>
                     <td>{{r.arquivo.name}}</td>
-                    <td>{{r.data|date:'d/m/Y'}}</td>
+                    <td>{{r.data}}</td>
                     <td>{{r.arquivo.version}}</td>
                     <td>
-                        <a target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.nome}}" >
+                        <a target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.nome}}">
                             baixar
                         </a>
                     </td>
@@ -47,6 +47,46 @@
             </tbody>
         </table>
     </div>
+    
+
+
+        <!-- paginate  -->
+        {% if registros.has_other_pages %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if registros.has_previous %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ registros.previous_page_number}}">
+                        <i class="fa fa-chevron-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a href="?page={{ registros.previous_page_number}}">
+                        <span class="page-link">{{ registros.previous_page_number }} <span
+                                class="sr-only">(current)</span></span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="page-item active"><span class="page-link">{{ registros.number }} <span
+                            class="sr-only">(current)</span></span>
+                </li>
+                {% if registros.has_next %}
+                <li class="page-item">
+                    <a href="?page={{registros.next_page_number}}">
+                        <span class="page-link">{{ registros.next_page_number }}
+                            <span class="sr-only">(current)</span></span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{registros.next_page_number}}">
+                        <i class="fa fa-chevron-right"></i>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav> {% endif %}
 </div>
 
 {% endblock %}

@@ -5,22 +5,32 @@
             <div class="card card-signin my-5 p-3">
                 <div class="card-body">
                     <h5 class="card-title text-center">Login</h5>
-                    <form action=""  method="POST" class="form-signin">
+                    <form action="" method="POST" class="form-signin">
                         {% csrf_token %}
                         <div class="form-label-group">
                             {{form.username.label_tag}}
                             <input class="form-control" type="text" name="username" autofocus="" required=""
                                 id="id_username">
+                        </div>
+                        <div class="form-label-group text-danger mt-1">
                             {{form.username.errors}}
                         </div>
                         <div class="form-label-group">
                             {{form.password.label_tag}}
                             <input class="form-control" type="password" name="password" required="" id="id_password">
+                        </div>
+                        <div class="form-label-group text-danger mt-1">
                             {{form.password.errors}}
                         </div>
                         <div class="form-label-group mt-3">
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">entrar</button>
-                            <a href="{% url 'password_reset' %}" class="text-white btn btn-lg btn-danger btn-block text-uppercase" type="submit">Esqueci a senha</a>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                type="submit">entrar</button>
+                            <a href="{% url 'password_reset' %}"
+                                class="text-white btn btn-lg btn-danger btn-block text-uppercase" type="submit">Esqueci
+                                a senha</a>
+                        </div>
+                        <div class="form-label-group text-danger mt-3">
+                            {{form.non_field_errors}}
                         </div>
                     </form>
                 </div>

@@ -119,7 +119,10 @@ class VeryCredit(APIView):
                 if cliente.valor_credito >= total:
                     data['result'] = True
                 else:
-                    data['value'] = total - cliente.valor_credito
+                    value = total - cliente.valor_credito
+                    value = "{}".format(value).replace('.', ',')
+                    # if value > Decimal('0.99'):
+                    data['value'] = value
                     data['cielo'] = True
                     data['error'] = "Saldo insuficiente"
         else:

@@ -75,9 +75,13 @@
             },
             start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
                 // console.log(e)
+                $('#check_acept_terms').removeAttr('checked')
+                $("#check_acept_terms").attr('disabled', true)
+                $("#btn_submit").removeAttr('disabled', true)
+                $("#btn_submit").attr('disabled', true)
             },
             stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
-
+                $('#check_acept_terms').removeAttr('disabled')
             },
             progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -370,50 +374,6 @@
         })
     }
 
-    // $('#btn-teste').click(function () {
-    //     let result = { name: "arquivo", id: 1 }
-    //     $('#coautores').prepend(
-    //         $('<div>').append(
-    //             $('<div>').append(
-    //                 $("<div>").append(
-    //                     $('<p>').text(result.name).addClass(),
-    //                 ).addClass('col-12'),
-    //                 $('<div>').append(
-    //                     $("<div>").append(
-    //                         $("<div>").append(
-    //                             $('<input type="text"/>')
-    //                                 .addClass('form-control')
-    //                                 .attr('placeholder', 'Nome')
-    //                                 .attr('name', "nome")
-    //                         ).addClass('col-12 col-lg-3 my-1'),
-    //                         $("<div>").append(
-    //                             $('<input type="number"/>')
-    //                                 .addClass('form-control')
-    //                                 .attr('placeholder', 'Documento')
-    //                                 .attr('name', "documento")
-    //                         ).addClass('col-12 col-lg-3 my-1'),
-    //                         $("<div>").append(
-    //                             $('<input type="number"/>')
-    //                                 .attr('name', "percentual_obra")
-    //                                 .attr("step", "0.01")
-    //                                 .attr('placeholder', 'Porcentagem')
-    //                                 .addClass('form-control')
-    //                         ).addClass('col-12 col-lg-3 my-1'),
-    //                         $("<div>").append(
-    //                             $("<a>").html("Adicionar")
-    //                                 .addClass('btn btn-primary btn-block text-white')
-    //                                 .attr('onclick', 'add_coautor("' + result.id + '")')
-    //                         ).addClass('col-12 col-lg-3 my-1'),
-    //                     ).addClass('row'),
-    //                 ).addClass('col-12'),
-    //                 $("<div>").attr('id', 'col_coautor' + result.id)
-    //                     .addClass('col-12'),
-    //             ).addClass("row"),
-    //         ).addClass("list-group-item").attr('id', 'table_coautor' + result.id)
-    //     ).addClass('container')
-    // })
-
-
     $('#check_acept_terms').click(function () {
         // alert('kdkdk')
         if ($(this).is(":checked")) {
@@ -456,37 +416,53 @@
         }
         let form = $('#cielo')
         let formData = form.serializeArray()
+        let submit = true
         formData.forEach(element => {
             data[element.name] = element.value
-        })
-        $.post(url, data, function (data) {
-            if (data.result) {
-                $('msg_cielo').text(data.msg)
-                // $('#modal_cielo').close()
-                $('#registro-form').submit()
-            } else {
-                $('msg_cielo').text(data.msg)
-                alert(data.msg)
+            if (element.value == "") {
+                submit = false
             }
-        }).fail(function (e) {
-            console.log(e)
-            alert(data.msg)
-            $('msg_cielo').text(data.msg)
         })
+        if (submit) {
+            $('#btn_cielo').text("Aguarde..");
+            $('#btn_cielo').attr("disabled", true);
+            $('#btn_close_cielo').attr("disabled", true);
+            $.post(url, data, function (data) {
+                if (data.result) {
+                    $('msg_cielo').text(data.msg)
+                    // $('#modal_cielo').close()
+                    $('#registro-form').submit()
+                } else {
+                    $('msg_cielo').text(data.msg)
+                    alert(data.msg)
+                }
+            }).fail(function (e) {
+                console.log(e)
+                alert(data.msg)
+                $('msg_cielo').text(data.msg)
+            }).always(function () {
+                $('#btn_cielo').text("Comprar");
+                $('#btn_cielo').removeAttr('disabled')
+                $('#btn_close_cielo').removeAttr('disabled')
+            })
+        } else {
+            alert('Todos os campos são obrigatorios')
+        }
     })
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
 <script type="text/javascript">
     $('#modal_terms').modal({
-        show:false,
+        show: false,
         backdrop: 'static',
         keyboard: false
     })
     $(document).ready(function () {
         $('#id_validade').mask('99/9999')
-        $("#id_valor").maskMoney({ showSymbol: true, symbol: "R$", decimal: ",", thousands: "." });
+        $("#id_valor").attr('readonly', true)
+        // $("#id_valor").maskMoney({ showSymbol: true, prefix: "R$", symbol: "R$", decimal: ",", thousands: "." });
     });
 </script>t>
 

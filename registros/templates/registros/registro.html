@@ -29,9 +29,9 @@
                 aria-controls="nav-home" aria-selected="true">
                 Arquivos
               </a>
-              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                aria-controls="nav-profile" aria-selected="false">
-                Resumo das obras
+              <a class="nav-item nav-link text-capitalize" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                role="tab" aria-controls="nav-profile" aria-selected="false">
+                titulo da obra
               </a>
               <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
                 aria-controls="nav-contact" aria-selected="false">
@@ -54,10 +54,15 @@
                       <div class="card-body mb-lg-5">
                         <div class="row mb-lg-3 p-lg-1">
                           <div class="col-12">
-                            <label for="id_codindicacao">{{form.codindicacao.label}}</label>
-                            {{form.codindicacao}}
+                            <label for="id_codigo_promocional">{{form.codigo_promocional.label}}</label>
+                            {{form.codigo_promocional}}
                             <div class="alert-danger"></div>
                           </div>
+                          <div class="col-12">
+                              <label for="id_codindicacao">{{form.codindicacao.label}}</label>
+                              {{form.codindicacao}}
+                              <div class="alert-danger"></div>
+                            </div>
                           <div class="col-12">
                             <label for="id_codservico">{{form.codservico.label}}</label><br>
                             {{form.codservico}}
@@ -130,8 +135,8 @@
                 <div class="row float-right">
                   <div class="col-12">
                     <input class="form-check-input" type="checkbox" name="acept" id="check_acept_terms">
-                    Concordo com os <a href="#modal_terms" data-toggle="modal" data-target="#modal_terms">termos de
-                      uso</a>.
+                    Concordo com o <a href="#modal_terms" data-toggle="modal" data-target="#modal_terms">contrato
+                    </a>.
                   </div>
                 </div>
                 <br>

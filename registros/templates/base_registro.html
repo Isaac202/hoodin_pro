@@ -96,7 +96,7 @@
                         .addClass('d-none')
 
                 )
-                let price = parseFloat(data.price).toFixed(2).valueOf().replace('.',',')
+                let price = parseFloat(data.price).toFixed(2).valueOf().replace('.', ',')
                 $('#total').html(price)
             },
             done: function (e, data) {
@@ -133,10 +133,10 @@
                                     .attr('id', 'desc_file' + result.id)
                                     .addClass('form-control form-control-lg resume')
                                     .attr('onchange', "myFunction('" + result.id + "')"),
-                                $("<a>").html("Salvar").addClass('btn btn-primary text-white')
-                                    .addClass('float-right mt-2')
-                                    .attr('link', result.delete)
-                                    .attr('style', 'cursor: pointer;')
+                                // $("<a>").html("Salvar").addClass('btn btn-primary text-white')
+                                //     .addClass('float-right mt-2')
+                                //     .attr('link', result.delete)
+                                //     .attr('style', 'cursor: pointer;')
                             ),
                         ).attr('id', 'tr_desc' + result.id)
                     )
@@ -213,7 +213,7 @@
                 extentions = extentions.substring(0, extentions.length - 2)
                 size = data.tamanho;
             }).done(function (data) {
-                valor = parseFloat(data.preco).toFixed(2).valueOf().replace('.',',')
+                valor = parseFloat(data.preco).toFixed(2).valueOf().replace('.', ',')
                 $("#tamanho").html(data.tamanho + "MB")
                 $("#valor").html("R$ " + valor)
                 $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase())
@@ -478,8 +478,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-          $("#id_valor").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+    $('#modal_terms').modal({
+        show:false,
+        backdrop: 'static',
+        keyboard: false
+    })
+    $(document).ready(function () {
+        $("#id_valor").maskMoney({ showSymbol: true, symbol: "R$", decimal: ",", thousands: "." });
     });
 </script>t>
 

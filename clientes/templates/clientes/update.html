@@ -136,6 +136,17 @@
                     value="{{object.nome_pai}}">
                 {% endif %}
             </div>
+
+            <div class="col-12 col-md-6 my-2">
+                {{form.codigo_promocional.label_tag}}
+                {{form.codigo_promocional}}
+                {% if form.codigo_promocional.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.codigo_promocional.errors}}
+                </div>
+                {% endif %}
+            </div>
+
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form_user.username.label_tag}}
                 {{form_user.username}}

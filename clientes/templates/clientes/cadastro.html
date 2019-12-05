@@ -143,6 +143,15 @@
                 </div>
                 {% endif %}
             </div>
+            <div class="col-12 col-md-6 my-2">
+                {{form.codigo_promocional.label_tag}}
+                {{form.codigo_promocional}}
+                {% if form.codigo_promocional.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.codigo_promocional.errors}}
+                </div>
+                {% endif %}
+            </div>
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form_user.username.label_tag}}
                 {{form_user.username}}
@@ -293,14 +302,14 @@
                 {% endif %}
             </div>
             <div class="col-12 my-2">
-                    {{form.atuacao.label_tag}}
-                    {{form.atuacao}}
-                    {% if form.atuacao.errors %}
-                    <div class="alert alert-danger" role="alert">
-                        {{form.atuacao.errors}}
-                    </div>
-                    {% endif %}
+                {{form.atuacao.label_tag}}
+                {{form.atuacao}}
+                {% if form.atuacao.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.atuacao.errors}}
                 </div>
+                {% endif %}
+            </div>
             <div class="col-12 my-2">
                 {{form.biografia.label_tag}}
                 {{form.biografia}}
@@ -344,7 +353,8 @@
     .select2-container--default .select2-selection--single {
         border: none !important;
     }
-    .select2-container--default .select2-selection--multiple  {
+
+    .select2-container--default .select2-selection--multiple {
         border: none !important;
     }
 

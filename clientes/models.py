@@ -72,7 +72,8 @@ class Clientes(models.Model):
     data_cadastro = models.DateTimeField(auto_now_add=True)
     confirmation_key = models.CharField(
         max_length=80, default='0', blank=True, null=True)
-    atuacao = models.ManyToManyField(Servicos, blank=True)
+    atuacao = models.ManyToManyField(Servicos, verbose_name="AREA DE INTERESSE", blank=True)
+    codigo_promocional = models.CharField("Codigo Promocional", max_length=200, blank=True, null=True)
 
     class Meta:
         ordering = ('nome',)

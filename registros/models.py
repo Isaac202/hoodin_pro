@@ -38,6 +38,7 @@ class Registros(models.Model):
     codqrcode = models.PositiveIntegerField(blank=True, null=True)
     codindicacao = models.PositiveIntegerField("Código de indicação", blank=True, null=True)
     desconto = models.DecimalField(max_digits=9,decimal_places=2, default=0)
+    codigo_promocional = models.CharField("Codigo Promocional", max_length=200, blank=True, null=True)
 
 
     class Meta:

@@ -38,7 +38,7 @@ class ContatoView(View):
             'Contato hoodid '+ nome,
             nome + "\n\n" + msg,
             email,
-            [settings.DEFAULT_EMAIL,'jf.interatividade@gmail.com'],
+            [settings.DEFAULT_EMAIL],
             fail_silently=False,
         )
         return JsonResponse({"msg":"Obrigado! entraremos em contato em breve"})

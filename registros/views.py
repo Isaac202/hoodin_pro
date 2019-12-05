@@ -60,26 +60,31 @@ class RegistrosCreate(LoginRequiredMixin, View):
             id_usuario=request.user,
             paid=False
         )
-        registros = []
         context = {}
         if files.exists():
             valor = files.aggregate(total=Sum('value'))["total"]
             cliente = request.user.clientes
-            cliente.valor_credito-=valor
-            msg = "Arquivo(s) registrado(s) com sucesso!"
-            messages.success(request, msg)
-            for file in files:
-                form = RegistrosForm(request.POST)
-                if form.is_valid():
-                    registro = form.save(commit=False)
-                    registro.arquivo = file
-                    registro.valor = registro.codservico.preco
-                    registro.id_usuario = request.user
-                    registro.save()
-                    file.paid = True
-                    file.save()
-                    # registros.append(registro.pk)
-        return render(request, self.template_name, context)
+            if cliente.valor_credito >= valor:
+                cliente.valor_credito-=valor
+                cliente.save()
+                msg = "Arquivo(s) registrado(s) com sucesso!"
+                messages.success(request, msg)
+                for file in files:
+                    form = RegistrosForm(request.POST)
+                    if form.is_valid():
+                        registro = form.save(commit=False)
+                        registro.arquivo = file
+                        registro.valor = registro.codservico.preco
+                        registro.id_usuario = request.user
+                        registro.save()
+                        file.paid = True
+                        file.save()
+            else:
+                msg = "Saldo Insuficiente!"
+                messages.error(request, msg)
+                files.delete()
+
+        return self.get(request, *args, **kwargs)
 
 
 class RegistrosList(LoginRequiredMixin, ListView):

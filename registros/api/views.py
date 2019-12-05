@@ -14,11 +14,12 @@ from tools.genereteKey import get_size_file, file_to_shar256
 from servicos.models import Servicos
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.db.models import Sum
 from decimal import Decimal
 
 
 class BasicUploadView(APIView):
-
+    
     # authentication_classes = [authentication.TokenAuthentication]
     # permission_classes = [permissions.IsAdminUser]
 
@@ -69,7 +70,7 @@ class BasicUploadView(APIView):
 
 
 class SetResumeFileView(APIView):
-
+    
     # authentication_classes = [authentication.TokenAuthentication]
     # permission_classes = [permissions.IsAdminUser]
 
@@ -84,6 +85,7 @@ class SetResumeFileView(APIView):
         return Response(data)
 
 
+
 class DeleteFileView(APIView):
 
     # authentication_classes = [authentication.TokenAuthentication]
@@ -96,6 +98,14 @@ class DeleteFileView(APIView):
             file = file.first()
             file.file.delete()
             file.delete()
+            value = ArquivoRegistro.objects.filter(
+                paid=False,
+                id_usuario=request.user).aggregate(total=Sum('value'))["total"]
+            if value:
+                value = "%.2f" % value
+                data['price'] = value.replace('.',',')
+            else:
+                data['price'] = '0,00'
             data['success'] = True
         return Response(data)
 

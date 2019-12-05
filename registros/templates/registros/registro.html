@@ -1,21 +1,5 @@
 {% extends 'base_registro.html' %}
 
-{% block header %}
-<style>
-  .select2 {
-    max-width: 100% !important;
-  }
-
-  span {
-    outline: 0 !important;
-    /*removendo outiline do select2 autocomplete*/
-  }
-  .select2-selection__rendered{
-    display: none
-  }
-</style>
-{% endblock header %}
-
 {% block content %}
 
 <div class="container mt-5">
@@ -47,7 +31,7 @@
               </a>
               <a class="nav-item nav-link text-capitalize" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                 role="tab" aria-controls="nav-profile" aria-selected="false">
-                titulo da obra
+                Insira aqui o Titulo da obra
               </a>
               <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
                 aria-controls="nav-contact" aria-selected="false">
@@ -72,11 +56,6 @@
                           <div class="col-12">
                             <label for="id_codigo_promocional">{{form.codigo_promocional.label}}</label>
                             {{form.codigo_promocional}}
-                            <div class="alert-danger"></div>
-                          </div>
-                          <div class="col-12">
-                            <label for="id_codindicacao">{{form.codindicacao.label}}</label>
-                            {{form.codindicacao}}
                             <div class="alert-danger"></div>
                           </div>
                           <div class="col-12">

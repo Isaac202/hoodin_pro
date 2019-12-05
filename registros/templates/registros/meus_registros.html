@@ -10,11 +10,11 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Serviço</th>
-                    <th scope="col">Arquivo</th>
+                    <th scope="col">Resumo da obra</th>
                     <th scope="col">Data</th>
                     <th scope="col">Versão</th>
-                    <th scope="col">Download</th>
-                    <th scope="col">PDF</th>
+                    <th scope="col">Arquivo</th>
+                    <th scope="col">Certificado</th>
                     <th scope="col">Assinatura</th>
                 </tr>
             </thead>
@@ -24,7 +24,7 @@
                 <tr>
                     <th scope="row">{{forloop.counter}}</th>
                     <td>{{r.codservico.nome}}</td>
-                    <td>{{r.arquivo.name}}</td>
+                    <td>{{r.arquivo.resume}}</td>
                     <td>{{r.data}}</td>
                     <td>{{r.arquivo.version}}</td>
                     <td>
@@ -34,7 +34,7 @@
                     </td>
                     <td>
                         <a target="_blank" download="{{r.arquivo.nome}}" href="{{r.arquivo.file.url}}">
-                            PDF
+                            Certificado
                         </a>
                     </td>
                     <td>

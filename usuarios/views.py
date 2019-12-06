@@ -34,14 +34,10 @@ def confUser(request, key):
     return redirect('users:login')
 
 
-@login_required
+@login_required 
 def login_redirect(request):
-    if hasattr(request.user, 'motorista'):
-        return redirect(reverse_lazy('motoristas:painel'))
-    elif hasattr(request.user, 'cliente'):
-        return redirect(reverse_lazy('clientes:painel'))
-    elif hasattr(request.user, 'funcionario'):
-        return redirect(reverse_lazy('funcionarios:painel'))
-    elif request.user.is_staff:
+    if request.user.is_staff:
         return redirect('/admin/')
+    else:
+        return redirect(reverse_lazy('cliente:update'))
     return redirect('/')

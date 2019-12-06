@@ -73,13 +73,13 @@ class SignUpCreateView(MultiCreateView):
     def form_valid(self, **forms):
         context = {}
         person = forms['form'].save(commit=False)
-        userForm = forms['form_user']
-        user = userForm.save()
+        user= forms['form_user'].save()
         person.id_usuario = user
-        # person.token = userForm.getPassword()
         person.save()
+        forms['form'].save_m2m()
         context['site'] = settings.ALLOWED_HOSTS[0]
         context['nome'] = person.nome
+        # person.token = userForm.getPassword()
         return self.login_redirect(user, context)
 
     def login_redirect(self, user, context):

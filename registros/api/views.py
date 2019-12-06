@@ -8,7 +8,7 @@ from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from registros.models import Registros, ArquivoRegistro
-from registros.forms import RegistrosForm, ArquivoRegistroForm
+from registros.forms import RegistrosForm, RegistrosViewForm, ArquivoRegistroForm
 from registros.api.serializers import ArquivoSerializer
 from tools.genereteKey import get_size_file, file_to_shar256
 from servicos.models import Servicos
@@ -35,13 +35,14 @@ class BasicUploadView(APIView):
     def post(self, request, format=None):
         service = request.GET.get('service')
         service = get_object_or_404(Servicos, pk=service)
-        cliente = request.user.clientes
+        # cliente = request.user.clientes
         file = request.FILES['file']
         data = {'is_valid': False}
         name = file.name
         shar256 = file_to_shar256(file)
-        size = file.size  # get_size_file(file)
+        size = file.size
         form = ArquivoRegistroForm(request.POST, request.FILES)
+        old_file = ArquivoRegistro.objects.filter(name=name, id_usuario=request.user).last()
         if form.is_valid():
             file = form.save(commit=False)
             file.id_usuario = request.user
@@ -49,6 +50,8 @@ class BasicUploadView(APIView):
             file.name = name
             file.size = size
             file.value = service.preco
+            if old_file:
+                file.version = old_file.version + Decimal('1.0')
             file.save()
             serializer = ArquivoSerializer(file, many=False)
             data = serializer.data
@@ -62,10 +65,6 @@ class BasicUploadView(APIView):
 
         price = service.preco * files.count()
         data['price'] = price
-        # data['post'] = request.POST
-
-        # if not cliente.valor_credito >= price:
-        #     data['error'] = "Crédito insuficiente"
         return Response(data)
 
 

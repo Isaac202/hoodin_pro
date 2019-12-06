@@ -23,12 +23,26 @@
             </li>
 
             {% if user.is_authenticated %}
-            <li class="nav-item active">
-                <a href="{% url 'registrar' %}" class="nav-link font-weight-bold">
-                    <i class="far fa-registered"></i>
+           
+            <li class="nav-item dropdown active font-weight-bold">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="far fa-registered"></i>
                     Registrar
                 </a>
+                <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item text-white item-menu" href="{% url 'registrar' %}">
+                        <i class="fas fa-file-alt"></i>
+                        Declaração de Autoria
+                    </a>
+                    <div class="dropdown-divider item-menu"></div>
+                    <a class="dropdown-item text-white item-menu" href="{% url 'registrar' %}?sd=*">
+                        <i class="fas fa-certificate"></i>
+                        Certificação de Documentos
+                    </a>
+                </div>
             </li>
+
             <li class="nav-item active">
                 <a class="nav-link font-weight-bold">
                     <i class="fas fa-user-circle"></i>

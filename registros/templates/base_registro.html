@@ -91,7 +91,7 @@
                 $(".progress-bar").text(strProgress);
             },
             success: function (data) {
-                // console.log(data)
+                console.log(data)
                 $("#complete").append(
                     $('<input type="checkbox"/>').val(data.id)
                         .attr('name', 'files')

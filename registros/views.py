@@ -6,7 +6,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Registros, ArquivoRegistro
-from .forms import RegistrosForm, ArquivoRegistroForm  # , ArquivoRegistroTesteForm
+from .forms import RegistrosForm, RegistrosViewForm, ArquivoRegistroForm  # , ArquivoRegistroTesteForm
 from registros.api.serializers import ArquivoSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -44,7 +44,9 @@ class RegistrosCreate(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         context = {}
-        context['form'] = RegistrosForm()
+        servico_digitalizacao = bool(request.GET.get('sd'))
+        # print(servico_digitalizacao,'\n\n')
+        context['form'] = RegistrosViewForm(sd=servico_digitalizacao)
         context['cielo'] = InserirCreditoForm()
         files = ArquivoRegistro.objects.filter(
             id_usuario=self.request.user, paid=False)

@@ -13,7 +13,7 @@ class Servicos(models.Model):
     preco = models.DecimalField(max_digits=11, decimal_places=2, default=0)
     tamanho = models.PositiveIntegerField()
     medida = models.CharField(max_length=5, null=True, blank=True)
-    servico_digitalizacao = models.CharField(max_length=1, null=True, blank=True)
+    servico_digitalizacao = models.BooleanField(default=False)
     extensoes = models.ManyToManyField(Extensoes, verbose_name="Extensoes serviçoes")
     class Meta:
         ordering = ('nome',)

@@ -6,4 +6,4 @@ class ArquivoSerializer(ModelSerializer):
     class Meta:
         model = ArquivoRegistro
         exclude = ('paid', 'update_at', 'id_usuario', 'shar256',
-                   'version', 'create_at', 'signature', 'size')
+                   'create_at', 'signature', 'size')

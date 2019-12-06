@@ -1,57 +1,64 @@
-{% extends "base.html" %}
+{% extends "base_bootstrap.html" %}
 {% load static %}
 {% block header %}
 <style>
-    html,
-    body {
-        height: 100%;
-    }
+  html,
+  body {
+    height: 100%;
+  }
 
-    .msg {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        text-align: center
-    }
+  .msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    text-align: center
+  }
 
-    .redirect {
-        font-size: 1.5rem
-    }
+  .redirect {
+    font-size: 1.5rem
+  }
 
-    .redirect,
-    #time {
-        color: red;
-        font-weight: bold;
-    }
+  .redirect,
+  #time {
+    color: red;
+    font-weight: bold;
+  }
 </style>
 {% endblock header %}
 
-{% block main %}
+{% block content %}
 <div class="msg">
-    {% block msg %}
-   <div class="card large">
-    <div class="card-image waves-effect waves-block waves-light">
-      <!-- <img class="activator" src="{% static 'imgs/f_img1.jpg' %}"> -->
-    </div>
+  {% block msg %}
+  <!-- <div class="card">
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">
-        <i class="material-icons right">email</i>
+
         <p>
-          Cadastro realizado com sucesso :) <br>
+          <br>
           Você receberá um e-mail em breve, <br>
           por favor confirme o e-mail para concluir seu cadastro. <br>
           Obrigado!
         </p>
       </span>
     </div>
-    <!-- <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Email de confirmação<i class="material-icons right">email</i></span>
-      <p>Você receberá um e-mail, por favor confirme o e-mail para concluir seu cadastro. Obrigado!</p>
-    </div> -->
+  </div> -->
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title h3">Cadastro realizado com sucesso :) </h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        <i class="fas fa-envelope"></i>
+      </h6>
+      <p class="card-text h">
+        Você receberá um e-mail em breve, <br>
+        por favor confirme o e-mail para concluir seu cadastro. <br>
+        Obrigado!
+      </p>
+    </div>
   </div>
-    {% endblock msg %}
+  {% endblock msg %}
 </div>
-{% endblock main %}
+{% endblock  %}

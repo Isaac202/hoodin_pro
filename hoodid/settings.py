@@ -32,6 +32,7 @@ LIB_APPS = [
     'rest_framework',
     'django_filters',
     'multiselectfield',
+    # 'import_export',
 
 ]
 
@@ -292,6 +293,7 @@ LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('users:redirect')
 
+# IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 SIMPLE_EMAIL_CONFIRMATION_AUTO_ADD = True
 EMAIL_CONFIRMATION_PERIOD_DAYS = 7

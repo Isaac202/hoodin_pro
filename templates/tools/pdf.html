@@ -1,7 +1,33 @@
+{% extends "tools/base_pdf.html" %}
+{% load static %}
+
+{% block content %}
+<img width="213px" height="76px" src="{% static 'imgs/logo-hoodid.png' %}">
+<p style="float: right">{{today}}</p>
+<hr>
 <ul class="list-group">
-    <li class="list-group-item disabled">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Morbi leo risus</li>
-    <li class="list-group-item">Porta ac consectetur ac</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
+  {% for cliente in clientes %}
+  <li class="list-group-item ">NOME: {{cliente.nome}}</li>
+  <li class="list-group-item">EMAIL: {{cliente.id_usuario.username}}</li>
+  <li class="list-group-item">CPF/CNPJ: {{cliente.cnpjcpf}}</li>
+  <li class="list-group-item">DATA DE CADASTRO: {{cliente.data_cadastro}}</li>
+  <li class="list-group-item">DATA DE NASCIMENTO: {{cliente.data_nascimento}}</li>
+  <li class="list-group-item">
+    {{cliente.cep}} - {{cliente.endereco}} - {{cliente.numero}} - {{cliente.bairro}} - 
+    {{cliente.cidade}} - {{cliente.estado}} 
+  </li>
+  <li>
+    <ul>
+      <li>AREA DE ATUAÇÃO</li>
+      {% for area in cliente.atuacao.all %}
+        <li>{{area}}</li>
+      {% endfor %}
+        
+    </ul>
+  </li>
+  <hr>
+  {% endfor %}
+
+</ul>
+
+{% endblock content %}

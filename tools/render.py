@@ -1,9 +1,9 @@
-
-
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.utils import timezone
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
 import xhtml2pdf.pisa as pisa
 import xlwt
 
@@ -27,13 +27,10 @@ class Render:
         today = timezone.now()
         params = {
             'today': today,
-            'nome': nome,
-            'email': email,
-            'cpf_cnpj':cpf/cnpj,
-            'data_cadastro',
-            'request': request
+            'request': request,
+            'clientes':clientes
         }
-        return Render.render('util/pdf.html', params)
+        return Render.render('tools/pdf.html', params)
 
     @staticmethod
     def render_to_xls(request, queryset):
@@ -65,3 +62,29 @@ class Render:
 
         wb.save(response)
         return response
+
+
+    # @staticmethod
+    # def some_view(request):
+    #     from django.template.loader import render_to_string
+    #     # Create a file-like buffer to receive PDF data.
+    #     buffer = BytesIO()
+
+    #     # Create the PDF object, using the buffer as its "file."
+    #     p = canvas.Canvas(buffer)
+
+    #     # Draw things on the PDF. Here's where the PDF generation happens.
+    #     # See the ReportLab documentation for the full list of functionality.
+    #     string = render_to_string('tools/pdf.html')
+    #     print(string)
+    #     p.drawString(100, 100, string)
+    #     p.dra
+
+    #     # Close the PDF object cleanly, and we're done.
+    #     p.showPage()
+    #     p.save()
+
+    #     # FileResponse sets the Content-Disposition header so that browsers
+    #     # present the option to save the file.
+    #     buffer.seek(0)
+    #     return FileResponse(buffer, as_attachment=True, filename='hello.pdf')

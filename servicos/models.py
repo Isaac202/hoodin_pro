@@ -15,8 +15,11 @@ class Servicos(models.Model):
     medida = models.CharField(max_length=5, null=True, blank=True)
     servico_digitalizacao = models.BooleanField(default=False)
     extensoes = models.ManyToManyField(Extensoes, verbose_name="Extensoes serviçoes")
+    
     class Meta:
         ordering = ('nome',)
+        verbose_name = 'Serviço'
+        verbose_name_plural = 'Serviços'
 
     def __str__(self):
         return self.nome

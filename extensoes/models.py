@@ -9,6 +9,8 @@ class Extensoes(models.Model):
 
     class Meta:
         ordering = ['nome', ]
+        verbose_name = 'Extesão'
+        verbose_name_plural = 'Extensões'
 
     def __str__(self):
         return self.nome

@@ -11,6 +11,8 @@ class Indicacoes(models.Model):
 
     class Meta:
         ordering = ['nome', ]
+        verbose_name = 'Indicação'
+        verbose_name_plural = 'Indicações'
 
     def __str__(self):
         return self.nome

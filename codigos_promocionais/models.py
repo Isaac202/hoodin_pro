@@ -20,6 +20,8 @@ class Codigos_Promocionais(models.Model):
 
     class Meta:
         ordering = ('nome',)
+        verbose_name = 'Código promocional'
+        verbose_name_plural = 'Códigos promocionais'
 
     def __str__(self):
         return self.nome

@@ -6,7 +6,8 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Registros, ArquivoRegistro
-from .forms import RegistrosForm, RegistrosViewForm, ArquivoRegistroForm  # , ArquivoRegistroTesteForm
+# , ArquivoRegistroTesteForm
+from .forms import RegistrosForm, RegistrosViewForm, ArquivoRegistroForm
 from registros.api.serializers import ArquivoSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -25,15 +26,8 @@ class TesteCreateView(View):
     template_name = "registros/teste.html"
 
     def get(self, request, *args, **kwargs):
-        context = {'form': InserirCreditoForm()}
-        # context["data"] = comprar_credito(10, 'matorele calixto', '5582859906117878', '463',
-        #                        'Master', '07/2020', 100, 1)
-        # Transacao autorizada
+
         return render(request, self.template_name, context)
-        # data = comprar_credito(10, 'Martoele C. Pixão', '0662821825086128', '279',
-        #                        'HiperCard', '07/2022', 200, 1)
-        
-        # return render(request, self.template_name,{'data':data})
 
 
 class RegistrosCreate(LoginRequiredMixin, View):
@@ -67,7 +61,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
             valor = files.aggregate(total=Sum('value'))["total"]
             cliente = request.user.clientes
             if cliente.valor_credito >= valor:
-                cliente.valor_credito-=valor
+                cliente.valor_credito -= valor
                 cliente.save()
                 msg = "Arquivo(s) registrado(s) com sucesso!"
                 messages.success(request, msg)
@@ -134,9 +128,20 @@ class MeusRegistrosList(ListView):
     template_name = 'registros/meus_registros.html'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = Registros.objects.filter(id_usuario=self.request.user).select_related()
-        paginator = Paginator(queryset, 8)
+        de = self.request.GET.get('de', None)
+        ate = self.request.GET.get('ate', None)
+        title = self.request.GET.get('title', None)
         page = self.request.GET.get('page', 1)
-        registros = paginator.get_page(page)
-        return registros
+        queryset = super().get_queryset()
+        queryset = Registros.objects.filter(
+            id_usuario=self.request.user).select_related()
+        if de:
+            queryset = queryset.filter(data__gte=de)
+        if ate:
+            queryset = queryset.filter(data__lte=ate)
+        if title:
+            queryset = queryset.filter(arquivo__resume__contains=title)
+        else:
+            paginator = Paginator(queryset, 2)
+            queryset = paginator.get_page(page)
+        return queryset

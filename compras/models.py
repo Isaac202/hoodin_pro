@@ -27,7 +27,9 @@ class Compras(models.Model):
     msg_cielo = models.CharField(max_length=150, blank=True, null=True)
 
 
-
+    class Meta:
+        verbose_name = 'Compra'
+        verbose_name_plural = 'Compras'
 
 # @receiver(post_save, sender=Compras)
 # def autalizar_salado_cliente(sender, instance, **kwargs):

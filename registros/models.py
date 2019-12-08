@@ -19,7 +19,7 @@ class ArquivoRegistro(models.Model):
     name = models.CharField(max_length=250)
     size = models.PositiveIntegerField()
     shar256 = models.CharField(max_length=90)
-    file = models.FileField(upload_to=user_directory_path)
+    file = models.FileField(upload_to=user_directory_path, blank=True, null=True)
     signature = models.FileField(
         blank=True, null=True, upload_to=user_directory_path)
     version = models.DecimalField(max_digits=9, decimal_places=2, default=1.0)

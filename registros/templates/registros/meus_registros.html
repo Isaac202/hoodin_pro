@@ -64,9 +64,14 @@
                     <td>{{r.data|time:"h:i"}}</td>
                     <td>{{r.arquivo.version}}</td>
                     <td>
+                        {% if r.arquivo.file %}
                         <a target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.nome}}">
-                            baixar
-                        </a>
+                                baixar
+                            </a>
+                        {% else %}
+                            <span> ------ </span>
+                        
+                        {% endif %}
                     </td>
                     <td>
                         <a target="_blank" download="{{r.arquivo.nome}}" href="{{r.arquivo.file.url}}">

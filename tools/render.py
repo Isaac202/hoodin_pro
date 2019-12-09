@@ -8,6 +8,12 @@ import xhtml2pdf.pisa as pisa
 import xlwt
 
 
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+
+from weasyprint import HTML
+
 
 class Render:
 
@@ -18,19 +24,23 @@ class Render:
         response = BytesIO()
         pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), response)
         if not pdf.err:
-            return HttpResponse(response.getvalue(), content_type='application/pdf')
+            # response = HttpResponse(pdf, content_type='application/pdf')
+            response =  HttpResponse(response.getvalue(), content_type='application/pdf')
+            # response['Content-Disposition'] = 'attachment; filename="cliente.pdf"'
+            return response
         else:
             return HttpResponse("Error Rendering PDF", status=400)
 
     @staticmethod
-    def render_to_pdf(request, clientes, description="Lista de Clientes"):
+    def render_to_pdf(request, queryset, template='tools/pdf.html', description="Relatório de Clientes"):
         today = timezone.now()
         params = {
             'today': today,
+            'description': description,
             'request': request,
-            'clientes':clientes
+            'queryset': queryset
         }
-        return Render.render('tools/pdf.html', params)
+        return Render.render( template, params)
 
     @staticmethod
     def render_to_xls(request, queryset):
@@ -63,6 +73,28 @@ class Render:
         wb.save(response)
         return response
 
+    # def html_to_pdf_view(request, clientes, description="Lista de Clientes"):
+    #     today = timezone.now()
+    #     params = {
+    #         'today': today,
+    #         'request': request,
+    #         'clientes': clientes
+    #     }
+    #     html_string = render_to_string(
+    #         'tools/pdf.html', params)
+
+    #     html = HTML(string=html_string,  encoding="utf-8")
+    #     # html = HTML(filename=template)
+    #     # html = HTML('http://localhost:8000/')#.write_pdf('/tmp/weasyprint-website.pdf')
+    #     html.write_pdf(target='/tmp/mypdf.pdf')
+
+    #     fs = FileSystemStorage('/tmp')
+    #     with fs.open('mypdf.pdf') as pdf:
+    #         response = HttpResponse(pdf, content_type='application/pdf')
+    #         # response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+    #         return response
+
+    #     return response
 
     # @staticmethod
     # def some_view(request):

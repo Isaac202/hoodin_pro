@@ -32,6 +32,8 @@ LIB_APPS = [
     'rest_framework',
     'django_filters',
     'multiselectfield',
+    'rangefilter',
+    # 'daterangefilter',
     # 'import_export',
 
 ]

@@ -1,0 +1,19 @@
+{% extends "tools/base_pdf.html" %}
+
+{% block content %}
+<ul class="list-group" style="font-size: 13px;">
+  {% for compra in queryset %}
+  <li class="list-group-item">NOME: {{compra.id_cliente.nome}}</li>
+  <li class="list-group-item">DATA: {{compra.data}}</li>
+  <li class="list-group-item">CPF/CNPJ: {{compra.id_cliente.cnpjcpf}}</li>
+  <li class="list-group-item">VALOR: {{compra.valor}}</li>
+  <li class="list-group-item">STATUS: {% if compra.autorizado %}
+        Autorizado
+        {% else %}
+        Recusado
+  {% endif %}</li>
+  <hr>
+  {% endfor %}
+
+</ul>
+{% endblock content %}

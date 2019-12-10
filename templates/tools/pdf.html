@@ -1,28 +1,49 @@
 {% extends "tools/base_pdf.html" %}
 
+{% block thead %}
+<tr style="border-bottom: 1px solid #000;">
+  <th>NOME</th>
+  <th>EMAIL</th>
+  <th>CPF/CNPJ</th>
+  <th>DATA DE NASCIMENTO</th>
+  <th>DATA DE CADASTRO</th>
+  <th>AREA DE ATUAÇÃO</th>
+</tr>
+
+{% endblock thead %}
+
+
 {% block content %}
-<ul class="list-group" style="font-size: 13px;">
-  {% for cliente in queryset %}
-  <li class="list-group-item">NOME: {{cliente.nome}}</li>
-  <li class="list-group-item">EMAIL: {{cliente.id_usuario.username}}</li>
-  <li class="list-group-item">CPF/CNPJ: {{cliente.cnpjcpf}}</li>
-  <li class="list-group-item">DATA DE NASCIMENTO: {{cliente.data_nascimento}}</li>
-  <li class="list-group-item">DATA DE CADASTRO: {{cliente.data_cadastro}}</li>
-  <li class="list-group-item">
-    {{cliente.cep}} - {{cliente.endereco}} - {{cliente.numero}} - {{cliente.bairro}} -
-    {{cliente.cidade}} - {{cliente.estado}}
-  </li>
-  <li>
-    AREA DE ATUAÇÃO:
-    <ul>
-      {% for area in cliente.atuacao.all %}
-      <li>{{area}}</li>
-      {% endfor %}
 
-    </ul>
-  </li>
-  <hr>
-  {% endfor %}
+{% for cliente in queryset %}
 
-</ul>
+<tr>
+  <td>{{cliente.nome}}</td>
+  <td>{{cliente.id_usuario.username}}</td>
+  <td>{{cliente.cnpjcpf}}</td>
+  <td>{{ cliente.data_nascimento | date:"d/m/Y" }}</td>
+  <td>{{ cliente.data_cadastro | date:"d/m/Y" }}</td>
+  <td>
+    {% for area in cliente.atuacao.all %}
+    {{area}} <br>
+    {% endfor %}
+  </td>
+</tr>
+<tr>
+  <td> {{cliente.cep}}</td>
+  <td>{{cliente.endereco}}</td>
+  <td>{{cliente.numero}}</td>
+  <td>{{cliente.bairro}}</td>
+  <td>{{cliente.cidade}} - {{cliente.estado}}</td>
+</tr>
+<tr style="border-top: 1px solid #000;">
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+</tr>
+{% endfor %}
+
 {% endblock content %}

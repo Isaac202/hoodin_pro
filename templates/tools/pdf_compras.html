@@ -1,19 +1,32 @@
 {% extends "tools/base_pdf.html" %}
 
-{% block content %}
-<ul class="list-group" style="font-size: 13px;">
-  {% for compra in queryset %}
-  <li class="list-group-item">NOME: {{compra.id_cliente.nome}}</li>
-  <li class="list-group-item">DATA: {{compra.data}}</li>
-  <li class="list-group-item">CPF/CNPJ: {{compra.id_cliente.cnpjcpf}}</li>
-  <li class="list-group-item">VALOR: {{compra.valor}}</li>
-  <li class="list-group-item">STATUS: {% if compra.autorizado %}
-        Autorizado
-        {% else %}
-        Recusado
-  {% endif %}</li>
-  <hr>
-  {% endfor %}
+{% block thead %}
+<tr style="border-bottom: 1px solid #000;">
+  <th>NOME</th>
+  <th>DATA</th>
+  <th>CPF/CNPJ</th>
+  <th>VALOR</th>
+  <th>STATUS</th>
+</tr>
+{% endblock thead %}
 
-</ul>
+
+{% block content %}
+{% for compra in queryset %}
+<tr>
+  <td>{{compra.id_cliente.nome}}</td>
+  <td>{{compra.data | date:"d/m/Y H:m:i"}}</td>
+  <td>{{compra.id_cliente.cnpjcpf}}</td>
+  <td>{{compra.valor}}</td>
+  <td>{% if compra.autorizado %}Autorizado{% else %}Recusado{% endif %}</td>
+</tr>
+<tr style="border-top: 1px solid #000;">
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+</tr>
+{% endfor %}
+
 {% endblock content %}

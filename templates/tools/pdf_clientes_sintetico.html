@@ -1,0 +1,36 @@
+{% extends "tools/base_pdf.html" %}
+
+{% block thead %}
+<tr style="border-bottom: 1px solid #000;">
+    <th>NOME</th>
+    <th>EMAIL</th>
+    <th>CPF/CNPJ</th>
+    <th>DATA DE NASCIMENTO</th>
+    <th>DATA DE CADASTRO</th>
+</tr>
+
+{% endblock thead %}
+
+
+{% block content %}
+
+{% for cliente in queryset %}
+
+<tr>
+    <td>{{cliente.nome}}</td>
+    <td>{{cliente.id_usuario.username}}</td>
+    <td>{{cliente.cnpjcpf}}</td>
+    <td>{{ cliente.data_nascimento | date:"d/m/Y" }}</td>
+    <td>{{ cliente.data_cadastro | date:"d/m/Y" }}</td>
+</tr>
+
+<tr style="border-top: 1px solid #000;">
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+</tr>
+{% endfor %}
+
+{% endblock content %}

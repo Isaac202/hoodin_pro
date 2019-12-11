@@ -25,6 +25,11 @@ def sair(request):
 #     return HttpResponse("email enviado")
 
 
+
+class CotratoView(TemplateView):
+    template_name = "home/contrato.html"
+
+
 class ContatoView(View):
     def get(self, request, *args, **kwargs):
         return redirect('/')

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
-from home.views import sair
+from home.views import sair, CotratoView
 from django.contrib.auth import views as auth_views
 from extensoes.views import ExtensoesCreate
 from extensoes.views import ExtensoesList
@@ -122,6 +122,7 @@ urlpatterns = [
 
     path('compra/', CompraCreditoCreate.as_view(), name='credito'),
     path('tabela-de-precos/', TabelaPrecos.as_view(), name='tabela_de_precos'),
+    path('contrato/', CotratoView.as_view(), name='contrato'),
 
     # path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
 

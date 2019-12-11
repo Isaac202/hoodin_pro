@@ -1,15 +1,31 @@
 {% extends "tools/base_pdf.html" %}
 
-{% block content %}
-<ul class="list-group" style="font-size: 13px;">
-  {% for registro in queryset %}
-  <li class="list-group-item">NOME: {{registro.id_cliente.nome}}</li>
-  <li class="list-group-item">DATA: {{registro.data}}</li>
-  <li class="list-group-item">SERVIÇO: {{registro.codservico.nome}} </li>
-  <!-- <li class="list-group-item">CPF/CNPJ: {{registro.id_cliente.cnpjcpf}}</li> -->
-  <li class="list-group-item">VALOR: {{registro.valor}}</li>
-  <hr>
-  {% endfor %}
+{% block thead %}
+<tr style="border-bottom: 1px solid #000;">
+  <th>NOME</th>
+  <th>DATA</th>
+  <th>SERVIÇO</th>
+  <th>CPF/CNPJ</th>
+  <th>VALOR</th>
+</tr>
+{% endblock thead %}
 
-</ul>
+
+{% block content %}
+{% for registro in queryset %}
+<tr>
+  <td>{{registro.id_usuario.clientes.nome}}</td>
+  <td>{{registro.data | date:"d/m/Y H:m:i"}}</td>
+  <td>{{registro.id_usuario.clientes.cnpjcpf}}</td>
+  <td>{{registro.codservico.nome}}</td>
+  <td>{{registro.valor}}</td>
+</tr>
+<tr style="border-top: 1px solid #000;">
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+</tr>
+{% endfor %}
+
 {% endblock content %}

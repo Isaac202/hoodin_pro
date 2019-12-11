@@ -3,23 +3,35 @@ from .models import Registros, ArquivoRegistro
 from rangefilter.filter import DateRangeFilter
 from tools.render import Render
 
+
 class RegistroAdmin(admin.ModelAdmin):
-    list_display = ('id_usuario','codservico','data')
+    list_display = ('id_usuario', 'codservico', 'data')
     list_filter = ('data', 'codservico',
-        ('data', DateRangeFilter),
-    )
-    search_fields = ('codservico', 'id_usuario__username', "id_cliente__cnpjcpf")
+                   ('data', DateRangeFilter),
+                   )
+    search_fields = ('codservico', 'id_usuario__username',
+                     "id_cliente__cnpjcpf")
     autocomplete_fields = ('id_usuario', "id_cliente", 'codservico',)
-    actions = ['gera_pdf',]
+    actions = ['gera_pdf','gera_pdf_total' ]
 
     def gera_pdf(set, request, queryset):
         if queryset:
             return Render.render_to_pdf(request, queryset,
-                description="Relatório de Registros",
-                template="tools/pdf_registros.html"
-            )
+                                        description="Relatório de Registros",
+                                        template="tools/pdf_registros.html"
+                                        )
 
-    gera_pdf.short_description = "Gerar PDF"
+    def gera_pdf_total(set, request, queryset):
+        if queryset:
+            return Render.render_to_pdf(request, queryset,
+                                        description="Relatório de Registros",
+                                        template="tools/pdf_registros_total.html"
+                                        )
+
+    gera_pdf.short_description = "Registros realizados"
+    gera_pdf_total.short_description = "Registros realizados totalizados"
+
 
 admin.site.register(Registros, RegistroAdmin)
 admin.site.register(ArquivoRegistro)
+

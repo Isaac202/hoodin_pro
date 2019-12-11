@@ -59,6 +59,6 @@ class Registros(models.Model):
         ordering = ('-data',)
 
     def __str__(self):
-        return self.descricao
+        return self.arquivo.name
 
 # Create your models here.

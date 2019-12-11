@@ -1,0 +1,30 @@
+{% extends "tools/base_pdf.html" %}
+
+{% block thead %}
+<tr style="border-bottom: 1px solid #000;">
+    <th>NOME</th>
+    <th>SERVIÇO</th>
+    <th>TOTAL</th>
+</tr>
+{% endblock thead %}
+
+
+{% block content %}
+{% for registro in queryset %}
+
+{% for servico in registro.id_usuario.servircos_set.all %}
+<tr>
+    <td>{{registro.id_usuario.clientes.nome}}</td>
+    <td>{{registro.codservico.nome}}</td>
+    <td>{{registro.valor}}</td>
+</tr>
+{% endfor %}
+<tr style="border-top: 1px solid #000;">
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+</tr>
+{% endfor %}
+
+{% endblock content %}

@@ -86,8 +86,13 @@ class Clientes(models.Model):
     def get_sexo(self):
         sexo = self.sexo
         for s in settings.SEXO_CHOICES:
-            print(s)
             if s[0] in sexo:
+                return s[1]
+
+    def get_estadocivil(self):
+        esc = self.estadocivil
+        for s in settings.ESTADO_CIVIL_CHOICES:
+            if s[0] in esc:
                 return s[1]
 
     def is_cpf(self):

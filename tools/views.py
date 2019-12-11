@@ -72,8 +72,9 @@ class SignUpCreateView(MultiCreateView):
 
     def form_valid(self, **forms):
         context = {}
+        user = forms['form_user'].save()
         person = forms['form'].save(commit=False)
-        user= forms['form_user'].save()
+        person.valor_credito = settings.VALOR_CREIDITO_INCIAL
         person.id_usuario = user
         person.save()
         forms['form'].save_m2m()

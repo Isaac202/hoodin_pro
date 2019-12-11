@@ -1,3 +1,8 @@
+from decimal import Decimal
+from django.db.models import F
+import json
+import requests
+from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
@@ -6,7 +11,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Servicos
 from .forms import ServicosForm, BuscarForm
-#from .forms import BuscaPlacerForm
+from django.conf import settings
+# from .forms import BuscaPlacerForm
 
 
 class ServicosCreate(CreateView):
@@ -20,10 +26,11 @@ class ServicosCreate(CreateView):
         form.instance.perfil = self.request.user
         return super(ServicosCreate, self).form_valid(form)
 
-    #success_url = reverse_lazy('lista_placer')
+    # success_url = reverse_lazy('lista_placer')
+
 
 class ServicosList(ListView):
-    template_name ="servicos/listar_servicos.html"
+    template_name = "servicos/listar_servicos.html"
     model = Servicos
     paginate_by = 10
     context_object_name = "servicos"
@@ -40,14 +47,16 @@ class ServicosList(ListView):
         form = BuscarForm()
         context['form'] = form
        # context['nomeservico'] = 'nome do servico'
-        #context['codservico'] = 1
+        # context['codservico'] = 1
         return context
+
 
 class ServicosUpdate(UpdateView):
     model = Servicos
     template_name = "servicos/upd_servicos.html"
     form_class = ServicosForm
     success_url = reverse_lazy('lista_servicos')
+
 
 class ServicosDelete(DeleteView):
     model = Servicos
@@ -79,3 +88,28 @@ class ServicosDelete(DeleteView):
 #     def form_valid(self, form):
 #         form.instance.perfil = self.request.user
 #         return super(ServicosExtensoesCreate, self).form_valid(form)
+
+
+class TabelaPrecos(TemplateView):
+    template_name = "servicos/tabela.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            url = "https://economia.awesomeapi.com.br/all/USD-BRL,EUR-BRL"
+            response = requests.get(url)
+            data = response.text
+            parsed = json.loads(data)
+            self.euro = Decimal(parsed['EUR']["ask"])
+            self.dolar = Decimal(parsed['USD']["ask"])
+        except:
+            self.euro = settings.DOLAR_VALOR
+            self.dolar = settings.EURO_VALOR
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dolar'] = self.dolar
+        context['euro'] = self.euro
+        context["servicos"] = Servicos.objects.all().annotate(
+            dolar=F("preco")/self.dolar, euro=F('preco')/self.euro)
+        return context

@@ -1,0 +1,43 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">SERVIÇO</th>
+                            <th scope="col">VALOR R$</th>
+                            <th scope="col">VALOR $</th>
+                            <th scope="col">VALOR €</th>
+                            <th scope="col">TAMANHO MÁXIMO</th>
+                            <th scope="col">TIPO DE ARQUIVOS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for s in servicos %}
+                        <tr>
+                            <td>{{s.nome|upper}}</td>
+                            <td>R$ {{s.preco}}</td>
+                            <td>$ {{s.dolar}}</td>
+                            <td>€ {{s.euro}}</td>
+                            <td>{{s.tamanho}}MB</td>
+                            <td>
+                                {% for ex in s.extensoes.all %}
+                                {{ex.nome|upper}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

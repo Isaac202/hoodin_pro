@@ -16,7 +16,7 @@ from clientes.views import ClientesDelete
 from clientes.views import ConfirmacaoCadadtro
 
 
-from servicos.views import ServicosCreate
+from servicos.views import ServicosCreate, TabelaPrecos
 from servicos.views import ServicosList
 from servicos.views import ServicosUpdate
 from servicos.views import ServicosDelete
@@ -121,6 +121,7 @@ urlpatterns = [
     path('delete_codigos_promocionais/<int:pk>/', Codigos_PromocionaisDelete.as_view(), name='delete_codigos_promocionais'),
 
     path('compra/', CompraCreditoCreate.as_view(), name='credito'),
+    path('tabela-de-precos/', TabelaPrecos.as_view(), name='tabela_de_precos'),
 
     # path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
 

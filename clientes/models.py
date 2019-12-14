@@ -124,13 +124,13 @@ def type_person(sender, instance, **kwargs):
             qrcode=codigo, data_limite__lte=datetime.now(), resgate=False)
         if promocao.exists():
             instance.valor_credito += promocao.first().valor
-            instance.codigo_promocional = ""
             promocao.update(
                 cnpjcpf=instance.cnpjcpf,
                 nome=instance.nome,
                 email=instance.id_usuario.username,
                 resgate=True,
                 data_resgate=datetime.now())
+    instance.codigo_promocional = ""
 
 
 @receiver(post_save, sender=Clientes)

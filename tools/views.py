@@ -57,7 +57,7 @@ class MultiCreateView(CreateView):
 
 
 class SignUpCreateView(MultiCreateView):
-    
+
     form_class = None
 
     def dispatch(self, request, *args, **kwargs):
@@ -73,10 +73,13 @@ class SignUpCreateView(MultiCreateView):
 
     def form_valid(self, **forms):
         context = {}
+        valor_credito = 0
         conf = Confuguracao.objects.first()
+        if conf:
+            valor_credito = conf.credito_inicial
         user = forms['form_user'].save()
         person = forms['form'].save(commit=False)
-        person.valor_credito = conf.credito_inicial
+        person.valor_credito = valor_credito
         person.id_usuario = user
         person.save()
         forms['form'].save_m2m()

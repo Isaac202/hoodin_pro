@@ -12,7 +12,7 @@ class GerarCodigoAdmin(admin.ModelAdmin):
 
 
 class CodigoPromocionalAdmin(admin.ModelAdmin):
-    list_display = ('qrcode', 'data_emissao', 'data_limite',
+    list_display = ('qrcode','valor', 'data_emissao', 'data_limite',
                     'data_resgate', "promotor")
     list_filter = ('resgate', 'data_emissao', 'data_limite', 'data_resgate',
                    ('data_emissao',

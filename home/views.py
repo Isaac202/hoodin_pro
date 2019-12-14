@@ -14,6 +14,13 @@ from django.http import JsonResponse
 class IndexView(TemplateView):
     template_name = 'home.html'
 
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.is_staff:
+            return redirect('/admin')
+        return super().dispatch(request, *args, **kwargs)
+    
+
 
 def sair(request):
     logout(request)

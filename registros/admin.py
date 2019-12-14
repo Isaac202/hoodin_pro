@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Registros, ArquivoRegistro
+from registros.models import Registros, ArquivoRegistro
 from rangefilter.filter import DateRangeFilter
 from tools.render import Render
 
@@ -13,6 +13,8 @@ class RegistroAdmin(admin.ModelAdmin):
                      "id_cliente__cnpjcpf")
     autocomplete_fields = ('id_usuario', "id_cliente", 'codservico',)
     actions = ['gera_pdf','gera_pdf_total' ]
+    show_full_result_count = True
+    
 
     def gera_pdf(set, request, queryset):
         if queryset:
@@ -22,9 +24,10 @@ class RegistroAdmin(admin.ModelAdmin):
                                         )
 
     def gera_pdf_total(set, request, queryset):
-        if queryset:
-            return Render.render_to_pdf(request, queryset,
-                                        description="Relatório de Registros",
+        queryset = queryset.objects.all().aggregate(total=Sum('valor'), count=Count('codservico'))
+        # queryset = queryset..values('id_usuario', 'codservico')
+        return Render.render_to_pdf(request, queryset,
+                                        description="Ryelatório de Registros",
                                         template="tools/pdf_registros_total.html"
                                         )
 

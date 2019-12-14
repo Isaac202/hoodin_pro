@@ -79,7 +79,7 @@
                         </a>
                     </td>
                     <td>
-                        <a target="_blank" download="{{r.arquivo.nome}}" href="{{r.arquivo.file.url}}">
+                        <a target="_blank" href="{% url 'pdf' r.pk %}">
                             Certificado
                         </a>
                     </td>

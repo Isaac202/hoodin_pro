@@ -20,3 +20,6 @@ class Coautores(models.Model):
         "registros.ArquivoRegistro", verbose_name="Arquivo", on_delete=models.CASCADE)
     documento = models.CharField(max_length=50)
     percentual_obra = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return self.nome

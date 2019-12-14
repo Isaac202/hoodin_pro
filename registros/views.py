@@ -145,3 +145,48 @@ class MeusRegistrosList(ListView):
             paginator = Paginator(queryset, 2)
             queryset = paginator.get_page(page)
         return queryset
+
+
+
+
+# # -*- coding: UTF-8 -*-
+# from __future__ import unicode_literals
+
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from django.utils.text import slugify
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+
+from weasyprint import HTML
+from weasyprint.fonts import FontConfiguration
+
+# from .models import Donation
+
+@login_required
+def to_pdf(request, id_registro):
+    registro = get_object_or_404(Registros, pk=id_registro, id_usuario=request.user)
+    response = HttpResponse(content_type="application/pdf")
+    # response['Content-Disposition'] = "teste.pdf"
+    # )
+    context = []
+    coautores = registro.arquivo.coautores_set.all()
+    cont = coautores.count()
+    for c in range(0, cont):
+        salt = 5
+        index = (c+1) * salt
+        if index < cont:
+            # print(index-salt, index)
+            context.append(coautores[index-salt: index])
+        else:
+            # print(index-salt, cont)
+            context.append(coautores[index-salt:cont])
+            break
+    html = render_to_string("registros/certificado.html", {
+        'registro': registro,
+        'lista_coautores':context
+    })
+
+    font_config = FontConfiguration()
+    HTML(string=html).write_pdf(response, font_config=font_config)
+    return response

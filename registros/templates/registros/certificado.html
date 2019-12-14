@@ -1,0 +1,197 @@
+<html>
+
+<head>
+	<title>CERTIFICADO</title>
+	<style>
+		@page {
+			size: landscape;
+			margin: 0cm;
+		}
+
+		body {
+			background-image: url(https://www.hoodid.com/images/Fundo.jpg);
+			background-repeat: no-repeat;
+			background-size: 100%;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="margin-top: 5%">
+		<div style="text-align: center;">
+			<strong>CERTIFICADO DE REGISTRO N&ordm;{{registro.pk}}</strong></div>
+		<div style="text-align: center;">
+			&nbsp;</div>
+		<div style="display: flex; justify-content: center">
+			<div>
+				<div style="text-align: justify;">
+					CERTIFICO que, &agrave;s {{registro.data|date:'H:i'}} horas do dia {{registro.data|date:'d/m/Y'}},&nbsp; &nbsp; {{registro.id_cliente.nome|upper}},
+					{{registro.id_cliente.pais}},&nbsp; &nbsp; inscrito</div>
+				<div style="text-align: justify;">
+					no CPF/MF sob o n&uacute;mero {{registro.id_cliente.cnpjcpf|upper}}, residente {{registro.id_cliente.endereco|upper}}, N&ordm;
+					{{registro.id_cliente.numero|upper}},
+					{% if registro.id_cliente.complemento %}{{registro.id_cliente.complemento|upper}},{% endif %}
+				</div>
+				<div style="text-align: justify;">
+					na cidade de {{registro.id_cliente.cidade|upper}},&nbsp; bairro de {{registro.id_cliente.bairro|upper}},&nbsp; estado&nbsp; {{registro.id_cliente.estado|upper}},&nbsp;
+					com&nbsp;
+					&nbsp;CEP&nbsp; &nbsp; {{registro.id_cliente.cep|upper}},&nbsp; &nbsp;obteve registro&nbsp; da&nbsp; sua</div>
+					<div style="text-align: justify;">
+					declara&ccedil;&atilde;o de autoria da&nbsp; &nbsp;obra&nbsp; intelectual intitulada {{registro.arquivo.resume}}, na categoria&nbsp; &nbsp;{{registro.codservico.nome|upper}}. O&nbsp; &nbsp;presente</div>
+				<div style="text-align: justify;">
+					registro foi&nbsp; assinado&nbsp; pelo titular deste&nbsp; certificado, e est&aacute; associado a
+					uma
+					chave
+					digital fornecida&nbsp; pelo&nbsp; &nbsp;Instituto</div>
+				<div style="text-align: justify;">
+					Nacional de Tecnologia da Informa&ccedil;&atilde;o (ITI), atrav&eacute;s de&nbsp; uma&nbsp;
+					&nbsp;ACT
+					(Autoridade de Carimbo de Tempo) utilizada</div>
+				<div style="text-align: justify;">
+					para garantir data e hora da assinatura digital com&nbsp; &nbsp;base&nbsp; &nbsp;nos&nbsp; dados
+					fornecidos
+					pelo
+					Observat&oacute;rio Nacional, cuja</div>
+				<div style="text-align: justify;">
+					autoridade foi conferida pela Administra&ccedil;&atilde;o&nbsp; &nbsp;P&uacute;blica.&nbsp; &nbsp;A
+					chave
+					digital foi&nbsp; &nbsp;gerada atrav&eacute;s&nbsp; &nbsp;do&nbsp; sistema online da</div>
+				<div style="text-align: justify;">
+					HoodID&nbsp; &nbsp;Registros Online Ltda.,&nbsp; tendo esta declara&ccedil;&atilde;o de&nbsp;
+					autoria&nbsp;
+					&nbsp;de&nbsp; obra intelectual garantia de autenticidade,</div>
+				<div style="text-align: justify;">
+					integridade e validade jur&iacute;dica, nos termos&nbsp; do&nbsp; &nbsp;artigo 1&ordm;&nbsp;
+					da&nbsp;
+					&nbsp;Medida Provis&oacute;ria n&ordm; 2.200-2,&nbsp; de&nbsp; &nbsp;24 de agosto de</div>
+				<div style="text-align: justify;">
+					2001. Por ser esta declara&ccedil;&atilde;o a mais absoluta express&atilde;o da verdade, a HoodID
+					Registros
+					Online emite o presente</div>
+				<div style="text-align: justify;">
+					certificado que subscreve nesta cidade do Recife - PE.</div>
+			</div>
+		</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<p>
+			&nbsp;</p>
+	</div>
+
+	{% for coautores in lista_coautores %}
+	{% if coautores %}
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="text-align: center;">
+		&nbsp;</div>
+	<div style="margin-top: 5%">
+		<div style="text-align: center;">
+			<strong>CERTIFICADO DE REGISTRO N&ordm;{{registro.pk}}</strong></div>
+		<div style="text-align: center;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="display: flex; justify-content: center">
+			<div>
+				<div style="text-align: justify;">
+					<strong>&nbsp; Coautoria da obra:</strong></div>
+				{% for c in coautores %}
+				<div>
+					&nbsp; Nome: {{c.nome}} Documento Identifica&ccedil;&atilde;o:{{c.documento}}
+					{{c.percentual_obra}}%
+				</div>
+
+				{% endfor %}
+			</div>
+		</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<p>
+			&nbsp;</p>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<div style="text-align: justify;">
+			&nbsp;</div>
+		<p>
+			&nbsp;</p>
+	</div>
+	{% endif %}
+
+	{% endfor %}
+</body>
+
+</html>

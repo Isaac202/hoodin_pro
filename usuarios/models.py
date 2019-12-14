@@ -119,3 +119,21 @@ class UserConfirm(models.Model):
         ordering = ['-created_at']
         verbose_name = 'Usuário Confirmado'
         verbose_name_plural = 'Usuários Confirmados'
+
+
+
+class Confuguracao(models.Model):
+    dolar = models.DecimalField(max_digits=5, decimal_places=2, default=4)
+    euro = models.DecimalField(max_digits=5, decimal_places=2, default=4)
+    credito_inicial = models.DecimalField(max_digits=5, decimal_places=2, default=1)
+    
+
+    class Meta:
+        verbose_name = _("Confuguracao")
+        verbose_name_plural = _("Confuguracaos")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("Confuguracao_detail", kwargs={"pk": self.pk})

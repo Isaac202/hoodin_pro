@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth import get_user_model
-from usuarios.models import UserConfirm
+from usuarios.models import UserConfirm, Confuguracao
 
 User = get_user_model()
 
@@ -12,3 +12,4 @@ class UserConfirmAdmin(admin.ModelAdmin):
 
 admin.site.register(UserConfirm, UserConfirmAdmin)
 admin.site.register(User, BaseUserAdmin)
+admin.site.register(Confuguracao)

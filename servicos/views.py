@@ -89,6 +89,7 @@ class ServicosDelete(DeleteView):
 #         form.instance.perfil = self.request.user
 #         return super(ServicosExtensoesCreate, self).form_valid(form)
 
+from usuarios.models import Confuguracao
 
 class TabelaPrecos(TemplateView):
     template_name = "servicos/tabela.html"
@@ -102,8 +103,9 @@ class TabelaPrecos(TemplateView):
             self.euro = Decimal(parsed['EUR']["ask"])
             self.dolar = Decimal(parsed['USD']["ask"])
         except:
-            self.euro = settings.DOLAR_VALOR
-            self.dolar = settings.EURO_VALOR
+            conf = Confuguracao.objects.first()
+            self.euro = conf.euro
+            self.dolar = conf.dolar
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

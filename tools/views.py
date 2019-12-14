@@ -8,8 +8,9 @@ from django.conf import settings
 from usuarios.models import UserConfirm
 from usuarios.forms import UserCreationForm
 from tools.genereteKey import generate_hash_key
-# from tarefas_backgroud.tasks import send_mail
 from tools.mail import send_mail_template
+from usuarios.models import Confuguracao
+# from tarefas_backgroud.tasks import send_mail
 
 
 class MultiCreateView(CreateView):
@@ -56,7 +57,7 @@ class MultiCreateView(CreateView):
 
 
 class SignUpCreateView(MultiCreateView):
-
+    
     form_class = None
 
     def dispatch(self, request, *args, **kwargs):
@@ -67,14 +68,15 @@ class SignUpCreateView(MultiCreateView):
         # Obitenho o modelForm que contem o id_usuario e transformo form_class em um dicionario
         # E adiciono o UserCreationForm ao Formulario
         self.form_class = {'form': self.form_class,
-                        #    'form_endereco': EnderecoMotoristaForm,
+                           #    'form_endereco': EnderecoMotoristaForm,
                            'form_user': UserCreationForm}
 
     def form_valid(self, **forms):
         context = {}
+        conf = Confuguracao.objects.first()
         user = forms['form_user'].save()
         person = forms['form'].save(commit=False)
-        person.valor_credito = settings.VALOR_CREIDITO_INCIAL
+        person.valor_credito = conf.credito_inicial
         person.id_usuario = user
         person.save()
         forms['form'].save_m2m()
@@ -87,7 +89,6 @@ class SignUpCreateView(MultiCreateView):
         key = generate_hash_key(user.email)
         UserConfirm.objects.create(user=user, key=key)
         context['key'] = key
-        send_mail_template(subject="Cadastro", template_name="usuarios/emailCadastro.html", context=context, recipient_list=[user.username])
+        send_mail_template(subject="Cadastro", template_name="usuarios/emailCadastro.html",
+                           context=context, recipient_list=[user.username])
         return self.get_success_url()
-
-

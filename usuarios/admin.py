@@ -10,6 +10,9 @@ class UserConfirmAdmin(admin.ModelAdmin):
     search_fields = ('user__username',)
     list_filter = ('confirmed', 'created_at',)
 
+class ConfiguracaoAdmin(admin.ModelAdmin):
+    list_display = ('pk','dolar', 'euro', 'credito_inicial', 'atualização')
+
 admin.site.register(UserConfirm, UserConfirmAdmin)
 admin.site.register(User, BaseUserAdmin)
-admin.site.register(Confuguracao)
+admin.site.register(Confuguracao, ConfiguracaoAdmin)

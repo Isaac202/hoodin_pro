@@ -126,14 +126,15 @@ class Confuguracao(models.Model):
     dolar = models.DecimalField(max_digits=5, decimal_places=2, default=4)
     euro = models.DecimalField(max_digits=5, decimal_places=2, default=4)
     credito_inicial = models.DecimalField(max_digits=5, decimal_places=2, default=1)
+    atualização = models.DateTimeField("Atualizado em", auto_now=True, auto_now_add=False)
     
 
     class Meta:
-        verbose_name = _("Confuguracao")
-        verbose_name_plural = _("Confuguracaos")
+        verbose_name = _("Confuguraçao")
+        verbose_name_plural = _("Confugurações")
 
     def __str__(self):
-        return self.name
+        return "Configurção"
 
-    def get_absolute_url(self):
-        return reverse("Confuguracao_detail", kwargs={"pk": self.pk})
+    # def get_absolute_url(self):
+    #     return reverse("Confuguracao_detail", kwargs={"pk": self.pk})

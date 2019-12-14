@@ -64,7 +64,7 @@ class ClienteUpdateForm(forms.ModelForm):
                   'codindicacao', 'tipo_pessoa',
                    'valor_credito', 'cnpjcpf', 'documento_tipo',
                    'documento_identidade', 'sexo',
-        'id_usuario','id_cliente', 'confirmation_key']
+        'id_usuario','id_cliente', 'confirmation_key','meu_link_indicacao']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -1,4 +1,3 @@
-from tools.genereteKey import generate_hash_key
 from codigos_promocionais.models import Codigos_Promocionais as Promocao
 from _json import make_encoder
 from django.contrib.auth import get_user_model
@@ -10,6 +9,7 @@ from django.conf import settings
 from indicacoes.models import Indicacoes
 from servicos.models import Servicos
 from django.core.mail import send_mail
+from tools.genereteKey import generate_hash_key
 from datetime import datetime
 
 User = get_user_model()
@@ -114,8 +114,9 @@ class Clientes(models.Model):
 def type_person(sender, instance, **kwargs):
     if not instance.is_cpf:
         instance.tipo_pessoa = "J"
+    if  instance.meu_link_indicacao in [None, '']:
+        instance.meu_link_indicacao = generate_hash_key(instance.id_usuario.username, 3)
     codigo = instance.codigo_promocional
-    instance.meu_link_indicacao = generate_hash_key(instance.id_usuario.username, 3)
     if codigo:
         promocao = Promocao.objects.filter(
             qrcode=codigo, data_limite__lte=datetime.now(), resgate=False)

@@ -10,6 +10,8 @@ from usuarios.forms import UserCreationForm
 from tools.genereteKey import generate_hash_key
 from tools.mail import send_mail_template
 from usuarios.models import Confuguracao
+from indicacoes.models import IndicacaoCliente
+from clientes.models import Clientes
 # from tarefas_backgroud.tasks import send_mail
 
 
@@ -81,8 +83,20 @@ class SignUpCreateView(MultiCreateView):
         person = forms['form'].save(commit=False)
         person.valor_credito = valor_credito
         person.id_usuario = user
-        person.memeu_link_indicacaou = generate_hash_key(user.email, salt=3)
+        person.meu_link_indicacaou = generate_hash_key(user.email, 3)
         person.save()
+        if person.link_indicacao:
+            pai = Clientes.objects.filter(
+                meu_link_indicacao=person.link_indicacao)
+            if pai.exists():
+                pai = pai.first()
+                IndicacaoCliente.objects.create(
+                    email_pai=pai.id_usuario.email,
+                    email_filho=user.email,
+                    code_pai=person.link_indicacao,
+                    code_filho=person.meu_link_indicacao
+                )
+
         forms['form'].save_m2m()
         context['site'] = settings.ALLOWED_HOSTS[0]
         context['nome'] = person.nome

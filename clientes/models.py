@@ -23,6 +23,8 @@ TIPO_DOCUMENTO = (
     ('Outros', 'Outros'),
 )
 
+Indicacoes
+
 
 class Clientes(models.Model):
     id_usuario = models.OneToOneField(User, on_delete=models.PROTECT)

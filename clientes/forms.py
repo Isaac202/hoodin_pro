@@ -39,6 +39,7 @@ class ClientesForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['atuacao'].queryset = Servicos.objects.filter(servico_digitalizacao=False)
         for field in self.fields:
             self.fields[field].widget.attrs.update({
                 # 'placeholder': field.capitalize(),

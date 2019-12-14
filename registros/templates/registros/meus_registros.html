@@ -64,7 +64,7 @@
                     <td>{{r.data|time:"h:i"}}</td>
                     <td>{{r.arquivo.version}}</td>
                     <td>
-                        {% if r.arquivo.file %}
+                        {% if r.codservico.servico_digitalizacao %} 
                         <a target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.nome}}">
                                 baixar
                             </a>

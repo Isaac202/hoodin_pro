@@ -9,5 +9,5 @@ class IndicacaoClienteAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Indicacoes)
-admin.site.register(IndicacaoCliente)#, IndicacaoClienteAdmin)
+admin.site.register(IndicacaoCliente, IndicacaoClienteAdmin)
 

@@ -3,9 +3,14 @@ from registros.models import Registros, ArquivoRegistro
 from rangefilter.filter import DateRangeFilter
 from tools.render import Render
 
+class ArquivoAdmin(admin.ModelAdmin):
+    list_display = ('id_usuario', 'name', 'version', 'value', 'resume')
+    list_filter = ('paid', 'create_at')
+    search_fields = ('shar256','id_usuario__username', 'name', "resume")
+
 
 class RegistroAdmin(admin.ModelAdmin):
-    list_display = ('id_usuario', 'codservico', 'data')
+    list_display = ('id_usuario','id_cliente', 'codservico', 'descricao', 'data')
     list_filter = ('data', 'codservico',
                    ('data', DateRangeFilter),
                    )
@@ -36,5 +41,5 @@ class RegistroAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Registros, RegistroAdmin)
-admin.site.register(ArquivoRegistro)
+admin.site.register(ArquivoRegistro, ArquivoAdmin)
 

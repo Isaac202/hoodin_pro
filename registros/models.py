@@ -28,6 +28,10 @@ class ArquivoRegistro(models.Model):
     resume = models.TextField(max_length=5000, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Arquivo"
+        verbose_name_plural = "Arquivos"
 
     def __str__(self):
         return self.name
@@ -59,6 +63,8 @@ class Registros(models.Model):
 
     class Meta:
         ordering = ('-data',)
+        verbose_name = "Registro"
+        verbose_name_plural = "Registros"
 
     def __str__(self):
         return self.arquivo.name

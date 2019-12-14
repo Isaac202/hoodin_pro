@@ -176,9 +176,9 @@ class BuyCredit(APIView):
             id_cliente=cliente,
             valor=val_decimail,
             codigo_compra_cielo=codigo_compra,
-            transacao_cielo=trasacao
+            transacao_cielo=trasacao,
+            autorizado=autorizado
         )
-
-        print(resposta_cielo, '\n\n')
+        # print(resposta_cielo, '\n\n')
         # , status=resp)
         return Response({'msg': resposta_cielo, 'result': autorizado})

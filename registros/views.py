@@ -142,7 +142,7 @@ class MeusRegistrosList(ListView):
         if title:
             queryset = queryset.filter(arquivo__resume__contains=title)
         else:
-            paginator = Paginator(queryset, 2)
+            paginator = Paginator(queryset, 8)
             queryset = paginator.get_page(page)
         return queryset
 

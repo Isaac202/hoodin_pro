@@ -81,6 +81,7 @@ class SignUpCreateView(MultiCreateView):
         person = forms['form'].save(commit=False)
         person.valor_credito = valor_credito
         person.id_usuario = user
+        person.link_indicacao = generate_hash_key(user.email, salt=3)
         person.save()
         forms['form'].save_m2m()
         context['site'] = settings.ALLOWED_HOSTS[0]

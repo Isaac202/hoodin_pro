@@ -24,6 +24,10 @@
         </div>
         <hr>
         <div class="row">
+            <div class="col-12 my-2">
+                <label for="">Meu Link de inicaçao</label>
+                <input class="form-control" type="text" readonly value="https://registrosonline.com.br{% url 'cliente:new' %}?indicacao={{object.meu_link_indicacao}}">
+            </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 <label for="">Nome</label>
                 <input class="form-control" type="text" readonly value="{{object.nome}}">

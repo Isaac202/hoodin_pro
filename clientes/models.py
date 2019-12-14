@@ -1,3 +1,5 @@
+from tools.genereteKey import generate_hash_key
+from codigos_promocionais.models import Codigos_Promocionais as Promocao
 from _json import make_encoder
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -72,10 +74,14 @@ class Clientes(models.Model):
     data_cadastro = models.DateTimeField(auto_now_add=True)
     confirmation_key = models.CharField(
         max_length=80, default='0', blank=True, null=True)
-    atuacao = models.ManyToManyField(Servicos, verbose_name="AREA DE INTERESSE", blank=True)
-    codigo_promocional = models.CharField("Codigo Promocional", max_length=200, blank=True, null=True)
-    link_indicacao = models.CharField("Link de Indicação", max_length=200, blank=True, null=True)
-
+    atuacao = models.ManyToManyField(
+        Servicos, verbose_name="AREA DE INTERESSE", blank=True)
+    codigo_promocional = models.CharField(
+        "Codigo Promocional", max_length=200, blank=True, null=True)
+    link_indicacao = models.CharField(
+        "Link de Indicação", max_length=200, blank=True, null=True)
+    meu_link_indicacao = models.CharField(
+        "Meu link de Indicação", max_length=200, blank=True, null=True)
     class Meta:
         ordering = ('nome',)
         verbose_name_plural = "Clientes"
@@ -108,6 +114,20 @@ class Clientes(models.Model):
 def type_person(sender, instance, **kwargs):
     if not instance.is_cpf:
         instance.tipo_pessoa = "J"
+    codigo = instance.codigo_promocional
+    instance.meu_link_indicacao = generate_hash_key(instance.id_usuario.username, 3)
+    if codigo:
+        promocao = Promocao.objects.filter(
+            qrcode=codigo, data_limite__lte=datetime.now(), resgate=False)
+        if promocao.exists():
+            instance.valor_credito += promocao.first().valor
+            instance.codigo_promocional = ""
+            promocao.update(
+                cnpjcpf=instance.cnpjcpf,
+                nome=instance.nome,
+                email=instance.id_usuario.username,
+                resgate=True,
+                data_resgate=datetime.now())
 
 
 @receiver(post_save, sender=Clientes)

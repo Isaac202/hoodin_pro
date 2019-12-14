@@ -154,7 +154,12 @@
             </div>
             <div class="col-12 col-md-6 my-2">
                 {{form.link_indicacao.label_tag}}
+                {% if request.GET.indicacao %}
+                <input readonly type="text" name="link_indicacao" maxlength="200" class="form-control"
+                    id="id_link_indicacao" value="{{request.GET.indicacao}}">
+                {% else %}
                 {{form.link_indicacao}}
+                {% endif %}
                 {% if form.link_indicacao.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{form.link_indicacao.errors}}

@@ -67,7 +67,7 @@ def create_promocional_codes(sender, instance, **kwargs):
             salt = "Hoodid" + str(ts)
             hash_code = generate_hash_key(salt)
             Codigos_Promocionais.objects.create(
-                promotor=hash_code,
+                # promotor=hash_code,
                 qrcode=hash_code,
                 data_emissao=instance.data_inicio,
                 data_limite=instance.data_fim,

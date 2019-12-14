@@ -72,6 +72,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
                         registro.arquivo = file
                         registro.valor = registro.codservico.preco
                         registro.id_usuario = request.user
+                        registro.id_cliente = cliente
                         registro.save()
                         file.paid = True
                         file.save()

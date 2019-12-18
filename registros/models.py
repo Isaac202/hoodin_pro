@@ -19,7 +19,8 @@ class ArquivoRegistro(models.Model):
     name = models.CharField(max_length=250)
     size = models.PositiveIntegerField()
     shar256 = models.CharField(max_length=90)
-    file = models.FileField(upload_to=user_directory_path, blank=True, null=True)
+    file = models.FileField(
+        upload_to=user_directory_path, blank=True, null=True)
     signature = models.FileField(
         blank=True, null=True, upload_to=user_directory_path)
     version = models.DecimalField(max_digits=9, decimal_places=2, default=1.0)
@@ -28,13 +29,14 @@ class ArquivoRegistro(models.Model):
     resume = models.TextField(max_length=5000, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         verbose_name = "Arquivo"
         verbose_name_plural = "Arquivos"
 
     def __str__(self):
         return self.name
+
 
 @receiver(pre_save, sender=ArquivoRegistro)
 def my_callback(sender, instance, *args, **kwargs):
@@ -44,7 +46,30 @@ def my_callback(sender, instance, *args, **kwargs):
         instance.resume = name
 
 
+class RegistroManager(models.Manager):
+    def with_counts(self):
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("""
+            SELECT clientes_clientes.nome, servicos_servicos.nome, SUM(registros_registros.valor), 
+            COUNT(registros_registros.id) FROM clientes_clientes, servicos_servicos, registros_registros
+            WHERE clientes_clientes.id = registros_registros.id_cliente_id
+            AND registros_registros.codservico_id = servicos_servicos.id
+            group by clientes_clientes.nome, servicos_servicos.nome
+            order by clientes_clientes.nome""")
+            result_list = []
+            for row in cursor.fetchall():
+                # p = self.model(id=row[0], question=row[1], poll_date=row[2])
+                # p.num_responses = row[3]
+                p = {'cliente':row[0], 'servico':row[1], 'valor':row[2], 'quantidade':row[3] }
+                result_list.append(p)
+        return result_list
+
+
 class Registros(models.Model):
+    
+    objects = RegistroManager()
+
     codregistro = models.PositiveIntegerField(blank=True, null=True)
     id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     id_cliente = models.ForeignKey(

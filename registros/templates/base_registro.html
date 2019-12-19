@@ -203,7 +203,8 @@
                                     .val(result.resume)
                                     .attr('id', 'desc_file' + result.id)
                                     .addClass('form-control form-control-lg resume')
-                                    .attr('onchange', "myFunction('" + result.id + "')"),
+                                    .attr('onchange', "myFunction('" + result.id + "')")
+                                    .attr('onkeyup',"desableCheck('" + result.id + "')"),
                                 // $("<a>").html("Salvar").addClass('btn btn-primary text-white')
                                 //     .addClass('float-right mt-2')
                                 //     .attr('link', result.delete)
@@ -345,6 +346,12 @@
     //     keyboard: false
     // });
     // }
+    function desableCheck(id){
+        $('#check_acept_terms').removeAttr('checked')
+        // $("#check_acept_terms").attr('disabled', true)
+        $("#btn_submit").removeAttr('disabled', true)
+        $("#btn_submit").attr('disabled', true)
+    }
 
     function myFunction(id) {
         let text = document.getElementById("desc_file" + id).value
@@ -353,10 +360,13 @@
             csrfmiddlewaretoken: "{{ csrf_token }}",
             resume: text
         }
+        
         $.post(url, data, function (data) {
             console.log(data)
         }).fail(function (e) {
             alert("erro")
+        }).always(function(e){
+        // $('#check_acept_terms').removeAttr('disabled')
         })
     }
 

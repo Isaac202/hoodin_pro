@@ -17,9 +17,10 @@
 		}
 
 		div {
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
+			/* white-space: nowrap; */
+			/* width: 90%; */
+			/* overflow: inherit; */
+			/* text-overflow: ellipsis; */
 		}
 	</style>
 </head>
@@ -48,7 +49,7 @@
 			<strong>CERTIFICADO DE REGISTRO N&ordm;{{registro.pk}}</strong></div>
 		<div style="text-align: center;">
 			&nbsp;</div>
-		<div style="display: flex; justify-content: center">
+		<div style="display: flex; justify-content: center; justify-items: center">
 			<div>
 				<div style="text-align: justify;">
 					CERTIFICO que, &agrave;s {{registro.data|date:'H:i'}} horas do dia
@@ -64,42 +65,23 @@
 					na cidade de {{registro.id_cliente.cidade|upper}},&nbsp; bairro de
 					{{registro.id_cliente.bairro|upper}},&nbsp; estado&nbsp; {{registro.id_cliente.estado|upper}},&nbsp;
 					com&nbsp;
-					&nbsp;CEP {{registro.id_cliente.cep|upper}},obteve registro&nbsp; da&nbsp;
-					sua</div>
-				<div style="text-align: justify;">
-					declara&ccedil;&atilde;o de autoria da obra&nbsp; intelectual intitulada
+					&nbsp;CEP {{registro.id_cliente.cep|upper}},<br>obteve registro&nbsp; da&nbsp;
+					sua declara&ccedil;&atilde;o de autoria da obra&nbsp; intelectual <br>intitulada
 					{{registro.arquivo.resume}},<br>na categoria {{registro.codservico.nome|upper}}.</div>
 				<div style="text-align: justify;">
 					O&nbsp;presente
 					registro foi&nbsp; assinado&nbsp; pelo titular deste&nbsp; certificado, e est&aacute; associado a
-					uma chave digital fornecida pelo Instituto</div>
-				<div style="text-align: justify;">
-					Nacional de Tecnologia da Informa&ccedil;&atilde;o (ITI), atrav&eacute;s de&nbsp; uma&nbsp;
-					&nbsp;ACT
-					(Autoridade de Carimbo de Tempo) utilizada</div>
-				<div style="text-align: justify;">
-					para garantir data e hora da assinatura digital combasenos&nbsp; dados
-					fornecidos
-					pelo
-					Observat&oacute;rio Nacional, cuja</div>
-				<div style="text-align: justify;">
-					autoridade foi conferida pela Administra&ccedil;&atilde;oP&uacute;blica.A
-					chave
-					digital foigerada atrav&eacute;sdo&nbsp; sistema online da</div>
-				<div style="text-align: justify;">
-					HoodIDRegistros Online Ltda.,&nbsp; tendo esta declara&ccedil;&atilde;o de&nbsp;
-					autoria&nbsp;
-					&nbsp;de&nbsp; obra intelectual garantia de autenticidade,</div>
-				<div style="text-align: justify;">
-					integridade e validade jur&iacute;dica, nos termos&nbsp; doartigo 1&ordm;&nbsp;
-					da&nbsp;
-					&nbsp;Medida Provis&oacute;ria n&ordm; 2.200-2,&nbsp; de24 de agosto de</div>
-				<div style="text-align: justify;">
-					2001. Por ser esta declara&ccedil;&atilde;o a mais absoluta express&atilde;o da verdade, a HoodID
-					Registros
-					Online emite o presente</div>
-				<div style="text-align: justify;">
-					certificado que subscreve nesta cidade do Recife - PE.</div>
+					uma chave digital <br>fornecida pelo Instituto
+					Nacional de Tecnologia da Informa&ccedil;&atilde;o (ITI), atrav&eacute;s de&nbsp; uma <br>
+					ACT (Autoridade de Carimbo de Tempo) utilizada
+					para garantir data e hora <br>da assinatura digital combasenos dados fornecidos pelo
+					Observat&oacute;rio Nacional,<br>cuja autoridade foi conferida pela Administra&ccedil;&atilde;oP&uacute;blica. 
+					<br> A chave digital foigerada atrav&eacute;sdo&nbsp; sistema online da
+					HoodIDRegistros Online Ltda.<br> Tendo esta declara&ccedil;&atilde;o de&nbsp; autoria&nbsp;
+					&nbsp;de&nbsp; obra intelectual garantia de autenticidade,
+					<br>integridade e validade jur&iacute;dica, nos termos <br>do artigo 1&ordm; da&nbsp; Medida Provis&oacute;ria n&ordm; 
+					2.200-2,&nbsp; de 24 de agosto de 2001. <br>Por ser esta declara&ccedil;&atilde;o a mais absoluta express&atilde;o da verdade,<br>
+					a HoodID Registros Online emite o presente certificado que subscreve <br>nesta cidade do Recife - PE.
 			</div>
 		</div>
 		<div style="text-align: justify;">

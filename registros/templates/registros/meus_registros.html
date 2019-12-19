@@ -79,7 +79,7 @@
                         </a>
                     </td>
                     <td>
-                        {% if r.codservico.servico_digitalizacao %}
+                        {% if not r.codservico.servico_digitalizacao %}
                         <a target="_blank" href="{% url 'pdf' r.pk %}">
                             Certificado
                         </a>

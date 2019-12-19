@@ -2,7 +2,7 @@ from cielo.tasks import comprar_credito
 from django import forms
 from random import randint
 from .models import Compras 
-
+from datetime import date
 
 class InserirCreditoForm(forms.Form):
 
@@ -21,28 +21,20 @@ class InserirCreditoForm(forms.Form):
 
     )
 
-    nome_cartao = forms.CharField(max_length=60, required=False)
-    numero_cartao = forms.CharField(max_length=30, required=False)
-    seguranca = forms.CharField(max_length=3, required=False)
-    bandeira = forms.ChoiceField(required=False, choices=BANDEIRA_CHOICES)
-    validade = forms.CharField(max_length=7, required=False)
+    nome_cartao = forms.CharField(max_length=60, required=True)
+    numero_cartao = forms.CharField(max_length=30, required=True)
+    seguranca = forms.CharField(max_length=3, required=True)
+    bandeira = forms.ChoiceField(required=True, choices=BANDEIRA_CHOICES)
+    validade = forms.CharField(max_length=7, required=True, label="Validade: MM/YYYY")
     valor = forms.DecimalField(
         max_digits=10, decimal_places=2, required=True, localize=True)
 
-    # class Meta:
-    #     model = Compras
-    #     # fields = ['valor', 'forma_pagamento', 'nome_cartao', 'numero_cartao', 'seguranca', 'bandeira',
-    #     #           'validade', 'valor', 'qtd_parcela', 'codigo_trasacao', 'statu_trasacao']
-    #     exclude = ['id', 'data_compra','id_usuario']
-
     def __init__(self,  *args, **kwargs):
         super().__init__(*args, **kwargs)
+        today = date.today()
         for field in self.fields:
-            # if field == 'valor':
-            #     self.fields[field].widget = forms.NumberInput(attrs={
-            #         'min':"0.00",
-            #         "step":"0.01"
-            #     })
+            if field == 'validade':
+                self.fields[field].widget.attrs['placeholder'] = 'Ex: 12/{}'.format(today.year)
             self.fields[field].widget.attrs['class'] ='form-control'
      
 

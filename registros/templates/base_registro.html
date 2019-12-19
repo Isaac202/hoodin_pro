@@ -100,13 +100,16 @@
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     }
 
-    function get_url() {
-        let save_file
+    function get_save_file() {
         if ($('#save_file').is(":checked")) {
-            save_file = '&save=True'
+            return '&save=True'
         } else {
-            save_file = '&save=False'
+            return '&save=False'
         }
+    }
+
+    function get_url() {
+        let save_file = get_save_file()
         return "{% url 'base_upload' %}?service=" + $("#id_codservico").val() + save_file
     }
 
@@ -439,13 +442,23 @@
 
     $('#registro-form').submit(async function (e) {
         e.preventDefault()
-        let url_check = '/api/very-credit/?service=' + $('#id_codservico').val()
-        // alert(url)
-
+        let base_url = '/api/very-credit/'
+        let service = '?service=' + $('#id_codservico').val()
+        let code_promocional = "&code=" + $("#id_codigo_promocional").val()
+        let url_check = base_url + service + get_save_file() + code_promocional
+        // console.log(url_check)
         await $.getJSON(url_check, function (data) {
             console.log(data)
             if (!data.result && data.cielo) {
                 $('#id_valor').val(data.value)
+                if (!code_promocional == "") {
+                    console.log(data.promocao)
+                    if (data.promocao != null) {
+                        $('#id_promocao').html("Desconto:" + data.promocao)
+                    } else {
+                        $('#id_promocao').html("Nenhum desconto aplicado!")
+                    }
+                }
                 $('#modal_cielo').modal({
                     backdrop: 'static',
                     keyboard: false
@@ -453,8 +466,9 @@
             } else if (!data.result && !data.cielo) {
                 alert('nenhum arquivo enviado')
             } else if (!data.cielo && data.result) {
-                $('#complete').append($('#id_codindicacao'))
-                $('#complete').append($('#id_codservico'))
+                $('#complete').append($('#id_codigo_promocional').addClass('d-none'))
+                $('#complete').append($('#save_file').addClass('d-none'))
+                $('#complete').append($('#id_codservico').addClass('d-none'))
                 $('#complete').submit()
             }
         }).fail(function (e) {

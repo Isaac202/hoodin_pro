@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container mt-5">
-  {% if messages %}
+  <!-- {% if messages %}
   <div class="row">
     <div class="col-12 col-lg-9 my-2">
       <ul class="messages list-group">
@@ -17,7 +17,7 @@
       <a href="{% url 'meus_registros' %}" class="btn btn-success btn-block btn-lg">Ver Registros</a>
     </div>
   </div>
-  {% endif %}
+  {% endif %} -->
   <section id="tabs">
     <div class="container">
       <!-- <h6 class="section-title h2"></h6> -->
@@ -137,7 +137,7 @@
                 <br>
                 <div class="row">
                   <div class="col-12 col-lg-3 offset-lg-9 text-center">
-                    <input checked class="form-check-input" type="checkbox" name="save_file" id="save_file"> Salvar arquivos? <br>
+                    <input checked class="form-check-input" type="checkbox" value="True" name="save_file" id="save_file"> Salvar arquivos? <br>
                   </div>
                   <div class="col-12 col-lg-3 offset-lg-9">
                     <button disabled type="submit" id="btn_submit"
@@ -187,15 +187,16 @@
         </div>
         <div class="modal-body">
           <div class="row">
-
             {% for field in cielo %}
             <div class="col-12 col-md-6 my-1">
               {{field.label_tag}} <br>
               {{field}}
               {{field.errors}}
+              {% if field.label == "Valor" %}
+                <small id="id_promocao" class="form-text text-muted"></small>
+              {% endif %}
             </div>
             {% endfor %}
-
           </div>
           <!-- {{cielo.as_p}} -->
         </div>

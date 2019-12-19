@@ -1,3 +1,4 @@
+from codigos_promocionais.utils import check_codigo_promocionanl
 from random import randint
 from compras.models import Compras
 from cielo.tasks import comprar_credito
@@ -29,8 +30,7 @@ class GetPriceView(APIView):
         price = files.aggregate(price=Sum('value'))['price']
         if price and save_file == 'True':
             conf = Confuguracao.objects.first()
-            value_files = conf.valor_file * Decimal(files.count())
-            price = price + value_files
+            price += conf.valor_file * Decimal(files.count())
 
         data = {}
         value = "0.00"
@@ -149,6 +149,9 @@ class VeryCredit(APIView):
         data['result'] = False
         data['cielo'] = False
         service = request.GET.get('service', None)
+        save = request.GET.get('save', None)
+        code = request.GET.get('code', None)
+        code = check_codigo_promocionanl(code).first()
         if service:
             service = get_object_or_404(Servicos, pk=service)
             cliente = request.user.clientes
@@ -157,13 +160,19 @@ class VeryCredit(APIView):
             )
             if files:
                 total = service.preco * files.count()
+                if save != "False":
+                    conf = Confuguracao.objects.first()
+                    total += conf.valor_file * files.count()
                 cliente = request.user.clientes
-                if cliente.valor_credito >= total:
+                valor_credito_cliente = cliente.valor_credito
+                if code:
+                    valor_credito_cliente += code.valor
+                    data['promocao'] = "R$ - {}".format(code.valor).replace('.', ',')
+                if valor_credito_cliente >= total:
                     data['result'] = True
                 else:
-                    value = total - cliente.valor_credito
+                    value = total - valor_credito_cliente
                     value = "{}".format(value).replace('.', ',')
-                    # if value > Decimal('0.99'):
                     data['value'] = value
                     data['cielo'] = True
                     data['error'] = "Saldo insuficiente"

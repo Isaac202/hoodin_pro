@@ -1,0 +1,39 @@
+{% extends 'base_bootstrap.html' %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row p-5">
+        <div class="col-12 col-lg-6 offset-lg-3">
+            <div class="row">
+                <div class="col-12 text-center mt-5">
+                    <h1>Pagamento Concluído <i class="fas fa-shopping-cart"></i></h1>
+                </div>
+            </div>
+            {% if messages %}
+            <div class="row">
+                <div class="col-12 mt-5">
+                    <ul class="messages list-group">
+                        {% for message in messages %}
+                        <li class="list-group-item text-success text-center" {% if message.tags %}
+                            class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-12 mt-5">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 my-2">
+                            <a href="{% url 'registrar' %}" class="btn btn-primary btn-block btn-lg">Registrar mais</a>
+                        </div>
+                        <div class="col-12 col-lg-6 my-2">
+                            <a href="{% url 'meus_registros' %}" class="btn btn-success btn-block btn-lg">Ver
+                                Registros</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

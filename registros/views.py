@@ -1,3 +1,9 @@
+from weasyprint.fonts import FontConfiguration
+from weasyprint import HTML
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.utils.text import slugify
+from django.template.loader import render_to_string
 from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
@@ -20,14 +26,17 @@ from decimal import Decimal
 from django.db.models import Sum
 from cielo.tasks import comprar_credito
 from random import randint
+from codigos_promocionais.utils import set_codigo_promocional
+from usuarios.models import Confuguracao
 
 
 class TesteCreateView(View):
-    template_name = "registros/teste.html"
+    template_name = "compras/compra_concluida.html"
 
     def get(self, request, *args, **kwargs):
-
-        return render(request, self.template_name, context)
+        msg = "Arquivo(s) registrado(s) com sucesso!"
+        messages.success(request, msg)
+        return render(request, self.template_name)
 
 
 class RegistrosCreate(LoginRequiredMixin, View):
@@ -50,18 +59,33 @@ class RegistrosCreate(LoginRequiredMixin, View):
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
+        context = {}
+        cliente = request.user.clientes
+        save = request.POST.get('save_file')
         files = request.POST.getlist('files', None)
+        code = request.POST.get('codigo_promocional')
+        print(code,'\n\n\n')
+        code = set_codigo_promocional(code, cliente)
+        print(code)
         files = ArquivoRegistro.objects.filter(
             pk__in=files,
             id_usuario=request.user,
             paid=False
         )
-        context = {}
         if files.exists():
+            self.template_name = "compras/compra_concluida.html"
             valor = files.aggregate(total=Sum('value'))["total"]
-            cliente = request.user.clientes
-            if cliente.valor_credito >= valor:
-                cliente.valor_credito -= valor
+            if save:
+                conf = Confuguracao.objects.first()
+                valor += conf.valor_file * files.count()
+
+            valor_credito_cliente = cliente.valor_credito
+
+            if code:
+                valor_credito_cliente += code.valor
+
+            if valor_credito_cliente >= valor:
+                cliente.valor_credito = valor_credito_cliente - valor
                 cliente.save()
                 msg = "Arquivo(s) registrado(s) com sucesso!"
                 messages.success(request, msg)
@@ -148,25 +172,17 @@ class MeusRegistrosList(ListView):
         return queryset
 
 
-
-
 # # -*- coding: UTF-8 -*-
 # from __future__ import unicode_literals
 
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-from django.utils.text import slugify
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
-
-from weasyprint import HTML
-from weasyprint.fonts import FontConfiguration
 
 # from .models import Donation
 
+
 @login_required
 def to_pdf(request, id_registro):
-    registro = get_object_or_404(Registros, pk=id_registro, id_usuario=request.user)
+    registro = get_object_or_404(
+        Registros, pk=id_registro, id_usuario=request.user)
     response = HttpResponse(content_type="application/pdf")
     # response['Content-Disposition'] = "teste.pdf"
     # )
@@ -185,7 +201,7 @@ def to_pdf(request, id_registro):
             break
     html = render_to_string("registros/certificado.html", {
         'registro': registro,
-        'lista_coautores':context
+        'lista_coautores': context
     })
 
     font_config = FontConfiguration()

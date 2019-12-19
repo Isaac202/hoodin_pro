@@ -47,7 +47,7 @@ class Clientes(models.Model):
         "Nome do Pai", max_length=100, null=True, blank=True)
     cnpjcpf = models.CharField("CPF/CNPJ *", max_length=18)
     codindicacao = models.ForeignKey(Indicacoes, on_delete=models.PROTECT,
-                                     related_name='indicacao', verbose_name="Como conheceu a gente? *")
+                                     related_name='indicacao', verbose_name="Como conheceu a Hoodid.com? *")
     cep = models.CharField("Cep *", max_length=9)
     endereco = models.CharField("Endereço *", max_length=255)
     complemento = models.CharField(
@@ -60,9 +60,9 @@ class Clientes(models.Model):
     cidade = models.CharField("Cidade *", max_length=50)
     bairro = models.CharField("Bairro *", max_length=50)
     documento_identidade = models.CharField(
-        "Documento de identificação *", max_length=50)
+        "Número do Documento de Identificação *", max_length=50)
     documento_tipo = models.CharField(
-        "Tipo de Documento *", max_length=20, choices=TIPO_DOCUMENTO)
+        "Tipo de Documento de Identificação *", max_length=20, choices=TIPO_DOCUMENTO)
     passaporte = models.CharField(max_length=50, null=True, blank=True)
     nacionalidade = models.CharField(
         "Nacionalidade *", max_length=20, default='Brasileiro')
@@ -72,7 +72,7 @@ class Clientes(models.Model):
     nif = models.CharField(max_length=100, null=True, blank=True)
     facebook = models.CharField(max_length=100, null=True, blank=True)
     twitter = models.CharField(max_length=100, null=True, blank=True)
-    homepage = models.URLField(max_length=100, null=True, blank=True)
+    homepage = models.CharField(max_length=100, null=True, blank=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
     confirmation_key = models.CharField(
         max_length=80, default='0', blank=True, null=True)

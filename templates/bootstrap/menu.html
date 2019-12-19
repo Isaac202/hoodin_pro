@@ -15,6 +15,14 @@
                     <i class="fas fa-home"></i>
                     Home<span class="sr-only">(Página atual)</span></a>
             </li>
+            {% if not user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link font-weight-bold" href="{% url 'cliente:new' %}">
+                    <i class="fas fa-user-plus"></i>
+                    Cadastre-se
+                </a>
+            </li>
+            {% endif %}
             <li class="nav-item active">
                 <a href="{% url 'tabela_de_precos' %}" class="nav-link font-weight-bold">
                     <i class="fas fa-receipt"></i>
@@ -23,11 +31,11 @@
             </li>
 
             {% if user.is_authenticated %}
-           
+
             <li class="nav-item dropdown active font-weight-bold">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="far fa-registered"></i>
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-registered"></i>
                     Registrar
                 </a>
                 <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
@@ -42,17 +50,10 @@
                     </a>
                 </div>
             </li>
-
-            <li class="nav-item active">
-                <a class="nav-link font-weight-bold">
-                    <i class="fas fa-user-circle"></i>
-                    {{user.username}}
-                </a>
-            </li>
             <li class="nav-item dropdown active font-weight-bold">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-cog"></i>
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
                     Minha conta
                 </a>
                 <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
@@ -70,7 +71,12 @@
                     </a>
                 </div>
             </li>
-
+            <li class="nav-item active">
+                <a class="nav-link font-weight-bold">
+                    <i class="fas fa-user-circle"></i>
+                    {{user.username}}
+                </a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link font-weight-bold" href="{% url 'logout' %}">
                     <i class="fas fa-sign-out-alt"></i>
@@ -78,12 +84,6 @@
                 </a>
             </li>
             {% else %}
-            <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="{% url 'cliente:new' %}">
-                    <i class="fas fa-user-plus"></i>
-                    Cadastre-se
-                </a>
-            </li>
             <li class="nav-item active">
                 <a class="nav-link font-weight-bold" href="{% url 'login' %}">
                     <i class="fas fa-sign-in-alt"></i>

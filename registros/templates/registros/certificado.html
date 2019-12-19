@@ -15,6 +15,12 @@
 			width: 100%;
 			height: 100%;
 		}
+
+		div {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 	</style>
 </head>
 
@@ -45,45 +51,49 @@
 		<div style="display: flex; justify-content: center">
 			<div>
 				<div style="text-align: justify;">
-					CERTIFICO que, &agrave;s {{registro.data|date:'H:i'}} horas do dia {{registro.data|date:'d/m/Y'}},&nbsp; &nbsp; {{registro.id_cliente.nome|upper}},
-					{{registro.id_cliente.pais}},&nbsp; &nbsp; inscrito</div>
+					CERTIFICO que, &agrave;s {{registro.data|date:'H:i'}} horas do dia
+					{{registro.data|date:'d/m/Y'}},&nbsp;{{registro.id_cliente.nome|upper}},
+					{{registro.id_cliente.pais}}, inscrito</div>
 				<div style="text-align: justify;">
-					no CPF/MF sob o n&uacute;mero {{registro.id_cliente.cnpjcpf|upper}}, residente {{registro.id_cliente.endereco|upper}}, N&ordm;
+					no CPF/MF sob o n&uacute;mero {{registro.id_cliente.cnpjcpf|upper}}, residente
+					{{registro.id_cliente.endereco|upper}}, N&ordm;
 					{{registro.id_cliente.numero|upper}},
 					{% if registro.id_cliente.complemento %}{{registro.id_cliente.complemento|upper}},{% endif %}
 				</div>
 				<div style="text-align: justify;">
-					na cidade de {{registro.id_cliente.cidade|upper}},&nbsp; bairro de {{registro.id_cliente.bairro|upper}},&nbsp; estado&nbsp; {{registro.id_cliente.estado|upper}},&nbsp;
+					na cidade de {{registro.id_cliente.cidade|upper}},&nbsp; bairro de
+					{{registro.id_cliente.bairro|upper}},&nbsp; estado&nbsp; {{registro.id_cliente.estado|upper}},&nbsp;
 					com&nbsp;
-					&nbsp;CEP&nbsp; &nbsp; {{registro.id_cliente.cep|upper}},&nbsp; &nbsp;obteve registro&nbsp; da&nbsp; sua</div>
-					<div style="text-align: justify;">
-					declara&ccedil;&atilde;o de autoria da&nbsp; &nbsp;obra&nbsp; intelectual intitulada {{registro.arquivo.resume}}, na categoria&nbsp; &nbsp;{{registro.codservico.nome|upper}}. O&nbsp; &nbsp;presente</div>
+					&nbsp;CEP {{registro.id_cliente.cep|upper}},obteve registro&nbsp; da&nbsp;
+					sua</div>
 				<div style="text-align: justify;">
+					declara&ccedil;&atilde;o de autoria da obra&nbsp; intelectual intitulada
+					{{registro.arquivo.resume}},<br>na categoria {{registro.codservico.nome|upper}}.</div>
+				<div style="text-align: justify;">
+					O&nbsp;presente
 					registro foi&nbsp; assinado&nbsp; pelo titular deste&nbsp; certificado, e est&aacute; associado a
-					uma
-					chave
-					digital fornecida&nbsp; pelo&nbsp; &nbsp;Instituto</div>
+					uma chave digital fornecida pelo Instituto</div>
 				<div style="text-align: justify;">
 					Nacional de Tecnologia da Informa&ccedil;&atilde;o (ITI), atrav&eacute;s de&nbsp; uma&nbsp;
 					&nbsp;ACT
 					(Autoridade de Carimbo de Tempo) utilizada</div>
 				<div style="text-align: justify;">
-					para garantir data e hora da assinatura digital com&nbsp; &nbsp;base&nbsp; &nbsp;nos&nbsp; dados
+					para garantir data e hora da assinatura digital combasenos&nbsp; dados
 					fornecidos
 					pelo
 					Observat&oacute;rio Nacional, cuja</div>
 				<div style="text-align: justify;">
-					autoridade foi conferida pela Administra&ccedil;&atilde;o&nbsp; &nbsp;P&uacute;blica.&nbsp; &nbsp;A
+					autoridade foi conferida pela Administra&ccedil;&atilde;oP&uacute;blica.A
 					chave
-					digital foi&nbsp; &nbsp;gerada atrav&eacute;s&nbsp; &nbsp;do&nbsp; sistema online da</div>
+					digital foigerada atrav&eacute;sdo&nbsp; sistema online da</div>
 				<div style="text-align: justify;">
-					HoodID&nbsp; &nbsp;Registros Online Ltda.,&nbsp; tendo esta declara&ccedil;&atilde;o de&nbsp;
+					HoodIDRegistros Online Ltda.,&nbsp; tendo esta declara&ccedil;&atilde;o de&nbsp;
 					autoria&nbsp;
 					&nbsp;de&nbsp; obra intelectual garantia de autenticidade,</div>
 				<div style="text-align: justify;">
-					integridade e validade jur&iacute;dica, nos termos&nbsp; do&nbsp; &nbsp;artigo 1&ordm;&nbsp;
+					integridade e validade jur&iacute;dica, nos termos&nbsp; doartigo 1&ordm;&nbsp;
 					da&nbsp;
-					&nbsp;Medida Provis&oacute;ria n&ordm; 2.200-2,&nbsp; de&nbsp; &nbsp;24 de agosto de</div>
+					&nbsp;Medida Provis&oacute;ria n&ordm; 2.200-2,&nbsp; de24 de agosto de</div>
 				<div style="text-align: justify;">
 					2001. Por ser esta declara&ccedil;&atilde;o a mais absoluta express&atilde;o da verdade, a HoodID
 					Registros

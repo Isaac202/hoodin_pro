@@ -70,10 +70,12 @@ class RegistrosCreate(LoginRequiredMixin, View):
             id_usuario=request.user,
             paid=False
         )
+        manter_arquivo = False
         if files.exists():
             self.template_name = "compras/compra_concluida.html"
             valor = files.aggregate(total=Sum('value'))["total"]
             if save:
+                manter_arquivo = True
                 conf = Confuguracao.objects.first()
                 valor += conf.valor_file * files.count()
             valor_credito_cliente = cliente.valor_credito
@@ -95,6 +97,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
                         registro.valor = registro.codservico.preco
                         registro.id_usuario = request.user
                         registro.id_cliente = cliente
+                        registro.manter_arquivo = manter_arquivo
                         registro.save()
                         file.paid = True
                         file.save()

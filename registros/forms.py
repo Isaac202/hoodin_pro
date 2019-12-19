@@ -13,7 +13,7 @@ class RegistrosViewForm(forms.ModelForm):
     class Meta:
         model = Registros
         exclude = ['data', 'codregistro', 'arquivo', 'descricao',
-                   'id_cliente', 'id_usuario', 'valor', 'desconto']
+                   'id_cliente', 'id_usuario', 'valor', 'desconto','manter_arquivo']
 
     def __init__(self, sd=False, *args, **kwargs):
         super().__init__(*args, **kwargs)

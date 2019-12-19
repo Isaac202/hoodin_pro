@@ -85,6 +85,7 @@ class Registros(models.Model):
     desconto = models.DecimalField(max_digits=9, decimal_places=2, default=0)
     codigo_promocional = models.CharField(
         "Codigo Promocional", max_length=200, blank=True, null=True)
+    manter_arquivo = models.BooleanField(default=True)
 
     class Meta:
         ordering = ('-data',)

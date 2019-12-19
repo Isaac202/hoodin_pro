@@ -1,0 +1,26 @@
+{% extends "tools/base_pdf.html" %}
+
+{% block thead %}
+<tr style="border-bottom: 1px solid #000;">
+  <th>INDICANTE</th>
+  <th>INDICADO</th>
+  <th>DATA</th>
+</tr>
+{% endblock thead %}
+
+
+{% block content %}
+{% for indicacao in queryset %}
+<tr>
+  <td>{{indicacao.email_pai}}</td>
+  <td>{{indicacao.email_filho}}</td>
+  <td>{{indicacao.create_at | date:"d/m/Y H:m:i"}}</td>
+</tr>
+<tr style="border-top: 1px solid #000;">
+  <td> </td>
+  <td> </td>
+  <td> </td>
+</tr>
+{% endfor %}
+
+{% endblock content %}

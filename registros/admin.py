@@ -29,10 +29,10 @@ class RegistroAdmin(admin.ModelAdmin):
                                         )
 
     def gera_pdf_total(set, request, queryset):
-        queryset = queryset.objects.all().aggregate(total=Sum('valor'), count=Count('codservico'))
-        # queryset = queryset..values('id_usuario', 'codservico')
+        queryset = Registros.objects.with_counts()
+        # print(queryset)
         return Render.render_to_pdf(request, queryset,
-                                        description="Ryelatório de Registros",
+                                        description="Relatório de Registros",
                                         template="tools/pdf_registros_total.html"
                                         )
 

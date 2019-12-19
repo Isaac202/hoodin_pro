@@ -100,10 +100,19 @@
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     }
 
+    function get_url() {
+        let save_file
+        if ($('#save_file').is(":checked")) {
+            save_file = '&save=True'
+        } else {
+            save_file = '&save=False'
+        }
+        return "{% url 'base_upload' %}?service=" + $("#id_codservico").val() + save_file
+    }
 
-    function upload(url_up) {
+    function upload() {
         $("#fileupload").fileupload({
-            url: url_up,
+            url: get_url(),
             dataType: 'json',
             sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
             autoUpload: false,
@@ -188,6 +197,7 @@
                                 $('<label>').attr('for', 'desc_file' + result.id)
                                     .html(result.name),
                                 $("<textarea>")
+                                    .val(result.resume)
                                     .attr('id', 'desc_file' + result.id)
                                     .addClass('form-control form-control-lg resume')
                                     .attr('onchange', "myFunction('" + result.id + "')"),
@@ -254,12 +264,14 @@
             }
         })
     }
+
     $('#id_codservico').change(function () {
         // jQuery.noConflict();
         if ($(this).val() != "" && !service_active) {
             let url_service = "/api/servicos/" + $(this).val()
             // let data = '{"csrfmiddlewaretoken": "{{ csrf_token }}",' + '"service":' + $(this).val()+'}'
             // $("#fileupload").attr('data-form-data', data)
+
             let url_up = "{% url 'base_upload' %}?service=" + $(this).val()
             // console.log(url_up)
             let resp = $.getJSON(url_service, function (data) {
@@ -277,7 +289,7 @@
                 $("#extentions").html("Extensões permitidas:" + "<br>" + extentions.toUpperCase())
                 $("#extentions").addClass('grey')
                 $("#fileupload").removeAttr('disabled')
-                upload(url_up)
+                upload()
             }).fail(function (resp) {
                 alert('erro')
                 $("#extentions").removeClass('grey')
@@ -294,7 +306,13 @@
     function remove_file(url, id) {
         let element = $("#tr_file" + id)
         element.fadeOut(1000)
-        data = { "csrfmiddlewaretoken": "{{ csrf_token }}" }
+        let save_file
+        if ($('#save_file').is(":checked")) {
+            save_file = 'True'
+        } else {
+            save_file = 'False'
+        }
+        data = { "csrfmiddlewaretoken": "{{ csrf_token }}", "save": save_file }
         $.post(url, data, function (data) {
             $('#total').html("R$ " + data.price)
         }).fail(function (e, data) {
@@ -485,6 +503,19 @@
             alert('Todos os campos são obrigatorios')
         }
     })
+
+    $('#save_file').change(function () {
+        upload()
+        if ($(this).is(":checked")) {
+            $.get('/api/getprice/?save=True', function (data) {
+                $('#total').html("R$ " + data.price)
+            })
+        } else {
+            $.get('/api/getprice/?save=False', function (data) {
+                $('#total').html("R$ " + data.price)
+            })
+        }
+    });
 </script>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script> -->

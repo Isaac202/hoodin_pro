@@ -39,5 +39,5 @@ def login_redirect(request):
     if request.user.is_staff:
         return redirect('/admin/')
     else:
-        return redirect(reverse_lazy('cliente:update'))
+        return redirect(reverse_lazy('cliente:meus_registros'))
     return redirect('/')

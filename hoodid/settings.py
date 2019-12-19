@@ -14,7 +14,6 @@ DEBUG = True # config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['registrosonline.com.br','localhost', '127.0.0.1', '*']
 
-
 DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -105,6 +104,11 @@ if DEV:
     DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
                                cast=dburl), }
 else:
+
+    SESSION_COOKIE_AGE = 30*60
+    SESSION_SAVE_EVERY_REQUEST = True
+    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',

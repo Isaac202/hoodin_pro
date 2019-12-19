@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
+from usuarios.models import Confuguracao
 from django.urls import reverse_lazy
 from registros.models import Registros, ArquivoRegistro
 from registros.forms import RegistrosForm, RegistrosViewForm, ArquivoRegistroForm
@@ -18,8 +19,29 @@ from django.db.models import Sum
 from decimal import Decimal
 
 
+class GetPriceView(APIView):
+
+    def get(self, request, format=None):
+        save_file = request.GET.get('save')
+        files = ArquivoRegistro.objects.filter(
+            id_usuario=request.user, paid=False
+        )
+        price = files.aggregate(price=Sum('value'))['price']
+        if price and save_file == 'True':
+            conf = Confuguracao.objects.first()
+            value_files = conf.valor_file * Decimal(files.count())
+            price = price + value_files
+
+        data = {}
+        value = "0.00"
+        if price:
+            value = "%.2f" % price
+        data['price'] = value.replace('.', ',')
+        return Response(data)
+
+
 class BasicUploadView(APIView):
-    
+
     # authentication_classes = [authentication.TokenAuthentication]
     # permission_classes = [permissions.IsAdminUser]
 
@@ -33,6 +55,7 @@ class BasicUploadView(APIView):
         # return Response(data)
 
     def post(self, request, format=None):
+        save_file = request.GET.get('save')
         service = request.GET.get('service')
         service = get_object_or_404(Servicos, pk=service)
         # cliente = request.user.clientes
@@ -42,7 +65,8 @@ class BasicUploadView(APIView):
         shar256 = file_to_shar256(file)
         size = file.size
         form = ArquivoRegistroForm(request.POST, request.FILES)
-        old_file = ArquivoRegistro.objects.filter(name=name, id_usuario=request.user).last()
+        old_file = ArquivoRegistro.objects.filter(
+            name=name, id_usuario=request.user).last()
         if form.is_valid():
             file = form.save(commit=False)
             file.id_usuario = request.user
@@ -63,13 +87,17 @@ class BasicUploadView(APIView):
             id_usuario=request.user, paid=False
         )
 
-        price = service.preco * files.count()
+        price = files.aggregate(price=Sum('value'))['price']
+        if save_file == 'True':
+            conf = Confuguracao.objects.first()
+            value_files = conf.valor_file * Decimal(files.count())
+            price = price + value_files
         data['price'] = price
         return Response(data)
 
 
 class SetResumeFileView(APIView):
-    
+
     # authentication_classes = [authentication.TokenAuthentication]
     # permission_classes = [permissions.IsAdminUser]
 
@@ -84,7 +112,6 @@ class SetResumeFileView(APIView):
         return Response(data)
 
 
-
 class DeleteFileView(APIView):
 
     # authentication_classes = [authentication.TokenAuthentication]
@@ -92,17 +119,23 @@ class DeleteFileView(APIView):
 
     def post(self, request, pk, format=None):
         data = {'success': False}
+        save_file = request.POST.get('save')
         file = ArquivoRegistro.objects.filter(pk=pk, id_usuario=request.user)
         if file.exists():
             file = file.first()
             file.file.delete()
             file.delete()
-            value = ArquivoRegistro.objects.filter(
+            files = ArquivoRegistro.objects.filter(
                 paid=False,
-                id_usuario=request.user).aggregate(total=Sum('value'))["total"]
+                id_usuario=request.user)
+            value = files.aggregate(total=Sum('value'))["total"]
             if value:
+                if save_file == 'True':
+                    conf = Confuguracao.objects.first()
+                    value_files = conf.valor_file * Decimal(files.count())
+                    value += value_files
                 value = "%.2f" % value
-                data['price'] = value.replace('.',',')
+                data['price'] = value.replace('.', ',')
             else:
                 data['price'] = '0,00'
             data['success'] = True

@@ -126,6 +126,7 @@ class Confuguracao(models.Model):
     dolar = models.DecimalField(max_digits=5, decimal_places=2, default=4)
     euro = models.DecimalField(max_digits=5, decimal_places=2, default=4)
     credito_inicial = models.DecimalField(max_digits=5, decimal_places=2, default=1)
+    valor_file = models.DecimalField(max_digits=5, decimal_places=2, default=0.50)
     atualização = models.DateTimeField("Atualizado em", auto_now=True, auto_now_add=False)
     
 

@@ -64,9 +64,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
         save = request.POST.get('save_file')
         files = request.POST.getlist('files', None)
         code = request.POST.get('codigo_promocional')
-        print(code,'\n\n\n')
         code = set_codigo_promocional(code, cliente)
-        print(code)
         files = ArquivoRegistro.objects.filter(
             pk__in=files,
             id_usuario=request.user,
@@ -78,15 +76,15 @@ class RegistrosCreate(LoginRequiredMixin, View):
             if save:
                 conf = Confuguracao.objects.first()
                 valor += conf.valor_file * files.count()
-
             valor_credito_cliente = cliente.valor_credito
-
             if code:
                 valor_credito_cliente += code.valor
-
             if valor_credito_cliente >= valor:
                 cliente.valor_credito = valor_credito_cliente - valor
                 cliente.save()
+                if code:
+                    msg = "Código promocional resgatado!"
+                    messages.success(request, msg)
                 msg = "Arquivo(s) registrado(s) com sucesso!"
                 messages.success(request, msg)
                 for file in files:

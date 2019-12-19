@@ -14,6 +14,8 @@ from rest_framework.response import Response
 from django.contrib.messages.views import SuccessMessageMixin
 from tools.views import SignUpCreateView 
 from tarefas_backgroud.tasks import teste
+from codigos_promocionais.utils import check_codigo_promocionanl
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -66,6 +68,16 @@ class ClientesUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_object(self):
         user = self.request.user
         return Clientes.objects.get(id_usuario=user)
+
+    def form_valid(self, form):
+        code = form.cleaned_data['codigo_promocional']
+        if not code in ['', None]:
+            promocao = check_codigo_promocionanl(code)
+            if promocao.exists():
+                messages.success(self.request, 'Código promocional resgatado!')
+            else:
+                messages.success(self.request, 'Código promocional invalido!')
+        return super().form_valid(form)
 
 
 class ClientesDelete(LoginRequiredMixin, DeleteView):

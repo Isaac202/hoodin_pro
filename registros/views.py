@@ -63,8 +63,9 @@ class RegistrosCreate(LoginRequiredMixin, View):
         cliente = request.user.clientes
         save = request.POST.get('save_file')
         files = request.POST.getlist('files', None)
-        code = request.POST.get('codigo_promocional')
-        code = set_codigo_promocional(code, cliente)
+        code = request.POST.get('codigo_promocional', None)
+        if code:
+            code = set_codigo_promocional(code, cliente)
         files = ArquivoRegistro.objects.filter(
             pk__in=files,
             id_usuario=request.user,
@@ -98,6 +99,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
                         registro.id_usuario = request.user
                         registro.id_cliente = cliente
                         registro.manter_arquivo = manter_arquivo
+                        registro.descricao = file.resume
                         registro.save()
                         file.paid = True
                         file.save()

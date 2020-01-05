@@ -10,7 +10,7 @@ def check_codigo_promocionanl(codigo):
 
 def set_codigo_promocional(codigo, cliente):
     promocao = check_codigo_promocionanl(codigo)
-    # print(promocao)
+    # print(prsomocao)
     # print(p)
     if promocao.exists():
         p = promocao.first()

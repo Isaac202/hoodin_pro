@@ -17,8 +17,8 @@ def user_directory_path(instance, filename):
 class ArquivoRegistro(models.Model):
     id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=250)
-    size = models.PositiveIntegerField()
-    shar256 = models.CharField(max_length=90)
+    size = models.PositiveIntegerField(default=1)
+    shar256 = models.CharField(max_length=90, blank=True, null=True)
     file = models.FileField(
         upload_to=user_directory_path, blank=True, null=True)
     signature = models.FileField(
@@ -79,7 +79,7 @@ class Registros(models.Model):
     valor = models.DecimalField(max_digits=9, decimal_places=2)
     data = models.DateTimeField(auto_now=True)
     arquivo = models.OneToOneField(
-        ArquivoRegistro, verbose_name="arquivo", on_delete=models.CASCADE)
+        ArquivoRegistro, verbose_name="arquivo", on_delete=models.CASCADE, blank=True, null=True)
     descricao = models.CharField(max_length=255, blank=True, null=True)
     codqrcode = models.PositiveIntegerField(blank=True, null=True)
     desconto = models.DecimalField(max_digits=9, decimal_places=2, default=0)

@@ -22,3 +22,6 @@ shell:
 
 createsuperuser:
 	python manage.py createsuperuser
+
+setenve:
+	source ../venv/bin/activate

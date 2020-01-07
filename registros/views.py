@@ -61,7 +61,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         context = {}
         cliente = request.user.clientes
-        save = request.POST.get('save_file')
+        save = request.POST.get('save_file', None)
         files = request.POST.getlist('files', None)
         code = request.POST.get('codigo_promocional', None)
         if code:

@@ -24,6 +24,13 @@ import os
 
 # django.core.files.uploadedfile.InMemoryUploadedFile
 
+def atualizar_senha():
+    users = g().objects.all()
+    print('atualizando')
+    for user in users:
+        user.set_password(user.password)
+        user.save()
+
 def file_size(fname):
         import os
         statinfo = os.stat(fname)

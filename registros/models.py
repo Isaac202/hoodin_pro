@@ -18,7 +18,7 @@ class ArquivoRegistro(models.Model):
     id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=250)
     size = models.PositiveIntegerField(default=1)
-    shar256 = models.CharField(max_length=90, blank=True, null=True)
+    b64 = models.TextField(blank=True, null=True)
     file = models.FileField(
         upload_to=user_directory_path, blank=True, null=True)
     signature = models.FileField(

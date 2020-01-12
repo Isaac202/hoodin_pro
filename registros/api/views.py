@@ -12,13 +12,14 @@ from django.urls import reverse_lazy
 from registros.models import Registros, ArquivoRegistro
 from registros.forms import RegistrosForm, RegistrosViewForm, ArquivoRegistroForm
 from registros.api.serializers import ArquivoSerializer
-from tools.genereteKey import get_size_file, file_to_shar256
+from tools.genereteKey import get_size_file, file_to_shar256, file_to_b64
 from servicos.models import Servicos
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.db.models import Sum
 from decimal import Decimal
 
+from tools.bry import get_signature_b64
 
 class GetPriceView(APIView):
 
@@ -62,7 +63,7 @@ class BasicUploadView(APIView):
         file = request.FILES['file']
         data = {'is_valid': False}
         name = file.name
-        shar256 = file_to_shar256(file)
+        b64 = file_to_b64(file)
         size = file.size
         form = ArquivoRegistroForm(request.POST, request.FILES)
         old_file = ArquivoRegistro.objects.filter(
@@ -70,7 +71,7 @@ class BasicUploadView(APIView):
         if form.is_valid():
             file = form.save(commit=False)
             file.id_usuario = request.user
-            file.shar256 = shar256
+            file.b64 = b64
             file.name = name
             file.size = size
             file.value = service.preco
@@ -83,6 +84,13 @@ class BasicUploadView(APIView):
                 'delete_file', kwargs={'pk': file.pk}))
             data['is_valid'] = True
 
+        # teste = get_signature_b64(b64)
+        # # data = base64.decodebytes(file_b64.encode('utf-8'))
+        # binary = base64.decodestring(file_b64)
+        # file = tempfile.TemporaryFile()
+        # file.write(binary)
+        # arquivo.signature.save("file.p7s", File(file))
+        
         files = ArquivoRegistro.objects.filter(
             id_usuario=request.user, paid=False
         )

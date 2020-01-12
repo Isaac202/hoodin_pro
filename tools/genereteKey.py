@@ -1,3 +1,4 @@
+import base64
 from hurry.filesize import size
 import hashlib
 import string
@@ -16,7 +17,17 @@ def generate_hash_key(salt, random_str_size=5):
     return hashlib.sha224(text.encode('utf-8')).hexdigest()
 
 
+def file_to_b64(file):
+    bytes_file = file.read()
+    encoded_string = base64.b64encode(bytes_file)
+    return encoded_string.decode('ascii') #.decode('utf-8')
+    
+
 def file_to_shar256(file):
+    # import codecs
+    # base64_data = codecs.encode(bytes_file, 'base64')
+    # print(base64_data, file=open("output.txt", "a"))
+    # decoded = base64.decodebytes(encoded_string)
     bytes_file = file.read()
     shar256_hash = hashlib.sha256(bytes_file).hexdigest()
     return shar256_hash

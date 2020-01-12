@@ -5,5 +5,5 @@ from registros.models import ArquivoRegistro
 class ArquivoSerializer(ModelSerializer):
     class Meta:
         model = ArquivoRegistro
-        exclude = ('paid', 'update_at', 'id_usuario', 'shar256',
+        exclude = ('paid', 'update_at', 'id_usuario', 'b64',
                    'create_at', 'signature', 'size')

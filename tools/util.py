@@ -27,3 +27,9 @@ def enviar_notificacao(msg):
     except Exception as e:
         return str(e)
 
+
+
+def remove_exention_file(name):
+    name = name.split('.')[:-1] 
+    name = ' '.join(map(str, name))
+    return name

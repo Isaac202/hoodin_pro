@@ -19,7 +19,12 @@ from django.utils import timezone
 from django.db.models import Sum
 from decimal import Decimal
 
+from tools.util import remove_exention_file
+
+from django.core.files import File
 from tools.bry import get_signature_b64
+import base64
+import tempfile
 
 class GetPriceView(APIView):
 
@@ -84,12 +89,16 @@ class BasicUploadView(APIView):
                 'delete_file', kwargs={'pk': file.pk}))
             data['is_valid'] = True
 
-        # teste = get_signature_b64(b64)
-        # # data = base64.decodebytes(file_b64.encode('utf-8'))
-        # binary = base64.decodestring(file_b64)
-        # file = tempfile.TemporaryFile()
-        # file.write(binary)
-        # arquivo.signature.save("file.p7s", File(file))
+        try:
+            response = get_signature_b64(b64)
+            signature = base64.b64decode(response['assinaturas'][0])
+            signature_file = tempfile.TemporaryFile()
+            signature_file.write(signature)
+            name = remove_exention_file(name)
+            file.signature.save("{}.p7s".format(name), File(signature_file))
+            signature_file.close()
+        except:
+            pass
         
         files = ArquivoRegistro.objects.filter(
             id_usuario=request.user, paid=False

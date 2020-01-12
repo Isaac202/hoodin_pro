@@ -42,12 +42,19 @@ def get_bry(headers, body, url=service_url):
     )
 
 
-def get_signature_b64(files_b64: list, method=1):
+def get_signature_b64(file_b64, method=1):
     headers = get_header()
     body = get_body()
     body['formatoAssinatura'] = get_formato(method)
-    body['hashes'] = files_b64
-    response = get_bry(headers, body)
+    hashes = []
+    hashes.append(file_b64)
+    body['hashes'] = hashes
+    response = requests.post(
+        service_url,
+        data=json.dumps(body),
+        headers=headers
+    )
+    # response = get_bry(headers, body)
     return response.json()
 
 

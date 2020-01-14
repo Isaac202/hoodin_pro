@@ -39,6 +39,8 @@ class TesteCreateView(View):
         return render(request, self.template_name)
 
 
+from registros.tasks import signature
+
 class RegistrosCreate(LoginRequiredMixin, View):
     template_name = "registros/registro.html"
 
@@ -62,12 +64,12 @@ class RegistrosCreate(LoginRequiredMixin, View):
         context = {}
         cliente = request.user.clientes
         save = request.POST.get('save_file', None)
-        files = request.POST.getlist('files', None)
+        pk_files = request.POST.getlist('files', None)
         code = request.POST.get('codigo_promocional', None)
         if code:
             code = set_codigo_promocional(code, cliente)
         files = ArquivoRegistro.objects.filter(
-            pk__in=files,
+            pk__in=pk_files,
             id_usuario=request.user,
             paid=False
         )
@@ -103,6 +105,8 @@ class RegistrosCreate(LoginRequiredMixin, View):
                         registro.save()
                         file.paid = True
                         file.save()
+                
+                signature.delay(pk_files)
             else:
                 msg = "Saldo Insuficiente!"
                 messages.error(request, msg)

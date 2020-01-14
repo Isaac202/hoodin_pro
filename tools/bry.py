@@ -1,8 +1,10 @@
+from registros.models import ArquivoRegistro
+from tools.util import remove_exention_file
+from django.core.files import File
 import json
 import requests
 import base64
 import tempfile
-
 
 base_url = 'http://35.229.72.245:8080'
 service_url = base_url + "/fw/v1/cms/pkcs12/assinaturas"
@@ -21,16 +23,14 @@ def get_header():
     }
 
 
-def get_body():
+def get_body(hashes:list):
     return {
         "signatario": "pkcs12",
         "algoritmoHash": "SHA256",
-        "perfil": "BASICA",
+        "perfil": "CARIMBO",
         "formatoDados": "Base64",
-        "formatoAssinatura": "HASH",
-        "hashes": [
-            "o+55vve0GAC27ZhbWp23umyDMgcCo++TMNC1JC92iaI="
-        ]
+        "formatoAssinatura": get_formato(1),
+        "hashes": hashes
     }
 
 
@@ -42,66 +42,54 @@ def get_bry(headers, body, url=service_url):
     )
 
 
-def get_signature_b64(file_b64, method=1):
-    headers = get_header()
+def get_signature_b64(hashes: list, method=1):
     body = get_body()
-    body['formatoAssinatura'] = get_formato(method)
-    hashes = []
-    hashes.append(file_b64)
     body['hashes'] = hashes
+    headers = get_header()
+    # hashes = []
+    # hashes.append(file_b64)
     response = requests.post(
         service_url,
         data=json.dumps(body),
         headers=headers
     )
-    # response = get_bry(headers, body)
     return response.json()
 
+        
 
-def save_signature(file_b64):
-    # data = base64.decodebytes(file_b64.encode('utf-8'))
-    binary = base64.decodestring(file_b64)
-    file = tempfile.TemporaryFile()
-    file.write(binary)
-    # arquivo.signature.save("file.p7s", File(file))
-    file.close()
-
-
-# encodedZip = base64.b64encode(zipContents).decode('ascii')
-
-# import base64
-
-# base64_img = 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAA' \
-#             'LEwEAmpwYAAAB1klEQVQ4jY2TTUhUURTHf+fy/HrjhNEX2KRGiyIXg8xgSURuokX' \
-#             'LxFW0qDTaSQupkHirthK0qF0WQQQR0UCbwCQyw8KCiDbShEYLJQdmpsk3895p4aS' \
-#             'v92ass7pcfv/zP+fcc4U6kXKe2pTY3tjSUHjtnFgB0VqchC/SY8/293S23f+6VEj' \
-#             '9KKwCoPDNIJdmr598GOZNJKNWTic7tqb27WwNuuwGvVWrAit84fsmMzE1P1+1TiK' \
-#             'MVKvYUjdBvzPZXCwXzyhyWNBgVYkgrIow09VJMznpyebWE+Tdn9cEroBSc1JVPS+' \
-#             '6moh5Xyjj65vEgBxafGzWetTh+rr1eE/c/TMYg8hlAOvI6JP4KmwLgJ4qD0TIbli' \
-#             'TB+sunjkbeLekKsZ6Zc8V027aBRoBRHVoduDiSypmGFG7CrcBEyDHA0ZNfNphC0D' \
-#             '6amYa6ANw3YbWD4Pn3oIc+EdL36V3od0A+MaMAXmA8x2Zyn+IQeQeBDfRcUw3B+2' \
-#             'PxwZ/EdtTDpCPQLMh9TKx0k3pXipEVlknsf5KoNzGyOe1sz8nvYtTQT6yyvTjIax' \
-#             'smHGB9pFx4n3jIEfDePQvCIrnn0J4B/gA5J4XcRfu4JZuRAw3C51OtOjM3l2bMb8' \
-#             'Br5eXCsT/w/EAAAAASUVORK5CYII='
-
-# # Decoding Binary Data with Python
-# base64_img_bytes = base64_img.encode('utf-8')
-# with open('decoded_image', 'wb') as file_to_save:
-#     decoded_data = base64.decodebytes(base64_img_bytes)
-#     file_to_save.write(decoded_image_data)
-
-# import io
-# io.BytesIO()
-# import os
-# import tempfile
-# fp = tempfile.TemporaryFile()
-# fp.write(b'Hello world!')
-# # Closing automatically deletes the tempfile
-# fp.close()
-
-
-# diretory = '/home/drummerzzz/workspace/python/django/test/hoodid_web'
-
-# with tempfile.NamedTemporaryFile(dir=os.path.dirname(diretory)) as f:
-#   f.write('kdkdkdkdkdk')
-#   os.link(f.name, diretory)
+def signature_files(pks):
+    queryset = ArquivoRegistro.objects.filter(pk__in=pks).order_by('id')
+    b64s = queryset.values_list('b64', flat=True)
+    b64s = list(b64s)
+    body = get_body(b64s)
+    headers = get_header()
+    response = requests.post(
+        service_url,
+        data=json.dumps(body),
+        headers=headers
+    ).json()
+    try:
+        assinaturas = response['assinaturas']
+        for index, assinatura in enumerate(assinaturas):
+            assinatura = base64.b64decode(assinatura)
+            temp = tempfile.TemporaryFile()
+            temp.write(assinatura)
+            file = queryset[index]
+            name = "{}.p7s".format(remove_exention_file(file.name))
+            file.signature.save(name, File(temp))
+            temp.close()
+    except:
+        print(response)
+        
+# def signature_save(queryset):
+#     for file in queryset:
+#         try:
+#         response = get_signature_b64(b64)
+#         signature = base64.b64decode(response['assinaturas'][0])
+#         signature_file = tempfile.TemporaryFile()
+#         signature_file.write(signature)
+#         name = remove_exention_file(name)
+#         file.signature.save("{}.p7s".format(name), File(signature_file))
+#         signature_file.close()
+#         except:
+#             pass

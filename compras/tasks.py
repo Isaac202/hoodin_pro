@@ -48,7 +48,7 @@ cod_erro_cielo= {
     '125': 'Data de validade do cartão de crédito é necessária',
     '126': 'Data de validade do cartão de crédito inválida',
     '127': 'Número de cartão de crédito obrigatório',
-    '128': 'Numero do cartão superiro de 16 dígitos',
+    '128': 'Numero do cartão superior    de 16 dígitos',
     '129': 'Meio de pagamento não vinculado a uma loja ou Fornecedor inválido',
     '130': 'Não foi possível obter o cartão de crédito',
     '131': 'MerchantKey é obrigatório',

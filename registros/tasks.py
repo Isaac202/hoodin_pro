@@ -8,9 +8,15 @@ import requests
 from django.contrib.auth import get_user_model
 import hashlib
 import logging
+from tools.bry import signature_files
+
 User = get_user_model()
 
-
+@task
+def signature(pks:list):
+    # queryset = File.objects.filter(pk__in=pks).order_by('pk')
+    signature_files(pks)
+    print('arquivos assinandos\n\n')
 
 
 def extrair_has(arquivo):

@@ -12,10 +12,10 @@ db-up:
 	python manage.py migrate
 
 delay:
-	celery -A viralize worker -l info
+	celery -A ${PROJECT_NAME} worker -l info
 
 celery:
-	celery -A viralize beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+	celery -A ${PROJECT_NAME} beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 
 shell:
 	python manage.py shell

@@ -66,7 +66,7 @@
                     <td>{{r.arquivo.version}}</td>
                     <td>
                         {% if r.manter_arquivo %}
-                        <a target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.nome}}">
+                        <a target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.name}}">
                             baixar
                         </a>
                         {% else %}
@@ -74,12 +74,16 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a target="_blank" download="{{r.arquivo.nome}}" href="{{r.arquivo.file.url}}">
-                            Assinatura
-                        </a>
-                    </td>
+                        {% if r.arquivo.signature %}
+                            <a target="_blank" download="{{r.arquivo.nome}}" href="{{r.arquivo.signature.url}}">
+                                baixar
+                            </a>
+                        {% else %}
+                            <span> processando </span>
+                        {% endif %}
+                        </td>
                     <td>
-                        {% if r.codservico.servico_digitalizacao %}
+                        {% if not r.codservico.servico_digitalizacao %}
                         <a target="_blank" href="{% url 'pdf' r.pk %}">
                             Certificado
                         </a>

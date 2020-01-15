@@ -7,6 +7,7 @@ import base64
 import tempfile
 
 base_url = 'http://35.229.72.245:8080'
+# base_url = 'http://localhost:8087'
 service_url = base_url + "/fw/v1/cms/pkcs12/assinaturas"
 
 
@@ -43,8 +44,8 @@ def get_bry(headers, body, url=service_url):
 
 
 def get_signature_b64(hashes: list, method=1):
-    body = get_body()
-    body['hashes'] = hashes
+    body = get_body(hashes)
+    # body['hashes'] = hashes
     headers = get_header()
     # hashes = []
     # hashes.append(file_b64)

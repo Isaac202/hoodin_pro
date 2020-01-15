@@ -86,6 +86,7 @@ class Registros(models.Model):
     codigo_promocional = models.CharField(
         "Codigo Promocional", max_length=200, blank=True, null=True)
     manter_arquivo = models.BooleanField(default=True)
+    excluido = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-data',)

@@ -178,7 +178,7 @@
                     // console.log(result)
                     let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
                     $("#gallery tbody").prepend(
-                        $("<tr>").append(
+                        $("<tr>").append( 
                             $('<td>').append(
                                 $("<a>").html(result.name)
                                     .attr('href', result.file)
@@ -457,6 +457,8 @@
         let code_promocional = "&code=" + $("#id_codigo_promocional").val()
         let url_check = base_url + service + get_save_file() + code_promocional
         // console.log(url_check)
+        $("#btn_submit").removeAttr('disabled', true)
+        $("#btn_submit").attr('disabled', true)
         await $.getJSON(url_check, function (data) {
             console.log(data)
             if (!data.result && data.cielo) {

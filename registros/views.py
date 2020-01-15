@@ -39,7 +39,8 @@ class TesteCreateView(View):
         return render(request, self.template_name)
 
 
-from registros.tasks import signature
+# from registros.tasks import signature
+from tools.bry import signature_files
 
 class RegistrosCreate(LoginRequiredMixin, View):
     template_name = "registros/registro.html"
@@ -72,7 +73,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
             pk__in=pk_files,
             id_usuario=request.user,
             paid=False
-        )
+        ).order_by('id')
         manter_arquivo = False
         if files.exists():
             self.template_name = "compras/compra_concluida.html"
@@ -85,28 +86,33 @@ class RegistrosCreate(LoginRequiredMixin, View):
             if code:
                 valor_credito_cliente += code.valor
             if valor_credito_cliente >= valor:
-                cliente.valor_credito = valor_credito_cliente - valor
-                cliente.save()
-                if code:
-                    msg = "Código promocional resgatado!"
+                assinados = signature_files(pk_files)
+                if assinados:
+                    cliente.valor_credito = valor_credito_cliente - valor
+                    cliente.save()
+                    if code:
+                        msg = "Código promocional resgatado!"
+                        messages.success(request, msg)
+                    msg = "Arquivo(s) registrado(s) com sucesso!"
                     messages.success(request, msg)
-                msg = "Arquivo(s) registrado(s) com sucesso!"
-                messages.success(request, msg)
-                for file in files:
-                    form = RegistrosForm(request.POST)
-                    if form.is_valid():
-                        registro = form.save(commit=False)
-                        registro.arquivo = file
-                        registro.valor = registro.codservico.preco
-                        registro.id_usuario = request.user
-                        registro.id_cliente = cliente
-                        registro.manter_arquivo = manter_arquivo
-                        registro.descricao = file.resume
-                        registro.save()
-                        file.paid = True
-                        file.save()
-                
-                signature.delay(pk_files)
+                    for file in files:
+                        form = RegistrosForm(request.POST)
+                        if form.is_valid():
+                            registro = form.save(commit=False)
+                            registro.arquivo = file
+                            registro.valor = registro.codservico.preco
+                            registro.id_usuario = request.user
+                            registro.id_cliente = cliente
+                            registro.manter_arquivo = manter_arquivo
+                            registro.descricao = file.resume
+                            registro.save()
+                            file.paid = True
+                            file.save()
+                else:
+                    self.template_name = "compras/erro.html"
+                    msg = "Desculpe houve um erro inesperado! :("
+                    messages.error(request, msg)
+                    files.delete()
             else:
                 msg = "Saldo Insuficiente!"
                 messages.error(request, msg)

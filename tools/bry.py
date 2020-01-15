@@ -29,7 +29,7 @@ def get_body(hashes:list):
         "algoritmoHash": "SHA256",
         "perfil": "CARIMBO",
         "formatoDados": "Base64",
-        "formatoAssinatura": get_formato(1),
+        "formatoAssinatura": get_formato(2),
         "hashes": hashes
     }
 
@@ -78,8 +78,10 @@ def signature_files(pks):
             name = "{}.p7s".format(remove_exention_file(file.name))
             file.signature.save(name, File(temp))
             temp.close()
+        return True
     except:
         print(response)
+        return False
         
 # def signature_save(queryset):
 #     for file in queryset:

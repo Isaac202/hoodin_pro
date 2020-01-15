@@ -457,8 +457,7 @@
         let code_promocional = "&code=" + $("#id_codigo_promocional").val()
         let url_check = base_url + service + get_save_file() + code_promocional
         // console.log(url_check)
-        $("#btn_submit").removeAttr('disabled', true)
-        $("#btn_submit").attr('disabled', true)
+        $('#aguarde').removeClass('d-none')
         await $.getJSON(url_check, function (data) {
             console.log(data)
             if (!data.result && data.cielo) {
@@ -471,16 +470,19 @@
                         $('#id_promocao').html("Nenhum desconto aplicado!")
                     }
                 }
+                $('#aguarde').addClass('d-none')
                 $('#modal_cielo').modal({
                     backdrop: 'static',
                     keyboard: false
                 })
             } else if (!data.result && !data.cielo) {
                 alert('nenhum arquivo enviado')
+                $('#aguarde').addClass('d-none')
             } else if (!data.cielo && data.result) {
                 $('#complete').append($('#id_codigo_promocional').addClass('d-none'))
                 $('#complete').append($('#save_file').addClass('d-none'))
                 $('#complete').append($('#id_codservico').addClass('d-none'))
+                // $('#aguarde').removeClass('d-none')
                 $('#complete').submit()
             }
         }).fail(function (e) {

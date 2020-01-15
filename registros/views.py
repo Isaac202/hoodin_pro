@@ -31,11 +31,11 @@ from usuarios.models import Confuguracao
 
 
 class TesteCreateView(View):
-    template_name = "compras/compra_concluida.html"
+    template_name = "modal_aguarde.html"
 
     def get(self, request, *args, **kwargs):
-        msg = "Arquivo(s) registrado(s) com sucesso!"
-        messages.success(request, msg)
+        # msg = "Arquivo(s) registrado(s) com sucesso!"
+        # messages.success(request, msg)
         return render(request, self.template_name)
 
 

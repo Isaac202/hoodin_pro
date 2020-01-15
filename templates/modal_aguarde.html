@@ -2,6 +2,10 @@
 código obitido em http://tobiasahlin.com/spinkit/ todos os direitos reservados -->
 
 <style>
+    .aguarde {
+        height: 200%;
+        width: 100%;
+    }
     .spinner {
         display: flex !important;
         flex-direction: column !important;
@@ -60,23 +64,15 @@ código obitido em http://tobiasahlin.com/spinkit/ todos os direitos reservados 
     }
 </style>
 
-</div>
-
-<div id="aguarde" class="modal-overlay hide" style="z-index: 1002; display: block; opacity: 0.5;">
-    <div class="spinner">
-        <h4 class="white-text center-align">Por favor aguarde</h4>
-        <div class="contention">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
+<div id="aguarde" class="aguarde d-none" style="background-color: black; position:fixed; z-index: 1002; display: block; opacity: 0.5;">
+    <div class="d-flex align-items-center justify-content-center" style="height: 50%;">
+        <div class="spinner">
+            <h1 class="text-white text-center mb-2">Por favor aguarde isso pode demorar um pouco</h1>
+            <div class="contention mt-2">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
         </div>
     </div>
-
 </div>
-
-
-<script>
-    $('form').submit((e) => {
-        $('#aguarde').removeClass('hide')
-    })
-</script>

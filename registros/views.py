@@ -171,7 +171,8 @@ class MeusRegistrosList(ListView):
         title = self.request.GET.get('title', None)
         page = self.request.GET.get('page', 1)
         queryset = super().get_queryset()
-        queryset = Registros.objects.filter(
+        queryset = Registros.objects.filter( 
+            excluido=False,
             id_usuario=self.request.user).select_related()
         if de:
             queryset = queryset.filter(data__gte=de)

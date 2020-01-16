@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="container my-2">
+<div class="container my-2 bg-light">
     <form method="post" class="form-group">
         {% csrf_token %}
         <div class="row">
@@ -28,12 +28,20 @@
                 <label for="">Meu Link de inicaçao</label>
                 <input class="form-control" type="text" readonly value="https://registrosonline.com.br{% url 'cliente:new' %}?indicacao={{object.meu_link_indicacao}}">
             </div>
+            <div class="col-12 col-md-6 my-4">
+                <label for="">Saldo</label>
+                <input class="form-control" disabled type="text" value="{{user.clientes.get_credit}}">
+            </div>
+            <div class="col-12 col-md-6 my-4">
+                <label for="">Pontuação</label>
+                <input class="form-control" disabled type="text" value="0">
+            </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 <label for="">Nome</label>
                 <input class="form-control" type="text" readonly value="{{object.nome}}">
             </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
-                <label class="text-capitalize" for="">Nome</label>
+                <label class="text-capitalize" for="">Data de Nascimento</label>
                 <input class="form-control" type="text" readonly value="{{object.data_nascimento}}">
             </div>
             <div class="col-12 col-md-12 col-lg-4 my-2">
@@ -159,15 +167,6 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6 col-lg-2 my-4">
-                <label for="">Saldo</label>
-                <input class="form-control" disabled type="text" value="{{user.clientes.get_credit}}">
-            </div>
-            <div class="col-12 col-md-6 col-lg-2 my-4">
-                <label for="">Pontuação</label>
-                <input class="form-control" disabled type="text" value="0">
-            </div>
-
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form_user.username.label_tag}}
                 {{form_user.username}}

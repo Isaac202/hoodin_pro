@@ -64,12 +64,12 @@ def signature_files(pks):
     b64s = list(b64s)
     body = get_body(b64s)
     headers = get_header()
-    response = requests.post(
-        service_url,
-        data=json.dumps(body),
-        headers=headers
-    ).json()
     try:
+        response = requests.post(
+            service_url,
+            data=json.dumps(body),
+            headers=headers
+        ).json()
         assinaturas = response['assinaturas']
         for index, assinatura in enumerate(assinaturas):
             assinatura = base64.b64decode(assinatura)
@@ -81,7 +81,7 @@ def signature_files(pks):
             temp.close()
         return True
     except:
-        print(response)
+        # print(response)
         return False
         
 # def signature_save(queryset):

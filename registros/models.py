@@ -20,6 +20,7 @@ class ArquivoRegistro(models.Model):
     id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     code = models.CharField("Codigo deo registro", max_length=100, blank=True, null=True)
     name = models.CharField(max_length=250)
+    content_type = models.CharField('content_type', max_length=50, blank=True, null=True)
     size = models.PositiveIntegerField(default=1)
     b64 = models.TextField(blank=True, null=True)
     file = models.FileField(

@@ -62,6 +62,7 @@ class BasicUploadView(APIView):
         file = request.FILES['file']
         data = {'is_valid': False}
         name = file.name
+        content_type  = file.content_type
         b64 = file_to_b64(file)
         size = file.size
         form = ArquivoRegistroForm(request.POST, request.FILES)
@@ -71,6 +72,7 @@ class BasicUploadView(APIView):
             file = form.save(commit=False)
             file.id_usuario = request.user
             file.b64 = b64
+            file.content_type = content_type
             file.name = name
             file.size = size
             file.value = service.preco
@@ -224,3 +226,8 @@ class BuyCredit(APIView):
         # print(resposta_cielo, '\n\n')
         # , status=resp)
         return Response({'msg': resposta_cielo, 'result': autorizado})
+
+
+
+    # def download_files(request, id_file):
+    #     file = ArquivoRegistro.objects.get(pk=id_file)

@@ -268,11 +268,14 @@ if AWS_ACCESS_KEY_ID:
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-    AWS_LOAD_METADATA = True
+    AWS_LOAD_METADATA = False
     AWS_AUTO_CREATE_BUCKET = False
     AWS_QUERYSTRING_AUTH = True
     AWS_S3_CUSTOM_DOMAIN = None
-    AWS_DEFAULT_ACL = 'private'
+    AWS_DEFAULT_ACL = "private"
+    AWS_BUCKET_ACL = "private"
+
+
     #Static assets
     #---------------------------------------------------------------------------
     STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'

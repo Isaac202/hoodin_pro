@@ -1,7 +1,7 @@
 <!-- Imagem e texto -->
 {% load static %}
-<nav class="navbar navbar-fixed-top  navbar-expand-lg navbar-dark text-white bg-primary p-0 m-0">
-    <a class="navbar-brand" href="/">
+<nav style="background-color: white;" class="navbar navbar-fixed-top  navbar-expand-lg p-0 m-0">
+    <a class="navbar-brand">
         <img width="213px" height="76px" src="{% static 'imgs/logo-hoodid.png' %}">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -10,21 +10,21 @@
     </button>
     <div class="collapse navbar-collapse mr-lg-3" id="navbarNav">
         <ul class="nav navbar-nav ml-auto text-center">
+            {% if not user.is_authenticated %}
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="/">
+                <a class="nav-link text-g font-weight-bold" href="/">
                     <i class="fas fa-home"></i>
                     Home<span class="sr-only">(Página atual)</span></a>
             </li>
-            {% if not user.is_authenticated %}
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="{% url 'cliente:new' %}">
+                <a class="nav-link text-g font-weight-bold" href="{% url 'cliente:new' %}">
                     <i class="fas fa-user-plus"></i>
                     Cadastre-se
                 </a>
             </li>
             {% endif %}
             <li class="nav-item active">
-                <a href="{% url 'tabela_de_precos' %}" class="nav-link font-weight-bold">
+                <a href="{% url 'tabela_de_precos' %}" class="nav-link text-g font-weight-bold">
                     <i class="fas fa-receipt"></i>
                     Tabela Preços
                 </a>
@@ -33,59 +33,59 @@
             {% if user.is_authenticated %}
 
             <li class="nav-item dropdown active font-weight-bold">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link text-g dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="far fa-registered"></i>
                     Registrar
                 </a>
-                <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item text-white item-menu" href="{% url 'registrar' %}">
+                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item  item-menu" href="{% url 'registrar' %}">
                         <i class="fas fa-file-alt"></i>
                         Declaração de Autoria
                     </a>
                     <div class="dropdown-divider item-menu"></div>
-                    <a class="dropdown-item text-white item-menu" href="{% url 'registrar' %}?sd=*">
+                    <a class="dropdown-item  item-menu" href="{% url 'registrar' %}?sd=*">
                         <i class="fas fa-certificate"></i>
                         Certificação de Documentos
                     </a>
                 </div>
             </li>
             <li class="nav-item dropdown active font-weight-bold">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link text-g dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-cog"></i>
                     Minha conta
                 </a>
-                <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item text-white item-menu" href="{% url 'cliente:update' %}">
+                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item  item-menu" href="{% url 'cliente:update' %}">
                         <i class="fas fa-database"></i>
                         Meus Dados</a>
-                    <a class="dropdown-item text-white item-menu" href="{% url 'meus_registros' %}">
+                    <a class="dropdown-item  item-menu" href="{% url 'meus_registros' %}">
                         <i class="fas fa-list"></i>
                         Meus Registros
                     </a>
                     <div class="dropdown-divider item-menu"></div>
-                    <a class="dropdown-item text-white item-menu">
+                    <a class="dropdown-item  item-menu">
                         <i class="fas fa-money-bill"></i>
                         Saldo R$ <span class="credit">{{user.clientes.get_credit}}</span>
                     </a>
                 </div>
             </li>
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold">
+                <a class="nav-link text-g font-weight-bold">
                     <i class="fas fa-user-circle"></i>
                     {{user.username}}
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="{% url 'logout' %}">
+                <a class="nav-link text-g font-weight-bold" href="{% url 'logout' %}">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </a>
             </li>
             {% else %}
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="{% url 'login' %}">
+                <a class="nav-link text-g font-weight-bold" href="{% url 'login' %}">
                     <i class="fas fa-sign-in-alt"></i>
                     Entre
                 </a>

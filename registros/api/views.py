@@ -68,6 +68,12 @@ class BasicUploadView(APIView):
         form = ArquivoRegistroForm(request.POST, request.FILES)
         old_file = ArquivoRegistro.objects.filter(
             name=name, id_usuario=request.user).last()
+        
+        if ArquivoRegistro.objects.filter(name=name, paid=False, id_usuario=request.user).exists():
+            data['is_valid'] = False
+            data['error'] = "Arquivo já enviado"
+            return Response(data)
+        
         if form.is_valid():
             file = form.save(commit=False)
             file.id_usuario = request.user

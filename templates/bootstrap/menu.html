@@ -1,30 +1,30 @@
 <!-- Imagem e texto -->
 {% load static %}
-<nav style="background-color: white;" class="navbar navbar-fixed-top navbar-light  navbar-expand-lg p-0 m-0">
+<nav style="background-color: white;" class="navbar navbar-fixed-top navbar-light navbar-expand-lg p-0 m-0">
     <a class="navbar-brand">
         <img width="213px" height="76px" src="{% static 'imgs/logo-hoodid.png' %}">
     </a>
     <button style="margin-left: -80px !important; outline: none !important; border: none;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
-        <span style="margin-left: -50px !important; outline: none !important;" class="navbar-toggler-icon"></span>
+        <span style="margin-left: -70px !important; outline: none !important;" class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse mr-lg-3" id="navbarNav">
         <ul class="nav navbar-nav ml-auto text-center">
             {% if not user.is_authenticated %}
             <li class="nav-item active">
-                <a class="nav-link text-g font-weight-bold" href="/">
+                <a style="color: #595d65 !important;" class="nav-link text-g font-weight-bold" href="/">
                     <i class="fas fa-home"></i>
                     Home<span class="sr-only">(Página atual)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link text-g font-weight-bold" href="{% url 'cliente:new' %}">
+                <a style="color: #595d65 !important;"  class="nav-link text-g font-weight-bold" href="{% url 'cliente:new' %}">
                     <i class="fas fa-user-plus"></i>
                     Cadastre-se
                 </a>
             </li>
             {% endif %}
             <li class="nav-item active">
-                <a href="{% url 'tabela_de_precos' %}" class="nav-link text-g font-weight-bold">
+                <a style="color: #595d65 !important;"  href="{% url 'tabela_de_precos' %}" class="nav-link text-g font-weight-bold">
                     <i class="fas fa-receipt"></i>
                     Tabela Preços
                 </a>
@@ -33,59 +33,59 @@
             {% if user.is_authenticated %}
 
             <li class="nav-item dropdown active font-weight-bold">
-                <a class="nav-link text-g dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a style="color: #595d65 !important;"  class="nav-link text-g dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="far fa-registered"></i>
                     Registrar
                 </a>
-                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item  item-menu" href="{% url 'registrar' %}">
+                <div  class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a style="color: #595d65 !important;"  class="dropdown-item item-menu" href="{% url 'registrar' %}">
                         <i class="fas fa-file-alt"></i>
                         Declaração de Autoria
                     </a>
                     <div class="dropdown-divider item-menu"></div>
-                    <a class="dropdown-item  item-menu" href="{% url 'registrar' %}?sd=*">
+                    <a style="color: #595d65 !important;"  class="dropdown-item item-menu" href="{% url 'registrar' %}?sd=*">
                         <i class="fas fa-certificate"></i>
                         Certificação de Documentos
                     </a>
                 </div>
             </li>
             <li class="nav-item dropdown active font-weight-bold">
-                <a class="nav-link text-g dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a style="color: #595d65 !important;"  class="nav-link text-g dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-cog"></i>
                     Minha conta
                 </a>
                 <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item  item-menu" href="{% url 'cliente:update' %}">
+                    <a style="color: #595d65 !important;"  class="dropdown-item  item-menu" href="{% url 'cliente:update' %}">
                         <i class="fas fa-database"></i>
                         Meus Dados</a>
-                    <a class="dropdown-item  item-menu" href="{% url 'meus_registros' %}">
+                    <a style="color: #595d65 !important;"  class="dropdown-item  item-menu" href="{% url 'meus_registros' %}">
                         <i class="fas fa-list"></i>
                         Meus Registros
                     </a>
                     <div class="dropdown-divider item-menu"></div>
-                    <a class="dropdown-item  item-menu">
+                    <a style="color: #595d65 !important;"  class="dropdown-item  item-menu">
                         <i class="fas fa-money-bill"></i>
                         Saldo R$ <span class="credit">{{user.clientes.get_credit}}</span>
                     </a>
                 </div>
             </li>
             <li class="nav-item active">
-                <a class="nav-link text-g font-weight-bold">
+                <a style="color: #595d65 !important;"  class="nav-link text-g font-weight-bold">
                     <i class="fas fa-user-circle"></i>
                     {{user.username}}
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link text-g font-weight-bold" href="{% url 'logout' %}">
+                <a style="color: #595d65 !important;"  class="nav-link text-g font-weight-bold" href="{% url 'logout' %}">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </a>
             </li>
             {% else %}
             <li class="nav-item active">
-                <a class="nav-link text-g font-weight-bold" href="{% url 'login' %}">
+                <a style="color: #595d65 !important;"  class="nav-link text-g font-weight-bold" href="{% url 'login' %}">
                     <i class="fas fa-sign-in-alt"></i>
                     Entre
                 </a>

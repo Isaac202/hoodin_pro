@@ -2,187 +2,94 @@
 
 <head>
 	<title>CERTIFICADO</title>
+	<meta name="pdfkit-page-size" content="Legal" />
+	<meta charset="utf-8">
+	<meta name="pdfkit-orientation" content="Landscape" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<style>
-		@page {
+		/* @page {
 			size: landscape;
 			margin: 0cm;
-		}
+		} */
 
-		body {
-			background-image: url(https://www.hoodid.com/images/Fundo.jpg);
-			background-repeat: no-repeat;
-			background-size: 100%;
+		body,
+		.page {
 			width: 100%;
 			height: 100%;
 		}
 
-		div {
-			/* white-space: nowrap; */
-			/* width: 90%; */
-			/* overflow: inherit; */
-			/* text-overflow: ellipsis; */
+		.page {
+			background-image: url(https://www.hoodid.com/images/Fundo.jpg);
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
 		}
 	</style>
 </head>
 
 <body>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="margin-top: 5%">
-		<div style="text-align: center;">
-			<strong>CERTIFICADO DE REGISTRO N&ordm;{{registro.pk}}</strong></div>
-		<div style="text-align: center;">
-			&nbsp;</div>
-		<div style="display: flex; justify-content: center; justify-items: center">
-			<div>
-				<div style="text-align: justify;">
-					CERTIFICO que, &agrave;s {{registro.data|date:'H:i'}} horas do dia
-					{{registro.data|date:'d/m/Y'}},&nbsp;{{registro.id_cliente.nome|upper}},
-					{{registro.id_cliente.pais}}, inscrito</div>
-				<div style="text-align: justify;">
-					no CPF/MF sob o n&uacute;mero {{registro.id_cliente.cnpjcpf|upper}}, residente
-					{{registro.id_cliente.endereco|upper}}, N&ordm;
-					{{registro.id_cliente.numero|upper}},
-					{% if registro.id_cliente.complemento %}{{registro.id_cliente.complemento|upper}},{% endif %}
-				</div>
-				<div style="text-align: justify;">
-					na cidade de {{registro.id_cliente.cidade|upper}},&nbsp; bairro de
-					{{registro.id_cliente.bairro|upper}},&nbsp; estado&nbsp; {{registro.id_cliente.estado|upper}},&nbsp;
-					com&nbsp;
-					&nbsp;CEP {{registro.id_cliente.cep|upper}},<br>obteve registro&nbsp; da&nbsp;
-					sua declara&ccedil;&atilde;o de autoria da obra&nbsp; intelectual <br>intitulada
-					{{registro.arquivo.resume}},<br>na categoria {{registro.codservico.nome|upper}}.</div>
-				<div style="text-align: justify;">
-					O&nbsp;presente
-					registro foi&nbsp; assinado&nbsp; pelo titular deste&nbsp; certificado, e est&aacute; associado a
-					uma chave digital <br>fornecida pelo Instituto
-					Nacional de Tecnologia da Informa&ccedil;&atilde;o (ITI), atrav&eacute;s de&nbsp; uma <br>
+	<div class="page">
+		<div class="container" style="padding-top: 18%; background: none;">
+			<div class="text-center">
+				<strong>CERTIFICADO DE REGISTRO N°{{registro.pk}}</strong>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-10 offset-1 text-justify">
+					CERTIFICO que, às {{registro.data|date:'H:i'}} horas do dia
+					{{registro.data|date:'d/m/Y'}}, {{registro.id_cliente.nome|upper}},
+					{{registro.id_cliente.pais}}, inscrito
+					no CPF/MF sob o número {{registro.id_cliente.cnpjcpf|upper}}, residente
+					{{registro.id_cliente.endereco|upper}}, N° {{registro.id_cliente.numero|upper}},
+					{% if registro.id_cliente.complemento %}
+					 {{registro.id_cliente.complemento|upper}},
+					{% endif %}
+					na cidade de {{registro.id_cliente.cidade|upper}},  bairro de
+					{{registro.id_cliente.bairro|upper}}, estado {{registro.id_cliente.estado|upper}}, 
+					com CEP {{registro.id_cliente.cep|upper}}, obteve registro da 
+					sua declaração de autoria da obra intelectual intitulada
+					{{registro.arquivo.resume}}, na categoria {{registro.codservico.nome|upper}}. <br>
+					O presente registro foi  assinado  pelo titular deste  certificado, e está associado a
+					uma chave digital fornecida pelo Instituto
+					Nacional de Tecnologia da Informação (ITI), através de  uma
 					ACT (Autoridade de Carimbo de Tempo) utilizada
-					para garantir data e hora <br>da assinatura digital combasenos dados fornecidos pelo
-					Observat&oacute;rio Nacional,<br>cuja autoridade foi conferida pela Administra&ccedil;&atilde;oP&uacute;blica. 
-					<br> A chave digital foigerada atrav&eacute;sdo&nbsp; sistema online da
-					HoodIDRegistros Online Ltda.<br> Tendo esta declara&ccedil;&atilde;o de&nbsp; autoria&nbsp;
-					&nbsp;de&nbsp; obra intelectual garantia de autenticidade,
-					<br>integridade e validade jur&iacute;dica, nos termos <br>do artigo 1&ordm; da&nbsp; Medida Provis&oacute;ria n&ordm; 
-					2.200-2,&nbsp; de 24 de agosto de 2001. <br>Por ser esta declara&ccedil;&atilde;o a mais absoluta express&atilde;o da verdade,<br>
-					a HoodID Registros Online emite o presente certificado que subscreve <br>nesta cidade do Recife - PE.
+					para garantir data e hora da assinatura digital combasenos dados fornecidos pelo
+					Observatório Nacional, cuja autoridade foi conferida pela
+					Administração Pública.
+					A chave digital foigerada através do  sistema online da
+					HoodIDRegistros Online Ltda. Tendo esta declaração de  autoria 
+					 de  obra intelectual garantia de autenticidade,
+					integridade e validade jurídica, nos termos do artigo 1°; da  Medida
+					Provisória n°;
+					2.200-2,  de 24 de agosto de 2001. Por ser esta declaração a mais absoluta
+					expressão da verdade,
+					a HoodID Registros Online emite o presente certificado que subscreve nesta cidade do Recife - PE.
+				</div>
 			</div>
 		</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<p>
-			&nbsp;</p>
 	</div>
-
 	{% for coautores in lista_coautores %}
 	{% if coautores %}
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="text-align: center;">
-		&nbsp;</div>
-	<div style="margin-top: 5%">
-		<div style="text-align: center;">
-			<strong>CERTIFICADO DE REGISTRO N&ordm;{{registro.pk}}</strong></div>
-		<div style="text-align: center;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="display: flex; justify-content: center">
-			<div>
-				<div style="text-align: justify;">
-					<strong>&nbsp; Coautoria da obra:</strong></div>
-				{% for c in coautores %}
-				<div>
-					&nbsp; Nome: {{c.nome}} Documento Identifica&ccedil;&atilde;o:{{c.documento}}
-					{{c.percentual_obra}}%
+	<div class="page">
+		<div class="container" style="padding-top: 18%; background: none;">
+			<div class="text-center">
+				<strong>CERTIFICADO DE REGISTRO N°;{{registro.pk}}</strong>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-10 offset-1 text-center">
+					<strong>  Coautoria da obra:</strong>
+					{% for c in coautores %}
+					<div>
+						  Nome: {{c.nome}} Documento Identificação:{{c.documento}}
+						{{c.percentual_obra}}%
+					</div>
+					{% endfor %}
+					{% endif %}
 				</div>
-
-				{% endfor %}
 			</div>
 		</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<p>
-			&nbsp;</p>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<div style="text-align: justify;">
-			&nbsp;</div>
-		<p>
-			&nbsp;</p>
 	</div>
-	{% endif %}
-
 	{% endfor %}
 </body>
 

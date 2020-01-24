@@ -13,9 +13,12 @@ User = get_user_model()
 def user_directory_path(instance, filename):
     return 'registros/{}/{}/{}'.format(instance.id_usuario.username, date.today(), filename)
 
+# def set_code_registro(pk)
+
 
 class ArquivoRegistro(models.Model):
     id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+    code = models.CharField("Codigo deo registro", max_length=100, blank=True, null=True)
     name = models.CharField(max_length=250)
     size = models.PositiveIntegerField(default=1)
     b64 = models.TextField(blank=True, null=True)

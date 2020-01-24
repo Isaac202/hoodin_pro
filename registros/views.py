@@ -192,32 +192,27 @@ class MeusRegistrosList(ListView):
 
 # from .models import Donation
 
+from django_pdfkit import PDFView
 
-@login_required
-def to_pdf(request, id_registro):
-    registro = get_object_or_404(
-        Registros, pk=id_registro, id_usuario=request.user)
-    response = HttpResponse(content_type="application/pdf")
-    # response['Content-Disposition'] = "teste.pdf"
-    # )
-    context = []
-    coautores = registro.arquivo.coautores_set.all()
-    cont = coautores.count()
-    for c in range(0, cont):
-        salt = 5
-        index = (c+1) * salt
-        if index < cont:
-            # print(index-salt, index)
-            context.append(coautores[index-salt: index])
-        else:
-            # print(index-salt, cont)
-            context.append(coautores[index-salt:cont])
-            break
-    html = render_to_string("registros/certificado.html", {
-        'registro': registro,
-        'lista_coautores': context
-    })
-
-    font_config = FontConfiguration()
-    HTML(string=html).write_pdf(response, font_config=font_config)
-    return response
+class CertificadoPDFView(LoginRequiredMixin, PDFView):
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        id_registro = kwargs['id_registro']
+        registro = get_object_or_404(
+        Registros, pk=id_registro, id_usuario=self.request.user)
+        c_autores = []
+        coautores = registro.arquivo.coautores_set.all()
+        cont = coautores.count()
+        for c in range(0, cont):
+            salt = 5
+            index = (c+1) * salt
+            if index < cont:
+                c_autores.append(coautores[index-salt: index])
+            else:
+                c_autores.append(coautores[index-salt:cont])
+                break
+        context["registro"] = registro
+        context["lista_coautores"] = c_autores
+        return context
+    

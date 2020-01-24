@@ -42,7 +42,7 @@ from rest_framework import routers
 #from servicos.views import ServicosExtensoesList
 #from servicos.views import ServicosExtensoesUpdate
 
-from registros.views import RegistrosCreate, BasicUploadView, MeusRegistrosList, TesteCreateView, to_pdf
+from registros.views import RegistrosCreate, BasicUploadView, MeusRegistrosList, TesteCreateView,  CertificadoPDFView
 from clientes.api.viewsets import ClienteViewSet
 
 from codigos_promocionais.views import Codigos_PromocionaisCreate
@@ -56,6 +56,10 @@ router.register(r'api/clientes', ClienteViewSet)
 router.register(r'api/servicos', ServicoViewSet)
 
 from compras.views import CompraCreditoCreate
+
+# from django_pdfkit import PDFView
+
+
 
 urlpatterns = [
     path('api/', include("api.urls")),
@@ -114,13 +118,13 @@ urlpatterns = [
     path('meus-registros/', MeusRegistrosList.as_view(), name='meus_registros'),
     path('upload/', BasicUploadView.as_view(), name='upload'),
     path('teste/', TesteCreateView.as_view(), name='teste'),
-    path('topdf/<int:id_registro>', to_pdf, name='pdf'),
+    # path('topdf/<int:id_registro>', to_pdfkit, name='pdf'),
+    path('topdf/<int:id_registro>', CertificadoPDFView.as_view(template_name='registros/certificado.html'), name='pdf'),
 
     path('lista_codigos_promocionais/', Codigos_PromocionaisList.as_view(), name='lista_codigos_promocionais'),
     path('novo_codigos_promocionais/', Codigos_PromocionaisCreate.as_view(), name='novo_codigos_promocionais'),
     path('atualiza_codigos_promocionais/<int:pk>/', Codigos_PromocionaisUpdate.as_view(), name='atualiza_codigos_promocionais'),
     path('delete_codigos_promocionais/<int:pk>/', Codigos_PromocionaisDelete.as_view(), name='delete_codigos_promocionais'),
-
     path('compra/', CompraCreditoCreate.as_view(), name='credito'),
     path('tabela-de-precos/', TabelaPrecos.as_view(), name='tabela_de_precos'),
     path('contrato/', CotratoView.as_view(), name='contrato'),

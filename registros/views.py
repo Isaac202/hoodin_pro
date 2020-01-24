@@ -1,5 +1,3 @@
-from weasyprint.fonts import FontConfiguration
-from weasyprint import HTML
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
@@ -29,6 +27,8 @@ from random import randint
 from codigos_promocionais.utils import set_codigo_promocional
 from usuarios.models import Confuguracao
 
+# from weasyprint import HTML
+# from weasyprint.fonts import FontConfiguration
 
 class TesteCreateView(View):
     template_name = "modal_aguarde.html"

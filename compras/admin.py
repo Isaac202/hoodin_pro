@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Compras
-from tools.render import Render
+from tools.render import RenderPDF as Render
 # from django.contrib.admin import DateFieldListFilter
 from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 # from daterangefilter.filters import PastDateRangeFilter, FutureDateRangeFilter

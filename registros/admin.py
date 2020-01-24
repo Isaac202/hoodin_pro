@@ -1,7 +1,7 @@
 from django.contrib import admin
 from registros.models import Registros, ArquivoRegistro
 from rangefilter.filter import DateRangeFilter
-from tools.render import Render
+from tools.render import RenderPDF as Render
 
 class ArquivoAdmin(admin.ModelAdmin):
     list_display = ('id_usuario', 'name', 'version', 'value', 'resume')

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Codigos_Promocionais, GeneratePromocionalCode
-from tools.render import Render
+from tools.render import RenderPDF
 from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 
@@ -25,7 +25,7 @@ class CodigoPromocionalAdmin(admin.ModelAdmin):
 
     def gera_pdf(set, request, queryset):
         if queryset:
-            return Render.render_to_pdf(
+            return RenderPDF.render_to_pdf(
                 request,
                 queryset,
                 template="tools/pdf_cod_promocional.html",

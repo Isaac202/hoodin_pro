@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Clientes
-from tools.render import Render
+from tools.render import RenderPDF as Render
 from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 

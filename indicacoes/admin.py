@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Indicacoes, IndicacaoCliente
-from tools.render import Render
+from tools.render import RenderPDF as Render
 
 class IndicacaoClienteAdmin(admin.ModelAdmin):
     list_display = ('email_pai', 'email_filho', 'code_pai', 'code_filho', 'create_at')

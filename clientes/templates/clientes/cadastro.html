@@ -10,6 +10,14 @@
         <h3 class="mt-5 pt-2">Dados Pessoais</h3>
         <hr>
         <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 my-4">
+                <label for="">Saldo</label>
+                <input class="form-control" disabled type="text" value="0">
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 my-4">
+                <label for="">Pontuação</label>
+                <input class="form-control" disabled type="text" value="0">
+            </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.nome.label_tag}}
                 {{form.nome}}
@@ -193,19 +201,20 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6 col-lg-6 my-4">
-                <label for="">Saldo</label>
-                <input class="form-control" disabled type="text" value="0">
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 my-4">
-                <label for="">Pontuação</label>
-                <input class="form-control" disabled type="text" value="0">
-            </div>
         </div>
 
         <h3 class="mt-5">Endereço</h3>
         <hr>
         <div class="row">
+            <div class="col-12 col-md-6 col-lg-2 my-2">
+                {{form.pais.label_tag}}
+                {{form.pais}}
+                {% if form.pais.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.pais.errors}}
+                </div>
+                {% endif %}
+            </div>
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.cep.label_tag}}
                 {{form.cep}}
@@ -273,16 +282,6 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6 col-lg-2 my-2">
-                {{form.pais.label_tag}}
-                {{form.pais}}
-                {% if form.pais.errors %}
-                <div class="alert alert-danger" role="alert">
-                    {{form.pais.errors}}
-                </div>
-                {% endif %}
-            </div>
-
         </div>
         <h3 class="mt-5">Informações</h3>
         <hr>
@@ -402,6 +401,13 @@
         };
 
     $('select').select2(); //autocomplete select2
+    
+    function setRequiredFields(value) {
+        $('#id_sexo').prop('required', value).prop('disabled', !value)
+        $('#id_documento_identidade').prop('required', value).prop('disabled',!value)
+        $('#id_documento_tipo').prop('required', value).prop('disabled', !value)
+        $('#id_estadocivil').prop('required', value).prop('disabled', !value)
+    }
 
     $(document).ready(function () {
         $("#id_cep").mask("99999-999");
@@ -409,6 +415,16 @@
         $("#id_celular").mask("(99) 99999-9999");
         $("#id_data_nascimento").mask("99/99/9999");
         $('#id_cnpjcpf').mask(cpfMascara, cpfOptions);
+        
+        setRequiredFields(true)
+        $('#id_cnpjcpf').on('input',function(){
+            let value = $(this).val()
+            if(value.length <= 14){
+                setRequiredFields(true)
+            }else{
+                setRequiredFields(false)
+            }
+        })
 
         $('#id_cep').on('input', function (e) {
             let cep = $('#id_cep').val();

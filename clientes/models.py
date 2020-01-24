@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from tools.genereteKey import generate_hash_key
 from codigos_promocionais.utils import set_codigo_promocional
 from datetime import datetime
+from django_countries.fields import CountryField
 
 User = get_user_model()
 
@@ -38,7 +39,7 @@ class Clientes(models.Model):
     celular = models.CharField("Celular *", max_length=16)
     data_nascimento = models.DateField("Data de nascimento *")
     sexo = models.CharField("Sexo *", max_length=1,
-                            choices=settings.SEXO_CHOICES)
+                            choices=settings.SEXO_CHOICES, blank=True, null=True)
     tipo_pessoa = models.CharField(
         "Tipo de Pessoa *", max_length=1, default="F", choices=settings.TIPOPESSOA_CHOICES)
     nome_mae = models.CharField(
@@ -53,21 +54,20 @@ class Clientes(models.Model):
     complemento = models.CharField(
         "Complemento", max_length=255, null=True, blank=True)
     numero = models.CharField("Número *", max_length=8)
-    pais = models.CharField(
-        "País de Origem *", max_length=50, default='Brasil')
+    pais = CountryField(default='BR')
     estado = models.CharField("Estado *", max_length=50, default='PE',
                               choices=settings.ESTADOS_CHOICES)
     cidade = models.CharField("Cidade *", max_length=50)
     bairro = models.CharField("Bairro *", max_length=50)
     documento_identidade = models.CharField(
-        "Número do Documento de Identificação *", max_length=50)
+        "Número do Documento de Identificação *", max_length=50, blank=True, null=True)
     documento_tipo = models.CharField(
-        "Tipo de Documento de Identificação *", max_length=20, choices=TIPO_DOCUMENTO)
+        "Tipo de Documento de Identificação *", max_length=20, choices=TIPO_DOCUMENTO, blank=True, null=True)
     passaporte = models.CharField(max_length=50, null=True, blank=True)
     nacionalidade = models.CharField(
         "Nacionalidade *", max_length=20, default='Brasileiro')
-    estadocivil = models.CharField(
-        "Estado civil *", max_length=1, choices=settings.ESTADO_CIVIL_CHOICES)
+    estadocivil = models.CharField("Estado civil *", 
+                max_length=1, choices=settings.ESTADO_CIVIL_CHOICES, blank=True, null=True)
     biografia = models.TextField(max_length=5000, null=True, blank=True)
     nif = models.CharField(max_length=100, null=True, blank=True)
     facebook = models.CharField(max_length=100, null=True, blank=True)

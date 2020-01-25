@@ -51,11 +51,19 @@
 
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 <label for="">Tipo de Documento de Identificação</label>
-                <input class="form-control" type="text" value="{{object.documento_tipo}}" readonly>
+                {% if object.documento_tipo %}
+                    <input class="form-control" type="text" value="{{object.documento_tipo}}" readonly>
+                {% else %}
+                    <input class="form-control" type="text" value="------" readonly>
+                {% endif %}
             </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 <label class="text-capitalize" for="">Número do Documento de Identificação</label>
-                <input class="form-control" type="text" readonly value="{{object.documento_identidade}}">
+                {% if object.documento_identidade %}
+                    <input class="form-control" type="text" readonly value="{{object.documento_identidade}}">
+                {% else %}
+                    <input class="form-control" type="text" value="------" readonly>
+                {% endif %}
             </div>
 
             <div class="col-12 col-md-6 col-lg-4 my-2">
@@ -87,14 +95,17 @@
 
             <div class="col-12 col-md-12 col-lg-4 my-2">
                 {{form.estadocivil.label_tag}}
-                {{form.estadocivil}}
-                {% if form.estadocivil.errors %}
-                <div class="alert alert-danger" role="alert">
-                    {{form.estadocivil.errors}}
-                </div>
+                {% if object.estadocivil %}
+                    {{form.estadocivil}}
+                    {% if form.estadocivil.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{form.estadocivil.errors}}
+                    </div>
+                    {% endif %}
+                {% else %}
+                    <input class="form-control" type="text" value="------" readonly>
                 {% endif %}
             </div>
-
 
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.telefone.label_tag}}
@@ -199,6 +210,15 @@
         <h3 class="mt-5">Endereço</h3>
         <hr>
         <div class="row">
+            <div class="col-12 col-md-6 col-lg-2 my-2">
+                {{form.pais.label_tag}}
+                {{form.pais}}
+                {% if form.pais.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.pais.errors}}
+                </div>
+                {% endif %}
+            </div>
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.cep.label_tag}}
                 {{form.cep}}
@@ -263,15 +283,6 @@
                 {% if form.estado.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{form.estado.errors}}
-                </div>
-                {% endif %}
-            </div>
-            <div class="col-12 col-md-6 col-lg-2 my-2">
-                {{form.pais.label_tag}}
-                {{form.pais}}
-                {% if form.pais.errors %}
-                <div class="alert alert-danger" role="alert">
-                    {{form.pais.errors}}
                 </div>
                 {% endif %}
             </div>
@@ -393,7 +404,9 @@
             }
         };
 
-    $('select').select2(); //autocomplete select2
+    $('#id_estado').select2(); //autocomplete select2
+    $('#id_pais').select2(); //autocomplete select2
+    $('#id_atuacao').select2(); //autocomplete select2
 
     $(document).ready(function () {
         $("#id_cep").mask("99999-999");

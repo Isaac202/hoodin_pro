@@ -92,17 +92,21 @@ class Clientes(models.Model):
     def __str__(self):
         return self.nome
 
-    def get_sexo(self):
-        sexo = self.sexo
-        for s in settings.SEXO_CHOICES:
-            if s[0] in sexo:
-                return s[1]
+    def get_sexo(self): 
+        if self.is_cpf():
+            sexo = self.sexo
+            for s in settings.SEXO_CHOICES:
+                if s[0] in sexo:
+                    return s[1]
+        return "-----"
 
     def get_estadocivil(self):
-        esc = self.estadocivil
-        for s in settings.ESTADO_CIVIL_CHOICES:
-            if s[0] in esc:
-                return s[1]
+        if self.is_cpf():
+            esc = self.estadocivil
+            for s in settings.ESTADO_CIVIL_CHOICES:
+                if s[0] in esc:
+                    return s[1]
+        return "-----"
 
     def is_cpf(self):
         if len(self.cnpjcpf) > 14:

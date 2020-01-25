@@ -400,13 +400,23 @@
             }
         };
 
-    $('select').select2(); //autocomplete select2
+    $('#id_estado').select2(); //autocomplete select2
+    $('#id_pais').select2(); //autocomplete select2
+    $('#id_atuacao').select2(); //autocomplete select2
+
     
     function setRequiredFields(value) {
+        $('#id_documento_identidade').prop('required', value).prop('disabled', !value)
         $('#id_sexo').prop('required', value).prop('disabled', !value)
-        $('#id_documento_identidade').prop('required', value).prop('disabled',!value)
         $('#id_documento_tipo').prop('required', value).prop('disabled', !value)
         $('#id_estadocivil').prop('required', value).prop('disabled', !value)
+        if (!value) {
+            $('#id_documento_identidade').val('')
+            $('#id_sexo').prop("selectedIndex", 0);
+            $('#id_documento_tipo').prop("selectedIndex", 0);
+            $('#id_estadocivil').prop("selectedIndex", 0);
+        }
+        
     }
 
     $(document).ready(function () {
@@ -419,7 +429,7 @@
         setRequiredFields(true)
         $('#id_cnpjcpf').on('input',function(){
             let value = $(this).val()
-            if(value.length <= 14){
+            if(value.length < 15){
                 setRequiredFields(true)
             }else{
                 setRequiredFields(false)

@@ -35,7 +35,7 @@ class Clientes(models.Model):
     valor_credito = models.DecimalField(
         max_digits=11, decimal_places=2, default=0)
     pontuacao = models.DecimalField(
-        max_digits=9, decimal_places=2, default=0)
+        max_digits=11, decimal_places=2, default=0)
     telefone = models.CharField(
         "Telefone Fixo", max_length=16, null=True, blank=True)
     celular = models.CharField("Celular *", max_length=16)

@@ -52,6 +52,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
         context = {}
         servico_digitalizacao = bool(request.GET.get('sd'))
         # print(servico_digitalizacao,'\n\n')
+        context['sd'] = servico_digitalizacao
         context['form'] = RegistrosViewForm(sd=servico_digitalizacao)
         context['cielo'] = InserirCreditoForm()
         files = ArquivoRegistro.objects.filter(

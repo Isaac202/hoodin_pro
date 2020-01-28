@@ -9,7 +9,7 @@ from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from usuarios.models import Confuguracao
 from django.urls import reverse_lazy
-from registros.models import Registros, ArquivoRegistro
+from registros.models import Registros, ArquivoRegistro, set_code_registro
 from registros.forms import RegistrosForm, RegistrosViewForm, ArquivoRegistroForm
 from registros.api.serializers import ArquivoSerializer
 from tools.genereteKey import get_size_file, file_to_shar256, file_to_b64
@@ -84,6 +84,8 @@ class BasicUploadView(APIView):
             file.value = service.preco
             if old_file:
                 file.version = old_file.version + Decimal('1.0')
+            file.save()
+            file.code = set_code_registro(file.id)
             file.save()
             serializer = ArquivoSerializer(file, many=False)
             data = serializer.data

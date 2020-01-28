@@ -6,6 +6,7 @@ from clientes.models import Clientes
 from datetime import date
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from datetime import datetime
 
 User = get_user_model()
 
@@ -13,7 +14,10 @@ User = get_user_model()
 def user_directory_path(instance, filename):
     return 'registros/{}/{}/{}'.format(instance.id_usuario.username, date.today(), filename)
 
-# def set_code_registro(pk)
+def set_code_registro(pk):
+    today = datetime.now()
+    code = '{}{}{}{}'.format(today.day, today.second, pk, today.microsecond)
+    return code
 
 
 class ArquivoRegistro(models.Model):

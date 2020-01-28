@@ -1,4 +1,3 @@
-<!-- #######  YAY, I AM THE SOURCE EDITOR! #########-->
 <table border="0" width="100%">
     <tbody>
         <tr>
@@ -6,494 +5,592 @@
                 <blockquote>
                     <blockquote>
                         <blockquote>
-                            <p align="justify"><strong>CONTRATO DIGITAL DE PRESTA&Ccedil;&Atilde;O DE SERVI&Ccedil;O DE
-                                    REGISTRO E ARQUIVAMENTO DE DECLARA&Ccedil;&Atilde;O DE DIREITOS AUTORAIS COM
-                                    AUTENTICA&Ccedil;&Atilde;O, CERTIFICA&Ccedil;&Atilde;O DIGITAL E CARIMBO DE
+                            <p align="justify" style="margin-bottom: 0.08in; direction: ltr;">
+                                <strong>CONTRATO DIGITAL DE PRESTAÇÃO DE SERVIÇO DE REGISTRO E ARQUIVAMENTO DE
+                                    DECLARAÇÃO DE DIREITOS AUTORAIS COM AUTENTICAÇÃO, CERTIFICAÇÃO DIGITAL E CARIMBO DE
                                     TEMPORALIDADE, E OUTROS AJUSTES NA FORMA ABAIXO.</strong></p>
-                            <p align="justify">&nbsp;</p>
+                            <p align="justify" style="margin-bottom: 0.08in; direction: ltr;">
+                                &nbsp;</p>
                         </blockquote>
                     </blockquote>
                 </blockquote>
-                <p align="JUSTIFY"><strong>DAS PARTES</strong></p>
+                <p>CONTRATO N&Uacute;MERO <strong id="codeFiles"></strong>.</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>DAS PARTES</strong></p>
                 <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
                     <span id="lblNome">
-                        {{user.clientes.nome|upper}}&Atilde;O</span>,&nbsp;<span
-                        id="lblPais">Brasil</span>&nbsp;, estado c&iacute;vil&nbsp;<span
+                        {{user.clientes.nome|upper}}&Atilde;O</span>,&nbsp;<span id="lblPais">Brasil</span>&nbsp;,
+                    estado c&iacute;vil&nbsp;<span
                         id="lblStCivil">{{user.clientes.get_estadocivil|upper}},&nbsp;</span>&nbsp;<span
                         id="lblDescricaoCPFCNPJ">inscrito no CPF/MF sob o n&ordm;&nbsp;</span><span
                         id="lblCPF">{{user.clientes.cnpjcpf|upper}}</span>&nbsp;<span id="lblTipoDocumento">, portador
-                        do(a) Identidade n&ordm;</span><span id="lblRg">{{user.clientes.documento_identidade|upper}}</span>,
-                        residente e domiciliado na&nbsp;<span
-                        id="lblEnde">{{user.clientes.endereco|upper}}</span>&nbsp;, n&ordm;&nbsp;<span
-                        id="lblNum">{{user.clientes.numero}}</span>&nbsp;
-                        {% if user.clientes.complemento %}
-                            <span id="lblComplemento">
-                            {{user.clientes.complemento|upper}}
-                            </span>
-                        {% endif %},&nbsp;bairro&nbsp;<span id="lblBairro">{{user.clientes.bairro|upper}}
+                        do(a) Identidade n&ordm;</span><span
+                        id="lblRg">{{user.clientes.documento_identidade|upper}}</span>,
+                    residente e domiciliado na&nbsp;<span id="lblEnde">{{user.clientes.endereco|upper}}</span>&nbsp;,
+                    n&ordm;&nbsp;<span id="lblNum">{{user.clientes.numero}}</span>&nbsp;
+                    {% if user.clientes.complemento %}
+                    <span id="lblComplemento">
+                        {{user.clientes.complemento|upper}}
+                    </span>
+                    {% endif %},&nbsp;bairro&nbsp;<span id="lblBairro">{{user.clientes.bairro|upper}}
                     </span>, no Munic&iacute;pio de&nbsp;<span id="lblCidade">
-                    {{user.clientes.cidade|upper}}</span>, Estado de&nbsp;<span id="lblUF">
-                    {{user.clientes.estado|upper}}</span>, doravante designado
+                        {{user.clientes.cidade|upper}}</span>, Estado de&nbsp;<span id="lblUF">
+                        {{user.clientes.estado|upper}}</span>, doravante designado
                     simplesmente&nbsp;<strong>CONTRATANTE</strong>, e;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">HOODID REGISTROS ONLINE LTDA - EPP, pessoa jur&iacute;dica de direito privado,
-                    constitu&iacute;da sob a forma de sociedade por quotas de responsabilidade limitada, inscrita no
-                    Cadastro Nacional de Pessoas Jur&iacute;dicas do Minist&eacute;rio da Fazenda (CNPJ/MF) sob o
-                    n&ordm; 20.854.059/0001-54, com sede na Rua Alvares Cabral, 200, sala 404, Bairro do Recife, cidade
-                    do Recife/PE, CEP: 50.030-160, representada na forma de seu CONTRATO Social, doravante designado
-                    simplesmente&nbsp;<strong>CONTRATADA;</strong></p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">Para melhor configura&ccedil;&atilde;o das cl&aacute;usulas e condi&ccedil;&otilde;es
-                    do presente CONTRATO, resolvem as partes fazer as seguintes considera&ccedil;&otilde;es:</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><em>CONSIDERANDO&nbsp;</em>que a CONTRATADA possibilita o acesso de seus clientes a
-                    cadeia de institui&ccedil;&otilde;es certificadoras da Infraestrutura de Chaves P&uacute;blicas
-                    Brasileiras &ndash; ICP-Brasil, criada atrav&eacute;s da Medida Provis&oacute;ria n&ordm; 2.200-2,
-                    de 24 de agosto de 2001, conferindo aos seus documentos eletr&ocirc;nicos garantia de autenticidade,
-                    integridade e validade jur&iacute;dica;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><em>CONSIDERANDO&nbsp;</em>que os membros da cadeia do ICP-Brasil est&atilde;o
-                    subordinados as normas do Comit&ecirc; Gestor das institui&ccedil;&otilde;es certificadoras,
-                    &oacute;rg&atilde;o vinculado &agrave; Casa Civil da Presid&ecirc;ncia da Rep&uacute;blica e que,
-                    por isso mesmo, est&aacute; autorizada a realizar registros de declara&ccedil;&atilde;o de autoria
-                    de obras intelectuais e que as declara&ccedil;&otilde;es constantes dos seus documentos presumem-se
-                    verdadeiros em rela&ccedil;&atilde;o aos seus signat&aacute;rios;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><em>CONSIDERANDO&nbsp;</em>que a certifica&ccedil;&atilde;o digital torna-se
-                    instrumento indispens&aacute;vel em casos de viola&ccedil;&atilde;o dos direitos de autor e serve
-                    como meio de prova de autoria em lit&iacute;gios judiciais;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><em>CONSIDERANDO&nbsp;</em>que o certificado digital viabilizado pela CONTRATADA
-                    protege o arquivo enviado pela CONTRATANTE, atrav&eacute;s de criptografias distintas de fontes
-                    variadas e incomunic&aacute;veis, por meio de procedimento padronizado pela
-                    administra&ccedil;&atilde;o p&uacute;blica federal, garantindo sua autenticidade;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><em>CONSIDERANDO&nbsp;</em>que o direito autoral brasileiro faculta ao CONTRATANTE
-                    registrar sua obra nas institui&ccedil;&otilde;es sugeridas pela Lei 5.988/73, mas n&atilde;o limita
-                    o procedimento de registro a tais institui&ccedil;&otilde;es;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><em>CONSIDERANDO&nbsp;</em>que o CONTRATANTE declarou serem verdadeiras, sob as penas
-                    da lei, as informa&ccedil;&otilde;es referentes a seus dados cadastrais na eventualidade do
-                    preenchimento do formul&aacute;rio de cadastro no Sistema HoodID, bem como que o CONTRATANTE se
-                    declara autor das obra(s) intelectual(s) relacionada(s) na cl&aacute;usula primeira do presente
-                    instrumento;</p>
-                <p align="JUSTIFY"><em>CONSIDERANDO&nbsp;</em>que o CONTRATANTE adquiriu, previamente, cr&eacute;ditos
-                    em moeda BRL no Sistema HoodID, e, por fim;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><em>CONSIDERANDO&nbsp;</em>que as partes acima qualificadas t&ecirc;m interesse em
-                    celebrar o presente CONTRATO de Presta&ccedil;&atilde;o de Servi&ccedil;o por livre e
-                    espont&acirc;nea vontade e na melhor forma do direito, o que fazem em conformidade com as
-                    cl&aacute;usulas e condi&ccedil;&otilde;es abaixo pactuadas<em>,&nbsp;</em>definem por contratar o
-                    seguinte.</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><strong>CL&Aacute;USULA PRIMEIRA&nbsp;</strong><strong>&ndash; DO OBJETO:</strong>
-                </p>
-                <p align="JUSTIFY">&nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    HOODID REGISTROS ONLINE LTDA - EPP, pessoa jurídica de direito privado, constituída sob a forma de
+                    sociedade por quotas de responsabilidade limitada, inscrita no Cadastro Nacional de Pessoas
+                    Jurídicas do Ministério da Fazenda (CNPJ/MF) sob o nº 20.854.059/0001-54, com sede na Rua Alvares
+                    Cabral, 200, sala 404, Bairro do Recife, cidade do Recife/PE, CEP: 50.030-160, representada na forma
+                    de seu CONTRATO Social, doravante designado simplesmente&nbsp;<strong>CONTRATADA;</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    Para melhor configuração das cláusulas e condições do presente CONTRATO, resolvem as partes fazer as
+                    seguintes considerações:</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <em>CONSIDERANDO&nbsp;</em>que a CONTRATADA possibilita o acesso de seus clientes a cadeia de
+                    instituições certificadoras da Infraestrutura de Chaves Públicas Brasileiras – ICP-Brasil, criada
+                    através da Medida Provisória nº 2.200-2, de 24 de agosto de 2001, conferindo aos seus documentos
+                    eletrônicos garantia de autenticidade, integridade e validade jurídica;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <em>CONSIDERANDO&nbsp;</em>que os membros da cadeia do ICP-Brasil estão subordinados as normas do
+                    Comitê Gestor das instituições certificadoras, órgão vinculado à Casa Civil da Presidência da
+                    República e que, por isso mesmo, está autorizada a realizar registros de declaração de autoria de
+                    obras intelectuais e que as declarações constantes dos seus documentos presumem-se verdadeiros em
+                    relação aos seus signatários;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <em>CONSIDERANDO&nbsp;</em>que a certificação digital torna-se instrumento indispensável em casos de
+                    violação dos direitos de autor e serve como meio de prova de autoria em litígios judiciais;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <em>CONSIDERANDO&nbsp;</em>que o certificado digital viabilizado pela CONTRATADA protege o arquivo
+                    enviado pela CONTRATANTE, através de criptografias distintas de fontes variadas e incomunicáveis,
+                    por meio de procedimento padronizado pela administração pública federal, garantindo sua
+                    autenticidade;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <em>CONSIDERANDO&nbsp;</em>que o direito autoral brasileiro faculta ao CONTRATANTE registrar sua
+                    obra nas instituições sugeridas pela Lei 5.988/73, mas não limita o procedimento de registro a tais
+                    instituições;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <em>CONSIDERANDO&nbsp;</em>que o CONTRATANTE declarou serem verdadeiras, sob as penas da lei, as
+                    informações referentes a seus dados cadastrais na eventualidade do preenchimento do formulário de
+                    cadastro no Sistema HoodID, bem como que o CONTRATANTE se declara autor das obra(s) intelectual(s)
+                    relacionada(s) na cláusula primeira do presente instrumento;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <em>CONSIDERANDO&nbsp;</em>que o CONTRATANTE adquiriu, previamente, créditos em moeda BRL no Sistema
+                    HoodID, e, por fim;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <em>CONSIDERANDO&nbsp;</em>que as partes acima qualificadas têm interesse em celebrar o presente
+                    CONTRATO de Prestação de Serviço por livre e espontânea vontade e na melhor forma do direito, o que
+                    fazem em conformidade com as cláusulas e condições abaixo pactuadas<em>,&nbsp;</em>definem por
+                    contratar o seguinte.</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>CLÁUSULA PRIMEIRA&nbsp;</strong><strong>– DO OBJETO:</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
                 <ol>
                     <li>
-                        <p align="JUSTIFY">O objeto do CONTRATO &eacute; servir de ve&iacute;culo entre o CONTRATANTE e
-                            a ICP-Brasil para a efetiva&ccedil;&atilde;o do registro de declara&ccedil;&atilde;o de
-                            autoria do conte&uacute;do da(s) obra(s) intelectual(s) abaixo relacionada(s), e
-                            opcionalmente com a possibilidade de arquivamento ou n&atilde;o das mesmas, levando-se em
-                            considera&ccedil;&atilde;o as informa&ccedil;&otilde;es prestadas no formul&aacute;rio de
-                            registro anteriormente preenchido pelo CONTRATANTE.&nbsp;<strong>.</strong></p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O objeto do CONTRATO é servir de veículo entre o CONTRATANTE e a ICP-Brasil para a
+                            efetivação do registro de declaração de autoria do conteúdo da(s) obra(s) intelectual(s)
+                            abaixo relacionada(s), e com a possibilidade de arquivamento ou não das mesmas, levando-se
+                            em consideração as informações prestadas no formulário de registro anteriormente preenchido
+                            pelo CONTRATANTE<strong>.</strong></p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">PAR&Aacute;GRAFO PRIMEIRO. A(s) obra(s) intelectual(s) acima est&atilde;o devidamente
-                    relacionadas no certificado de declara&ccedil;&atilde;o de autoria de n&ordm;&nbsp;<span
-                        id="lblNumReg">493999810</span>&nbsp;.</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">PAR&Aacute;GRAFO SEGUNDO. O presente CONTRATO possui um n&uacute;mero &uacute;nico e
-                    exclusivo, id&ecirc;ntico ao n&uacute;mero da solicita&ccedil;&atilde;o de registro realizada pelo
-                    CONTRATANTE, tendo sua validade jur&iacute;dica aceita com o certificado digital e carimbo de
-                    temporalidade.</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">PAR&Aacute;GRAFO TERCEIRO. A validade jur&iacute;dica do mencionado certificado de
-                    registro de declara&ccedil;&atilde;o de autoria emitido pelo Sistema HoodID ser&aacute; garantido,
-                    desde que o arquivo digital n&atilde;o seja alterado pelo CONTRATANTE;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">PAR&Aacute;GRAFO QUARTO. N&atilde;o faz parte do objeto do presente CONTRATO a
-                    an&aacute;lise de m&eacute;rito quanto aos direitos autorais da(s) obra(s) registrada(s), incluindo
-                    pesquisa de anterioridade, exame de oposi&ccedil;&atilde;o de terceiros, nem, tampouco, representar
-                    o CONTRATANTE em processos administrativos e judiciais.</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">PAR&Aacute;GRAFO QUINTO &ndash; O CONTRATANTE declara que tem conhecimento que
-                    n&atilde;o s&atilde;o objeto de prote&ccedil;&atilde;o como direitos autorais as
-                    cria&ccedil;&otilde;es relatadas no artigo 8&ordm; da Lei de Direitos Autorais. S&atilde;o elas:</p>
-                <p align="JUSTIFY">I - as ideias, procedimentos normativos, sistemas, m&eacute;todos, projetos ou
-                    conceitos matem&aacute;ticos como tais;</p>
-                <p align="JUSTIFY">II - os esquemas, planos ou regras para realizar atos mentais, jogos ou
-                    neg&oacute;cios;</p>
-                <p align="JUSTIFY">III - os formul&aacute;rios em branco para serem preenchidos por qualquer tipo de
-                    informa&ccedil;&atilde;o, cient&iacute;fica ou n&atilde;o, e suas instru&ccedil;&otilde;es;</p>
-                <p align="JUSTIFY">IV - os textos de tratados ou conven&ccedil;&otilde;es, leis, decretos, regulamentos,
-                    decis&otilde;es judiciais e demais atos oficiais;</p>
-                <p align="JUSTIFY">V - as informa&ccedil;&otilde;es de uso comum tais como calend&aacute;rios, agendas,
-                    cadastros ou legendas;</p>
-                <p align="JUSTIFY">VI - os nome e t&iacute;tulos isolados;</p>
-                <p align="JUSTIFY">VII - o aproveitamento industrial ou comercial das ideias contidas nas obras.</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><strong>CL&Aacute;USULA SEGUNDA&nbsp;</strong><strong>&ndash; DO
-                        PRE&Ccedil;O:</strong></p>
-                <p align="JUSTIFY">&nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    PARÁGRAFO PRIMEIRO. A(s) obra(s) intelectual(s) acima estão devidamente relacionadas no certificado
+                    de declaração de autoria de nº&nbsp;<span id="lblNumReg">paramentro_registros</span>&nbsp;.</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    PARÁGRAFO SEGUNDO. O presente CONTRATO possui um número único e exclusivo, idêntico ao número da
+                    solicitação de registro realizada pelo CONTRATANTE, tendo sua validade jurídica aceita com o
+                    certificado digital e carimbo de temporalidade.</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    PARÁGRAFO TERCEIRO. A validade jurídica do mencionado certificado de registro de declaração de
+                    autoria emitido pelo Sistema HoodID será garantido, desde que o arquivo digital não seja alterado
+                    pelo CONTRATANTE;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    PARÁGRAFO QUARTO. Não faz parte do objeto do presente CONTRATO a análise de mérito quanto aos
+                    direitos autorais da(s) obra(s) registrada(s), incluindo pesquisa de anterioridade, exame de
+                    oposição de terceiros, nem, tampouco, representar o CONTRATANTE em processos administrativos e
+                    judiciais.</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    PARÁGRAFO QUINTO – O CONTRATANTE declara que tem conhecimento que não são objeto de proteção como
+                    direitos autorais as criações relatadas no artigo 8º da Lei de Direitos Autorais. São elas:</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    I - as ideias, procedimentos normativos, sistemas, métodos, projetos ou conceitos matemáticos como
+                    tais;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    II - os esquemas, planos ou regras para realizar atos mentais, jogos ou negócios;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    III - os formulários em branco para serem preenchidos por qualquer tipo de informação, científica ou
+                    não, e suas instruções;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    IV - os textos de tratados ou convenções, leis, decretos, regulamentos, decisões judiciais e demais
+                    atos oficiais;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    V - as informações de uso comum tais como calendários, agendas, cadastros ou legendas;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    VI - os nome e títulos isolados;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    VII - o aproveitamento industrial ou comercial das ideias contidas nas obras.</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>CLÁUSULA SEGUNDA&nbsp;</strong><strong>– DO PREÇO:</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
                 <ol start="2">
                     <li>
-                        <p align="JUSTIFY">O pre&ccedil;o l&iacute;quido, certo e exig&iacute;vel pelo qual o
-                            CONTRATANTE pagar&aacute; &agrave; CONTRATADA para execu&ccedil;&atilde;o do(s)
-                            servi&ccedil;o(s) relacionado(s) na cl&aacute;usula primeira ser&aacute; de&nbsp;<span
-                                id="lblValor">R$ 41,80</span>&nbsp;, a ser pago em moeda BRL, atrav&eacute;s dos
-                            cr&eacute;ditos previamente adquiridos pelo CONTRATANTE, no Sistema HoodID.</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O preço líquido, certo e exigível pelo qual o CONTRATANTE pagará à CONTRATADA para execução
+                            do(s) serviço(s) relacionado(s) na cláusula primeira será de&nbsp;<span id="lblValor">R$
+                                41,80</span>&nbsp;, a ser pago em moeda BRL, através dos créditos previamente adquiridos
+                            pelo CONTRATANTE, no Sistema HoodID.</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">PAR&Aacute;GRAFO &Uacute;NICO. &Eacute; assegurado &agrave; CONTRATADA o direito de
-                    manter em seus arquivos, por tempo indeterminando, o conte&uacute;do da(s) obra(s) intelectual(s)
-                    relacionadas na cl&aacute;usula primeira do presente CONTRATO, em sua originalidade.</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><strong>CL&Aacute;USULA TERCEIRA&nbsp;</strong><strong>&ndash; DAS
-                        OBRIGA&Ccedil;&Otilde;ES:</strong></p>
-                <p align="JUSTIFY">&nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    PARÁGRAFO ÚNICO. É assegurado à CONTRATADA o direito de manter em seus arquivos, por tempo
+                    indeterminando, o conteúdo da(s) obra(s) intelectual(s) relacionadas na cláusula primeira do
+                    presente CONTRATO, em sua originalidade.</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>CLÁUSULA TERCEIRA&nbsp;</strong><strong>– DAS OBRIGAÇÕES:</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
                 <ol start="3">
                     <li>
-                        <p align="JUSTIFY">S&atilde;o obriga&ccedil;&otilde;es das partes:</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            São obrigações das partes:</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY"><strong>DO CONTRATANTE:</strong></p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            <strong>DO CONTRATANTE:</strong></p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Realizar o preenchimento do formul&aacute;rio de cadastro &agrave;
-                            disposi&ccedil;&atilde;o no Sistema HoodID, fornecendo as informa&ccedil;&otilde;es
-                            necess&aacute;rias ao pedido de registro de forma l&iacute;cita e ver&iacute;dica;</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Realizar o preenchimento do formulário de cadastro à disposição no Sistema HoodID,
+                            fornecendo as informações necessárias ao pedido de registro de forma lícita e verídica;</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="2">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="2" style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Realizar a aquisi&ccedil;&atilde;o de cr&eacute;ditos para posterior
-                            efetiva&ccedil;&atilde;o do registro, tudo atrav&eacute;s do Sistema HoodID;</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in;">
+                            Realizar a aquisição de créditos para posterior efetivação do registro, tudo através do
+                            Sistema HoodID;</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="3">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="3" style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Assumir a responsabilidade pela verifica&ccedil;&atilde;o pr&eacute;via da
-                            exist&ecirc;ncia de obra(s) intelectual(is) colidentes &agrave;quela(s) objeto do presente
-                            CONTRATO, bem como com marca, patente, direito autoral, desenhos industriais e/ou
-                            inova&ccedil;&atilde;o de terceiros antes do encaminhamento definitivo do pedido de registro
-                            &agrave; CONTRATADA;</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Assumir a responsabilidade pela verificação prévia da existência de obra(s) intelectual(is)
+                            colidentes àquela(s) objeto do presente CONTRATO, bem como com marca, patente, direito
+                            autoral, desenhos industriais e/ou inovação de terceiros antes do encaminhamento definitivo
+                            do pedido de registro à CONTRATADA;</p>
                     </li>
                 </ol>
-                <p>&nbsp;</p>
-                <ol start="4">
+                <p style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="4" style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Manter uma c&oacute;pia do arquivo enviado ao Sistema HoodID em sua
-                            originalidade, sem qualquer altera&ccedil;&atilde;o, inclusive sem editar e/ou salvar na
-                            &iacute;ntegra, sob pena de perder autenticidade;</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="2">
-                    <li>
-                        <p align="JUSTIFY"><strong>DA CONTRATADA:</strong></p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol>
-                    <li>
-                        <p align="JUSTIFY">Manter sigilo das informa&ccedil;&otilde;es recebidas pelo CONTRATANTE, na
-                            eventualidade do cadastramento no Sistema HoodID;</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="2">
-                    <li>
-                        <p align="JUSTIFY">Fornecer o mencionado certificado de registro de declara&ccedil;&atilde;o de
-                            autoria contendo a rela&ccedil;&atilde;o da(s) obra(s) intelectual(is) relacionada(s) na
-                            cl&aacute;usula primeira do presente CONTRATO;</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="3">
-                    <li>
-                        <p align="JUSTIFY">Possibilitar certifica&ccedil;&atilde;o digital com carimbo de temporalidade
-                            do(s) arquivo(s) relacionado(s) na cl&aacute;usula primeira do presente CONTRATO, em sua
-                            originalidade;</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="4">
-                    <li>
-                        <p align="JUSTIFY">Fornecer Nota(s) Fiscal(is) pelo(s) servi&ccedil;o(s) prestado(s);</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="5">
-                    <li>
-                        <p align="JUSTIFY">Manter estrutura administrativa e t&eacute;cnica para atender ao CONTRATANTE,
-                            pela Internet, no que tange a eventuais informa&ccedil;&otilde;es acerca do conte&uacute;do
-                            da(s) obra(s) intelectual(is) relacionada(s) na cl&aacute;usula primeira do presente
-                            CONTRATO, em sua originalidade.</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><strong>CL&Aacute;USULA QUARTA&nbsp;</strong><strong>&ndash; DA IRREVOGABILIDADE E
-                        IRRETRATABILIDADE:</strong></p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="4">
-                    <li>
-                        <p align="JUSTIFY">O presente CONTRATO &eacute; firmado em car&aacute;ter irrevog&aacute;vel e
-                            irretrat&aacute;vel, n&atilde;o cabendo arrependimento, obrigando-se as partes a cumprirem
-                            por si, seus herdeiros e sucessores, a qualquer t&iacute;tulo.</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><strong>CL&Aacute;USULA QUINTA&nbsp;</strong><strong>&ndash; DA
-                        CONFIDENCIALIDADE:</strong></p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="5">
-                    <li>
-                        <p align="JUSTIFY">Cada uma das partes se obriga, sob pena de indeniza&ccedil;&atilde;o por
-                            perdas e danos e aplica&ccedil;&atilde;o de multa de 10% sob o benef&iacute;cio
-                            econ&ocirc;mico auferido, a manter em absoluto sigilo e confidencialidade todas as
-                            informa&ccedil;&otilde;es decorrentes deste CONTRATO, dados ou especifica&ccedil;&otilde;es
-                            a que tiver acesso ou que porventura venha a conhecer ou ter ci&ecirc;ncia sobre a(s)
-                            obra(s) intelectual(is) relacionada(s) na cl&aacute;usula primeira do presente CONTRATO,
-                            usando-as somente para os fins desta rela&ccedil;&atilde;o CONTRATUAL, sem preju&iacute;zo
-                            das obriga&ccedil;&otilde;es de revela&ccedil;&atilde;o ou dos reportes exigidos em lei ou
-                            por ordem judicial.</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><strong>CL&Aacute;USULA SEXTA&nbsp;</strong><strong>&ndash; DAS HIP&Oacute;TESES DE
-                        RESOLU&Ccedil;&Atilde;O DO PRESENTE CONTRATO</strong></p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="6">
-                    <li>
-                        <p align="JUSTIFY">O presente instrumento CONTRATUAL ser&aacute; resolvido pelas seguintes
-                            hip&oacute;teses:</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol>
-                    <li>
-                        <p align="JUSTIFY">O presente CONTRATO poder&aacute; ser resilido sem &ocirc;nus ou multa, com
-                            rela&ccedil;&atilde;o ao arquivamento da(s) obra(s) intelectual(is) relacionada(s) na
-                            cl&aacute;usula primeira do presente instrumento, por qualquer parte, a qualquer tempo,
-                            mediante aviso pr&eacute;vio por escrito &agrave; outra parte com, pelo menos, 30 (trinta)
-                            dias de anteced&ecirc;ncia.</p>
-                    </li>
-                </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol>
-                    <li>
-                        <p align="JUSTIFY">Caso a CONTRATADA der causa a resili&ccedil;&atilde;o apontada no item 6.1.
-                            do presente CONTRATO, obriga-se o CONTRATANTE em realizar o download do conte&uacute;do
-                            da(s) obra(s) intelectual(is) relacionada(s) na cl&aacute;usula primeira do presente
-                            CONTRATO, em sua originalidade, no prazo de 30 (trinta) dias, ficando ciente que,
-                            ap&oacute;s o mencionado prazo, o arquivo ser&aacute; apagado/deletado do Sistema HoodID.
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Manter uma cópia do arquivo enviado ao Sistema HoodID em sua originalidade, sem qualquer
+                            alteração, inclusive sem editar e/ou salvar na íntegra, sob pena de perder autenticidade;
                         </p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
                 <ol start="2">
                     <li>
-                        <p align="JUSTIFY">Este CONTRATO ser&aacute; rescindido de pleno direito, independentemente de
-                            notifica&ccedil;&atilde;o, interpela&ccedil;&atilde;o judicial ou extrajudicial, na
-                            hip&oacute;tese de fal&ecirc;ncia, recupera&ccedil;&atilde;o judicial ou extrajudicial ou
-                            insolv&ecirc;ncia da CONTRATADA, decretada ou requerida.</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            <strong>DA CONTRATADA:</strong></p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="3">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Tamb&eacute;m motiva a rescis&atilde;o de pleno direito, e sem
-                            preju&iacute;zo da multa compensat&oacute;ria no valor equivalente &agrave; 10% sob o
-                            beneficio econ&ocirc;mico gerado, o n&atilde;o cumprimento pelo CONTRATANTE de qualquer das
-                            cl&aacute;usulas ou obriga&ccedil;&otilde;es dispostas neste CONTRATO, ou ainda se ocorrer
-                            qualquer das seguintes hip&oacute;teses:</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Manter sigilo das informações recebidas pelo CONTRATANTE, na eventualidade do cadastramento
+                            no Sistema HoodID;</p>
                     </li>
                 </ol>
-                <p>&nbsp;</p>
-                <ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="2" style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Se o CONTRATANTE n&atilde;o pagar quaisquer taxas, comiss&otilde;es ou
-                            quaisquer outros encargos eventualmente cobrados ou se recusar a faz&ecirc;-lo;</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Fornecer o mencionado certificado de registro de declaração de autoria contendo a relação
+                            da(s) obra(s) intelectual(is) relacionada(s) na cláusula primeira do presente CONTRATO;</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="2">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="3" style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Se o CONTRATANTE, sem autoriza&ccedil;&atilde;o da CONTRATADA, (i) ceder ou
-                            transferir para terceiros, emprestar-lhes ou entregar-lhes as informa&ccedil;&otilde;es
-                            constantes neste CONTRATO, na assessoria jur&iacute;dica ou qualquer outro materiais que
-                            receber em virtude deste CONTRATO. As veda&ccedil;&otilde;es aqui previstas s&atilde;o
-                            v&aacute;lidas e aplic&aacute;veis para filiais e empresas do mesmo grupo econ&ocirc;mico do
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Possibilitar certificação digital com carimbo de temporalidade do(s) arquivo(s)
+                            relacionado(s) na cláusula primeira do presente CONTRATO, em sua originalidade;</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="4" style="margin-left: 80px;">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Fornecer Nota(s) Fiscal(is) pelo(s) serviço(s) prestado(s);</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="5" style="margin-left: 80px;">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Manter estrutura administrativa e técnica para atender ao CONTRATANTE, pela Internet, no que
+                            tange a eventuais informações acerca do conteúdo da(s) obra(s) intelectual(is)
+                            relacionada(s) na cláusula primeira do presente CONTRATO, em sua originalidade.</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>CLÁUSULA QUARTA&nbsp;</strong><strong>– DA IRREVOGABILIDADE E IRRETRATABILIDADE:</strong>
+                </p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="4">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O presente CONTRATO é firmado em caráter irrevogável e irretratável, não cabendo
+                            arrependimento, obrigando-se as partes a cumprirem por si, seus herdeiros e sucessores, a
+                            qualquer título.</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>CLÁUSULA QUINTA&nbsp;</strong><strong>– DA CONFIDENCIALIDADE:</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="5">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Cada uma das partes se obriga, sob pena de indenização por perdas e danos e aplicação de
+                            multa de 10% sob o benefício econômico auferido, a manter em absoluto sigilo e
+                            confidencialidade todas as informações decorrentes deste CONTRATO, dados ou especificações a
+                            que tiver acesso ou que porventura venha a conhecer ou ter ciência sobre a(s) obra(s)
+                            intelectual(is) relacionada(s) na cláusula primeira do presente CONTRATO, usando-as somente
+                            para os fins desta relação CONTRATUAL, sem prejuízo das obrigações de revelação ou dos
+                            reportes exigidos em lei ou por ordem judicial.</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>CLÁUSULA SEXTA&nbsp;</strong><strong>– DAS HIPÓTESES DE RESOLUÇÃO DO PRESENTE
+                        CONTRATO</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="6">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O presente instrumento CONTRATUAL será resolvido pelas seguintes hipóteses:</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol style="margin-left: 40px;">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O presente CONTRATO poderá ser resilido sem ônus ou multa, com relação ao arquivamento da(s)
+                            obra(s) intelectual(is) relacionada(s) na cláusula primeira do presente instrumento, por
+                            qualquer parte, a qualquer tempo, mediante aviso prévio por escrito à outra parte com, pelo
+                            menos, 30 (trinta) dias de antecedência.</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol style="margin-left: 80px;">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Caso a CONTRATADA der causa a resilição apontada no item 6.1. do presente CONTRATO,
+                            obriga-se o CONTRATANTE em realizar o download do conteúdo da(s) obra(s) intelectual(is)
+                            relacionada(s) na cláusula primeira do presente CONTRATO, em sua originalidade, no prazo de
+                            30 (trinta) dias, ficando ciente que, após o mencionado prazo, o arquivo será
+                            apagado/deletado do Sistema HoodID.</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="2" style="margin-left: 40px;">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Este CONTRATO será rescindido de pleno direito, independentemente de notificação,
+                            interpelação judicial ou extrajudicial, na hipótese de falência, recuperação judicial ou
+                            extrajudicial ou insolvência da CONTRATADA, decretada ou requerida.</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="3" style="margin-left: 40px;">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Também motiva a rescisão de pleno direito, e sem prejuízo da multa compensatória no valor
+                            equivalente à 10% sob o beneficio econômico gerado, o não cumprimento pelo CONTRATANTE de
+                            qualquer das cláusulas ou obrigações dispostas neste CONTRATO, ou ainda se ocorrer qualquer
+                            das seguintes hipóteses:</p>
+                    </li>
+                </ol>
+                <p style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol style="margin-left: 80px;">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Se o CONTRATANTE não pagar quaisquer taxas, comissões ou quaisquer outros encargos
+                            eventualmente cobrados ou se recusar a fazê-lo;</p>
+                    </li>
+                </ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="2" style="margin-left: 80px;">
+                    <li>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Se o CONTRATANTE, sem autorização da CONTRATADA, (i) ceder ou transferir para terceiros,
+                            emprestar-lhes ou entregar-lhes as informações constantes neste CONTRATO, na assessoria
+                            jurídica ou qualquer outro materiais que receber em virtude deste CONTRATO. As vedações aqui
+                            previstas são válidas e aplicáveis para filiais e empresas do mesmo grupo econômico do
                             CONTRATANTE;</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="3">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="3" style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Se qualquer das informa&ccedil;&otilde;es escritas ou verbais dadas pelo
-                            CONTRATANTE, incluindo, mas n&atilde;o se limitando, &agrave;quelas constantes do
-                            Formul&aacute;rio de Afilia&ccedil;&atilde;o ao Sistema HoodID, representa&ccedil;&atilde;o
-                            legal e dados cadastrais do CONTRATANTE, n&atilde;o corresponderem com a verdade ou
-                            n&atilde;o forem atualizadas pelo CONTRATANTE em, no m&aacute;ximo 90 (noventa) dias, em
-                            caso de altera&ccedil;&atilde;o;</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Se qualquer das informações escritas ou verbais dadas pelo CONTRATANTE, incluindo, mas não
+                            se limitando, àquelas constantes do Formulário de Afiliação ao Sistema HoodID, representação
+                            legal e dados cadastrais do CONTRATANTE, não corresponderem com a verdade ou não forem
+                            atualizadas pelo CONTRATANTE em, no máximo 90 (noventa) dias, em caso de alteração;</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="4">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="4" style="margin-left: 80px;">
                     <li>
-                        <p align="JUSTIFY">Caso fortuito, ou for&ccedil;a maior que impe&ccedil;am o cumprimento deste
-                            CONTRATO.</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Caso fortuito, ou força maior que impeçam o cumprimento deste CONTRATO.</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><strong>PAR&Aacute;GRAFO &Uacute;NICO.&nbsp;</strong>Nos casos previstos nesta
-                    Cl&aacute;usula, a CONTRATADA n&atilde;o estar&aacute; obrigada a cumprir o prazo de 30 (trinta)
-                    dias podendo efetivar a rescis&atilde;o no momento de sua ci&ecirc;ncia da ocorr&ecirc;ncia de
-                    quaisquer das hip&oacute;teses acima.</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY"><strong>CL&Aacute;USULA S&Eacute;TIMA&nbsp;</strong><strong>&ndash; DAS
-                        CONDI&Ccedil;&Otilde;ES GERAIS:</strong></p>
-                <p align="JUSTIFY">&nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>PARÁGRAFO ÚNICO.&nbsp;</strong>Nos casos previstos nesta Cláusula, a CONTRATADA não estará
+                    obrigada a cumprir o prazo de 30 (trinta) dias podendo efetivar a rescisão no momento de sua ciência
+                    da ocorrência de quaisquer das hipóteses acima.</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>CLÁUSULA SÉTIMA&nbsp;</strong><strong>– DAS CONDIÇÕES GERAIS:</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
                 <ol start="7">
                     <li>
-                        <p align="JUSTIFY">O presente instrumento CONTRATUAL ser&aacute; regido pelas seguintes
-                            condi&ccedil;&otilde;es gerais:</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O presente instrumento CONTRATUAL será regido pelas seguintes condições gerais:</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">Sem preju&iacute;zo das demais cl&aacute;usulas e condi&ccedil;&otilde;es
-                            constantes deste CONTRATO, a CONTRATADA n&atilde;o se responsabilizar&aacute; por erro de
-                            informa&ccedil;&atilde;o prestada pelo CONTRATANTE, infra&ccedil;&atilde;o e/ou
-                            descumprimento de qualquer legisla&ccedil;&atilde;o aplic&aacute;vel &agrave;
-                            utiliza&ccedil;&atilde;o e explora&ccedil;&atilde;o da(s) obra(s) intelectual(is)
-                            relacionada(s) na cl&aacute;usula primeira do presente CONTRATO, sendo que, na
-                            hip&oacute;tese da CONTRATADA vir a sofrer ou suportar qualquer perda e/ou preju&iacute;zo,
-                            por culpa ou dolo do CONTRATANTE, ficar&aacute; o CONTRATANTE obrigado a proceder ao
-                            reembolso e/ou indeniza&ccedil;&atilde;o por perdas e danos, &agrave; CONTRATADA, de tais
-                            valores, incluindo, mas sem se limitar, despesas relacionadas &agrave; custas
-                            administrativas e/ou judiciais, taxas, emolumentos e honor&aacute;rios advocat&iacute;cios,
-                            devidamente atualizados de acordo com a varia&ccedil;&atilde;o do &iacute;ndice IGP-M/FGV,
-                            ou outro que vier a substitu&iacute;-lo;</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Sem prejuízo das demais cláusulas e condições constantes deste CONTRATO, a CONTRATADA não se
+                            responsabilizará por erro de informação prestada pelo CONTRATANTE, infração e/ou
+                            descumprimento de qualquer legislação aplicável à utilização e exploração da(s) obra(s)
+                            intelectual(is) relacionada(s) na cláusula primeira do presente CONTRATO, sendo que, na
+                            hipótese da CONTRATADA vir a sofrer ou suportar qualquer perda e/ou prejuízo, por culpa ou
+                            dolo do CONTRATANTE, ficará o CONTRATANTE obrigado a proceder ao reembolso e/ou indenização
+                            por perdas e danos, à CONTRATADA, de tais valores, incluindo, mas sem se limitar, despesas
+                            relacionadas à custas administrativas e/ou judiciais, taxas, emolumentos e honorários
+                            advocatícios, devidamente atualizados de acordo com a variação do índice IGP-M/FGV, ou outro
+                            que vier a substituí-lo;</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="2">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="2" style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">Todos os dados fornecidos para o pedido de registro s&atilde;o capturados de
-                            forma l&iacute;cita, destarte, qualquer ilicitude encontrada levar&aacute; o CONTRATANTE a
-                            responder processo c&iacute;vel e criminal pelos atos cometidos;</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Todos os dados fornecidos para o pedido de registro são capturados de forma lícita,
+                            destarte, qualquer ilicitude encontrada levará o CONTRATANTE a responder processo cível e
+                            criminal pelos atos cometidos;</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="3">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="3" style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">A eventual toler&acirc;ncia da CONTRATADA no descumprimento das
-                            obriga&ccedil;&otilde;es CONTRATUAIS por parte do CONTRATANTE n&atilde;o constituir&aacute;
-                            nova&ccedil;&atilde;o, ren&uacute;ncia ou modifica&ccedil;&atilde;o do CONTRATO, podendo a
-                            parte prejudicada exigir, a qualquer tempo, o cumprimento das obriga&ccedil;&otilde;es aqui
-                            previstas;</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            A eventual tolerância da CONTRATADA no descumprimento das obrigações CONTRATUAIS por parte
+                            do CONTRATANTE não constituirá novação, renúncia ou modificação do CONTRATO, podendo a parte
+                            prejudicada exigir, a qualquer tempo, o cumprimento das obrigações aqui previstas;</p>
                     </li>
                 </ol>
-                <p>&nbsp;</p>
-                <ol start="4">
+                <p style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="4" style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">A eventual declara&ccedil;&atilde;o judicial de nulidade de qualquer das
-                            cl&aacute;usulas deste CONTRATO, n&atilde;o implicar&aacute; na nulidade das demais
-                            cl&aacute;usulas, levando-se em considera&ccedil;&atilde;o que o presente CONTRATO
-                            dever&aacute; ser interpretado de modo a assegurar a sobreviv&ecirc;ncia de todas as suas
-                            disposi&ccedil;&otilde;es.</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            A eventual declaração judicial de nulidade de qualquer das cláusulas deste CONTRATO, não
+                            implicará na nulidade das demais cláusulas, levando-se em consideração que o presente
+                            CONTRATO deverá ser interpretado de modo a assegurar a sobrevivência de todas as suas
+                            disposições.</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="5">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="5" style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">Ao aderir a este CONTRATO, o CONTRATANTE autoriza a CONTRATADA a incluir, sem
-                            qualquer &ocirc;nus para esta &uacute;ltima, seu nome em a&ccedil;&otilde;es de marketing,
-                            cat&aacute;logos e outros materiais promocionais do Sistema HoodID com a finalidade de
-                            divulga&ccedil;&atilde;o e desenvolvimento de produtos oferecidos pela CONTRATADA.</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Ao aderir a este CONTRATO, o CONTRATANTE autoriza a CONTRATADA a incluir, sem qualquer ônus
+                            para esta última, seu nome em ações de marketing, catálogos e outros materiais promocionais
+                            do Sistema HoodID com a finalidade de divulgação e desenvolvimento de produtos oferecidos
+                            pela CONTRATADA.</p>
                     </li>
                 </ol>
-                <p>&nbsp;</p>
-                <ol start="6">
+                <p style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="6" style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">O CONTRATANTE est&aacute; ciente que na eventualidade de constatada a
-                            exist&ecirc;ncia de anterioridade de registro de declara&ccedil;&atilde;o de autoria em
-                            qualquer outro ve&iacute;culo de prote&ccedil;&atilde;o de direitos autorais semelhante ao
-                            Sistema HoodID n&atilde;o ser&aacute; responsabilidade da CONTRATADA.</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O CONTRATANTE está ciente que na eventualidade de constatada a existência de anterioridade
+                            de registro de declaração de autoria em qualquer outro veículo de proteção de direitos
+                            autorais semelhante ao Sistema HoodID não será responsabilidade da CONTRATADA.</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="7">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="7" style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">Para os fins deste CONTRATO, o CONTRATANTE autoriza e concorda que a
-                            CONTRATADA mantenha um banco de dados com suas informa&ccedil;&otilde;es cadastrais, podendo
-                            us&aacute;-los plenamente para a consecu&ccedil;&atilde;o do objeto do presente instrumento.
-                        </p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            Para os fins deste CONTRATO, o CONTRATANTE autoriza e concorda que a CONTRATADA mantenha um
+                            banco de dados com suas informações cadastrais, podendo usá-los plenamente para a consecução
+                            do objeto do presente instrumento.</p>
                     </li>
                 </ol>
-                <p>&nbsp;</p>
-                <ol start="8">
+                <p style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="8" style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">O CONTRATANTE tem ci&ecirc;ncia e est&aacute; de acordo que a CONTRATADA
-                            poder&aacute; encaminhar todos os dados do conte&uacute;do da(s) obra(s) intelectual(is)
-                            relacionada(s) na cl&aacute;usula primeira do presente CONTRATO, em sua originalidade,
-                            incluindo logins de acesso, aos &oacute;rg&atilde;os estatais com compet&ecirc;ncia para
-                            investiga&ccedil;&atilde;o de crimes ou conflitos de interesses, tais como, mas n&atilde;o
-                            se resumindo a, Receita Federal do Brasil, Pol&iacute;cia Federal, Poder Judici&aacute;rio
-                            em qualquer de suas inst&acirc;ncias, dentre outros.</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O CONTRATANTE tem ciência e está de acordo que a CONTRATADA poderá encaminhar todos os dados
+                            do conteúdo da(s) obra(s) intelectual(is) relacionada(s) na cláusula primeira do presente
+                            CONTRATO, em sua originalidade, incluindo logins de acesso, aos órgãos estatais com
+                            competência para investigação de crimes ou conflitos de interesses, tais como, mas não se
+                            resumindo a, Receita Federal do Brasil, Polícia Federal, Poder Judiciário em qualquer de
+                            suas instâncias, dentre outros.</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <ol start="9">
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <ol start="9" style="margin-left: 40px;">
                     <li>
-                        <p align="JUSTIFY">O presente CONTRATO passa a vigorar com o aceite eletr&ocirc;nico, bem como
-                            leitura e compreens&atilde;o dos&nbsp;<a
-                                href="https://www.lealmarcasepatentes.com.br/termos/">Termos e
-                                Condi&ccedil;&otilde;es</a>&nbsp;e&nbsp;<a
-                                href="https://www.lealmarcasepatentes.com.br/politica-de-privacidade/">Pol&iacute;ticas
-                                de Privacidade</a>&nbsp;deste portal de servi&ccedil;os. Fica presente no website da
-                            CONTRATADA, em todo o momento da contrata&ccedil;&atilde;o do servi&ccedil;o, o&nbsp;<a
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            O presente CONTRATO passa a vigorar com o aceite eletrônico, bem como leitura e compreensão
+                            dos&nbsp;<a href="https://www.lealmarcasepatentes.com.br/termos/">Termos e
+                                Condições</a>&nbsp;e&nbsp;<a
+                                href="https://www.lealmarcasepatentes.com.br/politica-de-privacidade/">Políticas de
+                                Privacidade</a>&nbsp;deste portal de serviços. Fica presente no website da CONTRATADA,
+                            em todo o momento da contratação do serviço, o&nbsp;<a
                                 href="https://www.lealmarcasepatentes.com.br/fale-conosco/">Fale Conosco</a>, para
-                            dirimir d&uacute;vidas eventuais referentes ao pedido de registro da
-                            declara&ccedil;&atilde;o de autoria encaminhado.</p>
+                            dirimir dúvidas eventuais referentes ao pedido de registro da declaração de autoria
+                            encaminhado.</p>
                     </li>
                 </ol>
-                <p>&nbsp;</p>
-                <p align="JUSTIFY"><strong>CL&Aacute;USULA</strong><strong>&nbsp;</strong><strong>&ndash; DO
-                        FORO.</strong></p>
-                <p align="JUSTIFY">&nbsp;</p>
+                <p style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>CLÁUSULA</strong><strong>&nbsp;</strong><strong>– DO FORO.</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
                 <ol start="8">
                     <li>
-                        <p align="JUSTIFY">As partes contratantes elegem o foro da Comarca do Recife-PE, como o
-                            &uacute;nico competente para processar e julgar quaisquer lit&iacute;gios judiciais que
-                            direta ou indiretamente decorram do presente CONTRATO, renunciando, expressamente a qualquer
-                            outro, por mais privilegiado que seja.</p>
+                        <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                            As partes contratantes elegem o foro da Comarca do Recife-PE, como o único competente para
+                            processar e julgar quaisquer litígios judiciais que direta ou indiretamente decorram do
+                            presente CONTRATO, renunciando, expressamente a qualquer outro, por mais privilegiado que
+                            seja.</p>
                     </li>
                 </ol>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="JUSTIFY">&nbsp;</p>
-                <p align="CENTER"><strong>***************************************</strong></p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
+                    &nbsp;</p>
+                <p align="CENTER" style="margin-bottom: 0.08in; direction: ltr;">
+                    <strong>***************************************</strong></p>
             </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
         </tr>
     </tbody>
 </table>

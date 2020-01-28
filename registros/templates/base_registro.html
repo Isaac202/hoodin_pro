@@ -173,10 +173,13 @@
                 //$("#total").html("10")
                 $("#percent").text("concluido ;)");
                 let result = data.result
-                if (result.is_valid) {
+                if (result.is_valid) { 
                     service_active = true
                     // console.log(result)
                     let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
+                    $("#codeFiles").append(
+                        $('<span>').attr('id',"codFile"+result.id).html(", "+result.code)
+                    )
                     $("#gallery tbody").prepend(
                         $("<tr>").append( 
                             $('<td>').append(
@@ -323,6 +326,7 @@
             element.fadeIn(005)
         }).done(function (data) {
             element.remove()
+            $('#codFile'+ id).remove()
             $("#tr_desc" + id).remove()
             $("#table_coautor" + id).remove()
             $('#check_file' + id).remove()

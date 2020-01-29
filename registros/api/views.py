@@ -210,7 +210,7 @@ class BuyCredit(APIView):
             valor = valor.replace(',', '.')
             val_decimail = Decimal(valor)
         val = int(val_decimail * 100)
-        pedido = randint(1, 1000000)
+        # pedido = randint(1, 1000000)
         data = comprar_credito(
             10, nome_cartao, numero_cartao, seguranca, bandeira, validade, val, 1)
         resposta_cielo, trasacao, codigo_compra = data
@@ -223,7 +223,7 @@ class BuyCredit(APIView):
             cliente.valor_credito += val_decimail
             cliente.save()
 
-        compra = Compras.objects.create(
+        Compras.objects.create(
             id_usuario=request.user,
             id_cliente=cliente,
             valor=val_decimail,

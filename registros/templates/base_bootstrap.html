@@ -49,11 +49,11 @@
 <body style="background-size: cover; background-image: url({% static 'imgs/bg.jpeg'%}">
     <div class="d-none" id="loading" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1;"></div>  
     <!-- Google Tradutor -->
-    <div style="background-color: white;" class="row">
+    {% include "modal_aguarde.html" %}
+    <div style="background-color: white; z-index: 1;" class="row">
         <div class="col-4 col-lg-8">&nbsp;</div>
         <div class="col-8 col-lg-4" id="google_translate_element"></div> 
     </div>
-    {% include "modal_aguarde.html" %}
     {% include "bootstrap/menu.html" %}
     {% block content %}
     {% endblock content %}

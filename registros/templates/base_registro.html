@@ -496,7 +496,7 @@
 
     $('#cielo').submit(function (e) {
         e.preventDefault()
-        let url = '/api/buy-credit/'
+        let url = '/api/buy-credit/' 
         let data = {
             csrfmiddlewaretoken: "{{ csrf_token }}",
         }
@@ -516,7 +516,7 @@
             $.post(url, data, function (data) {
                 if (data.result) {
                     $('msg_cielo').text(data.msg)
-                    // $('#modal_cielo').close()
+                    $('#modal_cielo').modal('hide');
                     $('#registro-form').submit()
                 } else {
                     $('msg_cielo').text(data.msg)
@@ -526,10 +526,12 @@
                 console.log(e)
                 alert(data.msg)
                 $('msg_cielo').text(data.msg)
-            }).always(function () {
-                $('#btn_cielo').text("Comprar");
-                $('#btn_cielo').removeAttr('disabled')
-                $('#btn_close_cielo').removeAttr('disabled')
+            }).always(function (data) {
+                if (!data.result) {
+                    $('#btn_cielo').text("Comprar");
+                    $('#btn_cielo').removeAttr('disabled')
+                    $('#btn_close_cielo').removeAttr('disabled')
+                }
             })
         } else {
             alert('Todos os campos são obrigatorios')

@@ -45,9 +45,6 @@ from tools.bry import signature_files
 class RegistrosCreate(LoginRequiredMixin, View):
     template_name = "registros/registro.html"
 
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
     def get(self, request, *args, **kwargs):
         context = {}
         servico_digitalizacao = bool(request.GET.get('sd'))

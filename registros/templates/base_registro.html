@@ -167,7 +167,9 @@
 
                 )
                 let price = parseFloat(data.price).toFixed(2).valueOf().replace('.', ',')
-                $('#total').html("R$ " + price)
+                $('#total').html("R$ " + data.total)
+                $('#tsfile').html("R$ " + data.save)
+                $('#tfile').html("R$ " + data.price)
             },
             done: function (e, data) {
                 //$("#total").html("10")
@@ -321,7 +323,9 @@
         }
         data = { "csrfmiddlewaretoken": "{{ csrf_token }}", "save": save_file }
         $.post(url, data, function (data) {
-            $('#total').html("R$ " + data.price)
+            $('#total').html("R$ " + data.total)
+            $('#tsfile').html("R$ " + data.save)
+            $('#tfile').html("R$ " + data.price)
         }).fail(function (e, data) {
             element.fadeIn(005)
         }).done(function (data) {
@@ -542,11 +546,15 @@
         upload()
         if ($(this).is(":checked")) {
             $.get('/api/getprice/?save=True', function (data) {
-                $('#total').html("R$ " + data.price)
+                $('#total').html("R$ " + data.total)
+                $('#tsfile').html("R$ " + data.save)
+                $('#tfile').html("R$ " + data.price)
             })
         } else {
             $.get('/api/getprice/?save=False', function (data) {
-                $('#total').html("R$ " + data.price)
+                $('#total').html("R$ " + data.total)
+                $('#tsfile').html("R$ " + data.save)
+                $('#tfile').html("R$ " + data.price)
             })
         }
     });

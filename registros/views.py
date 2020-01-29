@@ -49,7 +49,10 @@ class RegistrosCreate(LoginRequiredMixin, View):
         context = {}
         servico_digitalizacao = bool(request.GET.get('sd'))
         # print(servico_digitalizacao,'\n\n')
+        vsf = Confuguracao.objects.first().valor_file
+        vsf = "%.2f" % vsf
         context['sd'] = servico_digitalizacao
+        context['vsf'] = vsf.replace(',', '.')
         context['form'] = RegistrosViewForm(sd=servico_digitalizacao)
         context['cielo'] = InserirCreditoForm()
         files = ArquivoRegistro.objects.filter(

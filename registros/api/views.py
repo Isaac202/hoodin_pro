@@ -28,15 +28,22 @@ class GetPriceView(APIView):
             id_usuario=request.user, paid=False
         )
         price = files.aggregate(price=Sum('value'))['price']
+        save_price = 0
         if price and save_file == 'True':
             conf = Confuguracao.objects.first()
-            price += conf.valor_file * Decimal(files.count())
+            save_price = conf.valor_file * Decimal(files.count())
 
         data = {}
         value = "0.00"
+        save = "0.00"
+        total = "0.00"
         if price:
             value = "%.2f" % price
+            save = "%.2f" % save_price
+            total = "%.2f" % (price + save_price)
         data['price'] = value.replace('.', ',')
+        data['save'] = save.replace('.', ',')
+        data['total'] = total.replace('.', ',')
         return Response(data)
 
 
@@ -98,11 +105,19 @@ class BasicUploadView(APIView):
         )
 
         price = files.aggregate(price=Sum('value'))['price']
+        save_price = 0
         if save_file == 'True':
             conf = Confuguracao.objects.first()
-            value_files = conf.valor_file * Decimal(files.count())
-            price = price + value_files
-        data['price'] = price
+            save_price = conf.valor_file * Decimal(files.count())
+            # price = price + value_files
+    
+        total = "%.2f" % (price + save_price)
+        value = "%.2f" % price
+        save = "%.2f" % save_price
+        # data['price'] = value.replace('.', ',')
+        data['save'] = save.replace('.', ',')
+        data['total'] = total.replace('.', ',')
+        data['price'] = value.replace('.', ',')
         return Response(data)
 
 
@@ -140,14 +155,22 @@ class DeleteFileView(APIView):
                 id_usuario=request.user)
             value = files.aggregate(total=Sum('value'))["total"]
             if value:
+                save_price = 0
                 if save_file == 'True':
                     conf = Confuguracao.objects.first()
-                    value_files = conf.valor_file * Decimal(files.count())
-                    value += value_files
+                    save_price = conf.valor_file * Decimal(files.count())
+
+                total = "%.2f" % (value + save_price)
                 value = "%.2f" % value
+                save = "%.2f" % save_price
+                # data['price'] = value.replace('.', ',')
+                data['save'] = save.replace('.', ',')
+                data['total'] = total.replace('.', ',')
                 data['price'] = value.replace('.', ',')
             else:
                 data['price'] = '0,00'
+                data['save'] = '0,00'
+                data['total'] = '0,00'
             data['success'] = True
         return Response(data)
 

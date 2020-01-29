@@ -63,7 +63,7 @@ class ClienteUpdateForm(forms.ModelForm):
         exclude = ['nome', 'id_usuario', 'data_nascimento', 'nacionalidade',
                   'codindicacao', 'tipo_pessoa',
                    'valor_credito', 'cnpjcpf', 'documento_tipo',
-                   'documento_identidade', 'sexo',
+                   'documento_identidade', 'sexo', 'pontuacao',
         'id_usuario','id_cliente', 'confirmation_key','meu_link_indicacao']
 
     def __init__(self, *args, **kwargs):

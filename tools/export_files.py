@@ -48,9 +48,11 @@ def export(BASE_DIR):
         # pks = path.split('-')
         if path not in 'path.py':
             registro = Registros.objects.filter(codregistro=int(path))
-            if registro.exists():
+            result = registro.exists()
+            r = registro[0]
+            if result and r.arquivo is None:
                 # print(registro[0])
-                user = registro[0].id_usuario
+                user = r.id_usuario
                 # registro = registro.first()
                 for subpath, _, arquivos in os.walk(os.path.join(BASE_DIR, path)):
                     myfile = ArquivoRegistro()
@@ -58,6 +60,9 @@ def export(BASE_DIR):
                     myfile.value = Decimal('0')
                     myfile.paid = True
                     myfile.resume = registro[0].descricao
+                    myfile.save()
+                    r.arquivo = myfile
+                    r.save()
                     # myfile.size = 123# os.fstat(f.fileno()).st_size
                     print("Pasta:", path, " | arquivos:", arquivos)
                     for file in arquivos:
@@ -68,6 +73,7 @@ def export(BASE_DIR):
                         if file.endswith('.p7s'):
                             with open(file_path, 'rb') as s:
                                 myfile.signature.save(file, File(s))
+                                myfile.save()
                         else:
                             myfile.name = file
                             myfile.shar256 = file_path_to_shar256(file_path)
@@ -78,9 +84,8 @@ def export(BASE_DIR):
                                     myfile.size = size
                                 if old_file:
                                     myfile.version = old_file.version + Decimal('1.0')
-                    myfile.save()
-                    registro.update(arquivo=myfile)
-                    print("codregistro",registro[0].pk, "criou arquivo", myfile.pk)
+                                myfile.save()
+                    print("codregistro",r.codregistro, "criou arquivo", r.arquivo, 'file-pk', r.arquivo.pk)
     print("\nArquivos exportados!")
 
 # from tools.export_files import export

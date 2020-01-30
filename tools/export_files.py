@@ -56,6 +56,7 @@ def export(BASE_DIR):
                 # registro = registro.first()
                 for subpath, _, arquivos in os.walk(os.path.join(BASE_DIR, path)):
                     myfile = ArquivoRegistro()
+                    myfile.codregistro= int(path)
                     myfile.id_usuario = user
                     myfile.value = Decimal('0')
                     myfile.paid = True

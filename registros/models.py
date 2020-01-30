@@ -37,6 +37,7 @@ class ArquivoRegistro(models.Model):
     resume = models.TextField(max_length=5000, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    codregistro = models.PositiveIntegerField(blank=True, null=True)
 
     class Meta:
         verbose_name = "Arquivo"

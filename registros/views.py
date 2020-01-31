@@ -204,15 +204,16 @@ class CertificadoPDFView(LoginRequiredMixin, PDFView):
         Registros, pk=id_registro, id_usuario=self.request.user)
         c_autores = []
         coautores = registro.arquivo.coautores_set.all()
-        cont = coautores.count()
-        for c in range(0, cont):
-            salt = 5
-            index = (c+1) * salt
-            if index < cont:
-                c_autores.append(coautores[index-salt: index])
-            else:
-                c_autores.append(coautores[index-salt:cont])
-                break
+        if coautores:
+            cont = coautores.count()
+            for c in range(0, cont):
+                salt = 5
+                index = (c+1) * salt
+                if index < cont:
+                    c_autores.append(coautores[index-salt: index])
+                else:
+                    c_autores.append(coautores[index-salt:cont])
+                    break
         context["registro"] = registro
         context["lista_coautores"] = c_autores
         return context

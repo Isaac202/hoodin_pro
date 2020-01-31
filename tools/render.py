@@ -7,7 +7,7 @@ from django.utils import timezone
 import xlwt
 import os
 import pdfkit
-from pyvirtualdisplay import Display
+# from pyvirtualdisplay import Display
 from django_pdfkit import PDFView
 
 class CustomPDFView(PDFView):
@@ -26,13 +26,13 @@ class CustomPDFView(PDFView):
         if wkhtmltopdf_bin:
             kwargs['configuration'] = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_bin)
             
-        d = Display()
-        try:
-            d.start()
-            pdf = pdfkit.from_string(html, False, options, **kwargs)
-            return pdf
-        finally:
-            d.stop()
+        # d = Display()
+        # try:
+            # d.start()
+        pdf = pdfkit.from_string(html, False, options, **kwargs)
+        return pdf
+        # finally:
+            # d.stop()
     
     def render_html(self, *args, **kwargs):        
         template = get_template(self.template_name)

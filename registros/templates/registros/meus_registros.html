@@ -66,7 +66,7 @@
                     <td>{{r.arquivo.version}}</td>
                     <td>
                         {% if r.manter_arquivo %}
-                        <a target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.name}}">
+                        <a rel="nofollow" target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.name}}">
                             baixar
                         </a>
                         {% else %}
@@ -75,7 +75,7 @@
                     </td>
                     <td>
                         {% if r.arquivo.signature %}
-                            <a target="_blank" download="{{r.arquivo.nome}}" href="{{r.arquivo.signature.url}}">
+                            <a target="_blank" rel="nofollow" download="{{r.arquivo.nome}}" href="{{r.arquivo.signature.url}}">
                                 baixar
                             </a>
                         {% else %}

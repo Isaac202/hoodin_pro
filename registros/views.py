@@ -31,12 +31,27 @@ from usuarios.models import Confuguracao
 # from weasyprint.fonts import FontConfiguration
 
 class TesteCreateView(View):
-    template_name = "modal_aguarde.html"
+    template_name = "registros/certificado.html"
 
-    def get(self, request, *args, **kwargs):
-        # msg = "Arquivo(s) registrado(s) com sucesso!"
-        # messages.success(request, msg)
-        return render(request, self.template_name)
+    def get(self, request, id_registro, *args, **kwargs):
+        context = {}
+        registro = get_object_or_404(
+        Registros, pk=id_registro, id_usuario=self.request.user)
+        c_autores = []
+        coautores = registro.arquivo.coautores_set.all()
+        if coautores:
+            cont = coautores.count()
+            for c in range(0, cont):
+                salt = 5
+                index = (c+1) * salt
+                if index < cont:
+                    c_autores.append(coautores[index-salt: index])
+                else:
+                    c_autores.append(coautores[index-salt:cont])
+                    break
+        context["registro"] = registro
+        context["lista_coautores"] = c_autores
+        return render(request, self.template_name, context)
 
 
 # from registros.tasks import signature
@@ -136,7 +151,7 @@ class RegistrosList(LoginRequiredMixin, ListView):
         return qs
 
 
-class BasicUploadView(View):
+class BasicUploadView(LoginRequiredMixin, View):
     def get(self, request):
         photos_list = Photo.objects.all()
         return render(self.request, 'photos/basic_upload/index.html', {'photos': photos_list})
@@ -161,7 +176,7 @@ class BasicUploadView(View):
         return JsonResponse(data)
 
 
-class MeusRegistrosList(ListView):
+class MeusRegistrosList(LoginRequiredMixin, ListView):
     model = Registros
     context_object_name = 'registros'
     template_name = 'registros/meus_registros.html'

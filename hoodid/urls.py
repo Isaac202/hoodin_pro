@@ -117,7 +117,7 @@ urlpatterns = [
     path('registrar/', RegistrosCreate.as_view(), name='registrar'),
     path('meus-registros/', MeusRegistrosList.as_view(), name='meus_registros'),
     path('upload/', BasicUploadView.as_view(), name='upload'),
-    path('teste/', TesteCreateView.as_view(), name='teste'),
+    path('teste/<int:id_registro>', TesteCreateView.as_view(), name='teste'),
     # path('topdf/<int:id_registro>', to_pdfkit, name='pdf'),
     path('topdf/<int:id_registro>', CertificadoPDFView.as_view(template_name='registros/certificado.html'), name='pdf'),
 

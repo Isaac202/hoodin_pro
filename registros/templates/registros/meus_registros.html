@@ -66,7 +66,7 @@
                     <td>{{r.arquivo.version}}</td>
                     <td>
                         {% if r.manter_arquivo %}
-                        <a rel="nofollow" target="_blank" href="{{r.arquivo.file.url}}" download="{{r.arquivo.name}}">
+                        <a class="download" rel="nofollow" target="_blank" href="{{r.arquivo.file.url}}" fname="{{r.arquivo.name}}">
                             baixar
                         </a>
                         {% else %}
@@ -151,3 +151,30 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+    <script>
+        $('.download').click(function(e){
+            e.preventDefault()
+            let url = $(this).attr('href')
+            // console.log(url)
+            fetch(url)
+            .then(resp => resp.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                // the filename you want
+                a.download = $(this).attr('fname');
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                // alert('your file has downloaded!'); // or you know, something with better UX...
+            })
+            .catch(() => alert('ops algo deu errado!'));
+
+        })
+    
+    </script>
+{% endblock script %}

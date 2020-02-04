@@ -8,6 +8,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.http import JsonResponse
+from registros.models import Registros
 
 
 
@@ -32,26 +33,45 @@ def sair(request):
 #     return HttpResponse("email enviado")
 
 
+class BuscarRegistro(View):
+    template_name = "home/buscar.html"
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        context = {}
+        context['busca'] = True
+        code = request.POST.get('code', None)
+        if code:
+            context['registro'] = Registros.objects.filter(arquivo__code=code)
+            
+        return render(request, self.template_name, context)
+
 
 class CotratoView(TemplateView):
     template_name = "home/contrato.html"
 
 
 class ContatoView(View):
+    template_name = "home/contato_page.html"
+
     def get(self, request, *args, **kwargs):
-        return redirect('/')
+        return render(request, self.template_name)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
+        # print(request.POST)
         nome = request.POST.get('name')
         email = request.POST.get('email')
         msg = request.POST.get('message')
-        send_mail(
-            'Contato hoodid '+ nome,
-            nome + "\n\n" + msg,
-            email,
-            [settings.DEFAULT_EMAIL],
-            fail_silently=False,
-        )
-        return JsonResponse({"msg":"Obrigado! entraremos em contato em breve"})
-
+        try:
+            send_mail(
+                'Contato hoodid '+ nome,
+                nome + "\n\n" + msg,
+                email,
+                [settings.DEFAULT_EMAIL],
+                fail_silently=False,
+            )
+            return JsonResponse({"msg":"Obrigado! entraremos em contato em breve"})
+        except:
+            return JsonResponse({"msg":"Ops! algo deu errado :("})

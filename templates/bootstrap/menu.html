@@ -24,12 +24,23 @@
             </li>
             {% endif %}
             <li class="nav-item active">
+                <a style="color: #595d65 !important;"  href="{% url 'home:busca' %}" class="nav-link text-g font-weight-bold">
+                    <i class="fas fa-search"></i>
+                    Buscar
+                </a>
+            </li>
+            <li class="nav-item active">
                 <a style="color: #595d65 !important;"  href="{% url 'tabela_de_precos' %}" class="nav-link text-g font-weight-bold">
                     <i class="fas fa-receipt"></i>
                     Tabela Preços
                 </a>
             </li>
-
+            <li class="nav-item active">
+                <a style="color: #595d65 !important;"  href="{% url 'home:contato' %}" class="nav-link text-g font-weight-bold">
+                    <i class="fas fa-address-book"></i>
+                    Fale conosco
+                </a>
+            </li>
             {% if user.is_authenticated %}
 
             <li class="nav-item dropdown active font-weight-bold">

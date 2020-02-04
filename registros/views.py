@@ -26,7 +26,7 @@ from cielo.tasks import comprar_credito
 from random import randint
 from codigos_promocionais.utils import set_codigo_promocional
 from usuarios.models import Confuguracao
-
+import datetime
 # from weasyprint import HTML
 # from weasyprint.fonts import FontConfiguration
 
@@ -177,6 +177,8 @@ class MeusRegistrosList(LoginRequiredMixin, ListView):
         if de:
             queryset = queryset.filter(data__gte=de)
         if ate:
+            ate = datetime.datetime.strptime(ate, "%Y-%m-%d")
+            ate = ate + datetime.timedelta(days=1)
             queryset = queryset.filter(data__lte=ate)
         if title:
             queryset = queryset.filter(arquivo__resume__contains=title)

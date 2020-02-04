@@ -116,13 +116,13 @@
             {% if registros.has_previous %}
             <li class="page-item">
                 <a class="page-link"
-                    href="?page={{registros.previous_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.de %}&ate={{request.GET.ate}}{% endif %}">
+                    href="?page={{registros.previous_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.ate %}&ate={{request.GET.ate}}{% endif %}">
                     <i class="fa fa-chevron-left"></i>
                 </a>
             </li>
             <li class="page-item">
                 <a
-                    href="?page={{ registros.previous_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.de %}&ate={{request.GET.ate}}{% endif %}">
+                    href="?page={{ registros.previous_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.ate %}&ate={{request.GET.ate}}{% endif %}">
                     <span class="page-link">{{ registros.previous_page_number }} <span
                             class="sr-only">(current)</span></span>
                 </a>
@@ -133,15 +133,14 @@
             </li>
             {% if registros.has_next %}
             <li class="page-item">
-                <a
-                    href="?page={{registros.next_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.de %}&ate={{request.GET.ate}}{% endif %}">
+                <a href="?page={{registros.next_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.ate %}&ate={{request.GET.ate}}{% endif %}">
                     <span class="page-link">{{ registros.next_page_number }}
                         <span class="sr-only">(current)</span></span>
                 </a>
             </li>
             <li class="page-item">
                 <a class="page-link"
-                    href="?page={{registros.next_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.de %}&ate={{request.GET.ate}}{% endif %}">
+                    href="?page={{registros.next_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.ate %}&ate={{request.GET.ate}}{% endif %}">
                     <i class="fa fa-chevron-right"></i>
                 </a>
             </li>

@@ -67,6 +67,9 @@ class RegistrosCreate(LoginRequiredMixin, View):
         save = request.POST.get('save_file', None)
         pk_files = request.POST.getlist('files', None)
         code = request.POST.get('codigo_promocional', None)
+        conf = Confuguracao.objects.first()
+        if not conf:
+            return HttpResponse('Ops! ocorreu um erro interno, algumas configurações não foram definidas.')
         if code:
             code = set_codigo_promocional(code, cliente)
         files = ArquivoRegistro.objects.filter(
@@ -74,13 +77,12 @@ class RegistrosCreate(LoginRequiredMixin, View):
             id_usuario=request.user,
             paid=False
         ).order_by('id')
-        manter_arquivo = False
+        manter_arquivo = False 
         if files.exists():
             self.template_name = "compras/compra_concluida.html"
             valor = files.aggregate(total=Sum('value'))["total"]
             if save:
                 manter_arquivo = True
-                conf = Confuguracao.objects.first()
                 valor += conf.valor_file * files.count()
             valor_credito_cliente = cliente.valor_credito
             if code:
@@ -88,6 +90,8 @@ class RegistrosCreate(LoginRequiredMixin, View):
             if valor_credito_cliente >= valor:
                 assinados = signature_files(pk_files)
                 if assinados:
+                    pontos = cliente.pontuacao + (valor * conf.pontuacao)
+                    cliente.pontuacao = pontos
                     cliente.valor_credito = valor_credito_cliente - valor
                     cliente.save()
                     if code:

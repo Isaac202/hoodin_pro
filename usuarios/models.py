@@ -128,7 +128,8 @@ class Confuguracao(models.Model):
     credito_inicial = models.DecimalField(max_digits=5, decimal_places=2, default=1)
     valor_file = models.DecimalField(max_digits=5, decimal_places=2, default=0.50)
     atualização = models.DateTimeField("Atualizado em", auto_now=True, auto_now_add=False)
-    pontuacao = models.DecimalField(max_digits=5, decimal_places=2, default=0.10)
+    percentual = models.PositiveSmallIntegerField('percentual de pontuação', default=10)
+    pontuacao = models.DecimalField("Valor de resgate", max_digits=5, decimal_places=2, default=0.10)
 
     class Meta:
         verbose_name = _("Confuguraçao")

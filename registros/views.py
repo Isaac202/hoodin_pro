@@ -90,7 +90,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
             if valor_credito_cliente >= valor:
                 assinados = signature_files(pk_files)
                 if assinados:
-                    pontos = cliente.pontuacao + (valor * conf.pontuacao)
+                    pontos = cliente.pontuacao + ((valor * conf.percentual)/100)
                     cliente.pontuacao = pontos
                     cliente.valor_credito = valor_credito_cliente - valor
                     cliente.save()

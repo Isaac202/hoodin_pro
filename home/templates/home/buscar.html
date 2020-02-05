@@ -14,38 +14,19 @@
         </div>
 
         {% if busca == True %}
-        {% if registro %}
-        <div class="col-12 mt-5 bg-light">
-            <table class="table table-striped">
-                <thead>
-                    <th scope="col">Serviço</th>
-                    <th scope="col">Título da Obra</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">hora</th>
-                    <th scope="col">Versão</th>
-                </thead>
-                <tbody>
-                    {% for r in registro %}
-                    <tr>
-                        <td>{{r.codservico.nome}}</td>
-                        {% if r.arquivo.resume %}
-                        <td>{{r.arquivo.resume}}</td>
-                        {% else %}
-                        <td>{{r.arquivo.name}}</td>
-                        {% endif %}
-                        <td>R$ {{r.valor}}</td>
-                        <td>{{r.data|date:'d-m-Y'}}</td>
-                        <td>{{r.data|time:"h:i"}}</td>
-                        <td>{{r.arquivo.version}}</td>
-                        {% endfor %}
-                </tbody>
-            </table>
+        {% if r %}
+        <div class="col-12">
+            <p class="h3 text-center text-primary py-1">
+                O certificado número {{r.arquivo.code}} foi realizado na Hoodid.com <br>
+                às {{r.data|time:"h:i"}} do dia {{r.data|date:'d-m-Y'}} e corresponde <br>
+                a registro de declaração de autoria da obra {% if r.arquivo.resume %}{{r.arquivo.resume}}{% else %}{{r.arquivo.name}}{%endif%}
+            </p>
         </div>
         {% else %}
         <div class="col-12">
             <p class="h3 text-center text-danger py-1">
-                Registro não encontrado.
+                O certificado número {{code}}, <br>
+                não foi encontrado em nosso banco de registros.
             </p>
         </div>
         {% endif %}

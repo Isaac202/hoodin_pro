@@ -44,7 +44,8 @@ class BuscarRegistro(View):
         context['busca'] = True
         code = request.POST.get('code', None)
         if code:
-            context['registro'] = Registros.objects.filter(arquivo__code=code)
+            context['code'] = code
+            context['r'] = Registros.objects.filter(arquivo__code=code).first()
             
         return render(request, self.template_name, context)
 

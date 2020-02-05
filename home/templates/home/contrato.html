@@ -22,7 +22,7 @@
             var quotes = document.getElementById($(this).attr('id'));
             html2canvas(quotes, {
                 onrendered: function (canvas) {
-                    var pdf = new jsPDF('p', 'pt', 'letter');
+                    var pdf = new jsPDF('p','td', 'pt', 'letter');
                     for (var i = 0; i <= quotes.clientHeight / 980; i++) {
                         var srcImg = canvas;
                         var sX = 0;

@@ -25,6 +25,7 @@
 <script>
 
     function addScript(url) {
+        //https://www.npmjs.com/package/html2pdf.js
         var script = document.createElement('script');
         script.type = 'application/javascript';
         script.src = url;
@@ -45,7 +46,7 @@
             };
             let element = document.getElementById('contrato');
             // var worker = html2pdf().from(element).save('contrato');
-            html2pdf().set(opt).from(element).save();
+            html2pdf().set(opt).from(element).toPdf().save();
         })
     })
 
@@ -158,6 +159,11 @@
                     $("#codeFiles").append(
                         $('<span>').attr('id',"codFile"+result.id).html(", "+result.code)
                     )
+                    if($('#fileNames').length){
+                        $("#fileNames").append(
+                            $('<span>').attr('id',"fileName"+result.id).html(", "+result.name)
+                        )
+                    }
                     $("#gallery tbody").prepend(
                         $("<tr>").append( 
                             $('<td>').append(
@@ -312,8 +318,11 @@
             $("#tr_desc" + id).remove()
             $("#table_coautor" + id).remove()
             $('#check_file' + id).remove()
+            if($('#fileNames').length){
+                $('#fileName'+id).remove()
+            }
         }).always(function (data) {
-            console.log(data)
+            console.log(data)   
         })
     }
 

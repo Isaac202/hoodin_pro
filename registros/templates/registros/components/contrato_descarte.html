@@ -14,15 +14,12 @@
         do(a) Identidade n&ordm;</span><span id="lblRg">{{user.clientes.documento_identidade|upper}}</span>,
         residente e domiciliado na&nbsp;<span
         id="lblEnde">{{user.clientes.endereco|upper}}</span>&nbsp;, n&ordm;&nbsp;<span
-        id="lblNum">{{user.clientes.numero}}</span>&nbsp;
+        id="lblNum">{{user.clientes.numero}}</span>
         {% if user.clientes.complemento %}
-            <span id="lblComplemento">
-            {{user.clientes.complemento|upper}}
-            </span>
-        {% endif %},&nbsp;bairro&nbsp;<span id="lblBairro">{{user.clientes.bairro|upper}}
-    </span>, no Munic&iacute;pio de&nbsp;<span id="lblCidade">
-    {{user.clientes.cidade|upper}}</span>, Estado de&nbsp;<span id="lblUF">
-    {{user.clientes.estado|upper}}</span>, doravante designado
+        &nbsp;{{user.clientes.complemento|upper}}
+        {% endif %}, bairro {{user.clientes.bairro|upper}},
+    no Munic&iacute;pio de {{user.clientes.cidade|upper}}, 
+    Estado de {{user.clientes.estado|upper}}, doravante designado
     simplesmente&nbsp;<strong>CONTRATANTE</strong>, e;</p>
 <p>HOODID REGISTROS ONLINE LTDA - EPP, pessoa jur&iacute;dica de direito privado, constitu&iacute;da sob a forma de
     sociedade por quotas de responsabilidade limitada, inscrita no Cadastro Nacional de Pessoas Jur&iacute;dicas do
@@ -87,7 +84,7 @@
 </ol>
 <p>&nbsp;</p>
 <p>PAR&Aacute;GRAFO PRIMEIRO. O presente CONTRATO possui um n&uacute;mero &uacute;nico e exclusivo, tendo sua validade
-    jur&iacute;dica aceita com a chave digital gerada com base no arquivo DARF DESONERACAO.pdf .</p>
+    jur&iacute;dica aceita com a chave digital gerada com base no arquivo DARF <strong id="fileNames"></strong> .</p>
 <p>&nbsp;</p>
 <p>PAR&Aacute;GRAFO SEGUNDO. A validade jur&iacute;dica do mencionado certificado digital ser&aacute; garantido, desde
     que o arquivo digital n&atilde;o seja alterado pelo CONTRATANTE, ou de qualquer outra forma;</p>
@@ -590,5 +587,5 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p><strong>***************************************</strong></p>
+<p class="text-center"><strong>***************************************</strong></p>
 <p>&nbsp;</p>

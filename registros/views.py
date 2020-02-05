@@ -31,7 +31,7 @@ import datetime
 # from weasyprint.fonts import FontConfiguration
 
 class TesteCreateView(View):
-    template_name = "home/contato_page.html"
+    template_name = "registros/certificado.html"
 
     def get(self, request, *args, **kwargs):
         context = {}

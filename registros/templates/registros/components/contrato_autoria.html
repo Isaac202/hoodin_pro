@@ -19,26 +19,27 @@
                     <strong>DAS PARTES</strong></p>
                 <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
                     <span id="lblNome">
-                        {{user.clientes.nome|upper}}&Atilde;O</span>,&nbsp;<span id="lblPais">Brasil</span>&nbsp;,
-                    estado c&iacute;vil&nbsp;<span
+                        {{user.clientes.nome|upper}}&Atilde;O</span>,&nbsp;<span
+                        id="lblPais">Brasil</span>&nbsp;, estado c&iacute;vil&nbsp;<span
                         id="lblStCivil">{{user.clientes.get_estadocivil|upper}},&nbsp;</span>&nbsp;<span
                         id="lblDescricaoCPFCNPJ">inscrito no CPF/MF sob o n&ordm;&nbsp;</span><span
                         id="lblCPF">{{user.clientes.cnpjcpf|upper}}</span>&nbsp;<span id="lblTipoDocumento">, portador
-                        do(a) Identidade n&ordm;</span><span
-                        id="lblRg">{{user.clientes.documento_identidade|upper}}</span>,
-                    residente e domiciliado na&nbsp;<span id="lblEnde">{{user.clientes.endereco|upper}}</span>&nbsp;,
-                    n&ordm;&nbsp;<span id="lblNum">{{user.clientes.numero}}</span>&nbsp;
-                    {% if user.clientes.complemento %}
-                    <span id="lblComplemento">
-                        {{user.clientes.complemento|upper}}
-                    </span>
-                    {% endif %},&nbsp;bairro&nbsp;<span id="lblBairro">{{user.clientes.bairro|upper}}
-                    </span>, no Munic&iacute;pio de&nbsp;<span id="lblCidade">
-                        {{user.clientes.cidade|upper}}</span>, Estado de&nbsp;<span id="lblUF">
-                        {{user.clientes.estado|upper}}</span>, doravante designado
+                        do(a) Identidade n&ordm;</span><span id="lblRg">{{user.clientes.documento_identidade|upper}}</span>,
+                        residente e domiciliado na&nbsp;<span
+                        id="lblEnde">{{user.clientes.endereco|upper}}</span>&nbsp;, n&ordm;&nbsp;<span
+                        id="lblNum">{{user.clientes.numero}}</span>
+                        {% if user.clientes.complemento %}
+                        &nbsp;{{user.clientes.complemento|upper}}
+                        {% endif %}, bairro {{user.clientes.bairro|upper}},
+                    no Munic&iacute;pio de {{user.clientes.cidade|upper}}, 
+                    Estado de {{user.clientes.estado|upper}}, doravante designado
                     simplesmente&nbsp;<strong>CONTRATANTE</strong>, e;</p>
-                <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
-                    &nbsp;</p>
+                <p>HOODID REGISTROS ONLINE LTDA - EPP, pessoa jur&iacute;dica de direito privado, constitu&iacute;da sob a forma de
+                    sociedade por quotas de responsabilidade limitada, inscrita no Cadastro Nacional de Pessoas Jur&iacute;dicas do
+                    Minist&eacute;rio da Fazenda (CNPJ/MF) sob o n&ordm; 20.854.059/0001-54, com sede na Rua Alvares Cabral, 200, sala
+                    404, Bairro do Recife, cidade do Recife/PE, CEP: 50.030-160, representada na forma de seu CONTRATO Social, doravante
+                    designado simplesmente&nbsp;<strong>CONTRATADA;</strong></p>
+                <p>&nbsp;</p>
                 <p align="JUSTIFY" style="margin-bottom: 0.08in; direction: ltr;">
                     HOODID REGISTROS ONLINE LTDA - EPP, pessoa jurídica de direito privado, constituída sob a forma de
                     sociedade por quotas de responsabilidade limitada, inscrita no Cadastro Nacional de Pessoas

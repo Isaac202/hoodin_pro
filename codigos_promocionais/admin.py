@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Codigos_Promocionais, GeneratePromocionalCode
 from tools.render import RenderPDF
 from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
-
+from codigos_promocionais.actions import write_code
 
 class GerarCodigoAdmin(admin.ModelAdmin):
     list_display = ("valor", 'quantidade', 'data_inicio',
@@ -21,7 +21,7 @@ class CodigoPromocionalAdmin(admin.ModelAdmin):
                     ('data_limite', DateRangeFilter),
                    )
     search_fields = ('qrcode', 'email', 'cnpjcpf', 'nome')
-    actions = ['gera_pdf']
+    actions = ['gera_pdf','gera_cartao']
 
     def gera_pdf(set, request, queryset):
         if queryset:
@@ -32,8 +32,15 @@ class CodigoPromocionalAdmin(admin.ModelAdmin):
                 description="Relatório Códigos promocionais gerados"
             )
 
+
+    def gera_cartao(set, request, queryset):
+        return write_code(queryset)
+
+    gera_cartao.short_description = "Gerar Cartao"
     gera_pdf.short_description = "Gerar PDF"
 
 
 admin.site.register(Codigos_Promocionais, CodigoPromocionalAdmin)
 admin.site.register(GeneratePromocionalCode, GerarCodigoAdmin)
+
+

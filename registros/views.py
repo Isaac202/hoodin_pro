@@ -39,32 +39,7 @@ class TesteCreateView(View):
     template_name = "registros/certificado.html"
 
     def get(self, request, *args, **kwargs):
-        registro = Registros.objects.first()  
-        context = { 
-            'code': registro.arquivo.code,
-            'hora': registro.data.strftime('%H:%M:%S'),
-            'data': registro.data.strftime("%d/%m/%Y"),
-            'nome': registro.id_cliente.nome.upper(),
-            'pais': registro.id_cliente.pais,
-            'cnpjcpf': registro.id_cliente.cnpjcpf,
-            'endereco': registro.id_cliente.endereco,
-            'numero': registro.id_cliente.numero,
-            'complemento': 'complemento',#registro.id_cliente.complemento or ",",
-            'cidade': registro.id_cliente.cidade.upper(),
-            'bairro': registro.id_cliente.bairro.upper(),
-            'estado': registro.id_cliente.estado.upper(),
-            'cep': registro.id_cliente.cep,
-            'resume': registro.arquivo.resume,
-            'servico': registro.codservico.nome
-        }
-        # registro.data
-        buffer = io.BytesIO()
-        p = get_canvas(buffer, context)
-        p.showPage()
-        p.save()
-        buffer.seek(0)
-        return FileResponse(buffer, as_attachment=False, filename='certificado.pdf')
-
+        return HttpResponse('teste')
 
 # from registros.tasks import signature
 from tools.bry import signature_files
@@ -226,28 +201,17 @@ class MeusRegistrosList(LoginRequiredMixin, ListView):
 
 # from .models import Donation
 
-from django_pdfkit import PDFView
+# from django_pdfkit import PDFView
 
-class CertificadoPDFView(LoginRequiredMixin, PDFView):
+from tools.pdf import get_canvas
+
+@login_required
+def certificadoPDFView(request, id_registro, *args, **kwargs):
+    registro = get_object_or_404(Registros, pk=id_registro, id_usuario=request.user)
+    buffer = io.BytesIO()        
+    pdf = get_canvas(buffer, registro)
+    pdf.save()
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename='certificado.pdf')
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        id_registro = kwargs['id_registro']
-        registro = get_object_or_404(
-        Registros, pk=id_registro, id_usuario=self.request.user)
-        c_autores = []
-        coautores = registro.arquivo.coautores_set.all()
-        if coautores:
-            cont = coautores.count()
-            for c in range(0, cont):
-                salt = 5
-                index = (c+1) * salt
-                if index < cont:
-                    c_autores.append(coautores[index-salt: index])
-                else:
-                    c_autores.append(coautores[index-salt:cont])
-                    break
-        context["registro"] = registro
-        context["lista_coautores"] = c_autores
-        return context
     

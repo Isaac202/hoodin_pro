@@ -42,7 +42,7 @@ from rest_framework import routers
 #from servicos.views import ServicosExtensoesList
 #from servicos.views import ServicosExtensoesUpdate
 
-from registros.views import RegistrosCreate, BasicUploadView, MeusRegistrosList, TesteCreateView,  CertificadoPDFView
+from registros.views import RegistrosCreate, BasicUploadView, MeusRegistrosList, TesteCreateView,  certificadoPDFView
 from clientes.api.viewsets import ClienteViewSet
 
 from codigos_promocionais.views import Codigos_PromocionaisCreate
@@ -119,7 +119,7 @@ urlpatterns = [
     path('upload/', BasicUploadView.as_view(), name='upload'),
     path('teste/', TesteCreateView.as_view(), name='teste'),
     # path('topdf/<int:id_registro>', to_pdfkit, name='pdf'),
-    path('topdf/<int:id_registro>', CertificadoPDFView.as_view(template_name='registros/certificado.html'), name='pdf'),
+    path('topdf/<int:id_registro>', certificadoPDFView , name='pdf'),
 
     path('lista_codigos_promocionais/', Codigos_PromocionaisList.as_view(), name='lista_codigos_promocionais'),
     path('novo_codigos_promocionais/', Codigos_PromocionaisCreate.as_view(), name='novo_codigos_promocionais'),

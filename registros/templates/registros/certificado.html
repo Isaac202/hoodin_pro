@@ -5,6 +5,7 @@
 	<meta name="pdfkit-page-size" content="Legal" />
 	<meta charset="utf-8">
 	<meta name="pdfkit-orientation" content="Landscape" />
+	{% load static %}
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<style>
@@ -20,7 +21,7 @@
 		}
 
 		.page {
-			background-image: url("https://hoodidfile.s3.amazonaws.com/static/imgs/fundo.jpg");
+			background-image: url("{% static 'imgs/fundo.jpg' %}");
 			background-repeat: no-repeat;
 			background-size: 100% 100%;
 		}
@@ -28,8 +29,9 @@
 </head>
 
 <body>
-	<div class="page">
-		<div class="container" style="padding-top: 15%; background: none;">
+	<div class="page" style="position: relative;">
+		<img style="position: absolute;" width="100%" height="100%" src="{% static 'imgs/fundo.jpg' %}" alt="">
+		<div class="container" style="position: absolute; padding-top: 15%; background: none;">
 			<div class="text-center">
 				<strong>CERTIFICADO DE REGISTRO N° {{registro.arquivo.code}}</strong>
 			</div>

@@ -30,12 +30,40 @@ import datetime
 # from weasyprint import HTML
 # from weasyprint.fonts import FontConfiguration
 
+import io
+from django.http import FileResponse
+# from reportlab.pdfgen import canvas
+from tools.pdf import get_canvas
+
 class TesteCreateView(View):
     template_name = "registros/certificado.html"
 
     def get(self, request, *args, **kwargs):
-        context = {}
-        return render(request, self.template_name, context)
+        registro = Registros.objects.first()  
+        context = { 
+            'code': registro.arquivo.code,
+            'hora': registro.data.strftime('%H:%M:%S'),
+            'data': registro.data.strftime("%d/%m/%Y"),
+            'nome': registro.id_cliente.nome.upper(),
+            'pais': registro.id_cliente.pais,
+            'cnpjcpf': registro.id_cliente.cnpjcpf,
+            'endereco': registro.id_cliente.endereco,
+            'numero': registro.id_cliente.numero,
+            'complemento': 'complemento',#registro.id_cliente.complemento or ",",
+            'cidade': registro.id_cliente.cidade.upper(),
+            'bairro': registro.id_cliente.bairro.upper(),
+            'estado': registro.id_cliente.estado.upper(),
+            'cep': registro.id_cliente.cep,
+            'resume': registro.arquivo.resume,
+            'servico': registro.codservico.nome
+        }
+        # registro.data
+        buffer = io.BytesIO()
+        p = get_canvas(buffer, context)
+        p.showPage()
+        p.save()
+        buffer.seek(0)
+        return FileResponse(buffer, as_attachment=False, filename='certificado.pdf')
 
 
 # from registros.tasks import signature

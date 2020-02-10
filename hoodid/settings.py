@@ -178,7 +178,7 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
-DEFAULT_EMAIL = "hoodidregistrosonline@gmail.com"
+DEFAULT_EMAIL = "hoodidregistrosonline@gmail.com;contato@hoodid.com"
 # EMAIL_USE_TLS = True
 
 

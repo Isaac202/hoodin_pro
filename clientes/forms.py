@@ -11,7 +11,7 @@ class ClientesForm(forms.ModelForm):
 
     class Meta:
         model = Clientes
-        exclude = ['id', 'id_usuario', 'tipo_pessoa', 'valor_credito',
+        exclude = ['id', 'id_usuario', 'tipo_pessoa', 'valor_credito', 'pontuacao',
                    'id_cliente', 'confirmation_key']  # 'codindicacao',#, 'atuacao'
 
     def clean_cnpjcpf(self):

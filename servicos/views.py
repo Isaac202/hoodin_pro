@@ -112,6 +112,6 @@ class TabelaPrecos(TemplateView):
         context = super().get_context_data(**kwargs)
         context['dolar'] = self.dolar
         context['euro'] = self.euro
-        context["servicos"] = Servicos.objects.all().annotate(
+        context["servicos"] = Servicos.objects.filter(servico_digitalizacao=False).annotate(
             dolar=F("preco")/self.dolar, euro=F('preco')/self.euro)
         return context

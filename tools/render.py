@@ -45,22 +45,25 @@ class CustomPDFView(PDFView):
         self.context = context
 
 
+from django.shortcuts import render
+
 class RenderPDF:
     
     @staticmethod
     def render(path: str, params: dict, *args, **kwargs):
         filename = params['description'] + ".pdf"
         request = params['request']
-        pdf_kit = CustomPDFView(template_name=path, filename=filename)
-        pdf_kit.set_context(params)
-        content = pdf_kit.render_pdf(*args, **kwargs)
-        response = HttpResponse(content, content_type='application/pdf')
-        if (not pdf_kit.inline or 'download' in request.GET) and 'inline' not in request.GET:
-            response['Content-Disposition'] = 'attachment; filename=%s' % filename
-            response['Content-Length'] = len(content)
-            return response
-        else:
-            return HttpResponse("Error Rendering PDF", status=400)
+        return render(request, path, params)
+        # pdf_kit = CustomPDFView(template_name=path, filename=filename)
+        # pdf_kit.set_context(params)
+        # content = pdf_kit.render_pdf(*args, **kwargs)
+        # response = HttpResponse(content, content_type='application/pdf')
+        # if (not pdf_kit.inline or 'download' in request.GET) and 'inline' not in request.GET:
+        #     response['Content-Disposition'] = 'attachment; filename=%s' % filename
+        #     response['Content-Length'] = len(content)
+        #     return response
+        # else:
+        #     return HttpResponse("Error Rendering PDF", status=400)
 
     @staticmethod
     def render_to_pdf(request, queryset, template='tools/pdf.html', description="Relatório de Clientes"):

@@ -159,9 +159,9 @@
                     $("#codeFiles").append(
                         $('<span>').attr('id',"codFile"+result.id).html(", "+result.code)
                     )
-                    if($('#fileNames').length){
-                        $("#fileNames").append(
-                            $('<span>').attr('id',"fileName"+result.id).html(", "+result.name)
+                    if($('.fileNames').length){
+                        $(".fileNames").append(
+                            $('<span>').attr('class',"fileName"+result.id).html(result.name).append('<br>')
                         )
                     }
                     $("#gallery tbody").prepend(
@@ -318,8 +318,8 @@
             $("#tr_desc" + id).remove()
             $("#table_coautor" + id).remove()
             $('#check_file' + id).remove()
-            if($('#fileNames').length){
-                $('#fileName'+id).remove()
+            if($('.fileNames').length){
+                $('.fileName'+id).remove()
             }
         }).always(function (data) {
             console.log(data)   

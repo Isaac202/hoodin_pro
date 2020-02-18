@@ -22,6 +22,197 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
+
+
+<script>
+function convertNumberToWords(amount) {
+    var words = new Array();
+    words[0] = '';
+    words[1] = 'um';
+    words[2] = 'dois';
+    words[3] = 'três';
+    words[4] = 'quatro';
+    words[5] = 'cinco';
+    words[6] = 'seis';
+    words[7] = 'sete';
+    words[8] = 'oito';
+    words[9] = 'nove';
+    words[10] = 'dez';
+    words[11] = 'onze';
+    words[12] = 'doze';
+    words[13] = 'treze';
+    words[14] = 'quartoze';
+    words[15] = 'quinze';
+    words[16] = 'dezesseis';
+    words[17] = 'dezessete';
+    words[18] = 'dezoito';
+    words[19] = 'dezenove';
+    words[20] = 'vinte';
+    words[30] = 'trinta';
+    words[40] = 'quarenta';
+    words[50] = 'cinquenta';
+    words[60] = 'sessenta';
+    words[70] = 'setenta';
+    words[80] = 'oitenta';
+    words[90] = 'noventa';
+    amount = amount.toString();
+    var atemp = amount.split(".");
+    var number = atemp[0].split(",").join("");
+    var n_length = number.length;
+    var words_string = "";
+    if (n_length <= 9) {
+        var n_array = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
+        var received_n_array = new Array();
+        for (var i = 0; i < n_length; i++) {
+            received_n_array[i] = number.substr(i, 1);
+        }
+        for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
+            n_array[i] = received_n_array[j];
+        }
+        for (var i = 0, j = 1; i < 9; i++, j++) {
+            if (i == 0 || i == 2 || i == 4 || i == 7) {
+                if (n_array[i] == 1) {
+                    n_array[j] = 10 + parseInt(n_array[j]);
+                    n_array[i] = 0;
+                }
+            }
+        }
+        value = "";
+        for (var i = 0; i < 9; i++) {
+            if (i == 0 || i == 2 || i == 4 || i == 7) {
+                value = n_array[i] * 10;
+            } else {
+                value = n_array[i];
+            }
+            if (value != 0) {
+                words_string += words[value] + " ";
+            }
+            if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "Crores ";
+            }
+            if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "Lakhs ";
+            }
+            if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
+                words_string += "mil ";
+            }
+            if (i == 6 && value != 0 && (n_array[i + 1] != 0 && n_array[i + 2] != 0)) {
+                words_string += "cento e ";
+            } else if (i == 6 && value != 0) {
+                words_string += "cento ";
+            }
+        }
+        words_string = words_string.split("  ").join(" ");
+    }
+    return words_string;
+}
+</script>
+
+
+
+
+
+<script>
+    function number_format(a, b, c, d) {
+        a = Math.round(a * Math.pow(10, b)) / Math.pow(10, b);
+        e = a + '';
+        f = e.split('.');
+        if (!f[0]) {
+            f[0] = '0';
+        }
+        if (!f[1]) {
+            f[1] = '';
+        }
+        if (f[1].length < b) {
+            g = f[1];
+            for (i=f[1].length + 1; i <= b; i++) {
+                g += '0';
+            }
+            f[1] = g;
+        }
+        if(d != '' && f[0].length > 3) {
+            h = f[0];
+            f[0] = '';
+            for(j = 3; j < h.length; j+=3) {
+                i = h.slice(h.length - j, h.length - j + 3);
+                f[0] = d + i + f[0] + '';
+            }
+            j = h.substr(0, (h.length % 3 == 0) ? 3 : (h.length % 3));
+            f[0] = j + f[0];
+        }
+        c = (b <= 0) ? '' : c;
+        return f[0] + c + f[1];
+    }
+
+    function ValorPorExtenso(valor) {
+
+        if (!valor) return 'Zero';
+
+        var singular = ['centavo', 'real', 'mil', 'milhão', 'bilhão', 'trilhão', 'quatrilhão'];
+        var plural = ['centavos', 'reais', 'mil', 'milhões', 'bilhões', 'trilhões', 'quatrilhões'];
+
+        var c = ['', 'cento', 'duzentos', 'trezentos', 'quatrocentos', 'quinhentos', 'seiscentos', 'setecentos', 'oitocentos', 'novecentos'];
+        var d = ['', 'dez', 'vinte', 'trinta', 'quarenta', 'cinquenta', 'sessenta', 'setenta', 'oitenta', 'noventa'];
+        var d10 = ['dez', 'onze', 'doze', 'treze', 'quatorze', 'quinze', 'dezesseis', 'dezesete', 'dezoito', 'dezenove'];
+        var u = ['', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove'];
+
+        var z = 0;
+
+        valor = valor.toString();
+        valor = number_format(valor, 2, '.', '.');
+
+        var inteiro = valor.split(/\./);
+
+        for (var i = 0; i < inteiro.length; i++) {
+            inteiro[i] = inteiro[i].toString();
+            for (var ii = inteiro[i].length; ii < 3; ii++) {
+                inteiro[i] = '0' + inteiro[i];
+            }
+        }
+
+        var fim = inteiro.length - (inteiro[inteiro.length-1] > 0 ? 1 : 2 );
+
+        var rc, rd, ru;
+        var r, t;
+        var rt = '';
+        var valor_split;
+        for (var i = 0; i < inteiro.length; i++) {
+
+            valor = inteiro[i];
+            valor_split = valor.match(/./g);
+
+            rc = ((valor > 100) && (valor < 200)) ? 'cento' : c[valor_split[0]];
+            rd = (valor_split[1] < 2) ? '' : d[valor_split[1]];
+            ru = (valor > 0) ? ((valor_split[1] == 1) ? d10[valor_split[2]] : u[valor_split[2]]) : '';
+
+            r = rc + ((rc && (rd || ru)) ? ' e ' : '') + rd + ((rd && ru) ? ' e ' : '') + ru;
+            t = inteiro.length - 1 - i;
+
+            r = r + (r ? ' ' + (valor > 1 ? plural[t] : singular[t]) : '');
+            if (valor == '000') z++;
+            else if (z > 0) z--;
+
+            if ((t==1) && (z>0) && (inteiro[0] > 0)) {
+                r = r + ((z>1) ? ' de ' : '') + plural[t];
+            }
+            if (r) {
+                rt = rt + (((i > 0) && (i <= fim) && (inteiro[0] > 0) && (z < 1)) ? ( (i < fim) ? ', ' : ' e ') : ' ') + r;
+           }
+
+        }
+
+        return (rt ? rt : 'zero');
+        //return ('zero')
+    }
+
+//alert(ValorPorExtenso(8916165));
+
+</script>
+
+
+
+
+
 <script>
 
     function addScript(url) {
@@ -147,6 +338,8 @@
                 $('#total').html("R$ " + data.total)
                 $('#tsfile').html("R$ " + data.save)
                 $('#tfile').html("R$ " + data.price)
+                $('#soma').html("R$ " + data.total)
+                $('#somaextenso').html(ValorPorExtenso(data.total.replace(',', '.')))
             },
             done: function (e, data) {
                 //$("#total").html("10")
@@ -156,6 +349,9 @@
                     service_active = true
                     // console.log(result)
                     let str_func = 'remove_file("' + result.delete + '",' + result.id + ')'
+                    $("#totvals").append(
+                        $('<span>').attr('id',"totval"+result.id).html("R$ "+result.total)
+                    )
                     $("#codeFiles").append(
                         $('<span>').attr('id',"codFile"+result.id).html(", "+result.code)
                     )

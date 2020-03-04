@@ -10,7 +10,6 @@ class InserirCreditoForm(forms.Form):
         ('Visa', 'Visa'),
         ('Master', 'Master'),
         ('Hipercard', 'Hipercard'),
-        ('Hiper', 'Hiper'),
         ('American Express', 'American Express'),
         ('Elo', 'Elo'),
         ('Diners Club', 'Diners Club'),
@@ -18,6 +17,7 @@ class InserirCreditoForm(forms.Form):
         ('Discover', 'Discover'),
         ('JCB', 'JCB'),
         ('Aura', 'Aura'),
+      #  ('Hiper', 'Hiper'),
 
     )
 

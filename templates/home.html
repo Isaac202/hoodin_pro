@@ -3,6 +3,21 @@
 
 {% block header %}
 <style>
+    .parallax {
+    /* Coloque a imagem a ser usada como background */
+    background-image: url("https://www.hoodid.com/site/conteudo/arquivo_adm/imagens/2015/03/hoodid-site-1-1-20150303152132-banner-home-1-png.png");
+
+    /* Defina uma altura para a visão que o usuário terá da imagem */
+    min-height: 350px;
+
+    /* defina o background como fixo e posicione a imagem */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+
+
     /* The hero image */
     .hero-image {
         /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
@@ -17,10 +32,11 @@
         background-size: cover;
         position: relative;
 
+
         /*background-position: center top;*/
         /*background-repeat: no-repeat;*/
         /*background-size: cover;*/
-        /*background-attachment: fixed;*/
+        background-attachment: fixed;
 
     }
 

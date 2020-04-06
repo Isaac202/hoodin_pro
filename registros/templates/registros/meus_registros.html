@@ -41,6 +41,7 @@
                     <th scope="col">Serviço</th>
                     <th scope="col">Título da Obra</th>
                    <!-- <th scope="col">Valor</th>-->
+                    <th scope="col">Versão</th>
                     <th scope="col">Data</th>
                     <th scope="col">hora</th>
                     <!--<th scope="col">Versão</th>-->
@@ -60,6 +61,7 @@
                     {% else %}
                     <td>{{r.arquivo.name}}</td>
                     {% endif %}
+                    <td>{{r.arquivo.version}}</td>
                     <!--<td>R$ r.valor</td>-->
                     <td>{{r.data|date:'d-m-Y'}}</td>
                     <td>{{r.data|time:"h:i"}}</td>

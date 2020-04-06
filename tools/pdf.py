@@ -22,7 +22,7 @@ def get_bg():
 def get_text(registro):
     return u'''
         CERTIFICO que, às {} horas do dia {}, {},
-        inscrito(a) no CPF/MF sob o número {}, residente {}, {} N° {},
+        inscrito(a) no CPF/MF sob o número {}, {}, residente {} N° {},
         {} na cidade de {}, bairro de {}, estado {}, com CEP {}, 
         obteve registro da sua declaração de autoria da obra intelectual intitulada {}, na categoria {}.
         O presente registro foi  assinado  pelo titular deste  certificado, e está associado a

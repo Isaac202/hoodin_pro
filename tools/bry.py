@@ -20,7 +20,7 @@ def get_header():
     return { 
         "Content-Type": "application/json",
         "pfx": "d2c0KkUySDdlUA==",
-        "fw_credencial": "MDE5ODg5ODUwOTkrdWdkZ0R1NlpqWg==",
+        "fw_credencial": "MDE5ODg5ODUwOTkrdWdkZ0R1NlpqWg=="
     }
 
 

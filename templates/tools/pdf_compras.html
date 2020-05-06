@@ -7,18 +7,30 @@
   <th>CPF/CNPJ</th>
   <th>VALOR</th>
   <th>STATUS</th>
+  <th>TOTAL</th>
 </tr>
 {% endblock thead %}
 
-
 {% block content %}
-{% for compra in queryset %}
-<tr>
+
+<!--
   <td>{{compra.id_cliente.nome}}</td>
   <td>{{compra.data | date:"d/m/Y H:m:i"}}</td>
   <td>{{compra.id_cliente.cnpjcpf}}</td>
   <td>{{compra.valor}}</td>
   <td>{% if compra.autorizado %}Autorizado{% else %}Recusado{% endif %}</td>
+-->
+
+
+{% for compra in queryset %}
+<tr>
+  <td>{{compra.cliente}}</td>
+  <td>{{compra.data | date:"d/m/Y H:m:i"}}</td>
+  <td>{{compra.cnpjcpf}}</td>
+  <td>{{compra.valor | floatformat:2}}</td>
+  <td>{% if compra.autorizado %}Autorizado{% else %}Recusado{% endif %}</td>
+  <td>{{compra.total | floatformat:2}}</td>
+
 </tr>
 <tr style="border-top: 1px solid #000;">
   <td> </td>

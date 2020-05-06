@@ -2,10 +2,14 @@
 
 {% block thead %}
 <tr style="border-bottom: 1px solid #000;">
-    <th>NOME</th>
-    <th>SERVIÇO</th>
-    <th>VALOR</th>
-    <th>QUANTIDADE</th>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Celular</th>
+    <th>Serviço</th>
+    <th>Valor</th>
+    <th>Val.Acum.</th>
+    <th>Qtd</th>
+    <th>Qtd.Acum.</th>
 </tr>
 {% endblock thead %}
 
@@ -15,9 +19,13 @@
 
 <tr>
     <td>{{registro.cliente}}</td>
+    <td>{{registro.email}}</td>
+    <td>{{registro.celular}}</td>
     <td>{{registro.servico}}</td>
-    <td>{{registro.valor}}</td>
+    <td>{{registro.valor | floatformat:2}}</td>
+    <td>{{registro.valoracumulado | floatformat:2}}</td>
     <td>{{registro.quantidade}}</td>
+    <td>{{registro.quantidadeacumulado}}</td>
 </tr>
 <tr style="border-top: 1px solid #000;">
     <td> </td>

@@ -3,9 +3,12 @@ from .models import Compras
 from tools.render import RenderPDF as Render
 # from django.contrib.admin import DateFieldListFilter
 from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
+from django.db.models import Sum
 # from daterangefilter.filters import PastDateRangeFilter, FutureDateRangeFilter
 
 class CompraCreditoAdmin(admin.ModelAdmin):
+  #  total_price = Compras.objects.all().aggregate(Sum('valor'))
+
     list_display = ('id_cliente', 'valor', 'data',
                     'msg_cielo', 'codigo_compra_cielo')
     list_filter = ('forma_pagamento', 'autorizado', 'data'    ,
@@ -15,8 +18,9 @@ class CompraCreditoAdmin(admin.ModelAdmin):
     actions = ['gera_pdf', ]
 
     def gera_pdf(set, request, queryset):
-        if queryset:
-            return Render.render_to_pdf(request, queryset, 
+        #if queryset:
+        queryset = Compras.objects.with_counts()
+        return Render.render_to_pdf(request, queryset,
             description="Relatório de compras",
             template='tools/pdf_compras.html')
 

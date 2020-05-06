@@ -8,6 +8,47 @@ from django.conf import settings
 
 User = get_user_model()
 
+class CompraTotalManager(models.Manager):
+    def with_counts(self):
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("""
+            SELECT SUM(compras_compras.valor), 
+            COUNT(compras_compras.id) 
+            FROM clientes_clientes, compras_compras
+            WHERE clientes_clientes.id = compras_compras.id_cliente_id
+            """)
+            result_list = []
+            for row in cursor.fetchall():
+                # p = self.model(id=row[0], question=row[1], poll_date=row[2])
+                # p.num_responses = row[3]
+                p = {'total':row[0], 'quantidade':row[1] }
+                result_list.append(p)
+        return result_list
+
+
+class CompraManager(models.Manager):
+    def with_counts(self):
+        total = 0;
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("""
+            SELECT clientes_clientes.nome, compras_compras.valor, 0 as total, clientes_clientes.cnpjcpf, 
+            0 as quantidade, compras_compras.data, compras_compras.autorizado 
+            FROM clientes_clientes, compras_compras
+            WHERE clientes_clientes.id = compras_compras.id_cliente_id
+            group by clientes_clientes.nome, clientes_clientes.cnpjcpf, compras_compras.data,
+            compras_compras.valor, compras_compras.autorizado
+            order by compras_compras.data desc""")
+            result_list = []
+            for row in cursor.fetchall():
+                # p = self.model(id=row[0], question=row[1], poll_date=row[2])
+                # p.num_responses = row[3]
+                total = total + row[1]
+                p = {'cliente':row[0], 'valor':row[1], 'total':total, 'cnpjcpf':row[3], 'quantidade':row[4],  'data':row[5],  'autorizado':row[6] }
+                result_list.append(p)
+        return result_list
+
 
 # Create your models here.
 class Compras(models.Model):
@@ -15,6 +56,7 @@ class Compras(models.Model):
         ('Cartão de Crédito', 'Cartão de Crédito'),
         ('Cartão de Débito', 'Cartão de Débito'),
     )
+    objects = CompraManager()
 
     id_usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     id_cliente = models.ForeignKey(Clientes, on_delete=models.PROTECT)

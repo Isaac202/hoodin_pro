@@ -57,20 +57,28 @@ def my_callback(sender, instance, *args, **kwargs):
 
 class RegistroManager(models.Manager):
     def with_counts(self):
+        valor_total = 0
+        quantidade_total = 0;
         from django.db import connection
         with connection.cursor() as cursor:
             cursor.execute("""
             SELECT clientes_clientes.nome, servicos_servicos.nome, SUM(registros_registros.valor), 
-            COUNT(registros_registros.id) FROM clientes_clientes, servicos_servicos, registros_registros
+            COUNT(registros_registros.id), clientes_clientes.celular, usuarios_user.email, 
+            0 as valoracumulado, 0 as quantidadeacumulado 
+            FROM clientes_clientes, servicos_servicos, registros_registros, usuarios_user
             WHERE clientes_clientes.id = registros_registros.id_cliente_id
+            AND usuarios_user.id = clientes_clientes.id_usuario_id
             AND registros_registros.codservico_id = servicos_servicos.id
-            group by clientes_clientes.nome, servicos_servicos.nome
+            group by clientes_clientes.nome, servicos_servicos.nome, clientes_clientes.celular, usuarios_user.email
             order by clientes_clientes.nome""")
             result_list = []
             for row in cursor.fetchall():
                 # p = self.model(id=row[0], question=row[1], poll_date=row[2])
                 # p.num_responses = row[3]
-                p = {'cliente':row[0], 'servico':row[1], 'valor':row[2], 'quantidade':row[3] }
+                valor_total = valor_total + row[2]
+                quantidade_total = quantidade_total + row[3]
+                p = {'cliente':row[0], 'servico':row[1], 'valor':row[2], 'quantidade':row[3], 'celular':row[4], 'email':row[5],
+                     'valoracumulado':valor_total, 'quantidadeacumulado':quantidade_total }
                 result_list.append(p)
         return result_list
 

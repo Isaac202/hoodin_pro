@@ -9,7 +9,7 @@ from django.conf import settings
 User = get_user_model()
 
 class CompraTotalManager(models.Manager):
-    def with_counts(self):
+    def with_counts(self, data):
         from django.db import connection
         with connection.cursor() as cursor:
             cursor.execute("""
@@ -17,7 +17,8 @@ class CompraTotalManager(models.Manager):
             COUNT(compras_compras.id) 
             FROM clientes_clientes, compras_compras
             WHERE clientes_clientes.id = compras_compras.id_cliente_id
-            """)
+            AND compras_compras.data = ?
+            """, (data,))
             result_list = []
             for row in cursor.fetchall():
                 # p = self.model(id=row[0], question=row[1], poll_date=row[2])
@@ -28,7 +29,7 @@ class CompraTotalManager(models.Manager):
 
 
 class CompraManager(models.Manager):
-    def with_counts(self):
+    def with_counts(self, data):
         total = 0;
         from django.db import connection
         with connection.cursor() as cursor:
@@ -37,9 +38,10 @@ class CompraManager(models.Manager):
             0 as quantidade, compras_compras.data, compras_compras.autorizado 
             FROM clientes_clientes, compras_compras
             WHERE clientes_clientes.id = compras_compras.id_cliente_id
-            group by clientes_clientes.nome, clientes_clientes.cnpjcpf, compras_compras.data,
+            AND compras_compras.data = ? 
+            group by clientes_clientes.nome, clientes_cli   entes.cnpjcpf, compras_compras.data,
             compras_compras.valor, compras_compras.autorizado
-            order by compras_compras.data desc""")
+            order by compras_compras.data desc""", (data,))
             result_list = []
             for row in cursor.fetchall():
                 # p = self.model(id=row[0], question=row[1], poll_date=row[2])

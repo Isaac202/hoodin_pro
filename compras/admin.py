@@ -28,3 +28,4 @@ class CompraCreditoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Compras, CompraCreditoAdmin)
+

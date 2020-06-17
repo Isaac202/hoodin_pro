@@ -11,7 +11,7 @@ def enviar_email(titulo, msg, de, para):
     except Exception as e:
         loogger.error('erro task enviar email' + str(e))
         enviar_notificacao(str(e))
-        return 'deu merda'
+        return 'deu pow'
 
 def enviar_notificacao(msg):
     account_sid = "AC2601d12123d4a71566381fe0a2140cb4"

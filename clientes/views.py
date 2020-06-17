@@ -16,6 +16,8 @@ from tools.views import SignUpCreateView
 from tarefas_backgroud.tasks import teste
 from codigos_promocionais.utils import check_codigo_promocionanl
 from django.contrib import messages
+import json
+
 
 User = get_user_model()
 
@@ -25,8 +27,6 @@ class ClientesCreate(SignUpCreateView, SuccessMessageMixin):
     template_name = "clientes/cadastro.html"
     form_class = ClientesForm
     success_message = "Verifique seu email pra ativar seu cadastro!"
-
-
 
 # class ClientesCreate(SuccessMessageMixin, CreateView):
 #     model = Clientes

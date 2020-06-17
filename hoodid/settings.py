@@ -15,13 +15,13 @@ DEBUG = True # config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = ['registrosonline.com.br','localhost', '127.0.0.1', '*']
 
 DEFAULT_APPS = [
+    'admin_menu',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 ]
 
 
@@ -233,6 +233,81 @@ ESTADOS_CHOICES = (
     ('TO', 'Tocantins')
 )
 
+DISTRITOS_PORTUGAL_CHOICES = (
+    ('Aveiro', 'Aveiro'),
+    ('Beja', 'Beja'),
+    ('Braga', 'Braga'),
+    ('Bragança', 'Bragança'),
+    ('Castelo Branco', 'Castelo Branco'),
+    ('Coimbra', 'Coimbra'),
+    ('Evora', 'Evora'),
+    ('Faro', 'Faro'),
+    ('Guarda', 'Guarda'),
+    ('Leiria', 'Leiria'),
+    ('Lisboa', 'Lisboa'),
+    ('Portalegre', 'Portalegre'),
+    ('Porto', 'Porto'),
+    ('Santarem', 'Santarem'),
+    ('Setubal', 'Setubal'),
+    ('Viana do Castelo', 'Viana do Castelo'),
+    ('Vila Real', 'Vila Real'),
+    ('Viseu', 'Viseu')
+)
+
+DISTRITOS_ESPANHA_CHOICES = (
+    ('Alava', 'Alava'),
+    ('Albacete', 'Albacete'),
+    ('Alicante', 'Alicante'),
+    ('Almería', 'Almería'),
+    ('Asturias', 'Asturias'),
+    ('Avila', 'Avila'),
+    ('Badajoz', 'Badajoz'),
+    ('Barcelona', 'Barcelona'),
+    ('Burgos', 'Burgos'),
+    ('Caceres', 'Caceres'),
+    ('Cadiz', 'Cadiz'),
+    ('Cantabria', 'Cantabria'),
+    ('Castellon', 'Castellon'),
+    ('Ciudad Real', 'Ciudad Real'),
+    ('Cordoba', 'Cordoba'),
+    ('La Coruña', 'La Coruña'),
+    ('Cuenca', 'Cuenca'),
+    ('Gerona', 'Gerona'),
+    ('Granada', 'Granada'),
+    ('Guadalajara', 'Guadalajara'),
+    ('Guipuzcoa', 'Guipuzcoa'),
+    ('Huelva', 'Huelva'),
+    ('Huesca', 'Huesca'),
+    ('Baleares', 'Baleares'),
+    ('Jaen', 'Jaen'),
+    ('Leon', 'Leon'),
+    ('Lerida', 'Lerida'),
+    ('Lugo', 'Lugo'),
+    ('Madrid', 'Madrid'),
+    ('Malaga', 'Malaga'),
+    ('Murcia', 'Murcia'),
+    ('Navarra', 'Navarra'),
+    ('Orense', 'Orense'),
+    ('Palencia', 'Palencia'),
+    ('Las Palmas', 'Las Palmas'),
+    ('Pontevedra', 'Pontevedra'),
+    ('La Rioja', 'La Rioja'),
+    ('Salamanca', 'Salamanca'),
+    ('Segovia', 'Segovia'),
+    ('Sevilla', 'Sevilla'),
+    ('Soria', 'Soria'),
+    ('Tarragona', 'Tarragona'),
+    ('Santa Cruz de Tenerife', 'Santa Cruz de Tenerife'),
+    ('Teruel', 'Teruel'),
+    ('Toledo', 'Toledo'),
+    ('Valencia', 'Valencia'),
+    ('Valladolid', 'Valladolid'),
+    ('Vizcaya', 'Vizcaya'),
+    ('Zamora', 'Zamora'),
+    ('Zaragoza', 'Zaragoza')
+)
+
+
 SEXO_CHOICES = (
     ('M', 'Masculino'),
     ('F', 'Feminino'),
@@ -298,6 +373,32 @@ if AWS_ACCESS_KEY_ID:
 #     os.path.join(BASE_DIR, 'estaticos')
 # ]
 
+ADMIN_LOGO = 'imgs/logo-hoodid.png'
+
+
+ADMIN_STYLE = {
+    'background': 'white',
+    'primary-color': '#205280',
+    'primary-text': '#d6d5d2',
+    'secondary-color': '#3B75AD',
+    'secondary-text': 'white',
+    'tertiary-color': '#F2F9FC',
+    'tertiary-text': 'black',
+    'breadcrumb-color': 'whitesmoke',
+    'breadcrumb-text': 'black',
+    'focus-color': '#eaeaea',
+    'focus-text': '#666',
+    'primary-button': '#26904A',
+    'primary-button-text':' white',
+    'secondary-button': '#999',
+    'secondary-button-text': 'white',
+    'link-color': '#333',
+    'link-color-hover': 'lighten($link-color, 20%)',
+    'logo-width': '165px',
+    'logo-height': '53px'
+    #3308
+    #1064
+}
 
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = reverse_lazy('login')

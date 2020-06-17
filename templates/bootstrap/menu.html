@@ -55,11 +55,13 @@
                         Declaração de Autoria
                     </a>
 
+                    {% if user.username == "martorele@strive.com.br" or user.username == "junior@strive.com.br" %}
                     <div class="dropdown-divider item-menu"></div>
                     <a style="color: #595d65 !important;"  class="dropdown-item item-menu" href="{% url 'registrar' %}?sd=*">
                         <i class="fas fa-certificate"></i>
                         Certificação de Documentos
                     </a>
+                    {% endif %}
 
                 </div>
             </li>

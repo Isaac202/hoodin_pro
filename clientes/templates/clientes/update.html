@@ -28,6 +28,21 @@
                 <label for="">Meu Link de indicação</label>
                 <input class="form-control" type="text" readonly value="https://registrosonline.com.br{% url 'cliente:new' %}?indicacao={{object.meu_link_indicacao}}">
             </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 my-2">
+                {{form.pais.label_tag}}
+                {{form.pais}}
+                {% if form.pais.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.pais.errors}}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-12 col-md-6 my-4">
                 <label for="">Saldo</label>
                 <input class="form-control" disabled type="text" value="{{user.clientes.get_credit}}">
@@ -210,15 +225,6 @@
         <h3 class="mt-5">Endereço</h3>
         <hr>
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-2 my-2">
-                {{form.pais.label_tag}}
-                {{form.pais}}
-                {% if form.pais.errors %}
-                <div class="alert alert-danger" role="alert">
-                    {{form.pais.errors}}
-                </div>
-                {% endif %}
-            </div>
             <div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.cep.label_tag}}
                 {{form.cep}}
@@ -259,6 +265,15 @@
                 {% endif %}
             </div>
 
+            <div class="col-12 col-md-6 col-lg-2 my-2">
+                {{form.estado.label_tag}}
+                {{form.estado}}
+                {% if form.estado.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.estado.errors}}
+                </div>
+                {% endif %}
+            </div>
             <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.cidade.label_tag}}
                 {{form.cidade}}
@@ -277,29 +292,20 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6 col-lg-2 my-2">
-                {{form.estado.label_tag}}
-                {{form.estado}}
-                {% if form.estado.errors %}
-                <div class="alert alert-danger" role="alert">
-                    {{form.estado.errors}}
-                </div>
-                {% endif %}
-            </div>
         </div>
         <h3 class="mt-5">Informações</h3>
         <hr>
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-3 my-2">
+            <!--<div class="col-12 col-md-6 col-lg-3 my-2">
                 {{form.nif.label_tag}}
                 {{form.nif}}
-                {% if form.nif.errors %}
+                { if form.nif.errors %}
                 <div class="alert alert-danger" role="alert">
                     {{form.nif.errors}}
                 </div>
-                {% endif %}
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 my-2">
+                { endif %}
+            </div>-->
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.facebook.label_tag}}
                 {{form.facebook}}
                 {% if form.facebook.errors %}
@@ -308,7 +314,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6 col-lg-3 my-2">
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.twitter.label_tag}}
                 {{form.twitter}}
                 {% if form.twitter.errors %}
@@ -317,7 +323,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-12 col-md-6 col-lg-3 my-2">
+            <div class="col-12 col-md-6 col-lg-4 my-2">
                 {{form.homepage.label_tag}}
                 {{form.homepage}}
                 {% if form.homepage.errors %}
@@ -404,9 +410,10 @@
             }
         };
 
-    $('#id_estado').select2(); //autocomplete select2
+    //$('#id_estado').select2(); //autocomplete select2
     $('#id_pais').select2(); //autocomplete select2
     $('#id_atuacao').select2(); //autocomplete select2
+
 
     $(document).ready(function () {
         $("#id_cep").mask("99999-999");
@@ -414,27 +421,32 @@
         $("#id_celular").mask("(99) 99999-9999");
         $("#id_data_nascimento").mask("99/99/9999");
         $('#id_cnpjcpf').mask(cpfMascara, cpfOptions);
+        $('#id_pais').prop('disabled', true)
 
         $('#id_cep').on('input', function (e) {
             let cep = $('#id_cep').val();
-            if (cep.length == 9) {
-                //Consulta o webservice viacep.com.br/
-                $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function (dados) {
-                    console.log('Buscando');
-                    if (!("erro" in dados)) {
-                        // console.log('deu certo');
-                        //Atualiza os campos com os valores da consulta.
-                        $("#id_endereco").val(dados.logradouro);
-                        $("#id_bairro").val(dados.bairro);
-                        $("#id_complemento").val(dados.complemento);
-                        $("#id_cidade").val(dados.localidade);
-                        $("#id_estado option[value=" + dados.uf + "]").attr('selected', 'selected');
-                        let estado = $("#id_estado option[value=" + dados.uf + "]").html();
-                        $("#estado_col input.select-dropdown").val(estado);
-                        $('#select2-id_estado-container').html(estado);
-                    }
-                });
-            }
+            let pais = $('#id_pais').val();
+            if (pais == 'BR') {
+                if (cep.length == 9) {
+                    //Consulta o webservice viacep.com.br/
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function (dados) {
+                        console.log('Buscando');
+                        if (!("erro" in dados)) {
+                            // console.log('deu certo');
+                            //Atualiza os campos com os valores da consulta.
+                            $("#id_endereco").val(dados.logradouro);
+                            $("#id_bairro").val(dados.bairro);
+                            $("#id_complemento").val(dados.complemento);
+                            $("#id_cidade").val(dados.localidade);
+                            $("#id_estado").val(dados.uf);
+                            //$("#id_estado option[value=" + dados.uf + "]").attr('selected', 'selected');
+                            //let estado = $("#id_estado option[value=" + dados.uf + "]").html();
+                            //$("#estado_col input.select-dropdown").val(estado);
+                            //$('#select2-id_estado-container').html(estado);
+                        }
+                    });
+                }
+             }
         });
 
     });

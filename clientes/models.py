@@ -22,6 +22,7 @@ TIPO_DOCUMENTO = (
     ('Titulo de Eleitor', 'Titulo de Eleitor'),
     ('Conselho de Classe', 'Conselho de Classe'),
     ('Outros', 'Outros'),
+    ('NIF', 'NIF'),
 )
 
 Indicacoes
@@ -48,7 +49,7 @@ class Clientes(models.Model):
         "Nome da Mãe", max_length=100, null=True, blank=True)
     nome_pai = models.CharField(
         "Nome do Pai", max_length=100, null=True, blank=True)
-    cnpjcpf = models.CharField("CPF/CNPJ *", max_length=18)
+    cnpjcpf = models.CharField("CPF/CNPJ ", max_length=18, blank=True)
     codindicacao = models.ForeignKey(Indicacoes, on_delete=models.PROTECT,
                                      related_name='indicacao', verbose_name="Como conheceu a Hoodid.com? *")
     cep = models.CharField("Cep *", max_length=9)
@@ -57,8 +58,9 @@ class Clientes(models.Model):
         "Complemento", max_length=255, null=True, blank=True)
     numero = models.CharField("Número *", max_length=8)
     pais = CountryField(default='BR')
-    estado = models.CharField("Estado *", max_length=50, default='PE',
-                              choices=settings.ESTADOS_CHOICES)
+    #estado = models.CharField("Estado *", max_length=50, default='PE',
+    #                          choices=settings.ESTADOS_CHOICES)
+    estado = models.CharField("Estado *", max_length=50)
     cidade = models.CharField("Cidade *", max_length=50)
     bairro = models.CharField("Bairro *", max_length=50)
     documento_identidade = models.CharField(
@@ -67,7 +69,7 @@ class Clientes(models.Model):
         "Tipo de Documento de Identificação *", max_length=20, choices=TIPO_DOCUMENTO, blank=True, null=True)
     passaporte = models.CharField(max_length=50, null=True, blank=True)
     nacionalidade = models.CharField(
-        "Nacionalidade *", max_length=20, default='Brasileiro')
+        "Nacionalidade *", max_length=20, default='')
     estadocivil = models.CharField("Estado civil *", 
                 max_length=1, choices=settings.ESTADO_CIVIL_CHOICES, blank=True, null=True)
     biografia = models.TextField(max_length=5000, null=True, blank=True)

@@ -1,0 +1,181 @@
+{% extends 'base_registro.html' %}
+
+{% block content %}
+<div class="container-fluid mt-2">
+    <hr>
+    <p class="h2 text-center">Download registros</p>
+    <form action="" method="get" class="form-group">
+        <div class="row">
+            <div class="col-12 col-lg-3 offset-lg-1 mt-2">
+                <label for="title">Titulo da obra</label>
+                <input value="{{request.GET.title}}" type="text" name="title" id="title" class="form-control"
+                    placeholder="EX: Minha canção">
+            </div>
+            <div class="col-12 col-lg-2 mt-2">
+                <label for="de">De</label>
+                <input value="{{request.GET.de}}" type="date" name="de" id="de" class="form-control">
+            </div>
+            <div class="col-12 col-lg-2 mt-2">
+                <label for="ate">Ate</label>
+                <input value="{{request.GET.ate}}" type="date" name="ate" id="ate" class="form-control">
+            </div>
+            <div class="col-12 col-lg-2 my-2">
+                <label for=""></label>
+                <input type="submit" value="Filtrar" class="btn btn-primary form-control mt-2">
+            </div>
+            <div class="col-12 col-lg-2 my-2">
+                <label for=""></label>
+                <a class="btn btn-success form-control mt-2" href="{% url 'meus_registros' %}">Todos</a>
+            </div>
+        </div>
+    </form>
+
+    <div class="row mt-2">
+        {% if registros %}
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Serviço</th>
+                    <th scope="col">Título da Obra</th>
+                   <!-- <th scope="col">Valor</th>-->
+                    <th scope="col">Versão</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">hora</th>
+                    <!--<th scope="col">Versão</th>-->
+                    <th scope="col">Arquivo</th>
+                    <th scope="col">Assinatura</th>
+                    <th scope="col">Certificado</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for r in registros %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{r.codservico.nome}}</td>
+                    {% if r.arquivo.resume %}
+                    <td>{{r.arquivo.resume}}</td>
+                    {% else %}
+                    <td>{{r.arquivo.name}}</td>
+                    {% endif %}
+                    <td>{{r.arquivo.version}}</td>
+                    <!--<td>R$ r.valor</td>-->
+                    <td>{{r.data|date:'d-m-Y'}}</td>
+                    <td>{{r.data|time:"h:i"}}</td>
+                    <!--<td>r.arquivo.version</td>-->
+                    <td>
+                        {% if r.manter_arquivo %}
+                        <a class="download" rel="nofollow" target="_blank" href="{{r.arquivo.file.url}}" fname="{{r.arquivo.name}}">
+                            baixar
+                        </a>
+                        {% else %}
+                        <span> ------ </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if r.arquivo.signature %}
+                            <a target="_blank" rel="nofollow" download="{{r.arquivo.nome}}" href="{{r.arquivo.signature.url}}">
+                                baixar
+                            </a>
+                        {% else %}
+                            <span> processando </span>
+                        {% endif %}
+                        </td>
+                    <td>
+                        {% if not r.codservico.servico_digitalizacao %}
+                        <a target="_blank" href="{% url 'pdf' r.pk %}">
+                            Certificado
+                        </a>
+                        {% else %}
+                        <span> ------ </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="col-12">
+            <hr>
+            <p class="h3 text-center text-danger mt-5">
+                Nenhum registro encontrado.
+            </p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- paginate  -->
+    {% if registros.has_other_pages %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if registros.has_previous %}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{registros.previous_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.ate %}&ate={{request.GET.ate}}{% endif %}">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+            </li>
+            <li class="page-item">
+                <a
+                    href="?page={{ registros.previous_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.ate %}&ate={{request.GET.ate}}{% endif %}">
+                    <span class="page-link">{{ registros.previous_page_number }} <span
+                            class="sr-only">(current)</span></span>
+                </a>
+            </li>
+            {% endif %}
+            <li class="page-item active"><span class="page-link">{{ registros.number }} <span
+                        class="sr-only">(current)</span></span>
+            </li>
+            {% if registros.has_next %}
+            <li class="page-item">
+                <a href="?page={{registros.next_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.ate %}&ate={{request.GET.ate}}{% endif %}">
+                    <span class="page-link">{{ registros.next_page_number }}
+                        <span class="sr-only">(current)</span></span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{registros.next_page_number}}{% if request.GET.de %}&de={{request.GET.de}}{% endif %}{% if request.GET.ate %}&ate={{request.GET.ate}}{% endif %}">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav> {% endif %}
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('.download').click(function(e){
+            e.preventDefault()
+            let url = $(this).attr('href')
+            // console.log(url)
+            fetch(url)
+            .then(resp => resp.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                // the filename you want
+                a.download = $(this).attr('fname');
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                // alert('your file has downloaded!'); // or you know, something with better UX...
+            })
+            .catch(() => alert('ops algo deu errado!'));
+
+        })
+    
+    </script>
+{% endblock script %}

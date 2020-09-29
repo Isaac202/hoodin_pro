@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True # config('DEBUG', default=False, cast=bool)
+DEBUG = True # config('DEBUG', default=False, cast=bool)aa
 
 ALLOWED_HOSTS = ['registrosonline.com.br','localhost', '127.0.0.1', '*']
 
@@ -413,3 +413,4 @@ SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS
 DOLAR_VALOR = 4
 EURO_VALOR = 4
 VALOR_CREIDITO_INCIAL = Decimal('1.00')
+

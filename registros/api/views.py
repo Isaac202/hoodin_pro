@@ -1,4 +1,4 @@
-from codigos_promocionais.utils import check_codigo_promocionanl
+from codigos_promocionais.utils import check_codigo_promocionanl, check_codigo_promocionanlSer
 from random import randint
 from compras.models import Compras
 from cielo.tasks import comprar_credito
@@ -185,6 +185,8 @@ class VeryCredit(APIView):
         save = request.GET.get('save', None)
         code = request.GET.get('code', None)
         code = check_codigo_promocionanl(code).first()
+        # if ((code == None)|(code == 0)):
+        #    code = check_codigo_promocionanlSer(qcode, service)
         if service:
             service = get_object_or_404(Servicos, pk=service)
             cliente = request.user.clientes

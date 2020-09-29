@@ -19,7 +19,17 @@ class RegistroAdmin(admin.ModelAdmin):
     autocomplete_fields = ('id_usuario', "id_cliente", 'codservico',)
     actions = ['gera_pdf','gera_pdf_total' ]
     show_full_result_count = True
-    
+
+class DownloadCertificadoAdmin(admin.ModelAdmin):
+    list_display = ('id_usuario', 'id_cliente', 'codservico', 'descricao', 'data')
+    list_filter = ('data', 'codservico',
+                   ('data', DateRangeFilter),
+                   )
+    search_fields = ('codservico', 'id_usuario__username',
+                     "id_cliente__cnpjcpf")
+    autocomplete_fields = ('id_usuario', "id_cliente", 'codservico',)
+    actions = ['gera_pdf', 'gera_pdf_total']
+    show_full_result_count = True
 
     def gera_pdf(set, request, queryset):
         if queryset:
@@ -42,4 +52,3 @@ class RegistroAdmin(admin.ModelAdmin):
 
 admin.site.register(Registros, RegistroAdmin)
 admin.site.register(ArquivoRegistro, ArquivoAdmin)
-

@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+
+from servicos.models import Servicos
 from tools.genereteKey import generate_hash_key
 import time
 # from django.utils import timezone
@@ -11,6 +13,7 @@ import time
 User = get_user_model()
 # Create your models here.
 
+Servicos
 
 class Codigos_Promocionais(models.Model):
     codpromocao = models.PositiveIntegerField(null=True, blank=True)
@@ -27,6 +30,10 @@ class Codigos_Promocionais(models.Model):
         max_digits=11, decimal_places=2, null=True, blank=True, default=0)
     id_cliente = models.PositiveIntegerField(null=True, blank=True)
     resgate = models.BooleanField(default=False)
+    id_servico = models.PositiveIntegerField(null=True, blank=True)
+
+#    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT,
+#                                      related_name='servico', verbose_name="informe servico")
 
     class Meta:
         ordering = ('nome',)
@@ -49,6 +56,10 @@ class GeneratePromocionalCode(models.Model):
     email = models.CharField(max_length=255, null=True, blank=True)
     tipo = models.CharField(max_length=1, null=True, blank=True)
     generated = models.BooleanField("gerado", default=False)
+    id_servico = models.PositiveIntegerField(null=True, blank=True)
+
+#    codservico = models.ForeignKey(Servicos, on_delete=models.PROTECT, null=True, blank=True,
+#                                     related_name='servico', verbose_name="informe servico")
 
     class Meta:
         verbose_name = "Gerar código promocional"
@@ -75,5 +86,6 @@ def create_promocional_codes(sender, instance, **kwargs):
                 nome=instance.nome,
                 email=instance.email,
                 tipo=instance.tipo,
-                valor=instance.valor
+                valor=instance.valor,
+                id_servico=instance.id_servico
             )

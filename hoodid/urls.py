@@ -42,7 +42,7 @@ from rest_framework import routers
 #from servicos.views import ServicosExtensoesList
 #from servicos.views import ServicosExtensoesUpdate
 
-from registros.views import RegistrosCreate, BasicUploadView, MeusRegistrosList, TesteCreateView,  certificadoPDFView
+from registros.views import RegistrosCreate, BasicUploadView, MeusRegistrosList, TesteCreateView,  certificadoPDFView, DownloadCertificadoList
 from clientes.api.viewsets import ClienteViewSet
 
 from codigos_promocionais.views import Codigos_PromocionaisCreate
@@ -95,7 +95,6 @@ urlpatterns = [
     path('delete_precos/<int:pk>/', PrecosDelete.as_view(), name='delete_precos'),
     path('api/confirmar/', ConfirmacaoCadadtro.as_view()),
 
-
     path('lista_area_atuacao_criacaopublicitaria/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_criacaopublicitaria'),
     path('lista_area_atuacao_desenhogravura/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_desenhogravura'),
     path('lista_area_atuacao_escultura/', Area_AtuacaoList.as_view(), name='lista_area_atuacao_escultura'),
@@ -129,6 +128,7 @@ urlpatterns = [
     path('tabela-de-precos/', TabelaPrecos.as_view(), name='tabela_de_precos'),
     path('contrato/', CotratoView.as_view(), name='contrato'),
 
+    path('download_certificado/', DownloadCertificadoList.as_view(), name='download_certificado'),
     # path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
 
 ]

@@ -460,7 +460,8 @@ s
         $("#id_celular").mask("(99) 99999-9999");
         $("#id_data_nascimento").mask("99/99/9999");
         $('#id_cnpjcpf').mask(cpfMascara, cpfOptions);
-        
+        $("#id_cep").mask("99999-999");
+
         setRequiredFields(true)
         $('#id_cnpjcpf').on('input',function(){
             let value = $(this).val()

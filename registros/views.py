@@ -9,7 +9,7 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Registros, ArquivoRegistro
+from .models import Registros, ArquivoRegistro, Servicos
 # , ArquivoRegistroTesteForm
 from .forms import RegistrosForm, RegistrosViewForm, ArquivoRegistroForm
 from registros.api.serializers import ArquivoSerializer
@@ -24,7 +24,7 @@ from decimal import Decimal
 from django.db.models import Sum
 from cielo.tasks import comprar_credito
 from random import randint
-from codigos_promocionais.utils import set_codigo_promocional
+from codigos_promocionais.utils import set_codigo_promocional, set_codigo_promocionalSer
 from usuarios.models import Confuguracao
 import datetime
 # from weasyprint import HTML
@@ -66,15 +66,24 @@ class RegistrosCreate(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         context = {}
+        codservico = 1 # request.POST.get('codservico', None)
         cliente = request.user.clientes
         save = request.POST.get('save_file', None)
         pk_files = request.POST.getlist('files', None)
         code = request.POST.get('codigo_promocional', None)
         conf = Confuguracao.objects.first()
+        valor_code = 0
         if not conf:
             return HttpResponse('Ops! ocorreu um erro interno, algumas configurações não foram definidas.')
         if code:
             code = set_codigo_promocional(code, cliente)
+            if ((code == 0)):
+                # code = set_codigo_promocionalSer(code, cliente, codservico)
+                valor_code = 6
+            else:
+                # preco = Servicos.objects.filter(id=codservico)
+                valor_code = 3
+
         files = ArquivoRegistro.objects.filter(
             pk__in=pk_files,
             id_usuario=request.user,
@@ -88,8 +97,8 @@ class RegistrosCreate(LoginRequiredMixin, View):
                 manter_arquivo = True
                 valor += conf.valor_file * files.count()
             valor_credito_cliente = cliente.valor_credito
-            if code:
-                valor_credito_cliente += code.valor
+            if valor_code > 0:   # code
+                valor_credito_cliente += valor_code   # code.valor
             if valor_credito_cliente >= valor:
                 assinados = signature_files(pk_files)
                 if assinados:
@@ -97,7 +106,7 @@ class RegistrosCreate(LoginRequiredMixin, View):
                     cliente.pontuacao = pontos
                     cliente.valor_credito = valor_credito_cliente - valor
                     cliente.save()
-                    if code:
+                    if valor_code > 0: # code
                         msg = "Código promocional resgatado!"
                         messages.success(request, msg)
                     msg = "Arquivo(s) registrado(s) com sucesso!"
@@ -179,6 +188,33 @@ class MeusRegistrosList(LoginRequiredMixin, ListView):
         page = self.request.GET.get('page', 1)
         queryset = super().get_queryset()
         queryset = Registros.objects.filter( 
+            excluido=False,
+            id_usuario=self.request.user).select_related()
+        if de:
+            queryset = queryset.filter(data__gte=de)
+        if ate:
+            ate = datetime.datetime.strptime(ate, "%Y-%m-%d")
+            ate = ate + datetime.timedelta(days=1)
+            queryset = queryset.filter(data__lte=ate)
+        if title:
+            queryset = queryset.filter(arquivo__resume__contains=title)
+        else:
+            paginator = Paginator(queryset, 8)
+            queryset = paginator.get_page(page)
+        return queryset
+
+class DownloadCertificadoList(LoginRequiredMixin, ListView):
+    model = Registros
+    context_object_name = 'registros'
+    template_name = 'registros/download_certificado.html'
+
+    def get_queryset(self):
+        de = self.request.GET.get('de', None)
+        ate = self.request.GET.get('ate', None)
+        title = self.request.GET.get('title', None)
+        page = self.request.GET.get('page', 1)
+        queryset = super().get_queryset()
+        queryset = Registros.objects.filter(
             excluido=False,
             id_usuario=self.request.user).select_related()
         if de:

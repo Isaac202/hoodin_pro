@@ -178,7 +178,7 @@ def comprar_credito(id_compra, cliente, numero_cartao, seguranca, bandeira, vali
         sale.payment = Payment(valor)
         sale.payment.credit_card = credit_card
         sale.payment.installments = qtd_parcela
-       # sale.payment.capture = True
+        sale.payment.capture = True
 
         response_create_sale = cielo_ecommerce.create_sale(sale)
         x = json.dumps(response_create_sale, indent=3, sort_keys=True)

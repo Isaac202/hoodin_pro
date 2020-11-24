@@ -230,6 +230,33 @@ class DownloadCertificadoList(LoginRequiredMixin, ListView):
             queryset = paginator.get_page(page)
         return queryset
 
+class DownloadCertificadoList(LoginRequiredMixin, ListView):
+    model = Registros
+    context_object_name = 'registros'
+    template_name = 'registros/download_certificado.html'
+
+    def get_queryset(self):
+        de = self.request.GET.get('de', None)
+        ate = self.request.GET.get('ate', None)
+        title = self.request.GET.get('title', None)
+        page = self.request.GET.get('page', 1)
+        queryset = super().get_queryset()
+        queryset = Registros.objects.filter(
+            excluido=False,
+            id_usuario=self.request.user).select_related()
+        if de:
+            queryset = queryset.filter(data__gte=de)
+        if ate:
+            ate = datetime.datetime.strptime(ate, "%Y-%m-%d")
+            ate = ate + datetime.timedelta(days=1)
+            queryset = queryset.filter(data__lte=ate)
+        if title:
+            queryset = queryset.filter(arquivo__resume__contains=title)
+        else:
+            paginator = Paginator(queryset, 8)
+            queryset = paginator.get_page(page)
+        return queryset
+
 
 # # -*- coding: UTF-8 -*-
 # from __future__ import unicode_literals

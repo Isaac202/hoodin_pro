@@ -242,7 +242,8 @@ class BuyCredit(APIView):
 
         # resp = status.HTTP_400_BAD_REQUEST
         autorizado = False
-        if resposta_cielo in "Transacao autorizada":
+        # if resposta_cielo in "Transacao autorizada":
+        if resposta_cielo in "Transacao capturada com sucesso":
             # resp = status.HTTP_201_CREATED
             autorizado = True
             cliente.valor_credito += val_decimail

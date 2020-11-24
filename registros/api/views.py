@@ -184,7 +184,7 @@ class VeryCredit(APIView):
         service = request.GET.get('service', None)
         save = request.GET.get('save', None)
         code = request.GET.get('code', None)
-        code = check_codigo_promocionanl(code).first()
+        # COMENTADO 2020/11/24 APRESENTANDO ERRO-> code = check_codigo_promocionanl(code).first()
         # if ((code == None)|(code == 0)):
         #    code = check_codigo_promocionanlSer(qcode, service)
         if service:

@@ -52,5 +52,5 @@ class IndicacoesUpdate(UpdateView):
 
 class IndicacoesDelete(DeleteView):
     model = Indicacoes
-    template_name = "indicacoes/del_indicacoes.html"
+    template_name = "indicacoes/del_instituicoes.html"
     success_url = reverse_lazy('lista_indicacoes')

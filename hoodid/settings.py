@@ -59,7 +59,10 @@ HOODID_APPS = [
     'servicos_extensoes',
     'tarefas_backgroud',
     'codigos_promocionais',
-    'registros_coautores'
+    'registros_coautores',
+    'instituicoes',
+    'instituicoes_arquivos',
+    'avaliadores'
 ]
 
 

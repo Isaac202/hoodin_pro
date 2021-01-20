@@ -50,6 +50,13 @@ from codigos_promocionais.views import Codigos_PromocionaisList
 from codigos_promocionais.views import Codigos_PromocionaisUpdate
 from codigos_promocionais.views import Codigos_PromocionaisDelete
 
+from instituicoes.views import InstituicoesCreate
+from instituicoes.views import InstituicoesList
+from instituicoes.views import InstituicoesUpdate
+from instituicoes.views import InstituicoesDelete
+
+
+
 from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
 router = routers.SimpleRouter()
 router.register(r'api/clientes', ClienteViewSet)
@@ -130,6 +137,11 @@ urlpatterns = [
 
     path('download_certificado/', DownloadCertificadoList.as_view(), name='download_certificado'),
     # path('novo_servicosextensoes/', ServicosExtensoesCreate.as_view(), name='novo_servicosextensoes'),
+
+    path('lista_instituicoes/', InstituicoesList.as_view(), name='lista_instituicoes'),
+    path('novo_instituicoes/', InstituicoesCreate.as_view(), name='novo_instituicoes'),
+    path('atualiza_instituicoes/<int:pk>/', InstituicoesUpdate.as_view(), name='atualiza_instituicoes'),
+    path('delete_instituicoes/<int:pk>/', InstituicoesDelete.as_view(), name='delete_instituicoes'),
 
 ]
 

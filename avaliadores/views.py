@@ -12,7 +12,7 @@ from .forms import BuscaAvaliadoresForm
 
 class AvaliadoresCreate(LoginRequiredMixin, CreateView):
     model = Avaliadores
-    template_name = "avaliadores/inc_avaliadores.html"
+    template_name = "avaliadores/inc_avaliadores.html"  
     form_class = CreateAvaliadoresForm
     success_url = reverse_lazy('lista_avaliadores')
 

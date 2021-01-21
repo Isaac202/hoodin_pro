@@ -1,0 +1,158 @@
+{% extends 'base_cadastro.html' %}
+{% block navegar %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Cadastro de Placer/a>
+        <i class="Large material-icons right">assignment</i>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {% if user.is_authenticated %}
+           <li>
+             <strong>Usuário</strong>
+              {{user.username}}
+             </li>
+
+             {% endif %}
+      </ul>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block main %}
+<div style="padding: 5rem">
+
+    <form class = "col s12" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <strong>{{ request.session.nome_campanha }}</strong>
+
+                <div class="col s12">
+                  <i class="material-icons prefix">urst_mode</i>
+                  {{form.id_placer.label_tag}}
+                  {{form.id_placer}}
+                  {{ form.id_placer.errors }}
+
+                </div>
+         <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">perm_media</i>
+                  {{form.tipo}}
+                   {{form.tipo.errors}}
+
+                  <label for="icon_telephone">Tipo</label>
+                </div>
+              </div>
+        <div class="row">
+                <div class="input-field col s6">
+
+                 <i class="material-icons prefix">toll</i>
+                  {{form.nome}}
+                   {{form.nome.errors}}
+                    <label for="icon_prefix">Nome</label>
+                </div>
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">create</i>
+                  {{form.descricao}}
+                    {{form.descricao.errors}}
+                 <label for="icon_telephone">Descrição</label>
+                </div>
+              </div>
+
+        <div class="row">
+                <div class="input-field col s6">
+
+                 <i class="material-icons prefix">dashboard</i>
+                  {{form.nome_area}}
+                   {{form.nome_area.errors}}
+                    <label for="icon_prefix">Area</label>
+                </div>
+                <div class="col s6">
+                  <i class="material-icons prefix">file_upload</i>
+                    {{form.media}}
+                    {{form.media.errors}}
+                    {{form.area2}}
+                    {{form.area2.errors}}
+                    {{form.area3}}
+                    {{form.area3.errors}}
+                    {{form.area4}}
+                    {{form.area4.errors}}
+
+                 <label for="icon_telephone">Arquivo</label>
+                </div>
+                <div class="row">
+                <div class="input-field col s6">
+
+                 <i class="material-icons prefix">done</i>
+                  {{form.ativo}}
+                  {{form.ativo.errors}}
+                  <label for="icon_prefix">Ativo</label>
+                </div>
+                <div class="input-field col s12">
+                     <input class="btn" type="submit" value="Enviar">
+                 </div>
+              </div>
+
+
+              </div>
+
+    </form>
+
+</div>
+
+
+
+{% endblock %}
+{% block script %}
+  <script>
+    $(document).ready(function(){
+        $('select').formSelect();
+        exibir_ocultar();
+
+        });
+
+  function exibir_ocultar(){
+    var valor = $("#id_nome_area").val();
+    switch (valor) {
+
+      case 'Area1':
+         $("#id_media").show();
+         $("#id_area3").hide();
+         $("#id_area4").hide();
+         $("#id_area2").hide();
+
+        break;
+      case 'Area2':
+         $("#id_media").hide();
+         $("#id_area3").hide();
+         $("#id_area4").hide();
+         $("#id_area2").show();
+
+         break;
+      case 'Area3':
+         $("#id_media").hide();
+         $("#id_area3").show();
+         $("#id_area4").hide();
+         $("#id_area2").hide();
+
+        break;
+      case 'Area4':
+         $("#id_media").hide();
+         $("#id_area3").hide();
+         $("#id_area4").show();
+         $("#id_area2").hide();
+        console.log('Mangoes and papayas are $2.79 a pound.');
+        // expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+      default:
+         $("#id_media").hide();
+         $("#id_area3").hide();
+         $("#id_area4").hide();
+         $("#id_area2").hide();
+
+    }
+
+
+};
+  </script>
+
+
+{% endblock script %}
+

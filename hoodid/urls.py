@@ -55,6 +55,15 @@ from instituicoes.views import InstituicoesList
 from instituicoes.views import InstituicoesUpdate
 from instituicoes.views import InstituicoesDelete
 
+from avaliadores.views import AvaliadoresCreate
+from avaliadores.views import AvaliadoresList
+from avaliadores.views import AvaliadoresUpdate
+from avaliadores.views import AvaliadoresDelete
+
+from instituicoes_arquivos.views import Instituicoes_ArquivosCreate
+from instituicoes_arquivos.views import Instituicoes_ArquivosList
+from instituicoes_arquivos.views import Instituicoes_ArquivosUpdate
+from instituicoes_arquivos.views import Instituicoes_ArquivosDelete
 
 
 from area_atuacao.views import Area_AtuacaoListCriacaoPublicitaria
@@ -142,7 +151,17 @@ urlpatterns = [
     path('novo_instituicoes/', InstituicoesCreate.as_view(), name='novo_instituicoes'),
     path('atualiza_instituicoes/<int:pk>/', InstituicoesUpdate.as_view(), name='atualiza_instituicoes'),
     path('delete_instituicoes/<int:pk>/', InstituicoesDelete.as_view(), name='delete_instituicoes'),
+    path('atualiza_instituicoes/<int:pk>/', InstituicoesUpdate.as_view(), name='atualiza_instituicoes'),
 
+    path('lista_avaliadores/', AvaliadoresList.as_view(), name='lista_avaliadores'),
+    path('avaliadores/', AvaliadoresCreate.as_view(), name='novo_avaliadores'),
+    path('atualiza_avaliadores/<int:pk>/', AvaliadoresUpdate.as_view(), name='atualiza_avaliadores'),
+    path('delete_avaliadores/<int:pk>/', AvaliadoresDelete.as_view(), name='delete_avaliadores'),
+
+    path('lista_instituicoes_arquivos/', Instituicoes_ArquivosList.as_view(), name='lista_instituicoes_arquivos'),
+    path('instituicoes_arquivos/', Instituicoes_ArquivosCreate.as_view(), name='novo_instituicoes_arquivos'),
+    path('atualiza_instituicoes_arquivos/<int:pk>/', Instituicoes_ArquivosUpdate.as_view(), name='atualiza_instituicoes_arquivos'),
+    path('delete_instituicoes_arquivos/<int:pk>/', Instituicoes_ArquivosDelete.as_view(), name='delete_instituicoes_arquivos'),
 ]
 
 admin.site.site_header = "Hoodid"

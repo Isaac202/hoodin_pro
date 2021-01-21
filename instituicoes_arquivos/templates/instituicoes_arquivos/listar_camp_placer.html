@@ -1,0 +1,63 @@
+{% extends 'base_cadastro.html' %}
+{% block navegar %}
+
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Anuncio</a>
+        <i class="Large material-icons right">assignment</i>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {% if user.is_authenticated %}
+           <li>
+             <strong>Usuário</strong>
+              {{user.username}}
+             </li>
+             <li>
+             <a href="{% url 'logout' %}" class="btn-floating btn-large waves-effect waves-light red">Logout</a>
+
+             {% endif %}
+      </ul>
+    </div>
+     </nav>
+   {% endblock %}
+
+{% block main %}
+
+ <ul class="collection with-header">
+ <li ><h5> Anuncio da Campanha:{{ request.session.nome_campanha }} </h5>
+ </li>
+     {% for cp in camp_placers %}
+          <li class="collection-header avatar"><div><i class="material-icons circle">bookmark_border</i> <strong>Codigo da Campanha:</strong>{{ cp.id_campanha.pk }}
+              <strong>Campanha:</strong>{{ cp.id_campanha }}
+          </div></li>
+       {% for place in cp.id_placer.all %}
+           <li class="collection-item">
+           <strong>Código:</strong>{{ place.id }}
+            <strong>Placer:</strong>{{ place.nome }}
+           </li>
+           {% endfor %}
+
+
+    {%endfor%}
+</ul>
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(atual)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% endblock %}

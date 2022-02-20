@@ -100,13 +100,13 @@ class ConfirmacaoCadadtro(APIView):
 
                     if Clientes.objects.filter(confirmation_key=chave).exists():
                         usuario_novo = User.objects.filter(email=email).update(is_active=True)
-                        return HttpResponseRedirect(redirect_to='https://hoodid.com.br/accounts/login/')
+                        return HttpResponseRedirect(redirect_to='https://registrosonline.com.br/accounts/login/')
                     else:
                           resposta = 'Sua chave está inválida'
                 else:
                     resposta = 'Sua chave está inválida'
 
-                return HttpResponseRedirect(redirect_to='https://hoodid.com.br/accounts/login/')
+                return HttpResponseRedirect(redirect_to='https://registrosonline.com.br/accounts/login/')
             else:
                 return Response({'msg': 'erro'})
 

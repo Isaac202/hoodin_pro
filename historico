@@ -1,0 +1,416 @@
+    1  cd /home/
+    2  cd webapps/hoodid_web/
+    3  sudo git pull
+    4  source ../env/bin/activate
+    5  python manage.py migrate
+    6  sudo service gunicorn restart
+    7  cd /home/webapps/hoodid_web/
+    8  git pull
+    9  sudo git pull
+   10  source ../env/bin/activate
+   11  python manage.py migrate
+   12  after run make db-up
+   13  sudo service gunicorn restart
+   14  python manage.py makemigrate
+   15  pip install django-admin-menu
+   16  sudo service gunicorn restart
+   17  ls
+   18  cd /home/webapps/hoodid_web/
+   19  vi .env
+   20  cd /home/webapps/hoodid_web/
+   21  sudo vi .env
+   22  cd /home/webapps/hoodid_web/
+   23  sudo git pull
+   24  vi .env
+   25  sudo rm .env
+   26  sudo git pull
+   27  sudo git pull origin master --force
+   28  sudo git pull master --force
+   29  cd..
+   30  cd ..
+   31  sudo rm wkht
+   32  :q
+   33  q:
+   34  exit
+   35  cd /home/webapps/hoodid_web/
+   36  sudo git pull
+   37  git remote
+   38  git remote -v
+   39  sudo git pull
+   40  sudo git pull origin master --force
+   41  cd /home/webapps/hoodid_web/
+   42  ls
+   43  sudo git pull
+   44  sudo service gunicorn restart
+   45  sudo git pull
+   46  exit
+   47  sudo apt-get clean
+   48  sudo service gunicorn restart
+   49  sudo service gunicorn status
+   50  sudo service gunicorn restart
+   51  q
+   52  quit
+   53  exit
+   54  clear
+   55  cd /home/webapps
+   56  . env/bin/activate
+   57  sudo service gunicorn stop
+   58  sudo service gunicorn start
+   59  sudo service nginx stop
+   60  sudo service nginx start
+   61  service bry-hub-fw status
+   62  cd /home/webapps
+   63  . env/bin/activate
+   64  service bry-hub-fw status
+   65  cd ..
+   66  cd 
+   67  service bry-hub-fw status
+   68  cd /home/webapps
+   69  . env/bin/activate
+   70  cd /home/webapps
+   71  . env/bin/activate
+   72  cd hoodid_web
+   73  python manage.py runserver
+   74  pip install psycopg2-binary
+   75  python manage.py runserver
+   76  sudo systemctl start nginx
+   77  sudo systemctl status nginx
+   78  sudo service gunicorn start
+   79  cd /home
+   80  cd webapps
+   81  . env/bin/activate
+   82  cd hoodid_web
+   83  python mange
+   84  python manage.py runserver
+   85  sudo service gunicorn status
+   86  sudo systemctl status nginx
+   87  cd ..
+   88  cd var
+   89  ls
+   90  ls -al
+   91  cd ..
+   92  ls -al
+   93  cd var
+   94  cd www
+   95  ls -al
+   96  vi html
+   97  cd /home
+   98  cd webapps
+   99  cd hoodid_web
+  100  ls
+  101  exit
+  102  cd /home
+  103  cd webapps
+  104  cd hoodid_web
+  105  ls
+  106  vi .env
+  107  exit
+  108  cd /home
+  109  cd webapps
+  110  cd hoodid_web
+  111  cd hoodid
+  112  ls
+  113  vi settings.py
+  114  exit
+  115  ls
+  116  3ls
+  117  ls
+  118  cd /home
+  119  ls
+  120  cd webapps
+  121  cd ..
+  122  ls -al
+  123  cd etc
+  124  pwd
+  125  cd webapps
+  126  ls
+  127  ls -al
+  128  cd hoodid_web
+  129  ls -al
+  130  cd tc
+  131  cd etc
+  132  cd ..
+  133  cd etc
+  134  ls etc
+  135  cd ..
+  136  ls etc
+  137  ls -lR -I gunicorn
+  138  ls -lR -I etc
+  139  exit
+  140  cd /home
+  141  cd webapps
+  142  cd hoodid_web
+  143  gunicorn hoodid.wsgi
+  144  celar
+  145  clear
+  146  exit
+  147  cd /etc/systemd/system
+  148  ls
+  149  vi gunicorn.service
+  150  vi gunicorn.socket
+  151  cd /home/webapps/env/bin
+  152  ls
+  153  cd gunicorn
+  154  cd gunicorn_paster
+  155  vi gunicorn
+  156  vi gunicorn_paster
+  157  exit
+  158  cd /home
+  159  cd etc
+  160  cd /etc
+  161  ls
+  162  ls -al
+  163  ls
+  164  cd nginx
+  165  ls
+  166  cd sites_available
+  167  cd sites-available
+  168  ls
+  169  cd hoodid
+  170  ls
+  171  ls -al
+  172  cd hoodid
+  173  vi hoodid
+  174  cd ..
+  175  ls
+  176  cd letsencrypt
+  177  ls
+  178  cd live
+  179  cd ..
+  180  exit
+  181  cd /home
+  182  cd /etc
+  183  cd nginx
+  184  ls
+  185  nginx.conf
+  186  ls
+  187  sudo vi nginx.conf
+  188  exit
+  189  ls
+  190  clear
+  191  cd /home/webapps/hoodid_web
+  192  source ..env/bin/activate
+  193  source ../env/bin/activate
+  194  ls
+  195  cd clientes
+  196  ls
+  197  cd templates
+  198  cd clientes
+  199  ls
+  200  cp upd_clientes.html /home/webapps/hoodid_web/clientes/templates/clientes/upd_clientes_copia.html
+  201  ls
+  202  vi upd_clientes.html
+  203  cp update.html /home/webapps/hoodid_web/clientes/templates/clientes/update_copia.html
+  204  clear
+  205  ls
+  206  vi update
+  207  vi update.html
+  208  ls
+  209  cp inc_clientes.html /home/webapps/hoodid_web/clientes/templates/clientes/inc_clientes_copia.html
+  210  ls
+  211  clear
+  212  vi inc_clientes.html
+  213  clear
+  214  exit
+  215  cd /home/webapps/hoodid_web
+  216  source ../env/bin/activate
+  217  cd /etc/letsencrypt/renewal
+  218  ls
+  219  rm /etc/letsencrypt/renewal/registrosonline.com.br.conf
+  220  chmod 744 registrosonline.com.br.conf
+  221  rm -r registrosonline.com.br.conf
+  222  sudo rm -f registrosonline.com.br.conf
+  223  ls
+  224  sudo certbot renew
+  225  cd ..
+  226  cd live
+  227  ls
+  228  cd live
+  229  sudo cd /live
+  230  cd /live
+  231  ls
+  232  cd live
+  233  cd /live/hoodid.com.br/
+  234  cd /live/hoodid.com.br
+  235  clear
+  236  cd /live/hoodid.com.br
+  237  ls
+  238  sudo npm start
+  239  clear
+  240  ls
+  241  cd archive
+  242  ls
+  243  cd acounts
+  244  ls
+  245  cd renewal
+  246  ls
+  247  cd ..
+  248  cd renewal-hooks
+  249  ls
+  250  cd ..
+  251  cd /home/webapps/hoodid_web/
+  252  source ../env/bin/activate
+  253  sudo certbot renew
+  254  cd /etc
+  255  cd /letsencrypt
+  256  cd letsencrypt
+  257  cd live
+  258  chmod 744 live
+  259  chmod -R 750 /live
+  260  chmod -R 750 live
+  261  ls
+  262  chmod -R 750 /etc/letsencrypt/live
+  263  sudo chmod -R 750 /etc/letsencrypt/live
+  264  cd live
+  265  cd /live
+  266  ls
+  267  cd live
+  268  sudo chmod -R 750 /etc/letsencrypt/live
+  269  cd /live
+  270  cd live
+  271  sudo cd live
+  272  sudo cd /live
+  273  clear
+  274  ls -lsa
+  275  sudo chmod 740 /etc/letsencrypt/live
+  276  cd live
+  277  sudo cd /live
+  278  sudo chmod +x /etc/letsencrypt/live
+  279  cd live
+  280  ls
+  281  cd..
+  282  cd ..
+  283  rm -f /etc/letsencrypt/live
+  284  cd /etc
+  285  ls
+  286  clear
+  287  cd /letsencrypt
+  288  cd letsencrypt
+  289  rm -f live
+  290  sudo rm -f /live
+  291  ls
+  292  cd live
+  293  cd ..
+  294  sudo rm -f /live
+  295  ls
+  296  cd renewal
+  297  ls
+  298  cd ..
+  299  ls
+  300  cd accounts
+  301  cd archive
+  302  cd live
+  303  cd ..
+  304  clear
+  305  rm /live
+  306  sudo certbot renew
+  307  sudo certbot certonly --standalone -d hoodid.com.br --pre-hook "service nginx stop" --post-hook "service nginx start"
+  308  cd /home/webapps/hoodid_web
+  309  source ../env/bin/activate
+  310  sudo service gunicorn start
+  311  sudo service gunicorn status
+  312  sudo service nginx status
+  313  sudo service nginx restart
+  314  clear
+  315  sudo certbot renew
+  316  sudo certbot certonly --standalone -d https://hoodid.com.br --pre-hook "service nginx stop" --post-hook "service nginx start"
+  317  sudo certbot certonly --standalone -d www.hoodid.com.br --pre-hook "service nginx stop" --post-hook "service nginx start"
+  318  ping www.hoodid.com.br
+  319  clear
+  320  ping www.hoodid.com.br
+  321  www.registrosonline.com.br
+  322  nano /etc/nginx/sites-available/hoodid
+  323  cd /etc/nginx/sites-available
+  324  ls
+  325  vi hoodid
+  326  sudo vi hoodid
+  327  vi hoodid
+  328  sudo service nginx restart
+  329  sudo certbot renew
+  330  sudo systemctl reload nginx
+  331  sudo certbot renew
+  332  sudo certbot renew --force-renewal
+  333  sudo certbot renew
+  334  clear
+  335  sudo vi hoodid
+  336  sudo service nginx restart
+  337  sudo servicectl nginx restart
+  338  sudo systemctl nginx restart
+  339  sudo vi hoodid
+  340  sudo nginx -t
+  341  sudo vi hoodid
+  342  sudo service nginx restart
+  343  sudo vi hoodid
+  344  sudo service nginx restart
+  345  ls
+  346  vi default.save
+  347  sudo vi hoodid
+  348  sudo service nginx restart
+  349  sudo service nginx start
+  350  sudo nginx -t
+  351  sudo vi hoodid
+  352  sudo service nginx start
+  353  clear
+  354  sudo service nginx start
+  355  sudo service nginx restart
+  356  sudo nginx -t
+  357  sudo service nginx restart reload
+  358  sudo service reload nginx
+  359  sudo service nginx reload
+  360  sudo systemctl reload nginx
+  361  sudo systemctl stop nginx
+  362  sudo systemctl start nginx
+  363  sudo systemctl status nginx
+  364  cd /home/webapps/hoodid_web
+  365  source ../env/bin/activate
+  366  sudo certbot renew
+  367  sudo certbot renew --force-renewal -d hoodid.com.br, www.hoodid.com.br
+  368  sudo certbot certonly --standalone -d laboratorio.hsvp.com.br --pre-hook "service nginx stop" --post-hook "service nginx start"
+  369  sudo service nginx restart
+  370  date
+  371  clear
+  372  cd /home/webapps/hoodid_web
+  373  source ../env/bin/activate
+  374  clear
+  375  sudo service bry-hub-fw status
+  376  ls
+  377  cd ..
+  378  ls
+  379  cd ..
+  380  ls
+  381  cd /bryhub
+  382  cd /home
+  383  cd bryhub
+  384  ls
+  385  cd hoodidregistrosonline_gmail_com
+  386  cd bryhub
+  387  clear
+  388  ls
+  389  cd /home
+  390  cd bryhub
+  391  clear
+  392  exit
+  393  users
+  394  sudo -s
+  395  exit
+  396  sudo -s
+  397  sudo service bry-hub-fw status
+  398  cd /home
+  399  cd bryhub
+  400  exit
+  401  passwd hoodidregistrosonline_gmail_com@bryhub
+  402  ssh hoodidregistrosonline_gmail_com@bryhub
+  403  clear
+  404  ls
+  405  exit
+  406  passwd root
+  407  ls
+  408  cd ..
+  409  ls
+  410  cd webapps/
+  411  ls
+  412  cd hoodid_web/
+  413  ls
+  414  cat .env
+  415  git status
+  416  history > historico

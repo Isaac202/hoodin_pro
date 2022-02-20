@@ -12,7 +12,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True # config('DEBUG', default=False, cast=bool)aa
 
-ALLOWED_HOSTS = ['hoodid.com.br','localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['registrosonline.com.br','localhost', '127.0.0.1', '*']
 
 DEFAULT_APPS = [
     'admin_menu',

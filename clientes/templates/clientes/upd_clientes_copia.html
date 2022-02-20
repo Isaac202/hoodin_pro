@@ -1,0 +1,457 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navegar %}
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Cadastro de Clientes</a>
+    <i class="Large material-icons right">assignment</i>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {% if user.is_authenticated %}
+      <li>
+        <strong>Usuário</strong>
+        {{user.username}}
+      </li>
+
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+{% endblock navegar %}
+
+{% block main %}
+<div class="container">
+
+  <div class="row">
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+    
+  </div>
+
+  <div class="row">
+    {{form.non_fields_errors}}
+    <form action="" method="post" class="col 12">
+      {% csrf_token %}
+
+      <div class="row">
+        <ul class="collapsible">
+          <li>
+            <div class="collapsible-header active">
+              <i class="material-icons">account_circle</i>Conta
+            </div>
+
+            <div class="collapsible-body">
+              <!---->
+              <div class="row">
+                <div class="input-field col s10 m5 offset-s1">
+                  <label class="active" for="">Nome</label>
+                  <input type="text" disabled value="{{object.nome}}">
+                </div>
+
+                <div class="input-field col s10 m3 offset-s1">
+                  <label class="active" for="">Data de Nascimento</label>
+                  <input type="text" disabled value="{{object.data_nascimento}}">
+                  </p>
+                </div>
+
+                <div class="input-field col s10 m3 offset-s1">
+                  <label class="active" for="">Sexo</label>
+                  <input type="text" disabled value="{{object.sexo}}">
+                </div>
+              </div>
+              <!---->
+
+              <!---->
+              <div class="row">
+                <div class="input-field col s10 m3 offset-s1">
+                  <label class="active" for="">CPF/CNPJ</label>
+                  <input type="text" disabled value="{{object.cnpjcpf}}">
+                </div>
+
+                <div class="input-field col s10 m2 offset-s1">
+                  <label for="" class="active">
+                    Tipo de pessoa
+                  </label>
+                  <input type="text" disabled value="{{object.tipo_pessoa}}">
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.tipo_pessoa.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s10 m2 offset-s1">
+                  {{form.telefone}}
+                  <label class="active">
+                    {{form.telefone.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.telefone.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s10 m2 offset-s1">
+                  {{form.celular}}
+                  <label class="active">
+                    {{form.celular.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.celular.errors}}
+                    </font>
+                  </p>
+                </div>
+
+              </div>
+              <!---->
+
+              <!---->
+              <div class="row">
+                <div class="input-field col s10 m5 offset-s1">
+                  <label class="active" for="">Nome da mãe</label>
+                  <input type="text" disabled value="{{object.nome_mae}}">
+                </div>
+
+                <div class="input-field col s10 m5 offset-s1">
+                  <label class="active" for="">Nome do pai</label>
+                  <input type="text" disabled value="{{object.nome_pai}}">
+                </div>
+
+                <div class="input-field col s10 m3 offset-s1">
+                  <label class="active" for="">Como conheceu a gente?</label>
+                  <input type="text" disabled value="{{object.codindicacao}}">
+                </div>
+
+                <div class="input-field col s3">
+                  <label class="active" for="">Email</label>
+                  <input type="text" disabled value="{{user.username}}">
+                </div>
+              </div>
+              <!---->
+
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">place</i>Endereço</div>
+            <div class="collapsible-body">
+              <div class="row">
+                <div class="input-field col s3">
+                  {{form.cep}}
+                  <label for="" class="acitve">
+                    {{form.cep.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.cep.errors}}
+                    </font>
+                  </p>
+                </div>
+                <div class="input-field col s4">
+                  {{form.endereco}}
+                  <label for="" class="active">
+                    {{form.endereco.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.endereco.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s3">
+                  {{form.numero}}
+                  <label for="" class="active">
+                    {{form.numero.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.numero.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s3">
+                  {{form.complemento}}
+                  <label for="" class="active">
+                    {{form.complemento.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.complemento.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s3">
+                  <label for="" class="active">
+                    {{form.bairro.label}}
+                  </label>
+                  {{form.bairro}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.bairro.errors}}
+                    </font>
+                  </p>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="input-field col s3">
+                  {{form.cidade}}
+                  <label for="" class="active">
+                    {{form.cidade.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.cidade.errors}}
+                    </font>
+                  </p>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="input-field col s3">
+                  <label for="" class="active">
+                    {{form.estado.label}}
+                  </label> <br>
+                  {{form.estado}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.estado.errors}}
+                    </font>
+                  </p>
+                </div>
+
+
+                <div class="input-field col s3">
+                  {{form.pais}}
+                  <label for="" class="active">
+                    {{form.pais.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.pais.errors}}
+                    </font>
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="collapsible-header"><i class="material-icons">portrait</i>Dados</div>
+            <div class="collapsible-body">
+
+              <div class="row">
+
+                <div class="input-field col s4">
+                  <input type="text" value="{{object.documento_tipo}}" disabled>
+                  <label for="" class="active">
+                    Tipo de Documento de Identificação
+                  </label>
+                </div>
+
+                <div class="input-field col s3">
+                  <input type="text" value="{{object.documento_identidade}}" disabled>
+                  <label for="" class="active">
+                    Documento
+                  </label>
+                </div>
+
+                <div class="input-field col s3">
+                  <input type="text" value="{{object.passaporte}}" disabled>
+                  <label for="" class="active">
+                    Passaporte
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="input-field col s3">
+                  <input type="text" value="{{object.nacionalidade}}" disabled>
+                  <label for="" class="active">
+                    Nacionalidade
+                  </label>
+                </div>
+                <div class="input-field col s3">
+                  <label for="" class="active">
+                    {{form.estadocivil.label}}
+                  </label> <br>
+                  {{form.estadocivil}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.estadocivil.errors}}
+                    </font>
+                  </p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s3">
+                  {{form.nif}}
+                  <label for="" class="active">
+                    {{form.nif.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.nif.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="input-field col s3">
+                  {{form.facebook}}
+                  <label for="" class="active">
+                    {{form.facebook.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.facebook.errors}}
+                    </font>
+                  </p>
+                </div>
+                <div class="input-field col s3">
+                  {{form.twitter}}
+                  <label for="" class="active">
+                    {{form.twitter.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.twitter.errors}}
+                    </font>
+                  </p>
+                </div>
+                <div class="input-field col s3">
+                  {{form.homepage}}
+                  <label for="" class="active">
+                    {{form.homepage.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.homepage.errors}}
+                    </font>
+                  </p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  {{form.biografia}}
+                  <label for="" class="active">
+                    {{form.biografia.label}}
+                  </label>
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.biografia.errors}}
+                    </font>
+                  </p>
+                </div>
+
+                <div class="col s12">
+                  {{form.atuacao.label_tag}} <br>
+                  {{form.atuacao}}
+                  <p class="errornote">
+                    <font color="red">
+                      {{form.atuacao.errors}}
+                    </font>
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+  </div>
+
+
+
+  <div class="input-field col s6">
+    <button class="btn waves-effect 1565c0 blue darken-3" type="submit" name="action">Gravar
+      <i class="material-icons right">done</i>
+    </button>
+  </div>
+  </form>
+</div>
+</div>
+<!--Import jQuery before materialize.js-->
+
+{% endblock main %}
+
+{% block header %}
+<!--autocomplete select2-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<style>
+  .select2 {
+    max-width: 100% !important;
+  }
+
+  span {
+    outline: 0 !important;
+    /*removendo outiline do select2 autocomplete*/
+  }
+</style>
+{% endblock header %} {% block script %}
+<!--autocomplete select2-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
+<script>
+  var cpfMascara = function (val) {
+    return val.replace(/\D/g, '').length > 11 ? '00.000.000/0000-00' : '000.000.000-009';
+  },
+    cpfOptions = {
+      onKeyPress: function (val, e, field, options) {
+        field.mask(cpfMascara.apply({}, arguments), options);
+      }
+    };
+
+  $('select').select2(); //autocomplete select2
+
+  $(document).ready(function () {
+    // $('select').material_select();
+    $('.datepicker').pickadate();
+    $("#id_cep").mask("99999-999");
+    $("#id_telefone").mask("(99) 99999-9999");
+    $("#id_celular").mask("(99) 99999-9999");
+    //$("#id_cnpjcpf").mask("999.999.999-99");
+    $("#id_data_nascimento").mask("99/99/9999");
+    $('.collapsible').collapsible();
+    $('#id_cnpjcpf').mask(cpfMascara, cpfOptions);
+
+
+    $('#id_cep').on('input', function (e) {
+      let cep = $('#id_cep').val();
+      if (cep.length == 9) {
+        //Consulta o webservice viacep.com.br/
+        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function (dados) {
+          console.log('Buscando');
+          if (!("erro" in dados)) {
+            // console.log('deu certo');
+            //Atualiza os campos com os valores da consulta.
+            $("#id_endereco").val(dados.logradouro);
+            $("#id_bairro").val(dados.bairro);
+            $("#id_complemento").val(dados.complemento);
+            $("#id_cidade").val(dados.localidade);
+            $("#id_estado option[value=" + dados.uf + "]").attr('selected', 'selected');
+            let estado = $("#id_estado option[value=" + dados.uf + "]").html();
+            $("#estado_col input.select-dropdown").val(estado);
+            $('#select2-id_estado-container').html(estado);
+          }
+        });
+      }
+    });
+
+  });
+</script>
+
+{% endblock script %}

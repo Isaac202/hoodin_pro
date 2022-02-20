@@ -10,18 +10,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True # config('DEBUG', default=False, cast=bool)aa
+DEBUG = True # config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['hoodid.com.br','localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['registrosonline.com.br','localhost', '127.0.0.1', '*']
+
 
 DEFAULT_APPS = [
-    'admin_menu',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 
@@ -31,10 +32,6 @@ LIB_APPS = [
     'rest_framework',
     'django_filters',
     'multiselectfield',
-    'rangefilter',
-    'django_countries'
-    # 'daterangefilter',
-    # 'import_export',
 
 ]
 
@@ -58,11 +55,7 @@ HOODID_APPS = [
     'cielo',
     'servicos_extensoes',
     'tarefas_backgroud',
-    'codigos_promocionais',
-    'registros_coautores',
-    'instituicoes',
-    'instituicoes_arquivos',
-    'avaliadores'
+    'download_certificado'
 ]
 
 
@@ -108,11 +101,6 @@ if DEV:
     DATABASES = {'default': config('DATABASE_URL', default=default_dburl,
                                cast=dburl), }
 else:
-
-    SESSION_COOKIE_AGE = 30*60
-    SESSION_SAVE_EVERY_REQUEST = True
-    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -176,14 +164,19 @@ REST_FRAMEWORK = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER = 'hoodidregistrosonline@gmail.com'
+#EMAIL_HOST_PASSWORD = 'strive@162'
+#
 EMAIL_PORT = 587
-DEFAULT_EMAIL = "hoodidregistrosonline@gmail.com;contato@hoodid.com"
-# EMAIL_USE_TLS = True
 
+DEFAULT_FROM_EMAIL = 'myconsult.orders@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'myconsult.orders@gmail.com'
+EMAIL_HOST_PASSWORD = 'qwerty@#'
+EMAIL_PORT = 587
 
 
 
@@ -236,82 +229,8 @@ ESTADOS_CHOICES = (
     ('TO', 'Tocantins')
 )
 
-DISTRITOS_PORTUGAL_CHOICES = (
-    ('Aveiro', 'Aveiro'),
-    ('Beja', 'Beja'),
-    ('Braga', 'Braga'),
-    ('Bragança', 'Bragança'),
-    ('Castelo Branco', 'Castelo Branco'),
-    ('Coimbra', 'Coimbra'),
-    ('Evora', 'Evora'),
-    ('Faro', 'Faro'),
-    ('Guarda', 'Guarda'),
-    ('Leiria', 'Leiria'),
-    ('Lisboa', 'Lisboa'),
-    ('Portalegre', 'Portalegre'),
-    ('Porto', 'Porto'),
-    ('Santarem', 'Santarem'),
-    ('Setubal', 'Setubal'),
-    ('Viana do Castelo', 'Viana do Castelo'),
-    ('Vila Real', 'Vila Real'),
-    ('Viseu', 'Viseu')
-)
-
-DISTRITOS_ESPANHA_CHOICES = (
-    ('Alava', 'Alava'),
-    ('Albacete', 'Albacete'),
-    ('Alicante', 'Alicante'),
-    ('Almería', 'Almería'),
-    ('Asturias', 'Asturias'),
-    ('Avila', 'Avila'),
-    ('Badajoz', 'Badajoz'),
-    ('Barcelona', 'Barcelona'),
-    ('Burgos', 'Burgos'),
-    ('Caceres', 'Caceres'),
-    ('Cadiz', 'Cadiz'),
-    ('Cantabria', 'Cantabria'),
-    ('Castellon', 'Castellon'),
-    ('Ciudad Real', 'Ciudad Real'),
-    ('Cordoba', 'Cordoba'),
-    ('La Coruña', 'La Coruña'),
-    ('Cuenca', 'Cuenca'),
-    ('Gerona', 'Gerona'),
-    ('Granada', 'Granada'),
-    ('Guadalajara', 'Guadalajara'),
-    ('Guipuzcoa', 'Guipuzcoa'),
-    ('Huelva', 'Huelva'),
-    ('Huesca', 'Huesca'),
-    ('Baleares', 'Baleares'),
-    ('Jaen', 'Jaen'),
-    ('Leon', 'Leon'),
-    ('Lerida', 'Lerida'),
-    ('Lugo', 'Lugo'),
-    ('Madrid', 'Madrid'),
-    ('Malaga', 'Malaga'),
-    ('Murcia', 'Murcia'),
-    ('Navarra', 'Navarra'),
-    ('Orense', 'Orense'),
-    ('Palencia', 'Palencia'),
-    ('Las Palmas', 'Las Palmas'),
-    ('Pontevedra', 'Pontevedra'),
-    ('La Rioja', 'La Rioja'),
-    ('Salamanca', 'Salamanca'),
-    ('Segovia', 'Segovia'),
-    ('Sevilla', 'Sevilla'),
-    ('Soria', 'Soria'),
-    ('Tarragona', 'Tarragona'),
-    ('Santa Cruz de Tenerife', 'Santa Cruz de Tenerife'),
-    ('Teruel', 'Teruel'),
-    ('Toledo', 'Toledo'),
-    ('Valencia', 'Valencia'),
-    ('Valladolid', 'Valladolid'),
-    ('Vizcaya', 'Vizcaya'),
-    ('Zamora', 'Zamora'),
-    ('Zaragoza', 'Zaragoza')
-)
-
-
 SEXO_CHOICES = (
+    ('', ''),
     ('M', 'Masculino'),
     ('F', 'Feminino'),
     ('O', 'Outros'),
@@ -330,8 +249,6 @@ ESTADO_CIVIL_CHOICES = (
     ('V', 'Viuvo'),
 
 )
-
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "estaticos")
 MEDIA_URL = '/media/'
@@ -346,14 +263,11 @@ if AWS_ACCESS_KEY_ID:
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-    AWS_LOAD_METADATA = False
+    AWS_LOAD_METADATA = True
     AWS_AUTO_CREATE_BUCKET = False
     AWS_QUERYSTRING_AUTH = True
     AWS_S3_CUSTOM_DOMAIN = None
-    AWS_DEFAULT_ACL = "private"
-    AWS_BUCKET_ACL = "private"
-
-
+    AWS_DEFAULT_ACL = 'private'
     #Static assets
     #---------------------------------------------------------------------------
     STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
@@ -372,49 +286,16 @@ if AWS_ACCESS_KEY_ID:
     INSTALLED_APPS.append('storages')
 
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'estaticos')
-# ]
-
-ADMIN_LOGO = 'imgs/logo-hoodid.png'
 
 
-ADMIN_STYLE = {
-    'background': 'white',
-    'primary-color': '#205280',
-    'primary-text': '#d6d5d2',
-    'secondary-color': '#3B75AD',
-    'secondary-text': 'white',
-    'tertiary-color': '#F2F9FC',
-    'tertiary-text': 'black',
-    'breadcrumb-color': 'whitesmoke',
-    'breadcrumb-text': 'black',
-    'focus-color': '#eaeaea',
-    'focus-text': '#666',
-    'primary-button': '#26904A',
-    'primary-button-text':' white',
-    'secondary-button': '#999',
-    'secondary-button-text': 'white',
-    'link-color': '#333',
-    'link-color-hover': 'lighten($link-color, 20%)',
-    'logo-width': '165px',
-    'logo-height': '53px'
-    #3308
-    #1064
-}
+#STATICFILES_DIRS = ['estaticos']
+
 
 LOGIN_URL = '/login/'
-LOGOUT_REDIRECT_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = reverse_lazy('users:redirect')
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
-# IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 SIMPLE_EMAIL_CONFIRMATION_AUTO_ADD = True
 EMAIL_CONFIRMATION_PERIOD_DAYS = 7
 SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS)
-
-DOLAR_VALOR = 4
-EURO_VALOR = 4
-VALOR_CREIDITO_INCIAL = Decimal('1.00')
-
-
